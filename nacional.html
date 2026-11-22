@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sable femenino · Temporada 2026-27</title>
+<style>
+:root{color-scheme:light;--bg:#f5f6fa;--card:#fff;--ink:#1b2333;--mut:#667085;--line:#e4e7ee;--acc:#b4232c;--acc2:#1f3a68;--ok:#1a7f4b;--warn:#b26a00;--chip:#eef1f7}
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(120deg,var(--acc2),#2b4f8a);color:#fff;padding:18px 22px 0}
+header h1{margin:0;font-size:20px;font-weight:700}header .sub{opacity:.85;font-size:13px;margin-top:2px}
+nav{display:flex;gap:4px;margin-top:14px;flex-wrap:wrap}
+nav button{background:transparent;border:0;color:#dfe6f3;padding:9px 14px;font:inherit;font-weight:600;cursor:pointer;border-radius:8px 8px 0 0}
+nav button.on{background:var(--bg);color:var(--acc2)}
+main{padding:18px 22px 40px;max-width:1200px;margin:0 auto}
+.grid{display:grid;gap:14px}.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.card h3{margin:0 0 10px;font-size:15px}.kpi .lab{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.kpi .val{font-size:22px;font-weight:700;margin:4px 0 2px}.kpi .det{color:var(--mut);font-size:13px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;font-size:13px}
+.chip.on{background:var(--acc2);color:#fff;border-color:var(--acc2)}
+table{width:100%;border-collapse:collapse}th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{font-size:12px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.03em;background:#fafbfd;position:sticky;top:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}td.n{white-space:nowrap}
+tr.cut td{border-bottom:2px dashed var(--acc)}
+.bar{height:6px;background:var(--chip);border-radius:4px;overflow:hidden;min-width:80px}.bar i{display:block;height:100%;background:var(--acc)}
+.tag{display:inline-block;font-size:11px;padding:2px 7px;border-radius:999px;background:var(--chip);color:var(--acc2);font-weight:600;white-space:nowrap}
+.tag.n{background:#fde8e9;color:var(--acc)}.tag.i{background:#e6eefb;color:var(--acc2)}.tag.p{background:#e5f5ec;color:var(--ok)}.tag.w{background:#fff3df;color:var(--warn)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+input,select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mut);font-weight:600}
+.mut{color:var(--mut)}.small{font-size:12px}a{color:var(--acc2)}
+.ev{display:grid;grid-template-columns:78px 1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);align-items:center}
+.date{background:var(--chip);border-radius:10px;text-align:center;padding:6px 4px}.date b{display:block;font-size:20px}.date span{font-size:11px;text-transform:uppercase;color:var(--mut)}
+.ev.past{opacity:.55}.ev .t{font-weight:600}
+.big{font-size:34px;font-weight:800;color:var(--acc)}
+.note{background:#fff8e6;border:1px solid #f1dfb0;border-radius:10px;padding:10px 12px;font-size:13px}
+.tbl{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:10px}
+.pod{display:flex;gap:8px;margin:8px 0 12px;flex-wrap:wrap}.pod div{flex:1;min-width:140px;background:var(--chip);border-radius:10px;padding:8px 10px}.pod b{color:var(--acc)}
+.hide{display:none}
+</style></head><body>
+<header>
+ <h1>Sable femenino · Temporada 2026-27</h1>
+ <div class="sub">Rankings nacionales RFEE, calendario y calculadora de puntos · M13 · M15 · M17 · M20 · Sub23 · Absoluto · Datos de <a style="color:#fff" href="https://app.skermo.org/ranking-rfee/public/RFEE" target="_blank">Skermo RFEE</a> a <span id="snap"></span></div>
+ <nav id="nav"></nav>
+</header>
+<main>
+<section id="t-resumen"></section>
+<section id="t-ranking" class="hide"></section>
+<section id="t-calendario" class="hide"></section>
+<section id="t-resultados" class="hide"></section>
+<section id="t-interno" class="hide"></section>
+<section id="t-calc" class="hide"></section>
+<section id="t-normativa" class="hide"></section>
+</main>
+<script>
+const SNAPSHOT="18/11/2026";
+// Ranking: [pos, nombre, apellidos, añoNac, club, puntos]
+const RK={
+M13:[["VALERIA","MARTINEZ VIDAL",2015,"FED-V-C"],["MENCIA","ALONSO LINARES",2016,"CEB-M"],["ROCIO","MARTÍNEZ PÉREZ",2014,"CEA-V"],["CARMEN","DÍEZ PÉREZ",2015,"CEAL-M"],["KEILA AIMARÁ","GONZALEZ PEREZ",2014,"CETORRE-MA"],["ELIZABETH","TISHINA",2015,"CED-V"],["MARTA","GOMEZ GARCIA",2014,"CE-M"],["ALBA","MARTIN HAGEL",2015,"SASLE-M"],["ROSARIO","CAMAÑO OCAÑA",2016,"CEB-M"],["ALENA","IVANOVA",2016,"FED-AND-C"],["DANIELA","GARCIA HERNANDO",2015,"ECC-BU"],["DANIELA","ESPINOSA BAUTISTA",2016,"SAMA-M"],["BLANCA","BENGOECHEA DE LUIS",2014,"CE-M"],["ANA","ÁLVAREZ ÍÑIGO",2014,"ELGATO-M"],["BIANCA","BUENO FORNI",2014,"CE-M"],["IRATXE","BALLESTEROS",2014,"CE-M"],["NOA","SERRANO LOPEZ",2014,"SASLE-M"],["CAITLYN","SCHIPPERS",2014,"FED-V-C"],["ARIADNA","PINA DEL ROSAL",2016,"SAMA-M"],["EVA","ROJO RAMIREZ",2015,"SASLE-M"],["GADEA","PRADO DEL ESTAL",2014,"ELGATO-M"],["YUXIN","CHEN",2014,"EHB-B"],["CELIE","COLNOT",2014,"FED-V-C"],["NATALIA","MONTORO CASTILLO",2014,"CEA-V"],["MANUELA","DE SANDE TEJEDOR",2016,"CEB-M"]].map(r=>[null,r[0],r[1],r[2],r[3],0]),
+M15:[["YUXIN","CHEN",2014,"EHB-B"],["MELANIA","TUDELA MARTINEZ",2012,"CETORRE-MA"],["MARTA","GOMEZ GARCIA",2014,"CE-M"],["SARA","MARTIN HAGEL",2012,"SASLE-M"],["SARA","PUGA GARCIA",2013,"CEEC-M"],["SOFÍA","PASTOR ROVALINO",2013,"CE-M"],["ADRIANA","VICENTE MORENO",2013,"SAMA-M"],["ISABELLA","CABRERA",2012,"SAV-V"],["KEILA AIMARÁ","GONZALEZ PEREZ",2014,"CETORRE-MA"],["CAITLYN","SCHIPPERS",2014,"FED-V-C"],["AINA","PARDO VÁZQUEZ",2012,"SAM-B"],["BLANCA","PES",2013,"CEEC-M"],["ANA","SANCHEZ CORBELLA",2013,"SAMA-M"],["ANNA","GALLEGO AGUSTI",2012,"SAM-B"],["ILITHIA SOFIA","MORENO GARCIA",2013,"FED-AND-C"],["GADEA","PRADO DEL ESTAL",2014,"ELGATO-M"],["ÁGUEDA","MESTRE GARIN",2014,"SAM-B"],["DARIA","NEBEZHEVA",2012,"FED-AND-C"],["NICOLE","SILVESTRINI",2013,"CED-V"],["MARIA ELISA","SAIEH PEREZ",2012,"SAMA-M"],["CELIE","COLNOT",2014,"FED-V-C"],["LEYRE","CADINU SÁNCHEZ",2012,"CEA-V"],["ADA LUNA","KECK ROMERO",2012,"CE-M"],["IRATXE","BALLESTEROS",2014,"CE-M"],["CRISTINA","AGÜERO SANZ",2013,"CEAL-M"],["EMPERATRIZ","AROCA CARRERO",2012,"CEC-C"],["MADISON","DELGADO GARCIA",2013,"CEEC-M"],["MARIA","MUÑOZ VILA",2012,"CEEC-M"],["JULIA","CRESPIN GOMEZ",2012,"SEAC-CO"],["BLANCA","BENGOECHEA DE LUIS",2014,"CE-M"],["DANIELLA","AYALA PULLA",2012,"ECC-BU"],["LAURA","VENTIMIGLIA",2012,"SASLE-M"],["MARINA","CUBELA MORILLO",2013,"CEHE-PO"],["JULIA","BELTRAN GIL",2013,"SASLE-M"]].map(r=>[null,r[0],r[1],r[2],r[3],0]),
+M17:[[1,"CRISTINA","LÓPEZ MARTÍNEZ",2011,"CE-M",5513.25],[2,"VIOLETA","MARTI PRADA",2011,"SAMA-M",5149.45],[3,"MARÍA","GONZÁLEZ DE HERRERO COBO",2011,"CE-M",3784.45],[4,"ALEJANDRA","JATIVA PLAZA",2010,"SAMA-M",3050.03],[5,"ANNA","GALLEGO AGUSTI",2012,"SAM-B",2718.26],[6,"CLARA","GÓMEZ DAMAS",2010,"CE-M",2505.11],[7,"KAMILA ALEXANDRA","GONZALEZ CASARES",2010,"CEA-V",2408.66],[8,"VICTORIA","GARCÍA ALBERCA",2011,"ELGATO-M",2279.24],[9,"CARLA","JIMENO MORA",2010,"CE-M",2220.27],[10,"JULIA","CURTO OCHOA",2010,"CDF-SS",2211.8],[11,"MARIÑA","PRIETO VARELA",2010,"CEHE-PO",2190.83],[12,"BIANCA","SELLÉS BARQUERO",2011,"CEA-V",2134.77],[13,"RITA","PACHECO GAVINHOS",2010,"CEHE-PO",1879.41],[14,"ADRIANA","VICENTE MORENO",2013,"SAMA-M",1631.88],[15,"LUCÍA","RÍOS OLARIA",2011,"CEA-V",1589.14],[16,"NOELIA","DOSA PODAR",2011,"CEEC-M",1425.57],[17,"ANA","SANCHEZ CORBELLA",2013,"SAMA-M",1413.97],[18,"ILLARI","PIQUE OCCELLI",2010,"CDF-SS",1287.45],[19,"SARA","PUGA GARCIA",2013,"CEEC-M",1261.65],[20,"MARINA","MUÑIZ AMO",2011,"CE-SG",1259.68],[21,"INES","MUNRO DIAZ",2010,"CE-M",1258.28],[22,"CARMEN","DEL RÍO MORENO",2011,"CE-M",1250.78],[23,"CELIA","SANCHEZ CORBELLA",2010,"SAMA-M",1247.75],[24,"CARMEN LAIA","CUBELA MORILLO",2010,"CEHE-PO",1241.19],[25,"ÁNGELA","PINAZO TORMO",2010,"CED-V",1132.76],[26,"SOFIA","SANCHEZ CORBELLA",2010,"SAMA-M",1097.45],[27,"ANA","MOLINA ARCOS",2011,"AECLM-CR",972.38],[28,"LOREA","ARRIET ARRAZOLA",2010,"CDF-SS",910.76],[29,"SARA","MARTIN HAGEL",2012,"SASLE-M",843.03],[30,"AINARA","CHACON UNGUREANU",2011,"CEEC-M",807.69],[31,"MARTINA","PRADO DEL ESTAL",2010,"ELGATO-M",787.23],[32,"LAURA","VENTIMIGLIA",2012,"SASLE-M",719.98],[33,"GOYA","RUIZ GARCÍA",2010,"CED-V",712.08],[34,"GADEA","PRADO DEL ESTAL",2014,"ELGATO-M",552.8],[35,"ALBA","MARTÍNEZ GONZÁLEZ",2011,"CEHE-PO",541.79],[36,"LEYRE","CADINU SÁNCHEZ",2012,"CEA-V",504.02],[37,"JULIA","SHIROKIKH",2011,"EHB-B",318.72],[38,"CRISTINA","AGÜERO SANZ",2013,"CEAL-M",238.78],[39,"MADISON","DELGADO GARCIA",2013,"CEEC-M",231.83],[40,"BLANCA","PES",2013,"CEEC-M",225.05],[41,"DANIELLA","AYALA PULLA",2012,"ECC-BU",218.45],[42,"LEIRE","MORO",2011,"CEEC-M",218.45]],
+M20:[[1,"LUCIA","JIMENO MORA",2007,"CE-M",5899.4],[2,"LAIA","MARTÍN HERNÁNDEZ",2007,"CEL-M",5294.31],[3,"VIOLETA","MARTI PRADA",2011,"SAMA-M",4347.11],[4,"JUNE","RUIZ BELATEGI",2008,"CDF-SS",4322.76],[5,"HELENA","VILA BAILACH",2008,"SAM-B",3700.51],[6,"VALERIA","VERDE ALONSO",2007,"SAMA-M",3450.92],[7,"CRISTINA","LÓPEZ MARTÍNEZ",2011,"CE-M",3351.52],[8,"HENAR","VALVERDE MATE",2007,"CEST-AV",3319.33],[9,"GADEA","PARAMO PEÑA",2009,"ECC-BU",2813.24],[10,"NEREA","THUAL TAENGUA",2007,"CED-V",2776.34],[11,"MARÍA","GONZÁLEZ DE HERRERO COBO",2011,"CE-M",2660.37],[12,"IRIA","ORTIZ HERAS",2007,"CEA-V",2505.79],[13,"CLARA","GÓMEZ DAMAS",2010,"CE-M",2361.59],[14,"ANGELA","MARTELLA MARTELLA",2009,"CE-M",2339.95],[15,"ALEJANDRA","JATIVA PLAZA",2010,"SAMA-M",2212.52],[16,"MARIONA","SANAHUJA DE LA TORRE",2009,"SAM-B",2166.15],[17,"OLIMPIA","HERNÁNDEZ GONZÁLEZ",2009,"ELGATO-M",1921.31],[18,"PETRA","ROHR LOPEZ",2007,"SASLE-M",1834.75],[19,"INES","HIGUERA LOPEZ",2009,"CEB-M",1758.85],[20,"IRENE","FERRERO CARBALLO",2008,"SASLE-M",1672.6],[21,"KAMILA ALEXANDRA","GONZALEZ CASARES",2010,"CEA-V",1613.32],[22,"CARLA","JIMENO MORA",2010,"CE-M",1612.72],[23,"BELEN","DEL RIO MORENO",2008,"CE-M",1344.69],[24,"VICTORIA","GARCÍA ALBERCA",2011,"ELGATO-M",1267.5],[25,"NOELIA","MATARRANZ GAVILAN",2007,"CEB-M",1224.17],[26,"MARIÑA","PRIETO VARELA",2010,"CEHE-PO",1189.96],[27,"JULIA","CURTO OCHOA",2010,"CDF-SS",1013.62],[28,"JULIA","SILVESTRINI",2008,"CED-V",823.33],[29,"CARMEN LAIA","CUBELA MORILLO",2010,"CEHE-PO",804.51],[30,"CARMEN","DEL RÍO MORENO",2011,"CE-M",792.67],[31,"CELIA","SANCHEZ CORBELLA",2010,"SAMA-M",785.5],[32,"LUCIA","RIVERO REDONDO",2008,"COE-M",729.6],[33,"SOFIA","SANCHEZ CORBELLA",2010,"SAMA-M",715.98],[34,"MARTINA","PRADO DEL ESTAL",2010,"ELGATO-M",696.59],[35,"LUCÍA","RÍOS OLARIA",2011,"CEA-V",690.23],[36,"RITA","PACHECO GAVINHOS",2010,"CEHE-PO",681.23],[37,"BIANCA","SELLÉS BARQUERO",2011,"CEA-V",657.09],[38,"ANNA","GALLEGO AGUSTI",2012,"SAM-B",629.46],[39,"MAIALEN","ESPINOZA",2008,"CDF-SS",623.34],[40,"MARINA","MUÑIZ AMO",2011,"CE-SG",565.26],[41,"CLAUDIA","FERNANDEZ LÓPEZ",2009,"AEC-CU",549.15],[42,"MAR","TABERNA RAMON",2009,"CEL-M",545.04],[43,"ILLARI","PIQUE OCCELLI",2010,"CDF-SS",534.49],[44,"ÁNGELA","PINAZO TORMO",2010,"CED-V",511.71],[45,"MARIA","LORA GOMÁ",2008,"CBC-CA",393.96],[46,"INES","MUNRO DIAZ",2010,"CE-M",384.5],[47,"CARLA","MUÑOZ PAZOS",2009,"SAM-B",368.69],[48,"LOREA","ARRIET ARRAZOLA",2010,"CDF-SS",335.53],[49,"ADRIANA","VICENTE MORENO",2013,"SAMA-M",322.51],[50,"GOYA","RUIZ GARCÍA",2010,"CED-V",300.19],[51,"ANGELA","NOGUEIRA GARCÍA",2008,"CEHE-PO",290.21],[52,"ANA","SANCHEZ CORBELLA",2013,"SAMA-M",267.68],[53,"DAYLIN","SUÑER",2009,"SASLE-M",251.22],[54,"JULIA","PRUÑONOSA ORERO",2009,"CED-V",250.6],[55,"NOELIA","DOSA PODAR",2011,"CEEC-M",240.83],[56,"LAURA","VENTIMIGLIA",2012,"SASLE-M",235.78],[57,"ALBA","MARTÍNEZ GONZÁLEZ",2011,"CEHE-PO",230.84],[58,"AINARA","CHACON UNGUREANU",2011,"CEEC-M",221.24],[59,"CLAUDIA","GOMEZ PEREZ",2009,"CEB-M",114.33]],
+ABS:[[1,"LUCIA","MARTIN PORTUGUES BARBERO",1990,"CEOYM-M",4288.74],[2,"ARACELI","NAVARRO LASO",1989,"CEOYM-M",3722.74],[3,"MARIA","VENTURA JORQUERA",2000,"CEOYM-M",3066.04],[4,"CELIA","PEREZ CUENCA",1994,"CEOYM-M",3057.74],[5,"ELENA","HERNANDEZ MUÑOZ",1999,"SAMA-M",2570.27],[6,"LAIA","MARTÍN HERNÁNDEZ",2007,"CEL-M",2451.34],[7,"ELENA","GOMEZ VALERA",2006,"CEB-M",2175.53],[8,"ITZIAR","GALLARDO GOMEZ",2000,"SAMA-M",2114.5],[9,"MARIA ALICIA","PERRONI",1988,"CE-M",2049.84],[10,"LUCIA","JIMENO MORA",2007,"CE-M",1987.91],[11,"VIOLETA","MARTI PRADA",2011,"SAMA-M",1742.92],[12,"MARTA","CERRO JIMENEZ",1999,"CEB-M",1661.55],[13,"MAR","FERNANDEZ AVILA",2005,"CEL-M",1627.39],[14,"HELENA","VILA BAILACH",2008,"SAM-B",1573.34],[15,"MARIA","CASTAÑO CORDERO",2003,"SAM-B",1565.77],[16,"VALERIA","VERDE ALONSO",2007,"SAMA-M",1464.03],[17,"MARIA","LEYVA VANEGAS",2003,"CE-M",1451.22],[18,"PILAR","GARNELO HERMIDA",2006,"CEHE-PO",1295.38],[19,"INES","VALVERDE MATE",2005,"CEST-AV",1224.26],[20,"HENAR","VALVERDE MATE",2007,"CEST-AV",1217.72],[21,"JUNE","RUIZ BELATEGI",2008,"CDF-SS",1197.06],[22,"NEREA","THUAL TAENGUA",2007,"CED-V",1158.33],[23,"MARTA","VELA DE PANDO",2005,"CBC-CA",1115.19],[24,"GADEA","PARAMO PEÑA",2009,"ECC-BU",1093.06],[25,"KREESTEL","FRAATZ",2000,"CEA-V",1085.68],[26,"ANA","ALDERETE CHAVEZ",2001,"CE-M",1047.71],[27,"MARÍA","GONZÁLEZ DE HERRERO COBO",2011,"CE-M",1042.9],[28,"CLARA","GÓMEZ DAMAS",2010,"CE-M",1025.78],[29,"ALEJANDRA","JATIVA PLAZA",2010,"SAMA-M",974.26],[30,"CRISTINA","LÓPEZ MARTÍNEZ",2011,"CE-M",972.91],[31,"OLIMPIA","HERNÁNDEZ GONZÁLEZ",2009,"ELGATO-M",905.46],[32,"CANDELA","CAMPOAMOR DAVILA",2001,"CE-M",809.05],[33,"ANGELA","MARTELLA MARTELLA",2009,"CE-M",752.93],[34,"IRIA","ORTIZ HERAS",2007,"CEA-V",739.27],[35,"ANA","SIERRA ACOSTA",1997,"CBC-CA",726.64],[36,"PETRA","ROHR LOPEZ",2007,"SASLE-M",699.58],[37,"INES","HIGUERA LOPEZ",2009,"CEB-M",684.3],[38,"JIMENA","BUENADICHA GARCÍA",2005,"CEST-AV",682.19],[39,"PAULA","GAYTAN DE AYALA",1990,"CBC-CA",651.14],[40,"DANIELA","SOLERA SANCHEZ",2006,"CEB-M",643.92],[41,"IRENE","FERRERO CARBALLO",2008,"SASLE-M",629.12],[42,"CLAUDIA","GARCIA CIMAS",2006,"SAM-B",571.97],[43,"IRIS","MEDINA ALVAREZ",2006,"CEB-M",543.13],[44,"KAMILA ALEXANDRA","GONZALEZ CASARES",2010,"CEA-V",509.64],[45,"ANGELA","DE RIOJA MEDIAVILLA",1967,"CE-M",489.83],[46,"MARIA","LORA GOMÁ",2008,"CBC-CA",471.77],[47,"PAULA","GARCIA GONZALEZ-ESTEFANI",2002,"CEB-M",466.92],[48,"ENCARNA","CELIS MONLEON",2005,"CED-V",450.45],[49,"ELA","ALPAGUT",2005,"COE-M",432.7],[50,"MARIONA","SANAHUJA DE LA TORRE",2009,"SAM-B",432.35],[51,"SAOIRSE","MCGLINCHEY",1999,"CE-M",339.9],[52,"CARMEN","DEL RÍO MORENO",2011,"CE-M",331.9],[53,"TERESA","PARREIRA GODINHO",2006,"COE-M",326.19],[54,"BELEN","DEL RIO MORENO",2008,"CE-M",322.22],[55,"JULIA","SILVESTRINI",2008,"CED-V",312.49],[56,"CELIA","SANCHEZ CORBELLA",2010,"SAMA-M",309.84],[57,"MARTINA","PRADO DEL ESTAL",2010,"ELGATO-M",294.55],[58,"LUCIA","RIVERO REDONDO",2008,"COE-M",275.58],[59,"VICTORIA","GARCÍA ALBERCA",2011,"ELGATO-M",262.28],[60,"ADRIANA","VICENTE MORENO",2013,"SAMA-M",258.01],[61,"RAFAELA MARITSA","PLYTA",2001,"COE-M",253.82],[62,"CARLA","JIMENO MORA",2010,"CE-M",249.7],[63,"SOFIA","SANCHEZ CORBELLA",2010,"SAMA-M",237.75],[64,"MARIÑA","PRIETO VARELA",2010,"CEHE-PO",233.89],[65,"CARMEN LAIA","CUBELA MORILLO",2010,"CEHE-PO",230.1],[66,"MAR","TABERNA RAMON",2009,"CEL-M",226.37],[67,"CARLA","MUÑOZ PAZOS",2009,"SAM-B",121.69],[68,"LUCIA","CULEBRAS MARIN",2006,"AEC-CU",118.07],[69,"ANGELA","NOGUEIRA GARCÍA",2008,"CEHE-PO",114.51]]
+};
+// Resultados TNR: [pos, nombre, apellidos, club, añoNac, puntos]
+const RES=[
+{id:10372,date:"18/10/2026",name:"TNR M17",cat:"M17",place:"MADRID",n:42,pdf:"https://app.skermo.org/client/1/a512aef5b9a76f2020965feacb3500b3.pdf",rows:[[1,"CRISTINA","LÓPEZ MARTÍNEZ","CE-M",2011,2424],[2,"VIOLETA","MARTI PRADA","SAMA-M",2011,2036.55],[3,"ANNA","GALLEGO AGUSTI","SAM-B",2012,1726.07],[3,"MARÍA","GONZÁLEZ DE HERRERO COBO","CE-M",2011,1726.07],[5,"ALEJANDRA","JATIVA PLAZA","SAMA-M",2010,1387.4],[6,"ADRIANA","VICENTE MORENO","SAMA-M",2013,1338.62],[7,"BIANCA","SELLÉS BARQUERO","CEA-V",2011,1297.38],[8,"SARA","PUGA GARCIA","CEEC-M",2013,1261.65],[9,"CLARA","GÓMEZ DAMAS","CE-M",2010,1028.14],[10,"VICTORIA","GARCÍA ALBERCA","ELGATO-M",2011,999.95],[11,"KAMILA ALEXANDRA","GONZALEZ CASARES","CEA-V",2010,974.45],[12,"NOELIA","DOSA PODAR","CEEC-M",2011,951.17],[13,"ANA","SANCHEZ CORBELLA","SAMA-M",2013,929.76],[14,"MARIÑA","PRIETO VARELA","CEHE-PO",2010,909.93],[15,"RITA","PACHECO GAVINHOS","CEHE-PO",2010,891.47],[16,"JULIA","CURTO OCHOA","CDF-SS",2010,874.2],[17,"INES","MUNRO DIAZ","CE-M",2010,655.98],[18,"CARMEN","DEL RÍO MORENO","CE-M",2011,640.69],[19,"CELIA","SANCHEZ CORBELLA","SAMA-M",2010,626.23],[20,"SARA","MARTIN HAGEL","SASLE-M",2012,612.5],[21,"ANA","MOLINA ARCOS","AECLM-CR",2011,599.45],[22,"CARMEN LAIA","CUBELA MORILLO","CEHE-PO",2010,587],[23,"ILLARI","PIQUE OCCELLI","CDF-SS",2010,575.11],[24,"LUCÍA","RÍOS OLARIA","CEA-V",2011,563.72],[25,"GADEA","PRADO DEL ESTAL","ELGATO-M",2014,552.8],[26,"ÁNGELA","PINAZO TORMO","CED-V",2010,542.31],[27,"SOFIA","SANCHEZ CORBELLA","SAMA-M",2010,532.21],[28,"CARLA","JIMENO MORA","CE-M",2010,522.48],[29,"LOREA","ARRIET ARRAZOLA","CDF-SS",2010,513.09],[30,"LEYRE","CADINU SÁNCHEZ","CEA-V",2012,504.02],[31,"AINARA","CHACON UNGUREANU","CEEC-M",2011,495.25],[32,"MARINA","MUÑIZ AMO","CE-SG",2011,486.75],[33,"MARTINA","PRADO DEL ESTAL","ELGATO-M",2010,276.52],[34,"LAURA","VENTIMIGLIA","SASLE-M",2012,268.53],[35,"JULIA","SHIROKIKH","EHB-B",2011,260.78],[36,"ALBA","MARTÍNEZ GONZÁLEZ","CEHE-PO",2011,253.24],[37,"GOYA","RUIZ GARCÍA","CED-V",2010,245.91],[38,"CRISTINA","AGÜERO SANZ","CEAL-M",2013,238.78],[39,"MADISON","DELGADO GARCIA","CEEC-M",2013,231.83],[40,"BLANCA","PES","CEEC-M",2013,225.05],[41,"DANIELLA","AYALA PULLA","ECC-BU",2012,218.45],[41,"LEIRE","MORO","CEEC-M",2011,218.45]]},
+{id:10369,date:"17/10/2026",name:"TNR M20",cat:"M20",place:"MADRID",n:55,pdf:"https://app.skermo.org/client/1/8abb16b7dc64f0f809ce2ca1315b9f6d.pdf",rows:[[1,"LUCIA","JIMENO MORA","CE-M",2007,2424],[2,"JUNE","RUIZ BELATEGI","CDF-SS",2008,2049.03],[3,"CRISTINA","LÓPEZ MARTÍNEZ","CE-M",2011,1745.85],[3,"VIOLETA","MARTI PRADA","SAMA-M",2011,1745.85],[5,"HENAR","VALVERDE MATE","CEST-AV",2007,1416.38],[6,"LAIA","MARTÍN HERNÁNDEZ","CEL-M",2007,1370.88],[7,"IRIA","ORTIZ HERAS","CEA-V",2007,1332.41],[8,"MARIONA","SANAHUJA DE LA TORRE","SAM-B",2009,1299.09],[9,"NEREA","THUAL TAENGUA","CED-V",2007,1067.7],[10,"HELENA","VILA BAILACH","SAM-B",2008,1041.41],[11,"MARÍA","GONZÁLEZ DE HERRERO COBO","CE-M",2011,1017.62],[12,"GADEA","PARAMO PEÑA","ECC-BU",2009,995.91],[13,"ANGELA","MARTELLA MARTELLA","CE-M",2009,975.94],[14,"CARLA","JIMENO MORA","CE-M",2010,957.44],[15,"VALERIA","VERDE ALONSO","SAMA-M",2007,940.23],[16,"JULIA","CURTO OCHOA","CDF-SS",2010,924.12],[17,"CLARA","GÓMEZ DAMAS","CE-M",2010,706.99],[18,"INES","HIGUERA LOPEZ","CEB-M",2009,692.73],[19,"ALEJANDRA","JATIVA PLAZA","SAMA-M",2010,679.24],[20,"OLIMPIA","HERNÁNDEZ GONZÁLEZ","ELGATO-M",2009,666.44],[21,"VICTORIA","GARCÍA ALBERCA","ELGATO-M",2011,654.26],[22,"KAMILA ALEXANDRA","GONZALEZ CASARES","CEA-V",2010,642.65],[23,"RITA","PACHECO GAVINHOS","CEHE-PO",2010,631.56],[24,"NOELIA","MATARRANZ GAVILAN","CEB-M",2007,620.94],[24,"PETRA","ROHR LOPEZ","SASLE-M",2007,620.94],[26,"LUCÍA","RÍOS OLARIA","CEA-V",2011,600.97],[27,"BELEN","DEL RIO MORENO","CE-M",2008,591.55],[28,"ANNA","GALLEGO AGUSTI","SAM-B",2012,582.47],[29,"MARIÑA","PRIETO VARELA","CEHE-PO",2010,573.72],[30,"MARINA","MUÑIZ AMO","CE-SG",2011,565.26],[31,"IRENE","FERRERO CARBALLO","SASLE-M",2008,557.07],[32,"CLAUDIA","FERNANDEZ LÓPEZ","AEC-CU",2009,549.15],[33,"CARMEN","DEL RÍO MORENO","CE-M",2011,339.47],[34,"BIANCA","SELLÉS BARQUERO","CEA-V",2011,332.02],[35,"INES","MUNRO DIAZ","CE-M",2010,324.79],[36,"MAIALEN","ESPINOZA","CDF-SS",2008,317.76],[37,"CARMEN LAIA","CUBELA MORILLO","CEHE-PO",2010,310.92],[38,"SOFIA","SANCHEZ CORBELLA","SAMA-M",2010,304.27],[38,"JULIA","SILVESTRINI","CED-V",2008,304.27],[40,"MARTINA","PRADO DEL ESTAL","ELGATO-M",2010,291.47],[41,"ILLARI","PIQUE OCCELLI","CDF-SS",2010,285.31],[42,"ÁNGELA","PINAZO TORMO","CED-V",2010,279.29],[42,"CELIA","SANCHEZ CORBELLA","SAMA-M",2010,279.29],[44,"ANA","SANCHEZ CORBELLA","SAMA-M",2013,267.68],[45,"LUCIA","RIVERO REDONDO","COE-M",2008,262.08],[45,"MAR","TABERNA RAMON","CEL-M",2009,262.08],[47,"DAYLIN","SUÑER","SASLE-M",2009,251.22],[48,"GOYA","RUIZ GARCÍA","CED-V",2010,245.97],[49,"NOELIA","DOSA PODAR","CEEC-M",2011,240.83],[50,"LAURA","VENTIMIGLIA","SASLE-M",2012,235.78],[51,"ALBA","MARTÍNEZ GONZÁLEZ","CEHE-PO",2011,230.84],[52,"LOREA","ARRIET ARRAZOLA","CDF-SS",2010,226],[53,"AINARA","CHACON UNGUREANU","CEEC-M",2011,221.24],[54,"CARLA","MUÑOZ PAZOS","SAM-B",2009,216.58],[55,"JULIA","PRUÑONOSA ORERO","CED-V",2009,212]]},
+{id:10295,date:"27/09/2026",name:"TNR ABS (1/3)",cat:"ABS",place:"MADRID",n:68,pdf:"https://app.skermo.org/client/1/c7184519d5ae977f49d1a066485b2d84.pdf",rows:[[1,"LUCIA","MARTIN PORTUGUES BARBERO","CEOYM-M",1990,2424],[2,"ARACELI","NAVARRO LASO","CEOYM-M",1989,2057.73],[3,"CELIA","PEREZ CUENCA","CEOYM-M",1994,1759.63],[3,"MARIA","VENTURA JORQUERA","CEOYM-M",2000,1759.63],[5,"LAIA","MARTÍN HERNÁNDEZ","CEL-M",2007,1436.57],[6,"ELENA","GOMEZ VALERA","CEB-M",2006,1393.36],[7,"ELENA","HERNANDEZ MUÑOZ","SAMA-M",1999,1356.83],[8,"VIOLETA","MARTI PRADA","SAMA-M",2011,1325.18],[9,"MARIA ALICIA","PERRONI","CE-M",1988,1095.27],[10,"HELENA","VILA BAILACH","SAM-B",2008,1070.3],[11,"ANA","ALDERETE CHAVEZ","CE-M",2001,1047.71],[12,"MARIA","LEYVA VANEGAS","CE-M",2003,1027.09],[13,"ITZIAR","GALLARDO GOMEZ","SAMA-M",2000,1008.12],[14,"PILAR","GARNELO HERMIDA","CEHE-PO",2006,990.56],[15,"KREESTEL","FRAATZ","CEA-V",2000,974.21],[16,"LUCIA","JIMENO MORA","CE-M",2007,958.91],[17,"CLARA","GÓMEZ DAMAS","CE-M",2010,742.54],[18,"MARTA","CERRO JIMENEZ","CEB-M",1999,729],[19,"ALEJANDRA","JATIVA PLAZA","SAMA-M",2010,716.18],[20,"MAR","FERNANDEZ AVILA","CEL-M",2005,704.03],[21,"NEREA","THUAL TAENGUA","CED-V",2007,692.47],[22,"VALERIA","VERDE ALONSO","SAMA-M",2007,681.44],[23,"HENAR","VALVERDE MATE","CEST-AV",2007,670.91],[24,"GADEA","PARAMO PEÑA","ECC-BU",2009,660.82],[25,"PAULA","GAYTAN DE AYALA","CBC-CA",1990,651.14],[26,"MARIA","CASTAÑO CORDERO","SAM-B",2003,641.85],[27,"MARÍA","GONZÁLEZ DE HERRERO COBO","CE-M",2011,632.9],[28,"OLIMPIA","HERNÁNDEZ GONZÁLEZ","ELGATO-M",2009,624.29],[29,"INES","VALVERDE MATE","CEST-AV",2005,615.97],[30,"MARTA","VELA DE PANDO","CBC-CA",2005,607.94],[31,"CRISTINA","LÓPEZ MARTÍNEZ","CE-M",2011,600.16],[32,"JUNE","RUIZ BELATEGI","CDF-SS",2008,592.64],[33,"ANA","SIERRA ACOSTA","CBC-CA",1997,383.35],[34,"DANIELA","SOLERA SANCHEZ","CEB-M",2006,376.27],[35,"ELA","ALPAGUT","COE-M",2005,369.4],[35,"ANGELA","MARTELLA MARTELLA","CE-M",2009,369.4],[37,"IRIA","ORTIZ HERAS","CEA-V",2007,356.23],[38,"CLAUDIA","GARCIA CIMAS","SAM-B",2006,349.91],[39,"JIMENA","BUENADICHA GARCÍA","CEST-AV",2005,343.76],[40,"KAMILA ALEXANDRA","GONZALEZ CASARES","CEA-V",2010,337.76],[41,"CARMEN","DEL RÍO MORENO","CE-M",2011,331.9],[42,"TERESA","PARREIRA GODINHO","COE-M",2006,326.19],[43,"IRIS","MEDINA ALVAREZ","CEB-M",2006,320.62],[44,"MARIA","LORA GOMÁ","CBC-CA",2008,315.17],[45,"CELIA","SANCHEZ CORBELLA","SAMA-M",2010,309.84],[46,"PETRA","ROHR LOPEZ","SASLE-M",2007,304.63],[47,"CANDELA","CAMPOAMOR DAVILA","CE-M",2001,299.54],[48,"MARTINA","PRADO DEL ESTAL","ELGATO-M",2010,294.55],[49,"SAOIRSE","MCGLINCHEY","CE-M",1999,289.66],[50,"INES","HIGUERA LOPEZ","CEB-M",2009,284.87],[51,"ANGELA","DE RIOJA MEDIAVILLA","CE-M",1967,280.18],[52,"LUCIA","RIVERO REDONDO","COE-M",2008,275.58],[53,"IRENE","FERRERO CARBALLO","SASLE-M",2008,271.06],[54,"ENCARNA","CELIS MONLEON","CED-V",2005,266.63],[55,"VICTORIA","GARCÍA ALBERCA","ELGATO-M",2011,262.28],[56,"ADRIANA","VICENTE MORENO","SAMA-M",2013,258.01],[57,"RAFAELA MARITSA","PLYTA","COE-M",2001,253.82],[58,"CARLA","JIMENO MORA","CE-M",2010,249.7],[59,"MARIONA","SANAHUJA DE LA TORRE","SAM-B",2009,245.65],[60,"BELEN","DEL RIO MORENO","CE-M",2008,241.66],[61,"SOFIA","SANCHEZ CORBELLA","SAMA-M",2010,237.75],[62,"MARIÑA","PRIETO VARELA","CEHE-PO",2010,233.89],[63,"CARMEN LAIA","CUBELA MORILLO","CEHE-PO",2010,230.1],[64,"MAR","TABERNA RAMON","CEL-M",2009,226.37],[65,"CARLA","MUÑOZ PAZOS","SAM-B",2009,121.69],[66,"LUCIA","CULEBRAS MARIN","AEC-CU",2006,118.07],[67,"ANGELA","NOGUEIRA GARCÍA","CEHE-PO",2008,114.51],[67,"JULIA","SILVESTRINI","CED-V",2008,114.51]]}
+];
+// Calendario: [fecha, nombre, cat, modalidad(I/E), lugar, tipo, ámbito(N/I), finInscripción, inscritas, sede, links, puntuaRankingInterno]
+const R="https://app.skermo.org/client/1/";
+const ACR="https://esgrima.es/wp-content/uploads/2026/11/ACREDITACION-";
+const ACR2122=[["Acreditación deportista",ACR+"DEPORTISTA-21-22-NOVIEMBRE-2026.pdf"],["Acreditación entrenador",ACR+"ENTRENADOR-21-22-NOVIEMBRE-2026.pdf"],["Acreditación árbitro",ACR+"ARBITRO-21-22-NOVIEMBRE-2026.pdf"],["Acreditación acompañante",ACR+"ACOMPANANTE-21-22-NOVIEMBRE-2026.pdf"]];
+const CAL=[
+["05/09/2026","Torneo Satélite","ABS","I","REYKJAVIK (ISL)","Circuito FIE","I","10/08/2026",0],
+["12/09/2026","Torneo Satélite","ABS","I","NÚREMBERG (GER)","Circuito FIE","I","17/08/2026",1],
+["19/09/2026","Torneo Satélite","ABS","I","ESTAMBUL (TUR)","Circuito FIE","I","24/08/2026",1],
+["25/09/2026","Copa del Mundo Cadete","M17","I","BOGOTÁ (COL)","Circuito FIE","I","31/08/2026",0],
+["25/09/2026","Copa del Mundo Junior","M20","I","BOGOTÁ (COL)","Circuito FIE","I","31/08/2026",0],
+["27/09/2026", "TNR ABS (1/3)", "ABS", "I", "MADRID", "TNR", "N", "18/09/2026", 69, "Polideportivo Campus Sur UPM", [["Resultado", R+"c7184519d5ae977f49d1a066485b2d84.pdf"]],[["Junior",0.75,"nacional"],["Sub23",0.75,"nacional"]]],
+["27/09/2026","Liga Nacional Iberdrola · 1ª jornada","ABS","E","MADRID","Liga de clubes","N","18/09/2026",0,"Polideportivo Campus Sur UPM",[["Resultado",R+"9256ce923f46533027536e0f9353dcd7.pdf"]]],
+["27/09/2026","Liga Nacional Plata · 1ª jornada","ABS","E","MADRID","Liga de clubes","N","18/09/2026",0,"Polideportivo Campus Sur UPM",[["Resultado",R+"79c1f737ae199be66c0e63295f8b9d15.pdf"]]],
+["03/10/2026","Circuito Europeo Cadete","M17","I","ESTAMBUL (TUR)","Circuito Cadete Europeo","I","07/09/2026",0],
+["03/10/2026","Circuito Europeo Sub23","M23","I","SOFÍA (BUL)","Circuito Sub23 Europeo","I","07/09/2026",3],
+["08/10/2026","Copa del Mundo Cadete","M17","I","TASHKENT (UZB)","Circuito FIE","I","14/09/2026",0],
+["08/10/2026","Copa del Mundo Junior","M20","I","TASHKENT (UZB)","Circuito FIE","I","14/09/2026",0],
+["15/10/2026", "Copa del Mundo", "ABS", "I", "ORÁN (ALG)", "Circuito FIE", "I", "21/09/2026", 2, "", [],[["Junior",2],["Sub23",2]]],
+["17/10/2026", "TNR M20", "M20", "I", "MADRID", "TNR", "N", "09/10/2026", 56, "Pabellón Central del CSD", [["Resultado", R+"8abb16b7dc64f0f809ce2ca1315b9f6d.pdf"]],[["Cadete",0.75,"nacional"],["Junior",0.75,"nacional"]]],
+["17/10/2026","TNR M20 equipos","M20","E","MADRID","TNR","N","09/10/2026",0,"Pabellón Central del CSD",[["Resultado",R+"d806dc9f899a6e2aab46b7014cd16436.pdf"]]],
+["17/10/2026","Circuito Europeo Cadete","M17","I","BUDAPEST (HUN)","Circuito Cadete Europeo","I","21/09/2026",0],
+["18/10/2026", "TNR M17", "M17", "I", "MADRID", "TNR", "N", "09/10/2026", 42, "Pabellón Central del CSD", [["Resultado", R+"a512aef5b9a76f2020965feacb3500b3.pdf"]],[["Cadete",0.75,"nacional"]]],
+["22/10/2026", "Copa del Mundo Cadete", "M17", "I", "ORÁN (ALG)", "Circuito FIE", "I", "21/09/2026", 5, "", [],[["Cadete",1]]],
+["22/10/2026", "Copa del Mundo Junior", "M20", "I", "ORÁN (ALG)", "Circuito FIE", "I", "21/09/2026", 6, "", [],[["Cadete",1.25],["Junior",1]]],
+["31/10/2026","Circuito Europeo Cadete","M17","I","SOFÍA (BUL)","Circuito Cadete Europeo","I","05/10/2026",4],
+["06/11/2026", "Copa del Mundo Cadete", "M17", "I", "BUDAPEST (HUN)", "Circuito FIE", "I", "12/10/2026", 7, "", [],[["Cadete",1]]],
+["06/11/2026", "Copa del Mundo Junior", "M20", "I", "BUDAPEST (HUN)", "Circuito FIE", "I", "12/10/2026", 15, "", [],[["Cadete",1.25],["Junior",1]]],
+["12/11/2026", "Copa del Mundo", "ABS", "I", "EL CAIRO (EGY)", "Circuito FIE", "I", "19/10/2026", 1, "", [],[["Junior",2],["Sub23",2]]],
+["14/11/2026", "Circuito Europeo Cadete", "M17", "I", "PAU (FRA)", "Circuito Cadete Europeo", "I", "19/10/2026", 23, "", [],[["Cadete",1]]],
+["21/11/2026","TNR M15 (1/3)","M15","I","MADRID","TNR","N","13/11/2026",34,"Pabellón Central del CSD",[["Información",R+"6fceb3f251e5ddd57852f17b773143f7.pdf"]].concat(ACR2122)],
+["22/11/2026","TNR M13 (1/2)","M13","I","MADRID","TNR","N","13/11/2026",25,"Pabellón Central del CSD",[["Información",R+"6fceb3f251e5ddd57852f17b773143f7.pdf"]].concat(ACR2122)],
+["26/11/2026","Copa del Mundo Cadete","M17","I","BOSTON (USA)","Circuito FIE","I","02/11/2026",0],
+["26/11/2026","Copa del Mundo Junior","M20","I","BOSTON (USA)","Circuito FIE","I","02/11/2026",0],
+["27/11/2026","Copa de Europa de Clubes","ABS","I","HEIDENHEIM (GER)","Copa Europa","I","02/11/2026",0],
+["03/12/2026", "Grand Prix", "ABS", "I", "ORLÉANS (FRA)", "Circuito FIE", "I", "09/11/2026", 3, "", [],[["Junior",2],["Sub23",2]]],
+["12/12/2026","Circuito Europeo Cadete","M17","I","EISLINGEN (GER)","Circuito Cadete Europeo","I","16/11/2026",0],
+["17/12/2026","Copa del Mundo Cadete","M17","I","BUSAN (KOR)","Circuito FIE","I","23/11/2026",0],
+["17/12/2026","Copa del Mundo Junior","M20","I","BUSAN (KOR)","Circuito FIE","I","23/11/2026",0],
+["19/12/2026", "TNR M17", "M17", "I", "MADRID", "TNR", "N", "11/12/2026", 0, "", [],[["Cadete",0.75,"nacional"]]],
+["19/12/2026", "TNR M20", "M20", "I", "MADRID", "TNR", "N", "11/12/2026", 0, "", [],[["Cadete",0.75,"nacional"],["Junior",0.75,"nacional"]]],
+["19/12/2026","TNR M20 equipos","M20","E","MADRID","TNR","N","11/12/2026",0],
+["19/12/2026","Circuito Europeo Sub23","M23","I","GRUNWALD (GER)","Circuito Sub23 Europeo","I","23/11/2026",0],
+["07/01/2027","Copa del Mundo Cadete","M17","I","Por determinar","Circuito FIE","I","14/12/2026",0],
+["07/01/2027","Copa del Mundo Junior","M20","I","Por determinar","Circuito FIE","I","14/12/2026",0],
+["09/01/2027", "Circuito Europeo Cadete", "M17", "I", "SEGOVIA (ESP)", "Circuito Cadete Europeo", "I", "14/12/2026", 0, "", [],[["Cadete",1]]],
+["15/01/2027", "Grand Prix", "ABS", "I", "TÚNEZ (TUN)", "Circuito FIE", "I", "21/12/2026", 1, "", [],[["Junior",2],["Sub23",2]]],
+["16/01/2027","Circuito Europeo Cadete","M17","I","KONIN (POL)","Circuito Cadete Europeo","I","21/12/2026",0],
+["21/01/2027","Copa del Mundo Cadete","M17","I","PLOVDIV (BUL)","Circuito FIE","I","28/12/2026",0],
+["21/01/2027", "Copa del Mundo Junior", "M20", "I", "PLOVDIV (BUL)", "Circuito FIE", "I", "28/12/2026", 0, "", [],[["Cadete",1.25],["Junior",1]]],
+["28/01/2027", "Copa del Mundo", "ABS", "I", "TASHKENT (UZB)", "Circuito FIE", "I", "04/01/2027", 0, "", [],[["Junior",2],["Sub23",2]]],
+["30/01/2027","Circuito Europeo Cadete","M17","I","PRAGA (CZE)","Circuito Cadete Europeo","I","04/01/2027",0],
+["01/02/2027", "Campeonato de Europa Cadete", "M17", "I", "PLOVDIV (BUL)", "Circuito FIE", "I", "", 0, "", [],[["Cadete",1.25]]],
+["01/02/2027", "Campeonato de Europa Junior", "M20", "I", "PLOVDIV (BUL)", "Circuito FIE", "I", "", 0, "", [],[["Cadete",1.5],["Junior",1.25]]],
+["06/02/2027","TNR M15 (2/3)","M15","I","CIUDAD REAL","TNR","N","29/01/2027",0],
+["06/02/2027","TNR M13 (2/2)","M13","I","CIUDAD REAL","TNR","N","29/01/2027",0],
+["18/02/2027", "Copa del Mundo", "ABS", "I", "PADOVA (ITA)", "Circuito FIE", "I", "25/01/2027", 0, "", [],[["Junior",2,"a confirmar: el documento cita SWC Atenas 19/02"],["Sub23",2,"a confirmar"]]],
+["27/02/2027", "TNR ABS (2/3)", "ABS", "I", "ALMAGRO", "TNR", "N", "19/02/2027", 0, "", [],[["Junior",0.75,"nacional"],["Sub23",0.75,"nacional"]]],
+["27/02/2027","Liga Nacional Iberdrola · 2ª jornada","ABS","E","ALMAGRO","Liga de clubes","N","19/02/2027",0],
+["27/02/2027","Liga Nacional Plata · 2ª jornada","ABS","E","ALMAGRO","Liga de clubes","N","19/02/2027",0],
+["06/03/2027","Eurofence League","ABS","I","BUDAPEST (HUN)","EFC Eurofence League","I","08/02/2027",0],
+["13/03/2027","Circuito Europeo Sub23","M23","I","BELGRADO (SRB)","Circuito Sub23 Europeo","I","15/02/2027",0],
+["19/03/2027", "Copa del Mundo", "ABS", "I", "PANAGYURISHTE (BUL)", "Circuito FIE", "I", "22/02/2027", 0, "", [],[["Junior",2,"a confirmar: el documento cita SWC Sofía 19/03"],["Sub23",2,"a confirmar"]]],
+["09/04/2027","Copa del Mundo Cadete","M17","I","Por determinar","Circuito FIE","I","",0],
+["09/04/2027","Campeonato del Mundo Junior","M20","I","Por determinar","Circuito FIE","I","",0],
+["17/04/2027","TNR M15 (3/3) Sant Jordi","M15","I","SANT CUGAT","TNR","N","09/04/2027",0,"ZEM La Guinardera",[["Web","https://trofeusantjordi.com/"],["Dossier",R+"f789a3559910eb6a2d462fa7e7c36ee6.pdf"],["Resultados online","https://engarde-service.com/tournament/rfee/trofeusantjordi2027"]]],
+["17/04/2027","Eurofence League","ABS","I","VIENA (AUT)","EFC Eurofence League","I","22/03/2027",0],
+["28/04/2027","Campeonato de Europa Sub23","M23","I","PODGORICA (MNE)","Circuito Sub23 Europeo","I","",0],
+["30/04/2027", "Grand Prix", "ABS", "I", "SEÚL (KOR)", "Circuito FIE", "I", "05/04/2027", 0, "", [],[["Junior",2],["Sub23",2]]],
+["15/05/2027","Eurofence League","ABS","I","KAMNIK (SLO)","EFC Eurofence League","I","19/04/2027",0],
+["16/06/2027","Juegos Europeos","ABS","I","ESTAMBUL (TUR)","Circuito FIE","I","",0],
+["20/07/2027","Campeonato del Mundo","ABS","I","TASHKENT (UZB)","Circuito FIE","I","",0]
+];
+// Ranking interno oficial RFEE (PDF Skermo "Clasificación"): [rk, nombre, club, añoNac, ptsNacional, [[pos,pts] por competición internacional], total]
+// Total = nacional + 2 mejores internacionales
+const INT={
+Cadete:{fecha:"17/11/2026",pdf:"https://app.skermo.org/client/1/CLASSIFICATION_FILES/5320c8c238a57459e2a469d6d218a9e6.pdf",min:7000,comps:["CM Cadete Orán 22/10","CM Junior Orán 23/10","CM Cadete Budapest 06/11","CM Junior Budapest 07/11","ECC Cadete Pau 14/11"],rows:[
+[1,"VIOLETA MARTI PRADA","SAMA-M",2011,3164.15,[[2,3630.38],[52,608.09],[52,554.53],[15,4562.62],[2,2719.68]],11357.15],
+[2,"MARÍA GONZÁLEZ DE HERRERO COBO","CE-M",2011,2248.57,[[3,3153.03],[65,371.03],[30,2067.31],[135,259.64],null],7468.90],
+[3,"CRISTINA LÓPEZ MARTÍNEZ","CE-M",2011,3454.73,[[24,1348.31],[90,0],[57,519.79],[110,527.32],[6,1994.33]],6797.38],
+[4,"CLARA GÓMEZ DAMAS","CE-M",2010,1433.91,[[22,1385.88],[92,0],[59,506.73],[152,192.12],[10,1641.46]],4461.25],
+[5,"ALEJANDRA JATIVA PLAZA","SAMA-M",2010,1677.34,[[9,2074.10],[78,276.77],[48,584.83],[173,0],[35,319.89]],4336.27],
+[6,"VICTORIA GARCÍA ALBERCA","ELGATO-M",2011,1363.34,[[18,1472.53],null,[130,0],null,[34,327.27]],3163.13],
+[7,"ANNA GALLEGO AGUSTI","SAM-B",2012,1840.62,[null,null,null,null,[21,1229.72]],3070.34],
+[8,"ADRIANA VICENTE MORENO","SAMA-M",2013,1003.97,[null,null,null,null,[5,2040.76]],3044.73],
+[9,"BIANCA SELLÉS BARQUERO","CEA-V",2011,1284.30,[null,null,null,null,[15,1538.20]],2822.50],
+[10,"CARLA JIMENO MORA","CE-M",2010,1289.46,[null,null,null,null,[28,1156.46]],2445.92],
+[11,"LUCÍA RÍOS OLARIA","CEA-V",2011,986.20,[null,null,null,null,[27,1165.72]],2151.92],
+[12,"CELIA SANCHEZ CORBELLA","SAMA-M",2010,731.51,[[21,1405.97],null,null,null,[73,0]],2137.47],
+[13,"JULIA CURTO OCHOA","CDF-SS",2010,1522.01,[null,null,null,null,[53,214.21]],1736.23],
+[14,"KAMILA ALEXANDRA GONZALEZ CASARES","CEA-V",2010,1333.32,[[27,0],null,null,null,[36,312.71]],1646.03],
+[15,"ANA SANCHEZ CORBELLA","SAMA-M",2013,948.27,[null,null,null,null,[38,298.94]],1247.21],
+[16,"NOELIA DOSA PODAR","CEEC-M",2011,939.16,[null,null,null,null,[39,292.33]],1231.49],
+[17,"SARA PUGA GARCIA","CEEC-M",2013,946.24,[null,null,null,null,[41,279.59]],1225.83],
+[18,"MARIÑA PRIETO VARELA","CEHE-PO",2010,1220.31,[null,null,null,null,null],1220.31],
+[19,"INES MUNRO DIAZ","CE-M",2010,796.48,[null,null,null,null,[50,229.05]],1025.53],
+[20,"MARINA MUÑIZ AMO","CE-SG",2011,895.00,[null,null,null,null,null],895.00]]},
+Junior:{fecha:"17/11/2026",pdf:"https://app.skermo.org/client/1/CLASSIFICATION_FILES/50da3ce4c58edd328b2231c413008d23.pdf",min:7200,comps:["CM Junior Orán 22/10","CM Junior Budapest 07/11"],rows:[
+[1,"VIOLETA MARTI PRADA","SAMA-M",2011,2551.75,[[52,486.47],[15,3650.10]],6688.31],
+[2,"LUCIA JIMENO MORA","CE-M",2007,2716.98,[[81,0],[79,572.62]],3289.60],
+[3,"LAIA MARTÍN HERNÁNDEZ","EHB-B",2007,2374.94,[[87,0],[133,214.51]],2589.45],
+[4,"JUNE RUIZ BELATEGI","CDF-SS",2008,2092.37,[[68,278.16],[106,438.73]],2809.26],
+[5,"HELENA VILA BAILACH","SAM-B",2008,1784.47,[[67,284.29],null],2068.76],
+[6,"CRISTINA LÓPEZ MARTÍNEZ","CE-M",2011,1872.04,[[90,0],[110,421.86]],2293.89],
+[7,"NEREA THUAL TAENGUA","CED-V",2007,1449.97,[[71,260.30],null],1710.27],
+[8,"HENAR VALVERDE MATE","CEST-AV",2007,1691.27,[null,[193,0]],1691.27],
+[9,"MARÍA GONZÁLEZ DE HERRERO COBO","CE-M",2011,1356.56,[[65,296.82],[135,207.71]],1861.10],
+[10,"ALEJANDRA JATIVA PLAZA","SAMA-M",2010,1180.85,[[78,221.41],[173,0]],1402.26],
+[11,"GADEA PARAMO PEÑA","ECC-BU",2009,1366.46,[[82,0],null],1366.46],
+[12,"VALERIA VERDE ALONSO","SAMA-M",2007,1344.02,[[94,0],null],1344.02],
+[13,"IRIA ORTIZ HERAS","EHB-B",2007,1333.28,[null,null],1333.28],
+[14,"CLARA GÓMEZ DAMAS","CE-M",2010,1226.37,[[92,0],[152,153.69]],1380.06],
+[15,"MARIONA SANAHUJA DE LA TORRE","SAM-B",2009,1204.61,[null,null],1204.61],
+[16,"OLIMPIA HERNÁNDEZ GONZÁLEZ","ELGATO-M",2009,1085.10,[null,null],1085.10],
+[17,"ANGELA MARTELLA MARTELLA","CE-M",2009,1078.27,[null,[148,165.84]],1244.11],
+[18,"INES HIGUERA LOPEZ","SAMA-M",2009,786.62,[null,[180,0]],786.62],
+[19,"PETRA ROHR LOPEZ","SASLE-M",2007,751.30,[null,null],751.30],
+[20,"IRENE FERRERO CARBALLO","SASLE-M",2008,671.92,[null,null],671.92]]}
+};
+
+</script>
+<script>
+const $=s=>document.querySelector(s);
+const fmt=n=>n.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pd=s=>{const[d,m,y]=s.split('/');return new Date(+y,+m-1,+d)};
+const TODAY=new Date();TODAY.setHours(0,0,0,0);
+const MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('#snap').textContent=SNAPSHOT;
+
+// ---------- Fórmula RFEE ----------
+function bonus(p){return p==1?1414:p==2?1212:p<5?1010:p<9?808:p<17?606:p<33?404:p<65?202:p<129?101:0}
+function pts(pos,n,coef=1){if(!(pos>=1)||!(n>=2)||pos>n)return NaN;return (bonus(pos)+1000*(1.01-Math.log10(pos)/Math.log10(n)))*coef}
+
+// ---------- Sub23 estimado (2 mejores TNR ABS de nacidas en 2004 o después) ----------
+const ABS_ALL=RES.filter(r=>r.cat=='ABS');const ABS_RES=ABS_ALL[0];
+{const m={};ABS_ALL.forEach(t=>t.rows.filter(r=>r[4]>=2004).forEach(r=>{const k=r[1]+'|'+r[2];(m[k]=m[k]||{r,p:[]}).p.push(r[5])}));
+RK.M23=Object.values(m).map(({r,p})=>[0,r[1],r[2],r[4],r[3],Math.round(p.sort((a,b)=>b-a).slice(0,2).reduce((s,x)=>s+x,0)*100)/100]).sort((a,b)=>b[5]-a[5]);}
+{let last=null,pos=0;RK.M23.forEach((r,i)=>{if(r[5]!==last){pos=i+1;last=r[5]}r[0]=pos})}
+
+const CATS=[["M13","M13"],["M15","M15 (Infantil)"],["M17","M17 (Cadete)"],["M20","M20 (Junior)"],["M23","Sub23"],["ABS","Absoluto"]];
+const CATNAME=Object.fromEntries(CATS);
+// Reglas de ranking (Normativa 26-27, apdo. 1.3)
+const RULES={
+ M13:{carry:0,best:"2 TNR M13 + Cto. España",comps:[["TNR M13",1],["Cto. España M13",1.25]],n:25},
+ M15:{carry:0,best:"Resultados de los TNR M15 + Cto. España",comps:[["TNR M15",1],["Cto. España M15",1.25]],n:34},
+ M17:{carry:10,best:"3 mejores entre 2 TNR M17 y 2 TNR M20 + Cto. España",comps:[["TNR M17",1],["TNR M20",1.25],["Cto. España M17",1.25],["Cto. España M20",1.5]],n:42},
+ M20:{carry:15,best:"3 mejores entre 2 TNR M20 y 3 TNR ABS + Cto. España",comps:[["TNR M20",1],["TNR Absoluto",1.25],["Cto. España M20",1.25],["Cto. España Sub23",1.25],["Cto. España Absoluto",1.5]],n:55},
+ M23:{carry:0,best:"2 mejores de los 3 TNR ABS + Cto. España",comps:[["TNR Absoluto",1],["Cto. España Sub23",1.25],["Cto. España Absoluto",1.5]],n:68},
+ ABS:{carry:20,best:"2 mejores de los 3 TNR ABS + Cto. España",comps:[["TNR Absoluto",1],["Cto. España Absoluto",1.25]],n:68}
+};
+const CUTS={M17:[[10,"Top 10 · PFCAR / Europeo"],[20,"Top 20 · pueden inscribirse en internacionales"],[38,"Top 38 · plaza directa Cto. España"]],M20:[[10,"Top 10 · Europeo (ranking interno)"],[20,"Top 20 · pueden inscribirse en internacionales"],[38,"Top 38 · plaza directa Cto. España"]],ABS:[[20,"Top 20 · pueden inscribirse en Copas del Mundo/GP"]],M23:[[10,"Top 10 · pueden inscribirse al Europeo Sub23"]]};
+
+// ---------- Tabs ----------
+const TABS=[["resumen","Resumen"],["ranking","Rankings"],["calendario","Calendario"],["resultados","Resultados"],["interno","Ranking interno"],["calc","Calculadora de puntos"],["normativa","Normativa clave"]];
+$('#nav').innerHTML=TABS.map(([k,l],i)=>`<button data-t="${k}" class="${i?'':'on'}">${l}</button>`).join('');
+$('#nav').onclick=e=>{const t=e.target.dataset.t;if(!t)return;document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.t==t));TABS.forEach(([k])=>$('#t-'+k).classList.toggle('hide',k!=t))};
+const go=t=>document.querySelector(`#nav button[data-t="${t}"]`).click();
+
+// ---------- Calendario helpers ----------
+const EV=CAL.map(c=>({d:pd(c[0]),date:c[0],name:c[1],cat:c[2],mod:c[3],place:c[4],tipo:c[5],amb:c[6],fin:c[7],ins:c[8],sede:c[9]||'',links:c[10]||[],punt:c[11]||[]}));
+const fx=v=>String(v).replace('.',',');
+const ptag=e=>e.punt.map(([r,f,n])=>`<span class="tag p" title="${n?esc(n):''}">Interno ${r} ×${fx(f)}${n&&n!='nacional'?' (?)':''}</span>`).join('');
+const daysTo=d=>Math.round((d-TODAY)/864e5);
+function evRow(e){const dd=daysTo(e.d);const past=dd<0;
+ const finD=e.fin?pd(e.fin):null;const fd=finD?daysTo(finD):null;
+ let when=past?'Celebrada':dd==0?'¡Hoy!':`en ${dd} día${dd==1?'':'s'}`;
+ let insc=e.fin?(fd>=0?`<span class="tag w">Inscripción hasta ${e.fin}${fd<=7?` (${fd} d)`:''}</span>`:(past?'':`<span class="tag">Inscripción cerrada</span>`)):'';
+ return `<div class="ev ${past?'past':''}"><div class="date"><b>${e.d.getDate()}</b><span>${MES[e.d.getMonth()]} ${String(e.d.getFullYear()).slice(2)}</span></div>
+ <div><div class="t">${esc(e.name)} ${e.mod=='E'?'<span class="tag">Equipos</span>':''}</div>
+ <div class="small mut">${esc(e.place)}${e.sede?' · '+esc(e.sede):''} · ${esc(e.tipo)}${e.ins?` · ${e.ins} inscritas`:''}</div>
+ <div class="row" style="margin-top:4px;gap:6px"><span class="tag ${e.amb=='N'?'n':'i'}">${e.amb=='N'?'Nacional':'Internacional'}</span><span class="tag">${CATNAME[e.cat]||e.cat}</span>${ptag(e)}${insc}
+ ${e.links.map(([l,u])=>`<a class="small" href="${u}" target="_blank">${l}</a>`).join(' ')}</div></div>
+ <div class="small ${past?'mut':''}" style="text-align:right;font-weight:600">${when}</div></div>`}
+
+// ---------- RESUMEN ----------
+function renderResumen(){
+ const up=EV.filter(e=>daysTo(e.d)>=0&&e.mod=='I');
+ const nextN=up.find(e=>e.amb=='N'), nextI=up.find(e=>e.amb=='I');
+ const openIns=EV.filter(e=>e.fin&&daysTo(pd(e.fin))>=0&&e.mod=='I').sort((a,b)=>pd(a.fin)-pd(b.fin))[0];
+ const leaders=CATS.map(([k,l])=>{const r=RK[k].find(x=>x[5]>0);return `<tr><td><b>${l}</b>${k=='M23'?' <span class="tag w">estimado</span>':''}</td><td>${r?esc(r[1]+' '+r[2]):'<span class="mut">Sin puntos aún</span>'}</td><td>${r?r[4]:''}</td><td class="n">${r?fmt(r[5]):'—'}</td></tr>`}).join('');
+ $('#t-resumen').innerHTML=`
+ <div class="grid g4">
+  <div class="card kpi"><div class="lab">Próxima nacional</div><div class="val">${nextN?esc(nextN.name):'—'}</div><div class="det">${nextN?`${nextN.date} · ${esc(nextN.place)} · en ${daysTo(nextN.d)} días`:''}</div></div>
+  <div class="card kpi"><div class="lab">Próxima internacional</div><div class="val">${nextI?esc(nextI.name):'—'}</div><div class="det">${nextI?`${nextI.date} · ${esc(nextI.place)} · en ${daysTo(nextI.d)} días`:''}</div></div>
+  <div class="card kpi"><div class="lab">Próximo cierre de inscripción</div><div class="val">${openIns?openIns.fin:'—'}</div><div class="det">${openIns?`${esc(openIns.name)} · ${esc(openIns.place)}`:''}</div></div>
+  <div class="card kpi"><div class="lab">TNR ya disputados (SF)</div><div class="val">${RES.length}</div><div class="det">${RES.map(r=>r.name).join(' · ')}</div></div>
+ </div>
+ <div class="grid g2" style="margin-top:14px">
+  <div class="card"><h3>Líderes del ranking nacional</h3><table><thead><tr><th>Categoría</th><th>Líder</th><th>Club</th><th class="n">Puntos</th></tr></thead><tbody>${leaders}</tbody></table>
+  <p class="small mut">M13 y M15 aún no han disputado ninguna prueba puntuable (1.º TNR: 21 y 22/11/2026). Sub23 no se publica en Skermo: se estima con el TNR ABS para nacidas en 2004 o después.</p>
+  <button class="chip" onclick="go('ranking')">Ver rankings completos →</button></div>
+  <div class="card"><h3>Próximas competiciones</h3>${up.slice(0,7).map(evRow).join('')}<div style="margin-top:10px"><button class="chip" onclick="go('calendario')">Ver calendario completo →</button></div></div>
+ </div>
+ <div class="note" style="margin-top:14px">Los Campeonatos de España 2026-27 y el 3.er TNR Absoluto todavía no aparecen en el calendario de Skermo. Esta página es una foto de los datos a ${(SNAPSHOT)}; pídeme que la actualice tras cada competición.</div>`;
+}
+
+// ---------- RANKING ----------
+let rkCat='M17',rkQ='',rkClub='';
+function renderRanking(){
+ const rows=RK[rkCat];const max=Math.max(...rows.map(r=>r[5]),1);
+ const clubs=[...new Set(rows.map(r=>r[4]))].sort();
+ const q=rkQ.toLowerCase();
+ const f=rows.filter(r=>(!q||(r[1]+' '+r[2]).toLowerCase().includes(q))&&(!rkClub||r[4]==rkClub));
+ const noPts=rows.every(r=>!r[5]);
+ const cuts=Object.fromEntries((CUTS[rkCat]||[]).map(c=>[c[0],c[1]]));
+ const rule=RULES[rkCat];
+ const body=noPts?f.map((r,i)=>`<tr><td class="n mut">—</td><td>${esc(r[1]+' '+r[2])}</td><td>${r[4]}</td><td>${r[3]}</td><td class="n mut">0,00</td><td></td></tr>`).join('')
+ :f.map(r=>`<tr class="${cuts[r[0]]&&!rkQ&&!rkClub?'cut':''}" title="${cuts[r[0]]||''}"><td class="n"><b>${r[0]}</b></td><td>${esc(r[1]+' '+r[2])}</td><td>${r[4]}</td><td>${r[3]}</td><td class="n">${fmt(r[5])}</td><td><div class="bar"><i style="width:${r[5]/max*100}%"></i></div></td></tr>`).join('');
+ $('#t-ranking').innerHTML=`<div class="card">
+ <div class="chips">${CATS.map(([k,l])=>`<button class="chip ${k==rkCat?'on':''}" data-c="${k}">${l}</button>`).join('')}</div>
+ <div class="row" style="margin-bottom:10px"><input id="rkq" placeholder="Buscar tiradora…" value="${esc(rkQ)}" style="min-width:220px"><select id="rkclub"><option value="">Todos los clubes</option>${clubs.map(c=>`<option ${c==rkClub?'selected':''}>${c}</option>`).join('')}</select>
+ <span class="small mut">Cuenta: ${rule.best} · arrastre temporada anterior ${rule.carry}%</span></div>
+ ${rkCat=='M23'?`<div class="note" style="margin-bottom:10px">Ranking Sub23 <b>estimado</b>: Skermo no publica ranking Sub23. Se calcula con los puntos de ${ABS_ALL.length>1?'los 2 mejores TNR ABS ('+ABS_ALL.map(r=>r.name).join(', ')+')':'el '+ABS_RES.name}${ABS_ALL.length>1?'':''} de las tiradoras nacidas en 2004 o después (arrastre 0%).</div>`:''}
+ ${noPts?`<div class="note" style="margin-bottom:10px">Aún sin pruebas puntuables en ${CATNAME[rkCat]}. Se listan las ${rows.length} tiradoras inscritas en el ranking; el primer TNR es el ${rkCat=='M15'?'21/11/2026':'22/11/2026'} en Madrid.</div>`:''}
+ ${(CUTS[rkCat]&&!noPts)?`<div class="small mut" style="margin-bottom:8px">Línea roja discontinua: ${(CUTS[rkCat]).map(c=>c[1]).join(' · ')}</div>`:''}
+ <div class="tbl"><table><thead><tr><th class="n">#</th><th>Tiradora</th><th>Club</th><th>Año</th><th class="n">Puntos</th><th></th></tr></thead><tbody>${body}</tbody></table></div>
+ <p class="small mut">Fuente: <a target="_blank" href="https://app.skermo.org/ranking-rfee/public/RFEE?season=17&weapon=S&category=${({M13:12,M15:4,M17:5,M20:6,ABS:7})[rkCat]||7}&gender=W">Skermo · Ranking Nacional</a> (${(SNAPSHOT)}).</p></div>`;
+ $('#t-ranking .chips').onclick=e=>{if(e.target.dataset.c){rkCat=e.target.dataset.c;rkClub='';renderRanking()}};
+ const qi=$('#rkq');qi.oninput=()=>{rkQ=qi.value;const p=qi.selectionStart;renderRanking();const n=$('#rkq');n.focus();n.setSelectionRange(p,p)};
+ $('#rkclub').onchange=e=>{rkClub=e.target.value;renderRanking()};
+}
+
+// ---------- CALENDARIO ----------
+let calCat='all',calAmb='all',calPast=false,calEq=false,calInt='';
+function renderCal(){
+ const f=EV.filter(e=>(calCat=='all'||e.cat==calCat)&&(calAmb=='all'||e.amb==calAmb)&&(calPast||daysTo(e.d)>=0)&&(calEq||e.mod=='I')&&(!calInt||e.punt.some(p=>calInt=='any'||p[0]==calInt)));
+ const byMonth={};f.forEach(e=>{const k=e.d.getFullYear()*100+e.d.getMonth();(byMonth[k]=byMonth[k]||[]).push(e)});
+ const MESL=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+ $('#t-calendario').innerHTML=`<div class="card">
+ <div class="chips" id="cc"><button class="chip ${calCat=='all'?'on':''}" data-c="all">Todas</button>${CATS.map(([k,l])=>`<button class="chip ${k==calCat?'on':''}" data-c="${k}">${l}</button>`).join('')}</div>
+ <div class="row" style="margin-bottom:6px">
+  <select id="camb"><option value="all">Nacionales e internacionales</option><option value="N" ${calAmb=='N'?'selected':''}>Solo nacionales</option><option value="I" ${calAmb=='I'?'selected':''}>Solo internacionales</option></select>
+  <label class="small"><input type="checkbox" id="cpast" ${calPast?'checked':''}> Mostrar celebradas</label>
+  <select id="cint"><option value="">Todas (puntúen o no)</option><option value="any" ${calInt=='any'?'selected':''}>Solo puntuables ranking interno</option>${['Cadete','Junior','Sub23'].map(r=>`<option value="${r}" ${calInt==r?'selected':''}>Puntúa ranking interno ${r}</option>`).join('')}</select>
+  <label class="small"><input type="checkbox" id="ceq" ${calEq?'checked':''}> Incluir equipos / Liga</label>
+  <span class="small mut">${f.length} competiciones</span></div>
+ ${Object.keys(byMonth).sort().map(k=>`<h3 style="margin:18px 0 0;font-size:14px;color:var(--acc2)">${MESL[k%100]} ${Math.floor(k/100)}</h3>${byMonth[k].map(evRow).join('')}`).join('')||'<p class="mut">No hay competiciones con estos filtros.</p>'}
+ <p class="small mut">"Interno Cadete/Junior/Sub23 ×factor" = la competición puntúa para ese ranking interno RFEE con ese multiplicador (Criterios de participación y selección 26-27). Las nacionales (×0,75) cuentan solo las 2 mejores; las internacionales, las 2 mejores. (?) = la fecha o sede de Skermo no coincide exactamente con el documento. Fuente: <a target="_blank" href="https://app.skermo.org/calendar/public/RFEE">Skermo · Calendario</a>.</p></div>`;
+ $('#cc').onclick=e=>{if(e.target.dataset.c){calCat=e.target.dataset.c;renderCal()}};
+ $('#camb').onchange=e=>{calAmb=e.target.value;renderCal()};$('#cpast').onchange=e=>{calPast=e.target.checked;renderCal()};$('#ceq').onchange=e=>{calEq=e.target.checked;renderCal()};$('#cint').onchange=e=>{calInt=e.target.value;renderCal()};
+}
+
+// ---------- RESULTADOS ----------
+let resId=RES[0].id;
+function renderRes(){
+ const r=RES.find(x=>x.id==resId);
+ $('#t-resultados').innerHTML=`<div class="card">
+ <div class="chips">${RES.map(x=>`<button class="chip ${x.id==resId?'on':''}" data-r="${x.id}">${x.name} · ${x.date}</button>`).join('')}</div>
+ <div class="row"><b>${r.name}</b><span class="mut">${r.place} · ${r.date} · ${r.n} participantes</span><a href="${r.pdf}" target="_blank" class="small">PDF oficial</a><a href="https://app.skermo.org/ranking/public/RFEE/competition/${r.id}" target="_blank" class="small">Skermo</a></div>
+ <div class="pod">${r.rows.filter(x=>x[0]<=3).map(x=>`<div><b>${x[0]}º</b> ${esc(x[1]+' '+x[2])}<div class="small mut">${x[3]} · ${fmt(x[5])} pts</div></div>`).join('')}</div>
+ <div class="tbl"><table><thead><tr><th class="n">Pos.</th><th>Tiradora</th><th>Club</th><th>Año</th><th class="n">Puntos (coef. 1)</th></tr></thead><tbody>
+ ${r.rows.map(x=>`<tr><td class="n">${x[0]}</td><td>${esc(x[1]+' '+x[2])}</td><td>${x[3]}</td><td>${x[4]}</td><td class="n">${fmt(x[5])}</td></tr>`).join('')}</tbody></table></div>
+ <p class="small mut">Los puntos mostrados son base (coeficiente 1). Cuando la prueba puntúa para la categoría inferior se multiplican (p. ej. TNR M20 ×1,25 en el ranking M17).</p></div>`;
+ $('#t-resultados .chips').onclick=e=>{if(e.target.dataset.r){resId=+e.target.dataset.r;renderRes()}};
+}
+
+
+// ---------- RANKING INTERNO ----------
+const INT_RULES={
+ Cadete:{nac:"2 mejores nacionales ×0,75 (TNR M17, TNR M20; sin arrastre)",int:"2 mejores internacionales: CM Cadete seleccionadas ×1 · CM Junior seleccionadas ×1,25 · Europeo Cadete ×1,25 · Europeo Junior ×1,5",min:"Mundial Cadete: 7.000 pts",uso:"Selección CM Cadete PFCAR (top 10), Europeo Cadete (top 3 + 1 CNTyC), Mundial Cadete"},
+ Junior:{nac:"2 mejores nacionales ×0,75 (TNR M20, TNR ABS; sin arrastre)",int:"2 mejores internacionales: CM Junior seleccionadas ×1 · Circuito Europeo Sub23 seleccionado ×1,25 · Copas del Mundo y GP senior seleccionados ×2 · Europeo Junior ×1,25",min:"Mundial Junior: 7.200 pts (a 08/03/2027)",uso:"Selección CM Junior PFCAR (top 8 + 4 CNTyC), Europeo Junior (top 3 + 1), Mundial Junior"},
+ Sub23:{nac:"2 mejores nacionales ×0,75 (TNR ABS; sin arrastre)",int:"2 mejores internacionales: Circuito Europeo Sub23 seleccionado ×1 · Satélites FIE en España seleccionados ×1,25 · Copas del Mundo y GP senior seleccionados ×2",min:"—",uso:"Selección Circuito Europeo Sub23 (top 4) y Europeo Sub23 (top 3 + 1 CNTyC)"}
+};
+const INT_NEXT={Cadete:"ECC Segovia 09/01, CM Plovdiv 21/01",Junior:"GP Orleans 03/12, CM Junior Plovdiv 21/01",Sub23:"GP Orleans 03/12"};
+
+function intTable(r){
+ const I=(typeof INT!=='undefined')&&INT[r];
+ if(!I)return `<div class="note" style="margin-top:10px">La RFEE aún no ha publicado el ranking interno ${r} de sable femenino en Skermo. Hasta entonces, la referencia es el ranking nacional${r=='Sub23'?' Sub23 (estimado en la pestaña Rankings)':''}.</div>`;
+ const max=I.min||Math.max(...I.rows.map(x=>x[6]));
+ const q=(window._intQ||'').toLowerCase();
+ return `<h3 style="margin:16px 0 6px;font-size:14px">Clasificación oficial a ${I.fecha} <a class="small" href="${I.pdf}" target="_blank" style="font-weight:400">PDF RFEE</a></h3>
+ <div class="tbl"><table><thead><tr><th class="n">#</th><th>Tiradora</th><th>Club</th><th>Año</th><th class="n">Nacionales</th>${I.comps.map(c=>`<th class="n">${esc(c)}<br><span style="font-weight:400;text-transform:none">pos · pts</span></th>`).join('')}<th class="n">Total</th><th style="min-width:110px">Hacia mínimo ${I.min?fmt(I.min).replace(',00',''):''}</th></tr></thead><tbody>
+ ${I.rows.map(x=>`<tr class="${x[0]==3||x[0]==10?'cut':''}" title="${x[0]==3?'Top 3: plaza directa al Europeo':x[0]==10?'Top 10: pueden inscribirse al Europeo':''}"><td class="n"><b>${x[0]}</b></td><td>${esc(x[1])}</td><td>${x[2]}</td><td>${x[3]}</td><td class="n">${fmt(x[4])}</td>${x[5].map(c=>`<td class="n">${c?`<span class="mut">${c[0]}ª</span> · ${fmt(c[1])}`:'<span class="mut">—</span>'}</td>`).join('')}<td class="n"><b>${fmt(x[6])}</b></td><td><div class="bar" title="${Math.round(x[6]/max*100)}% del mínimo"><i style="width:${Math.min(100,x[6]/max*100)}%;${x[6]>=max?'background:var(--ok)':''}"></i></div></td></tr>`).join('')}
+ </tbody></table></div>
+ <p class="small mut">Top 20 publicado por la RFEE (orden # tal como aparece en el PDF). Línea discontinua: top 3 (Europeo) y top 10 (pueden inscribirse al Europeo). Total = nacionales (2 mejores ×0,75) + los 2 mejores resultados internacionales. Las pruebas posteriores al ${I.fecha} (p. ej. ${INT_NEXT[r]||'las próximas seleccionadas'}) se sumarán cuando la RFEE publique la actualización.</p>`;
+}
+function renderInterno(){
+ const by=r=>EV.filter(e=>e.punt.some(p=>p[0]==r));
+ $('#t-interno').innerHTML=`<div class="note" style="margin-bottom:14px">Competiciones que puntúan para los <b>rankings internos RFEE</b> de sable femenino según los Criterios de participación y selección 26-27. Estos rankings deciden la selección para Copas del Mundo, Europeos y Mundiales. El ranking Absoluto no tiene ranking interno: la selección senior usa el ranking nacional (top 20) y los resultados en Copas del Mundo/GP.</div>
+ <div class="grid">${Object.entries(INT_RULES).map(([r,x])=>{const list=by(r);return `<div class="card"><h3>Ranking interno ${r}</h3>
+ <div class="small"><b>Nacionales:</b> ${x.nac}<br><b>Internacionales:</b> ${x.int}<br><b>Sirve para:</b> ${x.uso}<br><b>Mínimo:</b> ${x.min}</div>
+ ${intTable(r)}
+ <h3 style="margin:16px 0 6px;font-size:14px">Competiciones que puntúan</h3>
+ <table style="margin-top:10px"><thead><tr><th>Fecha</th><th>Competición</th><th>Lugar</th><th class="n">Factor</th><th></th></tr></thead><tbody>
+ ${list.map(e=>{const p=e.punt.find(q=>q[0]==r);const dd=daysTo(e.d);return `<tr style="${dd<0?'opacity:.55':''}"><td>${e.date}</td><td>${esc(e.name)}${p[2]&&p[2]!='nacional'?` <span class="tag w" title="${esc(p[2])}">a confirmar</span>`:''}</td><td class="small">${esc(e.place)}</td><td class="n"><b>×${fx(p[1])}</b></td><td class="small ${dd<0?'mut':''}">${dd<0?'Celebrada':'en '+dd+' d'}</td></tr>`}).join('')}
+ </tbody></table></div>`}).join('')}</div>
+ <p class="small mut" style="margin-top:12px">(a confirmar) El documento cita SWC Atenas 19/02 y SWC Sofía 19/03 para sable femenino; en Skermo aparecen Padova 18/02 y Panagyurishte 19/03. El Circuito Europeo Sub23 y los Satélites aún no tienen pruebas de sable seleccionadas en el documento. Los Campeonatos de España también puntúan como nacionales cuando se publiquen.</p>`;
+}
+
+// ---------- CALCULADORA ----------
+let cCat='M17',cComp=0,cPos=8,cN=42,cAth='';
+function renderCalc(){
+ const rule=RULES[cCat];if(cComp>=rule.comps.length)cComp=0;const coef=rule.comps[cComp][1];
+ const p=pts(cPos,cN,coef),base=pts(cPos,cN,1);
+ const bands=[1,2,3,5,8,9,16,17,32,33,64,65,128].filter(x=>x<=cN);
+ const ath=RK[cCat].filter(r=>r[5]>0||cCat=='M13'||cCat=='M15');
+ let sim='';
+ if(cAth!==''&&ath[+cAth]&&!isNaN(p)){const a=ath[+cAth];const nt=a[5]+p;const newPos=RK[cCat].filter(r=>r!==a&&r[5]>nt).length+1;
+  sim=`<div class="note" style="margin-top:10px"><b>${esc(a[1]+' '+a[2])}</b>: ${fmt(a[5])} pts (${a[0]?a[0]+'ª':'sin posición'}) → <b>${fmt(nt)} pts</b> → posición estimada <b>${newPos}ª</b> ${a[0]?`(${newPos<a[0]?'▲ sube '+(a[0]-newPos):newPos>a[0]?'▼ baja '+(newPos-a[0]):'se mantiene'})`:''}
+  <div class="small mut">Estimación: suma directa sin recalcular "mejores resultados" ni movimientos de las rivales.</div></div>`}
+ $('#t-calc').innerHTML=`<div class="grid g2">
+ <div class="card"><h3>Calcula los puntos de una competición</h3>
+  <div class="row" style="align-items:flex-end">
+   <label class="f">Ranking<select id="ccat">${CATS.map(([k,l])=>`<option value="${k}" ${k==cCat?'selected':''}>${l}</option>`).join('')}</select></label>
+   <label class="f">Competición (coef.)<select id="ccomp">${rule.comps.map((c,i)=>`<option value="${i}" ${i==cComp?'selected':''}>${c[0]} · ×${String(c[1]).replace('.',',')}</option>`).join('')}</select></label>
+  </div>
+  <div class="row" style="align-items:flex-end;margin-top:10px">
+   <label class="f">Posición final<input id="cpos" type="number" min="1" value="${cPos}" style="width:110px"></label>
+   <label class="f">Nº participantes<input id="cn" type="number" min="2" value="${cN}" style="width:110px"></label>
+  </div>
+  <div style="margin-top:16px"><div class="mut small">Puntos para el ranking ${CATNAME[cCat]}</div><div class="big">${isNaN(p)?'—':fmt(p)}</div>
+  <div class="small mut">${isNaN(p)?'La posición debe estar entre 1 y el nº de participantes.':`Base ${fmt(base)} × ${String(coef).replace('.',',')} · bonus por posición ${bonus(cPos)} + 1000·(1,01 − log(${cPos})/log(${cN}))`}</div></div>
+  <div style="margin-top:14px"><label class="f">Simular en el ranking actual<select id="cath"><option value="">— elige tiradora —</option>${ath.map((a,i)=>`<option value="${i}" ${String(i)===cAth?'selected':''}>${a[0]?a[0]+'. ':''}${esc(a[1]+' '+a[2])} (${fmt(a[5])})</option>`).join('')}</select></label>${sim}</div>
+ </div>
+ <div class="card"><h3>Tabla de puntos · ${cN} participantes · ${rule.comps[cComp][0]}</h3>
+  <div class="tbl" style="max-height:420px"><table><thead><tr><th class="n">Posición</th><th>Ronda</th><th class="n">Base</th><th class="n">× ${String(coef).replace('.',',')}</th></tr></thead><tbody>
+  ${bands.map(b=>`<tr ${b==cPos?'style="background:#fde8e9"':''}><td class="n">${b}</td><td class="mut small">${b==1?'Campeona':b==2?'Final':b<5?'Semifinal':b<9?'Cuartos (T8)':b<17?'T16':b<33?'T32':b<65?'T64':'T128'}</td><td class="n">${fmt(pts(b,cN))}</td><td class="n"><b>${fmt(pts(b,cN,coef))}</b></td></tr>`).join('')}
+  </tbody></table></div>
+  <p class="small mut">Primera y última posición de cada ronda del tablón. Saltos grandes al pasar de ronda: entrar en T32 (≤32) suma ~200 pts extra respecto a la 33ª.</p></div>
+ </div>
+ <div class="card" style="margin-top:14px"><h3>Cómo se calcula (Normativa RFEE 26-27, apdo. 1.4.1)</h3>
+ <p>Puntos = [ Bonus(posición) + 1000 × (1,01 − log<sub>10</sub>(posición) / log<sub>10</sub>(participantes)) ] × coeficiente</p>
+ <p class="small">Bonus: 1.º 1414 · 2.º 1212 · 3.º-4.º 1010 · 5.º-8.º 808 · 9.º-16.º 606 · 17.º-32.º 404 · 33.º-64.º 202 · 65.º-128.º 101. Coeficientes: categoría propia ×1; categoría inmediatamente superior ×1,25; Cto. España propio ×1,25; Cto. España superior ×1,50. Verificado con los resultados reales: 1.ª de 42 = 2.424,00; 2.ª de 42 = 2.036,55; 3.ª de 55 en TNR M20 aplicada al ranking M17 = 1.745,85 × 1,25 = 2.182,31.</p>
+ <p class="small"><b>Ranking ${CATNAME[cCat]}:</b> ${rule.best}. Arrastre de la temporada anterior: ${rule.carry}% de los puntos totales.</p></div>`;
+ $('#ccat').onchange=e=>{cCat=e.target.value;cComp=0;cAth='';cN=RULES[cCat].n;renderCalc()};
+ $('#ccomp').onchange=e=>{cComp=+e.target.value;const nm=RULES[cCat].comps[cComp][0];const m={"TNR M13":25,"TNR M15":34,"TNR M17":42,"TNR M20":55,"TNR Absoluto":68};if(m[nm])cN=m[nm];renderCalc()};
+ const bind=(id,set)=>{const el=$(id);el.oninput=()=>{set(+el.value);renderCalc();const n=$(id);n.focus();try{n.setSelectionRange(99,99)}catch(e){}}};
+ bind('#cpos',v=>cPos=v);bind('#cn',v=>cN=v);
+ $('#cath').onchange=e=>{cAth=e.target.value;renderCalc()};
+}
+
+// ---------- NORMATIVA ----------
+function renderNorm(){
+ $('#t-normativa').innerHTML=`<div class="grid g2">
+ <div class="card"><h3>Competiciones que puntúan por categoría</h3><table><thead><tr><th>Ranking</th><th>Qué cuenta</th><th class="n">Arrastre</th></tr></thead><tbody>
+ ${CATS.map(([k,l])=>`<tr><td><b>${l}</b></td><td class="small">${RULES[k].best}<br><span class="mut">${RULES[k].comps.map(c=>c[0]+' ×'+String(c[1]).replace('.',',')).join(' · ')}</span></td><td class="n">${RULES[k].carry}%</td></tr>`).join('')}
+ </tbody></table></div>
+ <div class="card"><h3>Clasificación para el Campeonato de España (individual)</h3>
+ <ul class="small"><li><b>M13 y M15:</b> participación libre.</li><li><b>M17 y M20:</b> 42 plazas → 38 primeras del ranking nacional + 2 plazas CNTyC por lesión + 2 para Baleares, Canarias, Ceuta, Melilla o residentes en el extranjero (T16 en algún TNR y top 5 española en ranking internacional). Las plazas no usadas se cubren con el ranking hasta el puesto 64.</li></ul>
+ <h3 style="margin-top:14px">Equipos</h3><ul class="small"><li>M13/M15: 6 equipos por ranking de clubes (máx. 2 por club).</li><li>M17: 6 primeros del ranking nacional de equipos (suma de posiciones de las 3 mejores de cada club).</li><li>M20: dos fases ligadas a los TNR; se clasifican los 8 primeros de la 2.ª fase.</li></ul></div>
+ <div class="card"><h3>Internacional · Cadete (M17)</h3><ul class="small">
+ <li>Copas del Mundo PFCAR: máx. 12 tiradoras; pueden optar las <b>top 20</b> del ranking (nacional para la 1.ª, interno después) al <b>cuarto lunes</b> antes de la prueba. Plazas: 10 primeras del ranking interno + 2 CNTyC.</li>
+ <li>Circuito Cadete Europeo no seleccionado: máx. 15, no puntúa, gastos de arbitraje a cargo de la tiradora.</li>
+ <li>Ranking interno: 2 mejores nacionales ×0,75 + 2 mejores internacionales (CM Cadete ×1; CM Junior ×1,25; Europeo Cadete ×1,25; Europeo Junior ×1,5).</li>
+ <li>Seleccionadas de sable: Orán 22/10, Budapest 05/11, ECC Pau 13/11, ECC Segovia 08-09/01.</li>
+ <li>Europeo Cadete: inscripción hasta el 11/01/2027 para las 10 primeras del ranking interno; van las 3 primeras + 1 CNTyC.</li>
+ <li><b>Mundial Cadete:</b> mínimo <b>7.000 pts</b> en ranking interno (sable F).</li></ul></div>
+ <div class="card"><h3>Internacional · Junior, Sub23 y Absoluto</h3><ul class="small">
+ <li><b>Junior:</b> CM Junior seleccionadas de sable: Orán 22/10, Budapest 05/11, Plovdiv 21/01, y las pruebas senior/Sub23 indicadas. Europeo Junior: 10 primeras del ranking interno (10/01/2027), van las 3 primeras + 1 CNTyC. <b>Mundial Junior: mínimo 7.200 pts</b> (sable F).</li>
+ <li><b>Sub23:</b> pruebas senior que puntúan: SWC Orán 15/10, SWC El Cairo 12/11, GP Orleans 03/12, GP Túnez 15/01, SWC 28/01, SWC Atenas 19/02, SWC Sofía 19/03, GP Seúl 30/04. Europeo Sub23: inscripción hasta 15/03/2027 (top 10 ranking interno); 3 primeras + 1 CNTyC.</li>
+ <li><b>Absoluto:</b> Copas del Mundo y GP fuera de España: 12 plazas; pueden inscribirse las <b>top 20</b> del ranking nacional (referencia 12 días antes). Europeo/Mundial: top 8 en una CM/GP, top 16 en dos o top 32 en tres.</li></ul></div>
+ </div>
+ <p class="small mut">Resumen de "Normativa para Rankings Nacionales 26-27 V1" y "Criterios de participación y selección 26-27 V4" (RFEE, septiembre 2026). Consulta siempre el documento oficial.</p>`;
+}
+
+renderResumen();renderInterno();renderRanking();renderCal();renderRes();renderCalc();renderNorm();
+</script>
+</body></html>
