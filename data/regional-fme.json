@@ -1,5 +1,5 @@
 {
-  "updated_at": "22/11/2026 19:00 UTC",
+  "updated_at": "22/11/2026 19:10 UTC",
   "sources": [
     {
       "name": "FME · Competición",
@@ -7,31 +7,77 @@
       "use": "Página índice oficial"
     },
     {
-      "name": "Skermo FME · Calendario e información de torneos",
+      "name": "FME · Calendario PDF",
+      "url": "docs/fme/Calendario.pdf",
+      "use": "Calendario completo de sable femenino; copia local oficial"
+    },
+    {
+      "name": "Skermo FME · Calendario",
       "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
-      "use": "Fechas, categorías, modalidad, sede, horario, cierre e inscripciones"
+      "use": "Información de torneos, horarios e inscripciones"
     },
     {
       "name": "Skermo FME · Ranking",
       "url": "https://app.skermo.org/ranking/public/FME?setLang=es",
-      "use": "Ranking regional por temporada, arma, categoría y género"
-    },
-    {
-      "name": "FME · Calendario PDF",
-      "url": "https://fmesgrima.es/wp-content/uploads/2026/06/Calendario.pdf",
-      "use": "Documento oficial de contraste"
+      "use": "Ranking regional por categoría y género"
     },
     {
       "name": "Engarde Service · FME",
       "url": "https://engarde-service.com/index.php?lang=en&Organisme=fme&page=tournois.php",
-      "use": "Resultados online y clasificaciones"
+      "use": "Resultados online"
     },
     {
-      "name": "FME · Normativa de competición",
-      "url": "https://fmesgrima.es/wp-content/uploads/2026/02/Competicion.pdf",
-      "use": "Reglas, coeficientes y criterios regionales"
+      "name": "FME · Normativa",
+      "url": "docs/fme/Competicion.pdf",
+      "use": "Escala de puntos y reglas territoriales"
     }
   ],
+  "points_rules": {
+    "scale": [
+      {
+        "from": 1,
+        "to": 1,
+        "points": 32
+      },
+      {
+        "from": 2,
+        "to": 2,
+        "points": 26
+      },
+      {
+        "from": 3,
+        "to": 4,
+        "points": 20
+      },
+      {
+        "from": 5,
+        "to": 8,
+        "points": 14
+      },
+      {
+        "from": 9,
+        "to": 16,
+        "points": 8
+      },
+      {
+        "from": 17,
+        "to": 32,
+        "points": 4
+      },
+      {
+        "from": 33,
+        "to": 64,
+        "points": 2
+      },
+      {
+        "from": 65,
+        "to": 128,
+        "points": 1
+      }
+    ],
+    "championship_multiplier": 2,
+    "source": "Normativa FME 08-09-2026, apartado C.4-C.5"
+  },
   "rankings": {
     "M13": [
       {
@@ -441,14 +487,279 @@
   },
   "calendar": [
     {
-      "date": "28/11/2026",
-      "name": "1 FASE M20 SABLE FEM",
+      "date": "19/09/2026",
+      "end_date": "20/09/2026",
+      "name": "1 FASE M17",
+      "category": "M17",
+      "categories": [
+        "M17"
+      ],
       "weapon": "Sable",
       "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Fase territorial",
+      "registration_deadline": "16/09/2026 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "03/10/2026",
+      "end_date": "04/10/2026",
+      "name": "1 FASE ABS/VET",
+      "category": "ABS",
+      "categories": [
+        "ABS"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Fase territorial",
+      "registration_deadline": "30/09/2026 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "24/10/2026",
+      "end_date": "25/10/2026",
+      "name": "1 FASE M15/M11/M13/M9",
+      "category": "M13 / M15",
+      "categories": [
+        "M13",
+        "M15"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Fase territorial",
+      "registration_deadline": "21/10/2026 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "28/11/2026",
+      "end_date": "29/11/2026",
+      "name": "1 FASE M20",
       "category": "M20",
-      "modality": "Individual",
+      "categories": [
+        "M20"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
       "location": "SF M20",
-      "url": "https://app.skermo.org/calendar/public/FME?setLang=es#detail1164"
+      "type": "Fase territorial",
+      "registration_deadline": "25/11/2026 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es#detail1164",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "28/11/2026",
+      "end_date": "29/11/2026",
+      "name": "TLM MADRID",
+      "category": "TODAS",
+      "categories": [
+        "TODAS"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "SF M20",
+      "type": "Torneo Liga Madrileña",
+      "registration_deadline": "25/11/2026 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es#detail1164",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "16/01/2027",
+      "end_date": "17/01/2027",
+      "name": "2 FASE M17/VET",
+      "category": "M17",
+      "categories": [
+        "M17"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Fase territorial",
+      "registration_deadline": "13/01/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "23/01/2027",
+      "end_date": "24/01/2027",
+      "name": "2 FASE M15/M11/M13/M9",
+      "category": "M13 / M15",
+      "categories": [
+        "M13",
+        "M15"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Fase territorial",
+      "registration_deadline": "20/01/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "06/02/2027",
+      "end_date": "07/02/2027",
+      "name": "TLM SANTIAGO",
+      "category": "TODAS",
+      "categories": [
+        "TODAS"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Torneo Liga Madrileña",
+      "registration_deadline": "03/02/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "13/02/2027",
+      "end_date": "14/02/2027",
+      "name": "CTO MAD M15",
+      "category": "M15",
+      "categories": [
+        "M15"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Campeonato de Madrid",
+      "registration_deadline": "10/02/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "20/02/2027",
+      "end_date": "21/02/2027",
+      "name": "CTO MAD M20",
+      "category": "M20",
+      "categories": [
+        "M20"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "SF M20",
+      "type": "Campeonato de Madrid",
+      "registration_deadline": "17/02/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es#detail1164",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "13/03/2027",
+      "end_date": "14/03/2027",
+      "name": "2 FASE ABS",
+      "category": "ABS",
+      "categories": [
+        "ABS"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Fase territorial",
+      "registration_deadline": "10/03/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "13/03/2027",
+      "end_date": "14/03/2027",
+      "name": "TLM CHICLANA",
+      "category": "TODAS",
+      "categories": [
+        "TODAS"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Torneo Liga Madrileña",
+      "registration_deadline": "10/03/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "03/04/2027",
+      "end_date": "04/04/2027",
+      "name": "3 FASE VET",
+      "category": "VET",
+      "categories": [
+        "VET"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Fase territorial",
+      "registration_deadline": "31/03/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "24/04/2027",
+      "end_date": "25/04/2027",
+      "name": "CTO MAD M17/ABS",
+      "category": "M17 / ABS",
+      "categories": [
+        "M17",
+        "ABS"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Campeonato de Madrid",
+      "registration_deadline": "21/04/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "15/05/2027",
+      "end_date": "16/05/2027",
+      "name": "3 FASE M9/M11",
+      "category": "TODAS",
+      "categories": [
+        "TODAS"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Fase territorial",
+      "registration_deadline": "12/05/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "12/06/2027",
+      "end_date": "13/06/2027",
+      "name": "CTO MAD M9/M11",
+      "category": "TODAS",
+      "categories": [
+        "TODAS"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Campeonato de Madrid",
+      "registration_deadline": "09/06/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
+    },
+    {
+      "date": "19/06/2027",
+      "end_date": "20/06/2027",
+      "name": "CTO MAD M13/VET",
+      "category": "M13",
+      "categories": [
+        "M13"
+      ],
+      "weapon": "Sable",
+      "gender": "Femenino",
+      "location": "Madrid / consultar FME",
+      "type": "Campeonato de Madrid",
+      "registration_deadline": "16/06/2027 23:59",
+      "url": "https://app.skermo.org/calendar/public/FME?setLang=es",
+      "source": "Calendario oficial FME PDF"
     }
   ],
   "results": []
