@@ -1,29 +1,45 @@
 name: Actualizar datos FME
+
 on:
   workflow_dispatch:
   schedule:
     - cron: '17 */6 * * *'
+
 permissions:
   contents: write
+
 concurrency:
   group: actualizar-datos-fme
   cancel-in-progress: true
+
 jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
-      - run: pip install -r requirements.txt
-      - run: python -m playwright install --with-deps chromium
-      - run: python scripts/update_fme.py
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Instalar Chromium
+        run: python -m playwright install --with-deps chromium
+
+      - name: Actualizar datos FME
+        run: python scripts/update_fme.py
+
       - name: Validar JSON
         run: python -m json.tool data/regional-fme.json > /dev/null
-      - name: Guardar cambios
+
+      - name: Guardar datos actualizados
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
