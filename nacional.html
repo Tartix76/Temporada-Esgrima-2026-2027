@@ -187,7 +187,11 @@ Junior:{fecha:"17/11/2026",pdf:"https://app.skermo.org/client/1/CLASSIFICATION_F
 };
 
 </script>
-<script>
+<script type="module">
+try {
+ const response=await fetch('data/nacional-rfee.json?v='+Date.now(),{cache:'no-store'});
+ if(response.ok){const live=await response.json();if(live.updated_at)SNAPSHOT=live.updated_at;if(live.rankings&&Object.values(live.rankings).some(x=>x.length)){for(const [cat,rows] of Object.entries(live.rankings)){if(rows.length)RK[cat]=rows.map(r=>[r.position,r.first_name,r.last_name,r.birth_year||'',r.club||'',Number(r.points)||0])}}if(Array.isArray(live.calendar)&&live.calendar.length)CAL=live.calendar.map(e=>[e.date,e.name,e.category,e.modality||'I',e.location||'',e.type||'',e.scope||'N',e.registration_deadline||'',e.entries||0,e.venue||'',e.links||[],e.internal_points||[]]);if(Array.isArray(live.results)&&live.results.length)RES=live.results.map(e=>({id:e.id,date:e.date,name:e.name,cat:e.category,place:e.location||'',n:e.entries||0,pdf:e.pdf||'',rows:(e.rows||[]).map(r=>[r.position,r.first_name,r.last_name,r.club,r.birth_year,Number(r.points)||0])}))}
+}catch(error){console.warn('Se usan datos nacionales integrados como respaldo:',error)}
 const $=s=>document.querySelector(s);
 const fmt=n=>n.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
 const pd=s=>{const[d,m,y]=s.split('/');return new Date(+y,+m-1,+d)};
