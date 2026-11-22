@@ -1,1 +1,52 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sable femenino 2026-27 · Nacional y Madrid</title><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:#f5f6fa;color:#182033}header{background:#18345f;color:#fff;padding:14px 18px}.top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.top h1{font-size:20px;margin:0 auto 0 0}.top button{border:1px solid #ffffff66;background:#ffffff12;color:#fff;border-radius:9px;padding:9px 13px;font-weight:700;cursor:pointer}.top button.on{background:#fff;color:#18345f}.top button:focus-visible{outline:3px solid #ffd166;outline-offset:2px}.refresh{background:#b4232c!important;border-color:#b4232c!important}.refresh[disabled]{opacity:.65;cursor:wait}#status{font-size:12px;opacity:.9;margin-top:7px}iframe{display:block;width:100%;height:calc(100vh - 98px);border:0;background:#f5f6fa}@media(max-width:600px){.top h1{width:100%;font-size:17px}iframe{height:calc(100vh - 135px)}}</style></head><body><header><div class="top"><h1>Sable femenino · Temporada 2026-27</h1><button id="nationalBtn" class="on" type="button">Nacional · RFEE</button><button id="regionalBtn" type="button">Regional · Madrid</button><button id="refreshBtn" class="refresh" type="button">↻ Comprobar datos</button></div><div id="status" role="status" aria-live="polite">Vista nacional</div></header><iframe id="dashboardFrame" title="Dashboard de sable femenino" src="nacional.html"></iframe><script>(()=>{const frame=document.querySelector('#dashboardFrame'),status=document.querySelector('#status'),national=document.querySelector('#nationalBtn'),regional=document.querySelector('#regionalBtn'),refresh=document.querySelector('#refreshBtn');let page='nacional.html';function show(next){page=next;frame.src=next+'?v='+Date.now();national.classList.toggle('on',next==='nacional.html');regional.classList.toggle('on',next==='regional.html');status.textContent=next==='nacional.html'?'Vista nacional · RFEE':'Vista regional · Federación Madrileña de Esgrima'}national.addEventListener('click',()=>show('nacional.html'));regional.addEventListener('click',()=>show('regional.html'));refresh.addEventListener('click',()=>{refresh.disabled=true;status.textContent='Descargando la última versión publicada…';frame.src=page+'?v='+Date.now();frame.addEventListener('load',()=>{refresh.disabled=false;status.textContent='Última versión comprobada · '+new Date().toLocaleString('es-ES')},{once:true})})})();</script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sable femenino 2026-27 · Nacional y Madrid</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Segoe UI,Arial;background:#f5f6fa;color:#182033}header{background:#18345f;color:#fff;padding:14px 18px}.top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.top h1{font-size:20px;margin:0 auto 0 0}.top button{border:1px solid #ffffff66;background:#ffffff12;color:#fff;border-radius:9px;padding:9px 13px;font-weight:700;cursor:pointer}.top button.on{background:#fff;color:#18345f}.top button:focus-visible{outline:3px solid #ffd166;outline-offset:2px}.refresh{background:#b4232c!important;border-color:#b4232c!important}.refresh[disabled]{opacity:.65;cursor:wait}#status{font-size:12px;opacity:.92;margin-top:7px}.checks{display:flex;gap:12px;flex-wrap:wrap;margin-top:5px;font-size:11px;color:#dce8fa}.ok{color:#baf3d0}.warn{color:#ffe0a6}.bad{color:#ffc0c0}iframe{display:block;width:100%;height:calc(100vh - 116px);border:0;background:#f5f6fa}@media(max-width:650px){.top h1{width:100%;font-size:17px}iframe{height:calc(100vh - 155px)}}
+</style>
+</head>
+<body>
+<header>
+<div class="top">
+<h1>Sable femenino · Temporada 2026-27</h1>
+<button id="nationalBtn" class="on" type="button">Nacional · RFEE</button>
+<button id="regionalBtn" type="button">Regional · Madrid</button>
+<button id="refreshBtn" class="refresh" type="button">↻ Comprobar Nacional + Regional</button>
+</div>
+<div id="status" role="status" aria-live="polite">Vista nacional · RFEE</div>
+<div class="checks" aria-live="polite"><span id="nationalCheck">Nacional: pendiente</span><span id="regionalCheck">Regional: pendiente</span></div>
+</header>
+<iframe id="dashboardFrame" title="Dashboard de sable femenino" src="nacional.html"></iframe>
+<script>
+(()=>{
+'use strict';
+const frame=document.querySelector('#dashboardFrame');
+const status=document.querySelector('#status');
+const national=document.querySelector('#nationalBtn');
+const regional=document.querySelector('#regionalBtn');
+const refresh=document.querySelector('#refreshBtn');
+const nationalCheck=document.querySelector('#nationalCheck');
+const regionalCheck=document.querySelector('#regionalCheck');
+let page='nacional.html';
+function bust(url){return url+(url.includes('?')?'&':'?')+'v='+Date.now()}
+function show(next){page=next;frame.src=bust(next);national.classList.toggle('on',next==='nacional.html');regional.classList.toggle('on',next==='regional.html');status.textContent=next==='nacional.html'?'Vista nacional · RFEE':'Vista regional · Federación Madrileña de Esgrima'}
+national.addEventListener('click',()=>show('nacional.html'));
+regional.addEventListener('click',()=>show('regional.html'));
+async function checkUrl(url){const r=await fetch(bust(url),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);return r}
+async function checkBoth(){
+ refresh.disabled=true; status.textContent='Comprobando Nacional y Regional…';
+ nationalCheck.className='warn';regionalCheck.className='warn';nationalCheck.textContent='Nacional: comprobando…';regionalCheck.textContent='Regional: comprobando…';
+ const nationalPromise=checkUrl('nacional.html').then(()=>{nationalCheck.className='ok';nationalCheck.textContent='✓ Nacional RFEE: última versión publicada'}).catch(e=>{nationalCheck.className='bad';nationalCheck.textContent='✕ Nacional RFEE: '+e.message});
+ const regionalPromise=checkUrl('data/regional-fme.json').then(async r=>{let d={};try{d=await r.json()}catch{} regionalCheck.className='ok';regionalCheck.textContent='✓ Regional FME: '+(d.updated_at||'última versión publicada')}).catch(e=>{regionalCheck.className='bad';regionalCheck.textContent='✕ Regional FME: '+e.message});
+ await Promise.allSettled([nationalPromise,regionalPromise]);
+ frame.src=bust(page);
+ frame.addEventListener('load',()=>{refresh.disabled=false;status.textContent='Nacional y Regional comprobados · '+new Date().toLocaleString('es-ES')},{once:true});
+}
+refresh.addEventListener('click',checkBoth);
+})();
+</script>
+</body>
+</html>
