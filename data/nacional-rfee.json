@@ -1,5 +1,5 @@
 {
-  "updated_at": "23/11/2026 01:28 UTC",
+  "updated_at": "23/11/2026 07:49 UTC",
   "sources": [
     {
       "name": "Skermo RFEE · Ranking Nacional",
@@ -14,47 +14,7 @@
     "M13": [
       {
         "position": 9999,
-        "first_name": "1. ALBA",
-        "last_name": "MARTIN HAGEL",
-        "birth_year": "",
-        "club": "SASLE-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "2. MANUELA",
-        "last_name": "DE SANDE TEJEDOR",
-        "birth_year": "",
-        "club": "CEB-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "3. ROSARIO",
-        "last_name": "CAMAÑO OCAÑA",
-        "birth_year": "",
-        "club": "CEB-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "4. ALENA",
-        "last_name": "IVANOVA",
-        "birth_year": "",
-        "club": "FED-AND-C",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "5. DANIELA",
-        "last_name": "GARCIA HERNANDO",
-        "birth_year": "",
-        "club": "ECC-BU",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "6. CAITLYN",
+        "first_name": "1. CAITLYN",
         "last_name": "SCHIPPERS",
         "birth_year": "",
         "club": "FED-V-C",
@@ -62,7 +22,7 @@
       },
       {
         "position": 9999,
-        "first_name": "7. NOA",
+        "first_name": "2. NOA",
         "last_name": "SERRANO LOPEZ",
         "birth_year": "",
         "club": "SASLE-M",
@@ -70,169 +30,15 @@
       },
       {
         "position": 9999,
-        "first_name": "8. ARIADNA",
-        "last_name": "PINA DEL ROSAL",
-        "birth_year": "",
-        "club": "SAMA-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "9. BIANCA",
-        "last_name": "BUENO FORNI",
-        "birth_year": "",
-        "club": "CE-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "10. ANA",
-        "last_name": "ÁLVAREZ ÍÑIGO",
-        "birth_year": "",
-        "club": "ELGATO-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "11. IRATXE",
-        "last_name": "BALLESTEROS",
-        "birth_year": "",
-        "club": "CE-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "12. MARTA",
-        "last_name": "GOMEZ GARCIA",
-        "birth_year": "",
-        "club": "CE-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "13. ELIZABETH",
-        "last_name": "TISHINA",
-        "birth_year": "",
-        "club": "CED-V",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "14. GADEA",
-        "last_name": "PRADO DEL ESTAL",
-        "birth_year": "",
-        "club": "ELGATO-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "15. BLANCA",
-        "last_name": "BENGOECHEA DE LUIS",
-        "birth_year": "",
-        "club": "CE-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "16. YUXIN",
-        "last_name": "CHEN",
-        "birth_year": "",
-        "club": "EHB-B",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "17. CELIE",
-        "last_name": "COLNOT",
-        "birth_year": "",
-        "club": "FED-V-C",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "18. NATALIA",
-        "last_name": "MONTORO CASTILLO",
-        "birth_year": "",
-        "club": "CEA-V",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "19. DANIELA",
-        "last_name": "ESPINOSA BAUTISTA",
-        "birth_year": "",
-        "club": "SAMA-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "20. KEILA AIMARÁ",
-        "last_name": "GONZALEZ PEREZ",
-        "birth_year": "",
-        "club": "CETORRE-MA",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "21. MENCIA",
-        "last_name": "ALONSO LINARES",
+        "first_name": "3. MANUELA",
+        "last_name": "DE SANDE TEJEDOR",
         "birth_year": "",
         "club": "CEB-M",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "22. VALERIA",
-        "last_name": "MARTINEZ VIDAL",
-        "birth_year": "",
-        "club": "FED-V-C",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "23. ROCIO",
-        "last_name": "MARTÍNEZ PÉREZ",
-        "birth_year": "",
-        "club": "CEA-V",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "24. CARMEN",
-        "last_name": "DÍEZ PÉREZ",
-        "birth_year": "",
-        "club": "CEAL-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "25. EVA",
-        "last_name": "ROJO RAMIREZ",
-        "birth_year": "",
-        "club": "SASLE-M",
-        "points": "0.00"
-      }
-    ],
-    "M15": [
-      {
-        "position": 9999,
-        "first_name": "1. ADRIANA",
-        "last_name": "VICENTE MORENO",
-        "birth_year": "",
-        "club": "SAMA-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "2. YUXIN",
-        "last_name": "CHEN",
-        "birth_year": "",
-        "club": "EHB-B",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "3. SARA",
+        "first_name": "4. ALBA",
         "last_name": "MARTIN HAGEL",
         "birth_year": "",
         "club": "SASLE-M",
@@ -240,87 +46,87 @@
       },
       {
         "position": 9999,
-        "first_name": "4. SARA",
-        "last_name": "PUGA GARCIA",
+        "first_name": "5. ROSARIO",
+        "last_name": "CAMAÑO OCAÑA",
         "birth_year": "",
-        "club": "CEEC-M",
+        "club": "CEB-M",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "5. ÁGUEDA",
-        "last_name": "MESTRE GARIN",
-        "birth_year": "",
-        "club": "SAM-B",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "6. JULIA",
-        "last_name": "CRESPIN GOMEZ",
-        "birth_year": "",
-        "club": "SEAC-CO",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "7. SOFÍA",
-        "last_name": "PASTOR ROVALINO",
+        "first_name": "6. IRATXE",
+        "last_name": "BALLESTEROS",
         "birth_year": "",
         "club": "CE-M",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "8. MARTA",
-        "last_name": "GOMEZ GARCIA",
-        "birth_year": "",
-        "club": "CE-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "9. MELANIA",
-        "last_name": "TUDELA MARTINEZ",
-        "birth_year": "",
-        "club": "CETORRE-MA",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "10. GADEA",
-        "last_name": "PRADO DEL ESTAL",
+        "first_name": "7. ANA",
+        "last_name": "ÁLVAREZ ÍÑIGO",
         "birth_year": "",
         "club": "ELGATO-M",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "11. CAITLYN",
-        "last_name": "SCHIPPERS",
+        "first_name": "8. NATALIA",
+        "last_name": "MONTORO CASTILLO",
         "birth_year": "",
-        "club": "FED-V-C",
+        "club": "CEA-V",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "12. ANA",
-        "last_name": "SANCHEZ CORBELLA",
+        "first_name": "9. EVA",
+        "last_name": "ROJO RAMIREZ",
+        "birth_year": "",
+        "club": "SASLE-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "10. ARIADNA",
+        "last_name": "PINA DEL ROSAL",
         "birth_year": "",
         "club": "SAMA-M",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "13. ANNA",
-        "last_name": "GALLEGO AGUSTI",
+        "first_name": "11. BIANCA",
+        "last_name": "BUENO FORNI",
         "birth_year": "",
-        "club": "SAM-B",
+        "club": "CE-M",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "14. KEILA AIMARÁ",
+        "first_name": "12. ALENA",
+        "last_name": "IVANOVA",
+        "birth_year": "",
+        "club": "FED-AND-C",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "13. DANIELA",
+        "last_name": "GARCIA HERNANDO",
+        "birth_year": "",
+        "club": "ECC-BU",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "14. DANIELA",
+        "last_name": "ESPINOSA BAUTISTA",
+        "birth_year": "",
+        "club": "SAMA-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "15. KEILA AIMARÁ",
         "last_name": "GONZALEZ PEREZ",
         "birth_year": "",
         "club": "CETORRE-MA",
@@ -328,23 +134,129 @@
       },
       {
         "position": 9999,
-        "first_name": "15. ILITHIA SOFIA",
-        "last_name": "MORENO GARCIA",
+        "first_name": "16. BLANCA",
+        "last_name": "BENGOECHEA DE LUIS",
         "birth_year": "",
-        "club": "FED-AND-C",
+        "club": "CE-M",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "16. ISABELLA",
-        "last_name": "CABRERA",
+        "first_name": "17. GADEA",
+        "last_name": "PRADO DEL ESTAL",
         "birth_year": "",
-        "club": "SAV-V",
+        "club": "ELGATO-M",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "17. MARIA",
+        "first_name": "18. YUXIN",
+        "last_name": "CHEN",
+        "birth_year": "",
+        "club": "EHB-B",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "19. CARMEN",
+        "last_name": "DÍEZ PÉREZ",
+        "birth_year": "",
+        "club": "CEAL-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "20. ROCIO",
+        "last_name": "MARTÍNEZ PÉREZ",
+        "birth_year": "",
+        "club": "CEA-V",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "21. MARTA",
+        "last_name": "GOMEZ GARCIA",
+        "birth_year": "",
+        "club": "CE-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "22. ELIZABETH",
+        "last_name": "TISHINA",
+        "birth_year": "",
+        "club": "CED-V",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "23. MENCIA",
+        "last_name": "ALONSO LINARES",
+        "birth_year": "",
+        "club": "CEB-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "24. VALERIA",
+        "last_name": "MARTINEZ VIDAL",
+        "birth_year": "",
+        "club": "FED-V-C",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "25. CELIE",
+        "last_name": "COLNOT",
+        "birth_year": "",
+        "club": "FED-V-C",
+        "points": "0.00"
+      }
+    ],
+    "M15": [
+      {
+        "position": 9999,
+        "first_name": "1. SARA",
+        "last_name": "PUGA GARCIA",
+        "birth_year": "",
+        "club": "CEEC-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "2. SARA",
+        "last_name": "MARTIN HAGEL",
+        "birth_year": "",
+        "club": "SASLE-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "3. YUXIN",
+        "last_name": "CHEN",
+        "birth_year": "",
+        "club": "EHB-B",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "4. ADRIANA",
+        "last_name": "VICENTE MORENO",
+        "birth_year": "",
+        "club": "SAMA-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "5. SOFÍA",
+        "last_name": "PASTOR ROVALINO",
+        "birth_year": "",
+        "club": "CE-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "6. MARIA",
         "last_name": "MUÑOZ VILA",
         "birth_year": "",
         "club": "CEEC-M",
@@ -352,10 +264,98 @@
       },
       {
         "position": 9999,
-        "first_name": "18. DARIA",
+        "first_name": "7. ÁGUEDA",
+        "last_name": "MESTRE GARIN",
+        "birth_year": "",
+        "club": "SAM-B",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "8. MELANIA",
+        "last_name": "TUDELA MARTINEZ",
+        "birth_year": "",
+        "club": "CETORRE-MA",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "9. MARTA",
+        "last_name": "GOMEZ GARCIA",
+        "birth_year": "",
+        "club": "CE-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "10. ANNA",
+        "last_name": "GALLEGO AGUSTI",
+        "birth_year": "",
+        "club": "SAM-B",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "11. ANA",
+        "last_name": "SANCHEZ CORBELLA",
+        "birth_year": "",
+        "club": "SAMA-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "12. CAITLYN",
+        "last_name": "SCHIPPERS",
+        "birth_year": "",
+        "club": "FED-V-C",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "13. GADEA",
+        "last_name": "PRADO DEL ESTAL",
+        "birth_year": "",
+        "club": "ELGATO-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "14. ISABELLA",
+        "last_name": "CABRERA",
+        "birth_year": "",
+        "club": "SAV-V",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "15. KEILA AIMARÁ",
+        "last_name": "GONZALEZ PEREZ",
+        "birth_year": "",
+        "club": "CETORRE-MA",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "16. ILITHIA SOFIA",
+        "last_name": "MORENO GARCIA",
+        "birth_year": "",
+        "club": "FED-AND-C",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "17. DARIA",
         "last_name": "NEBEZHEVA",
         "birth_year": "",
         "club": "FED-AND-C",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "18. JULIA",
+        "last_name": "CRESPIN GOMEZ",
+        "birth_year": "",
+        "club": "SEAC-CO",
         "points": "0.00"
       },
       {
@@ -368,18 +368,18 @@
       },
       {
         "position": 9999,
-        "first_name": "20. LEYRE",
-        "last_name": "CADINU SÁNCHEZ",
+        "first_name": "20. NICOLE",
+        "last_name": "SILVESTRINI",
         "birth_year": "",
-        "club": "CEA-V",
+        "club": "CED-V",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "21. NICOLE",
-        "last_name": "SILVESTRINI",
+        "first_name": "21. LEYRE",
+        "last_name": "CADINU SÁNCHEZ",
         "birth_year": "",
-        "club": "CED-V",
+        "club": "CEA-V",
         "points": "0.00"
       },
       {
@@ -392,23 +392,7 @@
       },
       {
         "position": 9999,
-        "first_name": "23. JULIA",
-        "last_name": "BELTRAN GIL",
-        "birth_year": "",
-        "club": "SASLE-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "24. AINA",
-        "last_name": "PARDO VÁZQUEZ",
-        "birth_year": "",
-        "club": "SAM-B",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "25. IRATXE",
+        "first_name": "23. IRATXE",
         "last_name": "BALLESTEROS",
         "birth_year": "",
         "club": "CE-M",
@@ -416,18 +400,34 @@
       },
       {
         "position": 9999,
-        "first_name": "26. CELIE",
-        "last_name": "COLNOT",
+        "first_name": "24. BLANCA",
+        "last_name": "PES",
         "birth_year": "",
-        "club": "FED-V-C",
+        "club": "CEEC-M",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "27. MARIA ELISA",
+        "first_name": "25. JULIA",
+        "last_name": "BELTRAN GIL",
+        "birth_year": "",
+        "club": "SASLE-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "26. MARIA ELISA",
         "last_name": "SAIEH PEREZ",
         "birth_year": "",
         "club": "SAMA-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "27. CELIE",
+        "last_name": "COLNOT",
+        "birth_year": "",
+        "club": "FED-V-C",
         "points": "0.00"
       },
       {
@@ -448,15 +448,7 @@
       },
       {
         "position": 9999,
-        "first_name": "30. LAURA",
-        "last_name": "VENTIMIGLIA",
-        "birth_year": "",
-        "club": "SASLE-M",
-        "points": "0.00"
-      },
-      {
-        "position": 9999,
-        "first_name": "31. MARINA",
+        "first_name": "30. MARINA",
         "last_name": "CUBELA MORILLO",
         "birth_year": "",
         "club": "CEHE-PO",
@@ -464,15 +456,15 @@
       },
       {
         "position": 9999,
-        "first_name": "32. MADISON",
-        "last_name": "DELGADO GARCIA",
+        "first_name": "31. LAURA",
+        "last_name": "VENTIMIGLIA",
         "birth_year": "",
-        "club": "CEEC-M",
+        "club": "SASLE-M",
         "points": "0.00"
       },
       {
         "position": 9999,
-        "first_name": "33. EMPERATRIZ",
+        "first_name": "32. EMPERATRIZ",
         "last_name": "AROCA CARRERO",
         "birth_year": "",
         "club": "CEC-C",
@@ -480,10 +472,18 @@
       },
       {
         "position": 9999,
-        "first_name": "34. BLANCA",
-        "last_name": "PES",
+        "first_name": "33. MADISON",
+        "last_name": "DELGADO GARCIA",
         "birth_year": "",
         "club": "CEEC-M",
+        "points": "0.00"
+      },
+      {
+        "position": 9999,
+        "first_name": "34. AINA",
+        "last_name": "PARDO VÁZQUEZ",
+        "birth_year": "",
+        "club": "SAM-B",
         "points": "0.00"
       }
     ],
@@ -2150,25 +2150,6 @@
     },
     {
       "date": "27/02/2027",
-      "name": "LIGA NACIONAL IBERDROLA 2ª JORNADA",
-      "category": "ABS",
-      "modality": "E",
-      "location": "SF ABS",
-      "type": "Equipos",
-      "scope": "N",
-      "registration_deadline": "",
-      "entries": 0,
-      "venue": "",
-      "links": [
-        [
-          "Skermo",
-          "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10560"
-        ]
-      ],
-      "internal_points": []
-    },
-    {
-      "date": "27/02/2027",
       "name": "LIGA NACIONAL PLATA 2ª JORNADA",
       "category": "ABS",
       "modality": "E",
@@ -2182,6 +2163,25 @@
         [
           "Skermo",
           "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10561"
+        ]
+      ],
+      "internal_points": []
+    },
+    {
+      "date": "27/02/2027",
+      "name": "LIGA NACIONAL IBERDROLA 2ª JORNADA",
+      "category": "ABS",
+      "modality": "E",
+      "location": "SF ABS",
+      "type": "Equipos",
+      "scope": "N",
+      "registration_deadline": "",
+      "entries": 0,
+      "venue": "",
+      "links": [
+        [
+          "Skermo",
+          "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10560"
         ]
       ],
       "internal_points": []
