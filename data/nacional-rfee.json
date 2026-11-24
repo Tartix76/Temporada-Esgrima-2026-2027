@@ -1,25 +1,22 @@
 {
-  "updated_at": "24/11/2026 14:18 UTC",
-  "source_updated_at": "2026-11-24T14:18:04+00:00",
-  "season": {
-    "label": "2026-2027",
-    "skermo_id": "17"
-  },
+  "updated_at": "24/11/2026 14:34 UTC",
+  "source_updated_at": "2026-11-24T14:34:55+00:00",
+  "season": "2026-2027",
   "filters": {
-    "weapon": "S",
-    "weapon_label": "Sable",
-    "gender": "W",
-    "gender_label": "Femenino"
+    "weapon": "Sable",
+    "gender": "Femenino"
   },
   "validation": {
-    "M15": "ok"
+    "M15_rows": 34,
+    "M15_positive_points": 33,
+    "M15_max_points": 2424.0
   },
   "ranking_urls": {
-    "M13": "https://app.skermo.org/ranking-rfee/public/RFEE?season=17&weapon=S&category=12&gender=W&setLang=es",
-    "M15": "https://app.skermo.org/ranking-rfee/public/RFEE?season=17&weapon=S&category=4&gender=W&setLang=es",
-    "M17": "https://app.skermo.org/ranking-rfee/public/RFEE?season=17&weapon=S&category=5&gender=W&setLang=es",
-    "M20": "https://app.skermo.org/ranking-rfee/public/RFEE?season=17&weapon=S&category=6&gender=W&setLang=es",
-    "ABS": "https://app.skermo.org/ranking-rfee/public/RFEE?season=17&weapon=S&category=7&gender=W&setLang=es"
+    "M13": "https://app.skermo.org/ranking-rfee/public/RFEE?setLang=es",
+    "M15": "https://app.skermo.org/ranking-rfee/public/RFEE?setLang=es",
+    "M17": "https://app.skermo.org/ranking-rfee/public/RFEE?setLang=es",
+    "M20": "https://app.skermo.org/ranking-rfee/public/RFEE?setLang=es",
+    "ABS": "https://app.skermo.org/ranking-rfee/public/RFEE?setLang=es"
   },
   "rankings": {
     "M13": [
@@ -2333,18 +2330,210 @@
       }
     ]
   },
-  "calendar": [],
+  "calendar_url": "https://app.skermo.org/calendar/public/RFEE?setLang=es",
+  "calendar": [
+    {
+      "date": "28/11/2026",
+      "name": "TLM",
+      "category": "ABS",
+      "modality": "I",
+      "location": "SF VET70",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10442"
+        }
+      ]
+    },
+    {
+      "date": "19/12/2026",
+      "name": "TNR M17",
+      "category": "M17",
+      "modality": "I",
+      "location": "SF M17",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10454"
+        }
+      ]
+    },
+    {
+      "date": "19/12/2026",
+      "name": "TNR M20",
+      "category": "M20",
+      "modality": "I",
+      "location": "SF M20",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10457"
+        }
+      ]
+    },
+    {
+      "date": "30/01/2027",
+      "name": "TLM",
+      "category": "ABS",
+      "modality": "I",
+      "location": "SF VET70",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10490"
+        }
+      ]
+    },
+    {
+      "date": "06/02/2027",
+      "name": "TNR M15",
+      "category": "M15",
+      "modality": "I",
+      "location": "SF M15",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10540"
+        }
+      ]
+    },
+    {
+      "date": "06/02/2027",
+      "name": "TNR M13",
+      "category": "M13",
+      "modality": "I",
+      "location": "SF M13",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10542"
+        }
+      ]
+    },
+    {
+      "date": "27/02/2027",
+      "name": "LIGA NACIONAL PLATA 2ª JORNADA",
+      "category": "ABS",
+      "modality": "E",
+      "location": "SF ABS",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10561"
+        }
+      ]
+    },
+    {
+      "date": "27/02/2027",
+      "name": "LIGA NACIONAL IBERDROLA 2ª JORNADA",
+      "category": "ABS",
+      "modality": "E",
+      "location": "SF ABS",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10560"
+        }
+      ]
+    },
+    {
+      "date": "27/02/2027",
+      "name": "TNR ABS",
+      "category": "ABS",
+      "modality": "I",
+      "location": "SF ABS",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10558"
+        }
+      ]
+    },
+    {
+      "date": "13/03/2027",
+      "name": "TLM",
+      "category": "ABS",
+      "modality": "I",
+      "location": "SF VET70",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10527"
+        }
+      ]
+    },
+    {
+      "date": "20/03/2027",
+      "name": "CIRCUITO EUROPEO M-14",
+      "category": "ABS",
+      "modality": "I",
+      "location": "SF M14",
+      "type": "Competición RFEE",
+      "scope": "I",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10293"
+        }
+      ]
+    },
+    {
+      "date": "17/04/2027",
+      "name": "TNR M15 (3/3) Sant Jordi",
+      "category": "M15",
+      "modality": "I",
+      "location": "SF M15",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10533"
+        }
+      ]
+    }
+  ],
   "results": [],
   "sources": [
     {
       "name": "Skermo RFEE · Ranking Nacional",
-      "url": "https://app.skermo.org/ranking-rfee/public/RFEE",
-      "use": "Rankings nacionales de Sable Femenino por categoría"
+      "url": "https://app.skermo.org/ranking-rfee/public/RFEE?setLang=es"
     },
     {
       "name": "Skermo RFEE · Calendario",
-      "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es&season=16&weapon=S&gender=W",
-      "use": "Calendario nacional de competiciones de Sable Femenino"
+      "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es"
     }
   ]
 }
