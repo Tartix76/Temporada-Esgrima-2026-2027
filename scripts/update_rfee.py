@@ -4,122 +4,29 @@ import datetime
 import json
 import re
 from pathlib import Path
-from urllib.parse import urlencode, urljoin
+from urllib.parse import urljoin
 
-import requests
 from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright
 
 
-BASE_DIR = Path(__file__).resolve().parents[1]
-OUTPUT_FILE = BASE_DIR / "data" / "nacional-rfee.json"
+BASE = Path(__file__).resolve().parents[1]
+OUT = BASE / "data" / "nacional-rfee.json"
 
-RANKING_URL = "https://app.skermo.org/ranking-rfee/public/RFEE"
-CALENDAR_URL = "https://app.skermo.org/calendar/public/RFEE"
+RANK_URL = "https://app.skermo.org/ranking-rfee/public/RFEE?setLang=es"
+CAL_URL = "https://app.skermo.org/calendar/public/RFEE?setLang=es"
 
-SEASON_LABEL = "2026-2027"
-
-# En Skermo RFEE, la temporada 2026-2027 utiliza actualmente season=16.
-# El script intenta detectarlo automáticamente antes de usar este valor.
-DEFAULT_SEASON_ID = "16"
-
-CATEGORY_IDS = {
-    "M13": "12",
-    "M15": "4",
-    "M17": "5",
-    "M20": "6",
-    "ABS": "7",
-}
-
-SESSION = requests.Session()
-SESSION.headers.update(
-    {
-        "User-Agent": (
-            "Mozilla/5.0 (X11; Linux x86_64) "
-            "AppleWebKit/537.36 "
-            "Chrome/120.0 Safari/537.36 "
-            "dashboard-sable-femenino/3.0"
-        ),
-        "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
-    }
-)
+SEASON = "2026-2027"
+CATEGORIES = ["M13", "M15", "M17", "M20", "ABS"]
 
 
-def read_previous_data():
-    """Lee el último JSON válido para utilizarlo como respaldo."""
-    if not OUTPUT_FILE.exists():
-        return {}
-
-    try:
-        return json.loads(OUTPUT_FILE.read_text(encoding="utf-8"))
-    except Exception as exc:
-        print(f"AVISO: no se pudo leer el JSON anterior: {exc}")
-        return {}
-
-
-def get_html(url, params=None):
-    """Descarga una página mediante HTTP."""
-    response = SESSION.get(url, params=params, timeout=60)
-    response.raise_for_status()
-    return response.text
-
-
-def get_browser_html(url):
-    """
-    Abre una página con Chromium cuando Skermo carga la tabla
-    mediante JavaScript.
-    """
-    from playwright.sync_api import sync_playwright
-
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True)
-
-        page = browser.new_page(
-            locale="es-ES",
-            viewport={"width": 1440, "height": 1800},
-        )
-
-        page.goto(
-            url,
-            wait_until="networkidle",
-            timeout=120000,
-        )
-
-        try:
-            page.wait_for_selector("table tbody tr", timeout=30000)
-        except Exception:
-            # Algunas páginas no utilizan tbody.
-            page.wait_for_timeout(5000)
-
-        html = page.content()
-        browser.close()
-
-    return html
-
-
-def clean_text(value):
-    """Normaliza espacios y saltos de línea."""
+def clean(value):
     return " ".join(str(value or "").split()).strip()
 
 
-def table_cells(row):
-    return [
-        clean_text(cell.get_text(" ", strip=True))
-        for cell in row.find_all(["td", "th"])
-    ]
-
-
-def parse_number(value):
-    """
-    Convierte formatos habituales de Skermo:
-    11.268,79 -> 11268.79
-    2424 -> 2424.0
-    2023.76 -> 2023.76
-    """
-    text = clean_text(value)
-    text = re.sub(r"[^\d,.\-]", "", text)
-
-    if not text:
-        return 0.0
+def number(value):
+    """Convierte 1.234,56 o 1234.56 a float."""
+    text = re.sub(r"[^0-9,.\-]", "", clean(value))
 
     if "," in text and "." in text:
         text = text.replace(".", "").replace(",", ".")
@@ -132,165 +39,119 @@ def parse_number(value):
         return 0.0
 
 
-def split_name(full_name):
-    """
-    Mantiene el nombre completo en first_name si no puede determinar
-    con seguridad la separación entre nombre y apellidos.
-    """
-    full_name = clean_text(full_name)
-
-    if not full_name:
-        return "", ""
-
-    return full_name, ""
-
-
-def detect_season_id():
-    """
-    Detecta el identificador interno que Skermo asigna a 2026-2027.
-
-    Si no se puede detectar, usa el valor comprobado actualmente:
-    season=16.
-    """
-    print(f"Buscando identificador de temporada {SEASON_LABEL}...")
-
+def read_old_data():
+    """Último JSON válido, para conservar datos si una categoría falla."""
     try:
-        html = get_html(
-            RANKING_URL,
-            params={
-                "setLang": "es",
-                "weapon": "S",
-                "category": CATEGORY_IDS["M15"],
-                "gender": "W",
-            },
+        return json.loads(OUT.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def select_by_visible_text(page, wanted_label):
+    """
+    Busca wanted_label en todos los desplegables de la página.
+
+    Así no dependemos de IDs internos de Skermo.
+    """
+    wanted = clean(wanted_label).casefold()
+
+    for select in page.locator("select").all():
+        options = select.locator("option")
+
+        for i in range(options.count()):
+            option = options.nth(i)
+            label = clean(option.inner_text())
+
+            if label.casefold() == wanted:
+                value = option.get_attribute("value")
+                select.select_option(value=value)
+                page.wait_for_timeout(900)
+                return True
+
+    return False
+
+
+def wait_after_filter(page):
+    try:
+        page.wait_for_load_state(
+            "networkidle",
+            timeout=30000
         )
+    except Exception:
+        pass
 
-        soup = BeautifulSoup(html, "html.parser")
-
-        for option in soup.select("select option"):
-            label = clean_text(option.get_text())
-
-            if SEASON_LABEL in label:
-                season_id = clean_text(option.get("value"))
-
-                if season_id:
-                    print(
-                        f"Temporada {SEASON_LABEL} detectada: "
-                        f"season={season_id}"
-                    )
-                    return season_id
-
-        # Busca también opciones incluidas en scripts o HTML dinámico.
-        patterns = [
-            rf'value=["\'](\d+)["\'][^>]*>\s*{re.escape(SEASON_LABEL)}',
-            rf'{re.escape(SEASON_LABEL)}[^0-9]{{0,30}}["\']?(\d+)["\']?',
-        ]
-
-        for pattern in patterns:
-            match = re.search(pattern, html, flags=re.IGNORECASE)
-
-            if match:
-                season_id = match.group(1)
-                print(
-                    f"Temporada detectada en el código HTML: "
-                    f"season={season_id}"
-                )
-                return season_id
-
-    except Exception as exc:
-        print(f"AVISO: no se pudo detectar la temporada: {exc}")
-
-    print(
-        f"Se utilizará season={DEFAULT_SEASON_ID} "
-        f"para {SEASON_LABEL}."
-    )
-
-    return DEFAULT_SEASON_ID
-
-
-def build_ranking_url(season_id, category_id):
-    params = {
-        "season": season_id,
-        "weapon": "S",
-        "category": category_id,
-        "gender": "W",
-        "setLang": "es",
-    }
-
-    return f"{RANKING_URL}?{urlencode(params)}"
+    page.wait_for_timeout(1800)
 
 
 def parse_ranking(html):
-    """Extrae las filas de una tabla de ranking de Skermo."""
+    """
+    Lee la tabla que Skermo muestra después de aplicar los filtros.
+    """
     soup = BeautifulSoup(html, "html.parser")
-    ranking = []
+    rows = []
 
-    for row in soup.select("table tr"):
-        cells = table_cells(row)
+    for tr in soup.select("table tr"):
+        cells = [
+            clean(cell.get_text(" ", strip=True))
+            for cell in tr.find_all(["td", "th"])
+        ]
 
         if not cells:
             continue
 
-        # Primera columna: posición, a veces "1" y otras "1."
         position_match = re.search(r"\d+", cells[0])
 
         if not position_match:
             continue
 
+        if len(cells) < 5:
+            continue
+
         position = int(position_match.group())
 
-        if position <= 0:
-            continue
+        # Formato esperado de Ranking Nacional:
+        #
+        # Posición
+        # Nombre
+        # Apellidos
+        # Fecha nacimiento
+        # Club
+        # Puntuación
 
-        first_name = ""
-        last_name = ""
-        birth_year = ""
-        birth_date = ""
-        club = ""
-        points = 0.0
-
-        # Formato habitual:
-        # Posición | Nombre | Apellidos | Fecha nacimiento | Club | Puntuación
         if len(cells) >= 6:
-            first_name = clean_text(cells[1])
-            last_name = clean_text(cells[2])
-            birth_date = clean_text(cells[3])
-            club = clean_text(cells[4])
-            points = parse_number(cells[5])
-
-        # Formato alternativo:
-        # Posición | Nombre completo | Club | Fecha nacimiento | Puntuación
-        elif len(cells) >= 5:
-            first_name, last_name = split_name(cells[1])
-
-            if re.search(r"\d{2}/\d{2}/\d{4}", cells[2]):
-                birth_date = clean_text(cells[2])
-                club = clean_text(cells[3])
-            else:
-                club = clean_text(cells[2])
-                birth_date = clean_text(cells[3])
-
-            points = parse_number(cells[-1])
+            first_name = cells[1]
+            last_name = cells[2]
+            birth_date = cells[3]
+            club = cells[4]
+            points = number(cells[5])
 
         else:
+            # Respaldo por si Skermo combina nombre/apellidos.
+            first_name = cells[1]
+            last_name = ""
+            club = cells[2]
+            birth_date = cells[3]
+            points = number(cells[-1])
+
+        full_name = clean(
+            f"{first_name} {last_name}"
+        )
+
+        if not full_name:
             continue
 
-        year_match = re.search(r"(19|20)\d{2}", birth_date)
+        year_match = re.search(
+            r"(?:19|20)\d{2}",
+            birth_date
+        )
 
-        if year_match:
-            birth_year = year_match.group()
+        birth_year = (
+            year_match.group()
+            if year_match
+            else ""
+        )
 
-        full_name = clean_text(f"{first_name} {last_name}")
-
-        # Evita incluir cabeceras interpretadas como deportistas.
-        if not full_name or full_name.lower() in {
-            "nombre",
-            "nombre apellidos",
-            "apellidos",
-        }:
-            continue
-
-        ranking.append(
+        rows.append(
             {
                 "position": position,
                 "first_name": first_name,
@@ -303,14 +164,15 @@ def parse_ranking(html):
             }
         )
 
-    # Elimina duplicados conservando una fila por posición y nombre.
+    # Elimina duplicados.
     unique = {}
 
-    for row in ranking:
+    for row in rows:
         key = (
             row["position"],
             row["full_name"].casefold(),
         )
+
         unique[key] = row
 
     return sorted(
@@ -322,193 +184,292 @@ def parse_ranking(html):
     )
 
 
-def retrieve_ranking(season_id, category, category_id):
-    ranking_url = build_ranking_url(season_id, category_id)
+def collect_one_ranking(
+    browser,
+    category,
+):
+    print()
+    print(
+        f"--- Actualizando {category} ---"
+    )
 
-    print(f"Consultando ranking {category}: {ranking_url}")
-
-    ranking = []
+    page = browser.new_page(
+        locale="es-ES",
+        viewport={
+            "width": 1500,
+            "height": 1900,
+        },
+    )
 
     try:
-        html = get_html(
-            RANKING_URL,
-            params={
-                "season": season_id,
-                "weapon": "S",
-                "category": category_id,
-                "gender": "W",
-                "setLang": "es",
-            },
+        page.goto(
+            RANK_URL,
+            wait_until="domcontentloaded",
+            timeout=120000,
         )
 
-        ranking = parse_ranking(html)
+        wait_after_filter(page)
 
-    except Exception as exc:
-        print(f"AVISO HTTP {category}: {exc}")
+        season_ok = select_by_visible_text(
+            page,
+            SEASON,
+        )
 
-    if not ranking:
-        try:
-            print(
-                f"{category}: tabla no encontrada por HTTP. "
-                f"Probando Chromium..."
+        weapon_ok = select_by_visible_text(
+            page,
+            "Sable",
+        )
+
+        category_ok = select_by_visible_text(
+            page,
+            category,
+        )
+
+        gender_ok = select_by_visible_text(
+            page,
+            "Femenino",
+        )
+
+        missing = []
+
+        if not season_ok:
+            missing.append(SEASON)
+
+        if not weapon_ok:
+            missing.append("Sable")
+
+        if not category_ok:
+            missing.append(category)
+
+        if not gender_ok:
+            missing.append("Femenino")
+
+        if missing:
+            raise RuntimeError(
+                "No se encontraron estos filtros: "
+                + ", ".join(missing)
             )
 
-            html = get_browser_html(ranking_url)
-            ranking = parse_ranking(html)
+        wait_after_filter(page)
 
-        except Exception as exc:
-            print(f"AVISO Chromium {category}: {exc}")
-
-    if not ranking:
-        raise RuntimeError(
-            f"No se encontraron filas válidas para {category}"
+        rows = parse_ranking(
+            page.content()
         )
 
-    print(f"{category}: {len(ranking)} tiradoras recuperadas")
+        if not rows:
+            raise RuntimeError(
+                "Skermo devolvió una tabla vacía"
+            )
 
-    return ranking, ranking_url
+        positive = sum(
+            row["points"] > 0
+            for row in rows
+        )
+
+        max_points = max(
+            (
+                row["points"]
+                for row in rows
+            ),
+            default=0,
+        )
+
+        print(
+            f"{category}: "
+            f"{len(rows)} tiradoras"
+        )
+
+        print(
+            f"{category}: "
+            f"{positive} con puntos > 0"
+        )
+
+        print(
+            f"{category}: "
+            f"máximo = {max_points}"
+        )
+
+        # Éste es el problema que queremos
+        # impedir expresamente.
+        if (
+            category == "M15"
+            and len(rows) >= 10
+            and positive == 0
+        ):
+            raise RuntimeError(
+                "M15 tiene participantes "
+                "pero TODOS los puntos son 0"
+            )
+
+        return rows, page.url
+
+    finally:
+        page.close()
 
 
-def retrieve_all_rankings(season_id, previous_rankings):
+def collect_rankings(
+    browser,
+    previous,
+):
     rankings = {}
-    ranking_urls = {}
+    urls = {}
 
-    for category, category_id in CATEGORY_IDS.items():
+    for category in CATEGORIES:
         try:
-            rows, source_url = retrieve_ranking(
-                season_id,
+            rows, url = collect_one_ranking(
+                browser,
                 category,
-                category_id,
             )
 
             rankings[category] = rows
-            ranking_urls[category] = source_url
+            urls[category] = url
 
         except Exception as exc:
-            print(f"AVISO ranking {category}: {exc}")
+            print(
+                f"AVISO {category}: {exc}"
+            )
 
-            old_rows = previous_rankings.get(category, [])
+            old_rows = previous.get(
+                category,
+                [],
+            )
 
             if old_rows:
                 print(
-                    f"{category}: se conservan "
-                    f"{len(old_rows)} filas anteriores."
+                    f"Se conservan "
+                    f"{len(old_rows)} "
+                    f"filas anteriores de "
+                    f"{category}."
                 )
 
             rankings[category] = old_rows
-            ranking_urls[category] = build_ranking_url(
-                season_id,
-                category_id,
-            )
+            urls[category] = RANK_URL
 
-    return rankings, ranking_urls
+    return (
+        rankings,
+        urls,
+    )
 
 
-def parse_calendar(html):
-    soup = BeautifulSoup(html, "html.parser")
+def parse_calendar(
+    html,
+    base_url,
+):
+    soup = BeautifulSoup(
+        html,
+        "html.parser",
+    )
+
     events = []
 
-    for row in soup.select("table tr"):
-        cells = table_cells(row)
+    for tr in soup.select("table tr"):
+        cells = [
+            clean(cell.get_text(
+                " ",
+                strip=True
+            ))
+            for cell in tr.find_all(
+                ["td", "th"]
+            )
+        ]
+
+        combined = " ".join(
+            cells
+        ).upper()
 
         if len(cells) < 5:
             continue
-
-        combined = " ".join(cells).upper()
 
         if "SABLE" not in combined:
             continue
 
         if not (
             "FEMENINO" in combined
-            or "FEM." in combined
-            or " SF " in f" {combined} "
+            or " FEM " in f" {combined} "
         ):
             continue
 
-        date_match = re.search(
-            r"\d{2}/\d{2}/\d{4}",
-            combined,
+        date = next(
+            (
+                cell
+                for cell in cells
+                if re.fullmatch(
+                    r"\d{2}/\d{2}/\d{4}",
+                    cell,
+                )
+            ),
+            "",
         )
 
-        if not date_match:
+        if not date:
             continue
-
-        date = date_match.group()
-        name = cells[1] if len(cells) > 1 else "Competición RFEE"
 
         category = next(
             (
                 category_name
-                for category_name in [
-             "M13",
-                    "M15",
-                    "M17",
-                    "M20",
-                    "M23",
-                    "ABS",
-                ]
-                if category_name in combined
+                for category_name
+                in CATEGORIES
+                if category_name
+                in combined
             ),
             "ABS",
         )
 
-        modality = (
-            "E"
-            if "EQUIP" in combined
-            else "I"
+        anchor = tr.find(
+            "a",
+            href=True,
         )
 
-        scope = (
-            "I"
-            if any(
-                word in combined
-                for word in [
-                    "FIE",
-                    "COPA DEL MUNDO",
-                    "GRAND PRIX",
-                    "CAMPEONATO DE EUROPA",
-                    "CAMPEONATO DEL MUNDO",
-                    "SATÉLITE",
-                    "SATELITE",
-                ]
+        url = (
+            urljoin(
+                base_url,
+                anchor["href"],
             )
-            else "N"
+            if anchor
+            else base_url
         )
-
-        link = CALENDAR_URL
-        anchor = row.find("a", href=True)
-
-        if anchor:
-            link = urljoin(
-                CALENDAR_URL,
-                anchor.get("href"),
-            )
-
-        location = ""
-
-        if len(cells) > 6:
-            location = clean_text(cells[6])
 
         events.append(
             {
                 "date": date,
-                "name": name,
+                "name": (
+                    cells[1]
+                    if len(cells) > 1
+                    else "Competición RFEE"
+                ),
                 "category": category,
-                "modality": modality,
-                "location": location,
+                "modality": (
+                    "E"
+                    if "EQUIP" in combined
+                    else "I"
+                ),
+                "location": (
+                    cells[6]
+                    if len(cells) > 6
+                    else ""
+                ),
                 "type": "Competición RFEE",
-                "scope": scope,
+                "scope": (
+                    "I"
+                    if any(
+                        text in combined
+                        for text in [
+                            "FIE",
+                            "MUNDIAL",
+                            "EUROPEO",
+                            "GRAND PRIX",
+                            "COPA DEL MUNDO",
+                        ]
+                    )
+                    else "N"
+                ),
                 "registration_deadline": "",
-                "entries": 0,
-                "venue": "",
                 "links": [
                     {
                         "label": "Skermo RFEE",
-                        "url": link,
+                        "url": url,
                     }
                 ],
-                "internal_points": [],
             }
         )
 
@@ -520,183 +481,256 @@ def parse_calendar(html):
             event["name"],
             event["category"],
         )
+
         unique[key] = event
 
-    return list(unique.values())
+    return list(
+        unique.values()
+    )
 
 
-def retrieve_calendar(previous_calendar):
-    params = {
-        "setLang": "es",
-        "season": DEFAULT_SEASON_ID,
-        "weapon": "S",
-        "gender": "W",
-    }
-
-    calendar_url = f"{CALENDAR_URL}?{urlencode(params)}"
-
-    print(f"Consultando calendario RFEE: {calendar_url}")
-
-    events = []
+def collect_calendar(
+    browser,
+    previous,
+):
+    page = browser.new_page(
+        locale="es-ES",
+        viewport={
+            "width": 1500,
+            "height": 1900,
+        },
+    )
 
     try:
-        html = get_html(
-            CALENDAR_URL,
-            params=params,
+        page.goto(
+            CAL_URL,
+            wait_until="domcontentloaded",
+            timeout=120000,
         )
 
-        events = parse_calendar(html)
+        wait_after_filter(page)
+
+        select_by_visible_text(
+            page,
+            SEASON,
+        )
+
+        select_by_visible_text(
+            page,
+            "Sable",
+        )
+
+        select_by_visible_text(
+            page,
+            "Femenino",
+        )
+
+        wait_after_filter(page)
+
+        events = parse_calendar(
+            page.content(),
+            page.url,
+        )
+
+        if not events:
+            print(
+                "AVISO: calendario vacío. "
+                "Se conserva el anterior."
+            )
+
+            return (
+                previous,
+                page.url,
+            )
+
+        print(
+            f"Calendario: "
+            f"{len(events)} eventos"
+        )
+
+        return (
+            events,
+            page.url,
+        )
 
     except Exception as exc:
-        print(f"AVISO calendario HTTP: {exc}")
-
-    if not events:
-        try:
-            html = get_browser_html(calendar_url)
-            events = parse_calendar(html)
-
-        except Exception as exc:
-            print(f"AVISO calendario Chromium: {exc}")
-
-    if not events:
         print(
-            "AVISO: no se encontró un calendario nuevo. "
-            "Se conserva el anterior."
+            f"AVISO calendario: {exc}"
         )
-        return previous_calendar, calendar_url
 
-    print(f"Calendario: {len(events)} pruebas recuperadas")
+        return (
+            previous,
+            CAL_URL,
+        )
 
-    return events, calendar_url
+    finally:
+        page.close()
 
 
-def validate_m15(ranking):
-    """
-    Comprobaciones mínimas para evitar aceptar una temporada incorrecta.
-    No exige una deportista concreta porque el ranking acumulado puede
-    cambiar después de cada competición.
-    """
-    if not ranking:
-        raise RuntimeError("El ranking M15 está vacío")
+def validate_m15(rankings):
+    m15 = rankings.get(
+        "M15",
+        [],
+    )
 
-    positions = [
-        row.get("position")
-        for row in ranking
-        if isinstance(row.get("position"), int)
-    ]
+    rows = len(m15)
 
-    if not positions:
+    positives = sum(
+        row.get(
+            "points",
+            0
+        ) > 0
+        for row in m15
+    )
+
+    max_points = max(
+        (
+            row.get(
+                "points",
+                0
+            )
+            for row in m15
+        ),
+        default=0,
+    )
+
+    validation = {
+        "M15_rows": rows,
+        "M15_positive_points": positives,
+        "M15_max_points": max_points,
+    }
+
+    if rows == 0:
         raise RuntimeError(
-            "El ranking M15 no contiene posiciones válidas"
+            "M15 está vacío"
         )
 
-    if min(positions) != 1:
+    if positives == 0:
         raise RuntimeError(
-            "El ranking M15 no empieza en la posición 1"
+            "M15 no contiene "
+            "ninguna puntuación positiva"
         )
 
-    if max(positions) < 10:
+    if max_points <= 0:
         raise RuntimeError(
-            "El ranking M15 contiene menos de 10 posiciones; "
-            "posible filtro o temporada incorrectos"
+            "M15_max_points "
+            "no es válido"
         )
 
-    if not any(
-        parse_number(row.get("points")) > 0
-        for row in ranking
-    ):
-        raise RuntimeError(
-            "El ranking M15 no contiene puntuaciones válidas"
-        )
+    return validation
 
 
 def main():
-    previous = read_previous_data()
+    previous = read_old_data()
 
-    previous_rankings = previous.get("rankings", {})
-    previous_calendar = previous.get("calendar", [])
-    previous_results = previous.get("results", [])
-
-    season_id = detect_season_id()
-
-    rankings, ranking_urls = retrieve_all_rankings(
-        season_id,
-        previous_rankings,
+    previous_rankings = (
+        previous.get(
+            "rankings",
+            {},
+        )
     )
 
-    # Una validación defectuosa no debe borrar el ranking anterior.
-    try:
-        validate_m15(rankings.get("M15", []))
-        m15_validation = "ok"
-
-    except Exception as exc:
-        print(f"AVISO validación M15: {exc}")
-        m15_validation = f"warning: {exc}"
-
-        if previous_rankings.get("M15"):
-            rankings["M15"] = previous_rankings["M15"]
-            print("M15: restaurado el último ranking válido.")
-
-    calendar, calendar_url = retrieve_calendar(
-        previous_calendar
+    previous_calendar = (
+        previous.get(
+            "calendar",
+            [],
+        )
     )
 
-    now = datetime.datetime.now().astimezone()
+    with sync_playwright() as p:
+        browser = (
+            p.chromium.launch(
+                headless=True
+            )
+        )
+
+        rankings, ranking_urls = (
+            collect_rankings(
+                browser,
+                previous_rankings,
+            )
+        )
+
+        calendar, calendar_url = (
+            collect_calendar(
+                browser,
+                previous_calendar,
+            )
+        )
+
+        browser.close()
+
+    # No generamos un JSON nuevo
+    # si M15 sigue incorrecto.
+    validation = validate_m15(
+        rankings
+    )
+
+    now = (
+        datetime.datetime
+        .now()
+        .astimezone()
+    )
 
     output = {
-        "updated_at": now.strftime(
-            "%d/%m/%Y %H:%M %Z"
+        "updated_at": (
+            now.strftime(
+                "%d/%m/%Y %H:%M %Z"
+            )
         ),
-        "source_updated_at": now.isoformat(
-            timespec="seconds"
+        "source_updated_at": (
+            now.isoformat(
+                timespec="seconds"
+            )
         ),
-        "season": {
-            "label": SEASON_LABEL,
-            "skermo_id": season_id,
-        },
+        "season": SEASON,
         "filters": {
-            "weapon": "S",
-            "weapon_label": "Sable",
-            "gender": "W",
-            "gender_label": "Femenino",
+            "weapon": "Sable",
+            "gender": "Femenino",
         },
-        "validation": {
-            "M15": m15_validation,
-        },
+        "validation": validation,
         "ranking_urls": ranking_urls,
         "rankings": rankings,
+        "calendar_url": calendar_url,
         "calendar": calendar,
-        # Hasta automatizar los resultados detallados, se mantienen
-        # los últimos resultados válidos.
-        "results": previous_results,
+
+        # Por ahora mantenemos los
+        # resultados detallados anteriores.
+        "results": previous.get(
+            "results",
+            [],
+        ),
+
         "sources": [
             {
-                "name": "Skermo RFEE · Ranking Nacional",
-                "url": RANKING_URL,
-                "use": (
-                    "Rankings nacionales de Sable Femenino "
-                    "por categoría"
+                "name": (
+                    "Skermo RFEE · "
+                    "Ranking Nacional"
                 ),
+                "url": RANK_URL,
             },
             {
-                "name": "Skermo RFEE · Calendario",
-                "url": calendar_url,
-                "use": (
-                    "Calendario nacional de competiciones "
-                    "de Sable Femenino"
+                "name": (
+                    "Skermo RFEE · "
+                    "Calendario"
                 ),
+                "url": CAL_URL,
             },
         ],
     }
 
-    OUTPUT_FILE.parent.mkdir(
+    OUT.parent.mkdir(
         parents=True,
         exist_ok=True,
     )
 
-    temporary_file = OUTPUT_FILE.with_suffix(".json.tmp")
+    temporary = (
+        OUT.with_suffix(
+            ".json.tmp"
+        )
+    )
 
-    temporary_file.write_text(
+    temporary.write_text(
         json.dumps(
             output,
             ensure_ascii=False,
@@ -705,26 +739,31 @@ def main():
         encoding="utf-8",
     )
 
-    # Verifica que el JSON escrito puede abrirse antes de reemplazar
-    # la versión anterior.
+    # Verificación final del JSON.
     json.loads(
-        temporary_file.read_text(
+        temporary.read_text(
             encoding="utf-8"
         )
     )
 
-    temporary_file.replace(OUTPUT_FILE)
-
-    print(
-        f"Datos RFEE guardados correctamente en "
-        f"{OUTPUT_FILE}"
+    temporary.replace(
+        OUT
     )
 
-    for category in CATEGORY_IDS:
-        print(
-            f"{category}: "
-            f"{len(rankings.get(category, []))} filas"
-        )
+    print()
+    print(
+        "Datos RFEE actualizados."
+    )
+
+    print(
+        "Validación M15:",
+        validation,
+    )
+
+    print(
+        "Archivo:",
+        OUT,
+    )
 
 
 if __name__ == "__main__":
