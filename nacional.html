@@ -2,231 +2,269 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
->
-<title>
-Sable femenino · Nacional RFEE
-</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Sable femenino · Nacional RFEE</title>
 
 <style>
-:root {
-  --nav:#315f9d;
-  --bg:#f4f6fa;
+:root{
+  --bg:#f5f6fa;
   --card:#fff;
-  --line:#dce2ec;
-  --text:#172033;
-  --mut:#65718a;
-  --red:#bf2c32;
-  --blue:#244d84;
+  --ink:#1b2333;
+  --mut:#667085;
+  --line:#e4e7ee;
+  --acc:#b4232c;
+  --blue:#1f3a68;
+  --ok:#1a7f4b;
+  --warn:#b26a00;
+  --chip:#eef1f7;
 }
 
-* {
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-body {
+body{
   margin:0;
-  font:
-    14px/1.45
-    system-ui,
-    Segoe UI,
-    Arial;
+  font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   background:var(--bg);
-  color:var(--text);
+  color:var(--ink);
 }
 
-header {
-  background:var(--nav);
+header{
+  background:linear-gradient(120deg,var(--blue),#2b4f8a);
   color:#fff;
-  padding:18px 20px 0;
+  padding:18px 22px 0;
 }
 
-h1 {
-  font-size:21px;
-  margin:0 0 4px;
+header h1{
+  margin:0;
+  font-size:20px;
 }
 
-.sub {
-  font-size:12px;
-  margin-bottom:16px;
+.sub{
+  opacity:.9;
+  font-size:13px;
+  margin-top:3px;
 }
 
-nav {
+nav{
   display:flex;
+  gap:4px;
+  margin-top:14px;
   flex-wrap:wrap;
 }
 
-nav button {
+nav button{
+  background:transparent;
   border:0;
-  background:none;
-  color:#eef4ff;
-  padding:12px 15px;
-  font-weight:700;
+  color:#dfe6f3;
+  padding:9px 14px;
+  font:inherit;
+  font-weight:600;
   cursor:pointer;
+  border-radius:8px 8px 0 0;
 }
 
-nav button.on {
-  background:#fff;
+nav button.on{
+  background:var(--bg);
   color:var(--blue);
-  border-radius:9px 9px 0 0;
 }
 
-main {
-  max-width:1180px;
-  margin:auto;
-  padding:18px;
+main{
+  padding:18px 22px 40px;
+  max-width:1200px;
+  margin:0 auto;
 }
 
-.hide {
-  display:none;
+.hide{display:none}
+
+.grid{
+  display:grid;
+  gap:14px;
 }
 
-.card {
+.g4{
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+}
+
+.g2{
+  grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+}
+
+.card{
   background:var(--card);
   border:1px solid var(--line);
   border-radius:12px;
   padding:16px;
-  margin-bottom:14px;
 }
 
-.grid4 {
-  display:grid;
-  grid-template-columns:
-    repeat(4,1fr);
-  gap:14px;
+.card h3{
+  margin:0 0 10px;
+  font-size:15px;
 }
 
-.kicker {
-  font-size:12px;
+.kpi .lab{
   color:var(--mut);
+  font-size:12px;
   text-transform:uppercase;
 }
 
-.big {
+.kpi .val{
   font-size:22px;
-  font-weight:800;
-  margin:5px 0;
+  font-weight:700;
+  margin:4px 0;
 }
 
-.mut {
+.kpi .det{
   color:var(--mut);
+  font-size:13px;
 }
 
-.cats,
-.row {
+.chips{
   display:flex;
-  gap:7px;
+  gap:6px;
   flex-wrap:wrap;
-  align-items:center;
-  margin:10px 0;
+  margin-bottom:12px;
 }
 
-.cats button {
+.chip{
   border:1px solid var(--line);
   background:#fff;
   border-radius:999px;
-  padding:7px 13px;
+  padding:6px 12px;
   cursor:pointer;
+  font:inherit;
+  font-size:13px;
 }
 
-.cats button.on {
+.chip.on{
   background:var(--blue);
   color:#fff;
+  border-color:var(--blue);
 }
 
-input,
-select {
-  font:inherit;
-  padding:8px 10px;
-  border:1px solid var(--line);
-  border-radius:8px;
-  background:#fff;
-}
-
-.tbl {
-  max-height:580px;
-  overflow:auto;
-  border:1px solid var(--line);
-  border-radius:10px;
-}
-
-table {
+table{
   width:100%;
   border-collapse:collapse;
 }
 
-th,
-td {
-  padding:9px 10px;
-  border-bottom:
-    1px solid var(--line);
+th,td{
+  padding:8px;
+  border-bottom:1px solid var(--line);
   text-align:left;
+  vertical-align:middle;
 }
 
-th {
+th{
   font-size:12px;
   color:var(--mut);
+  font-weight:600;
   background:#fafbfd;
   position:sticky;
   top:0;
 }
 
-td.num,
-th.num {
+td.n,th.n{
   text-align:right;
+  font-variant-numeric:tabular-nums;
 }
 
-.bar {
-  display:inline-block;
+.tbl{
+  max-height:560px;
+  overflow:auto;
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+
+.bar{
   height:6px;
-  background:var(--red);
-  border-radius:9px;
-  margin-left:8px;
-  vertical-align:middle;
+  background:var(--chip);
+  border-radius:4px;
+  overflow:hidden;
+  min-width:80px;
 }
 
-.tag {
+.bar i{
+  display:block;
+  height:100%;
+  background:var(--acc);
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+input,select{
+  font:inherit;
+  padding:7px 10px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fff;
+}
+
+label.f{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  font-size:12px;
+  color:var(--mut);
+  font-weight:600;
+}
+
+.mut{color:var(--mut)}
+.small{font-size:12px}
+
+.tag{
   display:inline-block;
   font-size:11px;
   padding:2px 7px;
   border-radius:999px;
-  background:#edf2f9;
+  background:var(--chip);
   color:var(--blue);
   font-weight:600;
 }
 
-.ok {
-  background:#eefaf4;
-  border:1px solid #bfe5d0;
-  color:#17613f;
+.tag.n{
+  background:#fde8e9;
+  color:var(--acc);
+}
+
+.note{
+  background:#fff8e6;
+  border:1px solid #f1dfb0;
   border-radius:10px;
-  padding:11px;
-  margin-bottom:14px;
+  padding:10px 12px;
+  font-size:13px;
 }
 
-.error {
-  background:#fff1f1;
-  border:1px solid #efc3c3;
-  color:#971b1b;
+.ok{
+  background:#e9f7ef;
+  border:1px solid #bde1ca;
+  color:#17643d;
   border-radius:10px;
-  padding:13px;
-  margin-bottom:14px;
+  padding:10px 12px;
 }
 
-a {
-  color:var(--blue);
+.err{
+  background:#fff0f0;
+  border:1px solid #efc4c4;
+  color:#9b2020;
+  border-radius:10px;
+  padding:10px 12px;
 }
 
-@media(max-width:850px) {
-  .grid4 {
-    grid-template-columns:1fr;
-  }
+.big{
+  font-size:34px;
+  font-weight:800;
+  color:var(--acc);
+}
 
-  main {
-    padding:10px;
-  }
+a{color:var(--blue)}
+
+@media(max-width:700px){
+  main{padding:12px}
 }
 </style>
 </head>
@@ -234,984 +272,1830 @@ a {
 <body>
 
 <header>
-<h1>
-Sable femenino · Temporada 2026-27
-</h1>
+
+<h1>Sable femenino · Temporada 2026-27</h1>
 
 <div class="sub">
-Ranking Nacional RFEE ·
-Sable femenino ·
-<span id="snapshot">
-Cargando datos actuales…
-</span>
+Rankings nacionales RFEE · Sable femenino ·
+<span id="snap">cargando datos…</span>
 </div>
 
 <nav id="nav"></nav>
+
 </header>
 
 <main>
 
-<div id="globalError"></div>
+<div id="status"></div>
 
-<section id="tab-resumen">
-</section>
-
-<section
-  id="tab-rankings"
-  class="hide">
-</section>
-
-<section
-  id="tab-calendario"
-  class="hide">
-</section>
-
-<section
-  id="tab-fuentes"
-  class="hide">
-</section>
+<section id="t-resumen"></section>
+<section id="t-ranking" class="hide"></section>
+<section id="t-calendario" class="hide"></section>
+<section id="t-resultados" class="hide"></section>
+<section id="t-interno" class="hide"></section>
+<section id="t-calc" class="hide"></section>
+<section id="t-normativa" class="hide"></section>
+<section id="t-fuentes" class="hide"></section>
 
 </main>
 
 <script>
-(() => {
 
-"use strict";
+const $ = s => document.querySelector(s);
 
-const $ =
-  selector =>
-    document.querySelector(
-      selector
-    );
+const fmt = n =>
+  Number(n || 0).toLocaleString(
+    "es-ES",
+    {
+      minimumFractionDigits:2,
+      maximumFractionDigits:2
+    }
+  );
 
-const esc =
-  value =>
-    String(value ?? "")
-      .replace(
-        /[&<>"']/g,
-        character => ({
-          "&":"&amp;",
-          "<":"&lt;",
-          ">":"&gt;",
-          '"':"&quot;",
-          "'":"&#39;"
-        })[character]
-      );
+const esc = s =>
+  String(s ?? "").replace(
+    /[&<>"]/g,
+    c => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;"
+    })[c]
+  );
+
+const pd = s => {
+  if(!s) return null;
+
+  const [d,m,y] = s.split("/");
+
+  return new Date(+y,+m-1,+d);
+};
+
+const TODAY = new Date();
+TODAY.setHours(0,0,0,0);
 
 
-const tabs = [
-  [
-    "resumen",
-    "Resumen"
-  ],
-  [
-    "rankings",
-    "Rankings"
-  ],
-  [
-    "calendario",
-    "Calendario"
-  ],
-  [
-    "fuentes",
-    "Fuentes"
-  ]
+/* ===========================================================
+   DATOS GENERALES
+   =========================================================== */
+
+let DATA = null;
+
+let RK = {
+  M13:[],
+  M15:[],
+  M17:[],
+  M20:[],
+  M23:[],
+  ABS:[]
+};
+
+
+/* ===========================================================
+   RESULTADOS NACIONALES CONOCIDOS
+   =========================================================== */
+
+const RES = [
+
+{
+  id:10372,
+  date:"18/10/2026",
+  name:"TNR M17",
+  cat:"M17",
+  place:"MADRID",
+  pdf:"https://app.skermo.org/client/1/a512aef5b9a76f2020965feacb3500b3.pdf"
+},
+
+{
+  id:10369,
+  date:"17/10/2026",
+  name:"TNR M20",
+  cat:"M20",
+  place:"MADRID",
+  pdf:"https://app.skermo.org/client/1/8abb16b7dc64f0f809ce2ca1315b9f6d.pdf"
+},
+
+{
+  id:10295,
+  date:"27/09/2026",
+  name:"TNR Absoluto",
+  cat:"ABS",
+  place:"MADRID",
+  pdf:"https://app.skermo.org/client/1/c7184519d5ae977f49d1a066485b2d84.pdf"
+},
+
+{
+  id:0,
+  date:"21/11/2026",
+  name:"TNR M15",
+  cat:"M15",
+  place:"MADRID",
+  pdf:""
+}
+
 ];
 
 
-let data = null;
-let category = "M15";
+/* ===========================================================
+   REGLAS RFEE
+   =========================================================== */
 
+const RULES = {
+
+M13:{
+  carry:0,
+  best:"2 TNR M13 + Campeonato de España",
+  comps:[
+    ["TNR M13",1],
+    ["Cto. España M13",1.25]
+  ],
+  n:25
+},
+
+M15:{
+  carry:0,
+  best:"TNR M15 + Campeonato de España",
+  comps:[
+    ["TNR M15",1],
+    ["Cto. España M15",1.25]
+  ],
+  n:34
+},
+
+M17:{
+  carry:10,
+  best:"3 mejores entre TNR M17/M20 + Cto. España",
+  comps:[
+    ["TNR M17",1],
+    ["TNR M20",1.25],
+    ["Cto. España M17",1.25],
+    ["Cto. España M20",1.5]
+  ],
+  n:42
+},
+
+M20:{
+  carry:15,
+  best:"3 mejores entre TNR M20/ABS + Cto. España",
+  comps:[
+    ["TNR M20",1],
+    ["TNR Absoluto",1.25],
+    ["Cto. España M20",1.25],
+    ["Cto. España Absoluto",1.5]
+  ],
+  n:55
+},
+
+M23:{
+  carry:0,
+  best:"2 mejores TNR ABS + Campeonato de España",
+  comps:[
+    ["TNR Absoluto",1],
+    ["Cto. España Sub23",1.25],
+    ["Cto. España Absoluto",1.5]
+  ],
+  n:68
+},
+
+ABS:{
+  carry:20,
+  best:"2 mejores TNR ABS + Campeonato de España",
+  comps:[
+    ["TNR Absoluto",1],
+    ["Cto. España Absoluto",1.25]
+  ],
+  n:68
+}
+
+};
+
+
+/* ===========================================================
+   FORMULA RFEE
+   =========================================================== */
+
+function bonus(p){
+
+  return p==1 ? 1414 :
+         p==2 ? 1212 :
+         p<5   ? 1010 :
+         p<9   ? 808  :
+         p<17  ? 606  :
+         p<33  ? 404  :
+         p<65  ? 202  :
+         p<129 ? 101  :
+         0;
+}
+
+
+function pts(pos,n,coef=1){
+
+  if(
+    !(pos>=1) ||
+    !(n>=2) ||
+    pos>n
+  ){
+    return NaN;
+  }
+
+  return (
+    bonus(pos)
+    +
+    1000 * (
+      1.01
+      -
+      Math.log10(pos)
+      /
+      Math.log10(n)
+    )
+  ) * coef;
+}
+
+
+/* ===========================================================
+   TABS
+   =========================================================== */
+
+const TABS = [
+
+["resumen","Resumen"],
+["ranking","Rankings"],
+["calendario","Calendario"],
+["resultados","Resultados"],
+["interno","Ranking interno"],
+["calc","Calculadora de puntos"],
+["normativa","Normativa"],
+["fuentes","Fuentes"]
+
+];
 
 $("#nav").innerHTML =
-  tabs
-    .map(
-      ([key,label],index) =>
-        `
-        <button
-          type="button"
-          data-tab="${key}"
-          class="${index ? "" : "on"}"
-        >
-          ${label}
-        </button>
-        `
-    )
-    .join("");
+  TABS.map(
+    ([k,l],i) =>
+      `<button
+        data-t="${k}"
+        class="${i ? "" : "on"}">
+        ${l}
+       </button>`
+  ).join("");
 
 
-$("#nav").addEventListener(
-  "click",
-  event => {
+$("#nav").onclick = e => {
 
-    const tab =
-      event.target.dataset.tab;
+  const t = e.target.dataset.t;
 
-    if (!tab) {
-      return;
-    }
+  if(!t) return;
 
-    $("#nav")
-      .querySelectorAll(
-        "button"
-      )
-      .forEach(
-        button =>
-          button.classList.toggle(
-            "on",
-            button.dataset.tab === tab
-          )
-      );
-
-    tabs.forEach(
-      ([key]) => {
-
-        $("#tab-" + key)
-          .classList.toggle(
-            "hide",
-            key !== tab
-          );
-
-      }
+  document
+    .querySelectorAll("#nav button")
+    .forEach(
+      b =>
+        b.classList.toggle(
+          "on",
+          b.dataset.t==t
+        )
     );
 
-  }
-);
+  TABS.forEach(
+    ([k]) =>
+      $("#t-"+k)
+        .classList.toggle(
+          "hide",
+          k!=t
+        )
+  );
+
+};
 
 
-fetch(
-  "data/nacional-rfee.json?v="
-  + Date.now(),
-  {
-    cache:"no-store"
-  }
-)
-.then(
-  response => {
+/* ===========================================================
+   CARGA AUTOMATICA DESDE nacional-rfee.json
+   =========================================================== */
 
-    if (!response.ok) {
+async function loadData(){
+
+  try{
+
+    const response =
+      await fetch(
+        "data/nacional-rfee.json?v="
+        + Date.now(),
+        {
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok){
+
       throw new Error(
         "HTTP "
         + response.status
       );
+
     }
 
-    return response.json();
+    DATA =
+      await response.json();
 
-  }
-)
-.then(
-  json => {
 
-    if (
-      !json.validation
-      ||
-      json.validation
-        .M15_positive_points
-        < 1
-    ) {
+    if(
+      !DATA.rankings
+    ){
 
       throw new Error(
-        "El JSON nacional "
-        + "no contiene puntos "
-        + "positivos en M15"
+        "El JSON no contiene rankings"
       );
 
     }
 
-    data = json;
 
-    $("#snapshot")
-      .textContent =
-        "Actualizado "
-        + json.updated_at;
+    const m15 =
+      DATA.rankings.M15 || [];
+
+
+    const positives =
+      m15.filter(
+        r =>
+          Number(r.points)>0
+      ).length;
+
+
+    if(
+      m15.length===0
+    ){
+
+      throw new Error(
+        "Ranking M15 vacío"
+      );
+
+    }
+
+
+    if(
+      positives===0
+    ){
+
+      throw new Error(
+        "M15 contiene tiradoras, "
+        +
+        "pero todos los puntos "
+        +
+        "son cero"
+      );
+
+    }
+
+
+    [
+      "M13",
+      "M15",
+      "M17",
+      "M20",
+      "ABS"
+    ].forEach(
+      cat => {
+
+        RK[cat] =
+          (DATA.rankings[cat] || [])
+            .map(
+              r => [
+
+                Number(
+                  r.position
+                )
+                || null,
+
+                String(
+                  r.first_name
+                  ||
+                  r.full_name
+                  ||
+                  ""
+                ),
+
+                String(
+                  r.last_name
+                  ||
+                  ""
+                ),
+
+                Number(
+                  r.birth_year
+                )
+                || "",
+
+                String(
+                  r.club
+                  ||
+                  ""
+                ),
+
+                Number(
+                  r.points
+                )
+                || 0
+
+              ]
+            );
+
+      }
+    );
+
+
+    createSub23();
+
+
+    $("#snap").textContent =
+      DATA.updated_at
+      +
+      " · actualización automática";
+
+
+    $("#status").innerHTML =
+      `<div class="ok">
+       Datos nacionales cargados
+       correctamente desde
+       <b>nacional-rfee.json</b>.
+       M15:
+       <b>${m15.length}</b>
+       tiradoras,
+       <b>${positives}</b>
+       con puntuación positiva.
+       </div>`;
+
 
     renderAll();
 
   }
-)
-.catch(
-  error => {
+  catch(error){
 
-    $("#snapshot")
-      .textContent =
-        "actualización no disponible";
+    $("#snap").textContent =
+      "actualización no disponible";
 
-    $("#globalError")
-      .innerHTML =
-        `
-        <div class="error">
-          <b>
-          No se muestran datos
-          nacionales antiguos.
-          </b>
 
-          ${esc(error.message)}.
-
-          Ejecuta el workflow
-          "Actualizar dashboard
-          Nacional y Regional"
-          y revisa
-          data/nacional-rfee.json.
-        </div>
-        `;
+    $("#status").innerHTML =
+      `<div class="err">
+       <b>No se muestran rankings
+       nacionales antiguos.</b>
+       ${esc(error.message)}.
+       Ejecuta el workflow
+       <b>Actualizar dashboard
+       Nacional y Regional</b>.
+       </div>`;
 
   }
-);
-
-
-function categoryLabel(
-  value
-) {
-
-  return (
-    value === "ABS"
-      ? "Absoluto"
-      : value
-  );
 
 }
 
 
-function dateValue(
-  date
-) {
+/* ===========================================================
+   SUB23 ESTIMADO
+   =========================================================== */
 
-  const match =
-    String(date ?? "")
-      .match(
-        /(\d{2})\/(\d{2})\/(\d{4})/
+function createSub23(){
+
+  const abs =
+    RK.ABS
+      .filter(
+        r => Number(r[3])>=2004
+      )
+      .map(
+        r => [...r]
+      )
+      .sort(
+        (a,b) =>
+          b[5]-a[5]
       );
 
-  if (!match) {
-    return null;
-  }
 
-  return new Date(
-    Number(match[3]),
-    Number(match[2]) - 1,
-    Number(match[1])
+  let last = null;
+  let pos = 0;
+
+
+  abs.forEach(
+    (r,i) => {
+
+      if(
+        r[5]!==last
+      ){
+
+        pos=i+1;
+        last=r[5];
+
+      }
+
+      r[0]=pos;
+
+    }
   );
 
-}
 
-
-function renderAll() {
-
-  renderSummary();
-
-  renderRanking();
-
-  renderCalendar();
-
-  renderSources();
+  RK.M23=abs;
 
 }
 
 
-function renderSummary() {
+/* ===========================================================
+   RESUMEN
+   =========================================================== */
 
-  const categories = [
-    "M13",
-    "M15",
-    "M17",
-    "M20",
-    "ABS"
+function renderResumen(){
+
+  const cats = [
+    ["M13","M13"],
+    ["M15","M15"],
+    ["M17","M17"],
+    ["M20","M20"],
+    ["M23","Sub23"],
+    ["ABS","Absoluto"]
   ];
 
-  const total =
-    Object.values(
-      data.rankings
-    )
-    .reduce(
-      (sum,rows) =>
-        sum + rows.length,
-      0
-    );
 
+  const leaders =
+    cats.map(
+      ([k,label]) => {
 
-  const today =
-    new Date();
+        const r =
+          RK[k]?.find(
+            x => x[5]>0
+          );
 
-  today.setHours(
-    0,0,0,0
-  );
+        return `
+        <tr>
+
+          <td>
+          <b>${label}</b>
+          </td>
+
+          <td>
+          ${
+            r
+              ? esc(
+                  r[1]
+                  +" "
+                  +r[2]
+                )
+              : "—"
+          }
+          </td>
+
+          <td>
+          ${r ? esc(r[4]) : ""}
+          </td>
+
+          <td class="n">
+          ${r ? fmt(r[5]) : "—"}
+          </td>
+
+        </tr>`;
+
+      }
+    ).join("");
 
 
   const upcoming =
-    (data.calendar || [])
+    (DATA.calendar || [])
       .filter(
-        event => {
-
-          const date =
-            dateValue(
-              event.date
-            );
-
-          return (
-            date
-            &&
-            date >= today
-          );
-
-        }
+        e =>
+          pd(e.date)
+          &&
+          pd(e.date)>=TODAY
       );
 
 
-  $("#tab-resumen")
-    .innerHTML =
-      `
+  $("#t-resumen").innerHTML = `
 
-      <div class="ok">
+  <div class="grid g4">
 
-        Datos RFEE actualizados:
-        <b>
-        ${esc(data.updated_at)}
-        </b>
+    <div class="card kpi">
 
-        · M15:
-
-        <b>
-        ${
-          data.validation
-            .M15_positive_points
-        }
-        </b>
-
-        tiradoras con
-        puntuación positiva.
-
+      <div class="lab">
+      Próxima nacional
       </div>
 
+      <div class="val">
+      ${
+        upcoming[0]
+          ? esc(upcoming[0].name)
+          : "—"
+      }
+      </div>
 
-      <div class="grid4">
+      <div class="det">
+      ${
+        upcoming[0]
+          ? esc(upcoming[0].date)
+          : ""
+      }
+      </div>
 
-        <div class="card">
+    </div>
 
-          <div class="kicker">
-          Próxima nacional
-          </div>
 
-          <div class="big">
-          ${
-            esc(
-              upcoming[0]
-                ?.name
-                ||
-              "Pendiente"
+    <div class="card kpi">
+
+      <div class="lab">
+      Tiradoras M15
+      </div>
+
+      <div class="val">
+      ${RK.M15.length}
+      </div>
+
+      <div class="det">
+      Ranking RFEE actualizado
+      </div>
+
+    </div>
+
+
+    <div class="card kpi">
+
+      <div class="lab">
+      Líder M15
+      </div>
+
+      <div class="val">
+
+      ${
+        RK.M15[0]
+          ? esc(
+              RK.M15[0][1]
+              +" "
+              +RK.M15[0][2]
             )
-          }
-          </div>
+          : "—"
+      }
 
-          <div class="mut">
-          ${
-            esc(
-              upcoming[0]
-                ?.date
-                ||
-              "Sin fecha"
+      </div>
+
+      <div class="det">
+
+      ${
+        RK.M15[0]
+          ? fmt(
+              RK.M15[0][5]
             )
-          }
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="kicker">
-          Categorías
-          </div>
-
-          <div class="big">
-          5
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="kicker">
-          Tiradoras
-          </div>
-
-          <div class="big">
-          ${total}
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="kicker">
-          Pruebas calendario
-          </div>
-
-          <div class="big">
-          ${
-            (data.calendar || [])
-              .length
-          }
-          </div>
-
-        </div>
+            +" puntos"
+          : ""
+      }
 
       </div>
 
+    </div>
 
-      <div class="card">
 
-        <h3>
-        Líderes del ranking nacional
-        </h3>
+    <div class="card kpi">
 
-        <table>
-
-          <tr>
-            <th>Categoría</th>
-            <th>Tiradora</th>
-            <th>Club</th>
-            <th>Puntos</th>
-          </tr>
-
-          ${
-            categories
-              .map(
-                cat => {
-
-                  const row =
-                    data
-                      .rankings[cat]
-                      ?.[0];
-
-                  return `
-                  <tr>
-
-                    <td>
-                    <b>
-                    ${
-                      categoryLabel(cat)
-                    }
-                    </b>
-                    </td>
-
-                    <td>
-                    ${
-                      esc(
-                        row
-                          ?.full_name
-                          ||
-                        "Sin datos"
-                      )
-                    }
-                    </td>
-
-                    <td>
-                    ${
-                      esc(
-                        row
-                          ?.club
-                          ||
-                        ""
-                      )
-                    }
-                    </td>
-
-                    <td>
-                    ${
-                      row
-                        ? Number(
-                            row.points
-                          )
-                          .toLocaleString(
-                            "es-ES",
-                            {
-                              minimumFractionDigits:2
-                            }
-                          )
-                        : "—"
-                    }
-                    </td>
-
-                  </tr>
-                  `;
-
-                }
-              )
-              .join("")
-          }
-
-        </table>
-
+      <div class="lab">
+      Actualización
       </div>
-      `;
+
+      <div class="val">
+      RFEE
+      </div>
+
+      <div class="det">
+      ${esc(DATA.updated_at)}
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="card"
+       style="margin-top:14px">
+
+    <h3>
+    Líderes del ranking nacional
+    </h3>
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Categoría</th>
+          <th>Líder</th>
+          <th>Club</th>
+          <th class="n">
+          Puntos
+          </th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+      ${leaders}
+      </tbody>
+
+    </table>
+
+  </div>
+
+  `;
 
 }
 
 
-function renderRanking() {
+/* ===========================================================
+   RANKINGS
+   =========================================================== */
 
-  const categories = [
-    "M13",
-    "M15",
-    "M17",
-    "M20",
-    "ABS"
-  ];
+let rkCat="M15";
+let rkQ="";
+let rkClub="";
 
+const CATNAME = {
 
-  $("#tab-rankings")
-    .innerHTML =
-      `
+M13:"M13",
+M15:"M15 (Infantil)",
+M17:"M17 (Cadete)",
+M20:"M20 (Junior)",
+M23:"Sub23",
+ABS:"Absoluto"
 
-      <div class="card">
-
-        <div class="cats">
-
-          ${
-            categories
-              .map(
-                cat => `
-                <button
-                  type="button"
-                  data-category="${cat}"
-                  class="${
-                    cat === category
-                      ? "on"
-                      : ""
-                  }"
-                >
-                  ${
-                    categoryLabel(
-                      cat
-                    )
-                  }
-                </button>
-                `
-              )
-              .join("")
-          }
-
-        </div>
+};
 
 
-        <div class="row">
+function renderRanking(){
 
-          <input
-            id="rankingSearch"
-            placeholder="Buscar tiradora…"
-          >
-
-          <select id="clubFilter">
-
-            <option value="">
-            Todos los clubes
-            </option>
-
-          </select>
-
-          <span
-            id="rankingCount"
-            class="mut">
-          </span>
-
-        </div>
+  const rows =
+    RK[rkCat] || [];
 
 
-        <div id="rankingBody">
-        </div>
-
-      </div>
-      `;
-
-
-  document
-    .querySelector(".cats")
-    .addEventListener(
-      "click",
-      event => {
-
-        const next =
-          event
-            .target
-            .dataset
-            .category;
-
-        if (!next) {
-          return;
-        }
-
-        category = next;
-
-        renderRanking();
-
-      }
+  const maximum =
+    Math.max(
+      ...rows.map(
+        r => Number(r[5]) || 0
+      ),
+      1
     );
 
 
   const clubs =
     [
       ...new Set(
-        (
-          data.rankings[
-            category
-          ]
-          ||
-          []
-        )
-        .map(
-          row => row.club
+        rows.map(
+          r => r[4]
         )
         .filter(Boolean)
       )
-    ]
-    .sort();
+    ].sort();
 
 
-  $("#clubFilter")
-    .innerHTML +=
-      clubs
-        .map(
-          club =>
-            `
-            <option>
-            ${esc(club)}
-            </option>
-            `
-        )
-        .join("");
+  const q =
+    rkQ.toLowerCase();
 
 
-  $("#rankingSearch")
-    .addEventListener(
-      "input",
-      drawRanking
-    );
-
-
-  $("#clubFilter")
-    .addEventListener(
-      "change",
-      drawRanking
-    );
-
-
-  drawRanking();
-
-}
-
-
-function drawRanking() {
-
-  let rows =
-    data.rankings[
-      category
-    ]
-    ||
-    [];
-
-
-  const search =
-    $("#rankingSearch")
-      .value
-      .toUpperCase();
-
-
-  const club =
-    $("#clubFilter")
-      .value;
-
-
-  rows =
+  const filtered =
     rows.filter(
-      row =>
-
+      r =>
         (
-          !search
+          !q
           ||
-          row
-            .full_name
-            .toUpperCase()
-            .includes(search)
-        )
-
-        &&
-
-        (
-          !club
-          ||
-          row.club === club
-        )
-
-    );
-
-
-  const maximum =
-    Math.max(
-      1,
-      ...rows.map(
-        row =>
-          Number(
-            row.points
+          (
+            r[1]
+            +" "
+            +r[2]
           )
+          .toLowerCase()
+          .includes(q)
+        )
+        &&
+        (
+          !rkClub
           ||
-          0
-      )
+          r[4]==rkClub
+        )
     );
 
 
-  $("#rankingCount")
-    .textContent =
-      rows.length
-      + " tiradoras";
+  const body =
+    filtered.map(
+      r => `
 
+      <tr>
 
-  $("#rankingBody")
-    .innerHTML =
+        <td class="n">
+        <b>${r[0] ?? "—"}</b>
+        </td>
+
+        <td>
+        ${esc(r[1]+" "+r[2])}
+        </td>
+
+        <td>
+        ${esc(r[4])}
+        </td>
+
+        <td>
+        ${r[3]}
+        </td>
+
+        <td class="n">
+        ${fmt(r[5])}
+        </td>
+
+        <td>
+
+          <div class="bar">
+
+            <i style="
+              width:
+              ${
+                Number(r[5])
+                /
+                maximum
+                *
+                100
+              }%
+            ">
+            </i>
+
+          </div>
+
+        </td>
+
+      </tr>
+
       `
+    ).join("");
 
-      <div class="tbl">
 
-        <table>
+  $("#t-ranking").innerHTML = `
+
+  <div class="card">
+
+    <div class="chips">
+
+      ${
+        Object.entries(
+          CATNAME
+        )
+        .map(
+          ([k,label]) =>
+            `
+            <button
+              class="chip
+              ${k==rkCat?"on":""}"
+              data-c="${k}"
+            >
+            ${label}
+            </button>
+            `
+        )
+        .join("")
+      }
+
+    </div>
+
+
+    <div class="row"
+         style="margin-bottom:10px">
+
+      <input
+        id="rkq"
+        placeholder="Buscar tiradora…"
+        value="${esc(rkQ)}"
+      >
+
+      <select id="rkclub">
+
+        <option value="">
+        Todos los clubes
+        </option>
+
+        ${
+          clubs.map(
+            c =>
+              `<option
+               ${c==rkClub
+                 ?"selected"
+                 :""}>
+               ${esc(c)}
+               </option>`
+          ).join("")
+        }
+
+      </select>
+
+      <span class="small mut">
+      ${rows.length} tiradoras
+      </span>
+
+    </div>
+
+
+    ${
+      rkCat=="M23"
+        ?
+        `<div class="note"
+              style="margin-bottom:10px">
+
+         Sub23 estimado a partir
+         del ranking Absoluto para
+         nacidas en 2004 o después.
+
+         </div>`
+        :
+        ""
+    }
+
+
+    <div class="tbl">
+
+      <table>
+
+        <thead>
 
           <tr>
-            <th>#</th>
+            <th class="n">#</th>
             <th>Tiradora</th>
             <th>Club</th>
             <th>Año</th>
-            <th class="num">
+            <th class="n">
             Puntos
             </th>
+            <th></th>
           </tr>
 
-          ${
-            rows
-              .map(
-                row => {
+        </thead>
 
-                  const points =
-                    Number(
-                      row.points
-                    )
-                    ||
-                    0;
+        <tbody>
+        ${body}
+        </tbody>
 
-                  const width =
-                    Math.round(
-                      120
-                      *
-                      points
-                      /
-                      maximum
-                    );
+      </table>
 
-                  return `
-                  <tr>
+    </div>
 
-                    <td>
-                    <b>
-                    ${row.position}
-                    </b>
-                    </td>
 
-                    <td>
-                    ${
-                      esc(
-                        row.full_name
-                      )
-                    }
-                    </td>
+    <p class="small mut">
 
-                    <td>
-                    ${
-                      esc(
-                        row.club
-                      )
-                    }
-                    </td>
+    Fuente:
+    <a
+      target="_blank"
+      rel="noopener"
+      href="${
+        DATA.ranking_urls?.[rkCat]
+        ||
+        "https://app.skermo.org/ranking-rfee/public/RFEE"
+      }">
 
-                    <td>
-                    ${
-                      esc(
-                        row.birth_year
-                      )
-                    }
-                    </td>
+    Skermo · Ranking Nacional
 
-                    <td class="num">
+    </a>
 
-                    ${
-                      points
-                        .toLocaleString(
-                          "es-ES",
-                          {
-                            minimumFractionDigits:2,
-                            maximumFractionDigits:2
-                          }
-                        )
-                    }
+    · ${esc(DATA.updated_at)}
 
-                    <span
-                      class="bar"
-                      style="
-                      width:${width}px
-                      ">
-                    </span>
+    </p>
 
-                    </td>
+  </div>
 
-                  </tr>
-                  `;
+  `;
 
-                }
-              )
-              .join("")
-          }
 
-        </table>
+  $("#t-ranking .chips")
+    .onclick =
+      e => {
 
-      </div>
-      `;
+        if(
+          e.target.dataset.c
+        ){
+
+          rkCat =
+            e.target.dataset.c;
+
+          rkClub="";
+
+          renderRanking();
+
+        }
+
+      };
+
+
+  $("#rkq").oninput =
+    e => {
+
+      rkQ=e.target.value;
+
+      renderRanking();
+
+    };
+
+
+  $("#rkclub").onchange =
+    e => {
+
+      rkClub=e.target.value;
+
+      renderRanking();
+
+    };
 
 }
 
 
-function renderCalendar() {
+/* ===========================================================
+   CALENDARIO
+   =========================================================== */
 
-  $("#tab-calendario")
-    .innerHTML =
-      `
+function renderCalendar(){
 
-      <div class="card">
+  const events =
+    DATA.calendar || [];
 
-        <h3>
-        Calendario RFEE
-        </h3>
 
-        <div class="tbl">
+  $("#t-calendario").innerHTML = `
 
-          <table>
+  <div class="card">
 
-            <tr>
-              <th>Fecha</th>
-              <th>Competición</th>
-              <th>Categoría</th>
-              <th>Lugar</th>
-            </tr>
+    <h3>
+    Calendario RFEE · Sable femenino
+    </h3>
+
+
+    ${
+      events.length
+      ?
+      `<div class="tbl">
+
+       <table>
+
+         <thead>
+
+           <tr>
+             <th>Fecha</th>
+             <th>Competición</th>
+             <th>Categoría</th>
+             <th>Lugar</th>
+           </tr>
+
+         </thead>
+
+         <tbody>
+
+         ${
+           events.map(
+             e =>
+             `
+             <tr>
+
+               <td>
+               ${esc(e.date)}
+               </td>
+
+               <td>
+               ${esc(e.name)}
+               </td>
+
+               <td>
+               <span class="tag">
+               ${esc(e.category)}
+               </span>
+               </td>
+
+               <td>
+               ${esc(e.location || "")}
+               </td>
+
+             </tr>
+             `
+           ).join("")
+         }
+
+         </tbody>
+
+       </table>
+
+       </div>`
+      :
+      `<p class="mut">
+       No hay competiciones
+       cargadas en el JSON.
+       </p>`
+    }
+
+  </div>
+
+  `;
+
+}
+
+
+/* ===========================================================
+   RESULTADOS
+   =========================================================== */
+
+function renderResultados(){
+
+  $("#t-resultados").innerHTML = `
+
+  <div class="card">
+
+    <h3>
+    Resultados nacionales
+    </h3>
+
+    ${
+      RES.map(
+        r =>
+        `
+        <div
+          style="
+          padding:12px 0;
+          border-bottom:
+          1px solid var(--line)"
+        >
+
+          <b>
+          ${esc(r.name)}
+          </b>
+
+          · ${r.date}
+          · ${r.place}
+
+          <div
+            class="row"
+            style="margin-top:5px"
+          >
 
             ${
-              (data.calendar || [])
-                .map(
-                  event =>
-                    `
-                    <tr>
-
-                      <td>
-                      ${
-                        esc(
-                          event.date
-                        )
-                      }
-                      </td>
-
-                      <td>
-                      ${
-                        esc(
-                          event.name
-                        )
-                      }
-                      </td>
-
-                      <td>
-
-                      <span
-                        class="tag">
-
-                        ${
-                          esc(
-                            event.category
-                          )
-                        }
-
-                      </span>
-
-                      </td>
-
-                      <td>
-                      ${
-                        esc(
-                          event.location
-                        )
-                      }
-                      </td>
-
-                    </tr>
-                    `
-                )
-                .join("")
+              r.pdf
+              ?
+              `<a
+                target="_blank"
+                rel="noopener"
+                href="${r.pdf}">
+                PDF oficial
+               </a>`
+              :
+              ""
             }
 
-          </table>
+            ${
+              r.id
+              ?
+              `<a
+                target="_blank"
+                rel="noopener"
+                href="
+                https://app.skermo.org/ranking/public/RFEE/competition/${r.id}
+                ">
+                Ver en Skermo
+               </a>`
+              :
+              ""
+            }
+
+          </div>
 
         </div>
+        `
+      ).join("")
+    }
 
-      </div>
-      `;
+  </div>
+
+  `;
 
 }
 
 
-function renderSources() {
+/* ===========================================================
+   RANKING INTERNO
+   =========================================================== */
 
-  $("#tab-fuentes")
-    .innerHTML =
-      `
+function renderInterno(){
 
-      <div class="card">
+  $("#t-interno").innerHTML = `
 
-        <h3>
-        Fuentes
-        </h3>
+  <div class="note">
+
+  El ranking interno RFEE para
+  Cadete, Junior y Sub23 se utiliza
+  para los procesos de selección
+  internacional.
+
+  </div>
+
+
+  <div class="grid g2"
+       style="margin-top:14px">
+
+
+    <div class="card">
+
+      <h3>
+      Cadete
+      </h3>
+
+      <p>
+      2 mejores resultados
+      nacionales ×0,75
+      +
+      2 mejores resultados
+      internacionales.
+      </p>
+
+      <p class="small mut">
+      Mínimo Mundial Cadete:
+      <b>7.000 puntos</b>.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>
+      Junior
+      </h3>
+
+      <p>
+      2 mejores resultados
+      nacionales ×0,75
+      +
+      2 mejores resultados
+      internacionales.
+      </p>
+
+      <p class="small mut">
+      Mínimo Mundial Junior:
+      <b>7.200 puntos</b>.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>
+      Sub23
+      </h3>
+
+      <p>
+      2 mejores resultados
+      nacionales ×0,75
+      +
+      2 mejores resultados
+      internacionales.
+      </p>
+
+      <p class="small mut">
+
+      El ranking Sub23 de la
+      pestaña Rankings es una
+      estimación basada en
+      Absoluto.
+
+      </p>
+
+    </div>
+
+  </div>
+
+  `;
+
+}
+
+
+/* ===========================================================
+   CALCULADORA
+   =========================================================== */
+
+let cCat="M15";
+let cComp=0;
+let cPos=1;
+let cN=34;
+
+
+function renderCalc(){
+
+  const rule =
+    RULES[cCat];
+
+
+  if(
+    cComp >= rule.comps.length
+  ){
+    cComp=0;
+  }
+
+
+  const coef =
+    rule.comps[cComp][1];
+
+
+  const p =
+    pts(
+      cPos,
+      cN,
+      coef
+    );
+
+
+  const base =
+    pts(
+      cPos,
+      cN,
+      1
+    );
+
+
+  $("#t-calc").innerHTML = `
+
+  <div class="grid g2">
+
+
+    <div class="card">
+
+      <h3>
+      Calcula los puntos
+      de una competición
+      </h3>
+
+
+      <div class="row">
+
+
+        <label class="f">
+
+        Ranking
+
+        <select id="ccat">
 
         ${
-          (data.sources || [])
+          Object.entries(
+            CATNAME
+          )
+          .map(
+            ([k,l]) =>
+            `<option
+              value="${k}"
+              ${k==cCat
+                ?"selected"
+                :""}>
+              ${l}
+             </option>`
+          )
+          .join("")
+        }
+
+        </select>
+
+        </label>
+
+
+        <label class="f">
+
+        Competición
+
+        <select id="ccomp">
+
+        ${
+          rule.comps
             .map(
-              source =>
-                `
-                <p>
+              (c,i) =>
+              `<option
+                value="${i}"
+                ${i==cComp
+                 ?"selected"
+                 :""}>
 
-                  <a
-                    href="${
-                      esc(
-                        source.url
-                      )
-                    }"
-                    target="_blank"
-                    rel="noopener"
-                  >
+               ${c[0]}
+               · ×${c[1]}
 
-                    ${
-                      esc(
-                        source.name
-                      )
-                    }
-
-                  </a>
-
-                </p>
-                `
+               </option>`
             )
             .join("")
         }
 
+        </select>
+
+        </label>
+
+
       </div>
-      `;
+
+
+      <div class="row"
+           style="margin-top:12px">
+
+
+        <label class="f">
+
+        Posición
+
+        <input
+          id="cpos"
+          type="number"
+          min="1"
+          value="${cPos}"
+        >
+
+        </label>
+
+
+        <label class="f">
+
+        Nº participantes
+
+        <input
+          id="cn"
+          type="number"
+          min="2"
+          value="${cN}"
+        >
+
+        </label>
+
+
+      </div>
+
+
+      <div style="margin-top:18px">
+
+        <div class="small mut">
+        Puntos obtenidos
+        </div>
+
+        <div class="big">
+
+        ${
+          Number.isNaN(p)
+          ? "—"
+          : fmt(p)
+        }
+
+        </div>
+
+        <div class="small mut">
+
+        ${
+          Number.isNaN(p)
+          ?
+          "Comprueba posición y participantes."
+          :
+          `Base ${fmt(base)}
+           × ${coef}`
+        }
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>
+      Fórmula RFEE
+      </h3>
+
+      <p>
+
+      Puntos =
+      [
+      Bonus(posición)
+      +
+      1000 ×
+      (
+      1,01 −
+      log10(posición)
+      /
+      log10(participantes)
+      )
+      ]
+      × coeficiente
+
+      </p>
+
+
+      <p class="small mut">
+
+      Bonus:
+      1.º 1414 ·
+      2.º 1212 ·
+      3.º-4.º 1010 ·
+      5.º-8.º 808 ·
+      9.º-16.º 606 ·
+      17.º-32.º 404 ·
+      33.º-64.º 202 ·
+      65.º-128.º 101.
+
+      </p>
+
+    </div>
+
+
+  </div>
+
+  `;
+
+
+  $("#ccat").onchange =
+    e => {
+
+      cCat=e.target.value;
+
+      cComp=0;
+
+      cN=RULES[cCat].n;
+
+      renderCalc();
+
+    };
+
+
+  $("#ccomp").onchange =
+    e => {
+
+      cComp =
+        Number(
+          e.target.value
+        );
+
+      renderCalc();
+
+    };
+
+
+  $("#cpos").oninput =
+    e => {
+
+      cPos =
+        Number(
+          e.target.value
+        );
+
+      renderCalc();
+
+    };
+
+
+  $("#cn").oninput =
+    e => {
+
+      cN =
+        Number(
+          e.target.value
+        );
+
+      renderCalc();
+
+    };
 
 }
 
-})();
+
+/* ===========================================================
+   NORMATIVA
+   =========================================================== */
+
+function renderNormativa(){
+
+  $("#t-normativa").innerHTML = `
+
+  <div class="grid g2">
+
+
+    <div class="card">
+
+      <h3>
+      Ranking nacional
+      </h3>
+
+      <table>
+
+        <thead>
+
+        <tr>
+          <th>Categoría</th>
+          <th>Qué cuenta</th>
+          <th>
+          Arrastre
+          </th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        ${
+          Object.entries(
+            CATNAME
+          )
+          .map(
+            ([k,l]) =>
+            `
+            <tr>
+
+            <td>
+            <b>${l}</b>
+            </td>
+
+            <td>
+            ${RULES[k].best}
+            </td>
+
+            <td>
+            ${RULES[k].carry}%
+            </td>
+
+            </tr>
+            `
+          ).join("")
+        }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>
+      Campeonato de España
+      </h3>
+
+      <ul class="small">
+
+        <li>
+        <b>M13 y M15:</b>
+        participación libre.
+        </li>
+
+        <li>
+        <b>M17 y M20:</b>
+        clasificación según
+        ranking nacional y
+        normativa RFEE.
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>
+      Internacional Cadete
+      </h3>
+
+      <ul class="small">
+
+        <li>
+        Copas del Mundo:
+        acceso según ranking
+        interno RFEE.
+        </li>
+
+        <li>
+        Mundial Cadete:
+        referencia mínima
+        <b>7.000 puntos</b>.
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>
+      Internacional Junior
+      </h3>
+
+      <ul class="small">
+
+        <li>
+        Selección según
+        ranking interno.
+        </li>
+
+        <li>
+        Mundial Junior:
+        referencia mínima
+        <b>7.200 puntos</b>.
+        </li>
+
+      </ul>
+
+    </div>
+
+
+  </div>
+
+  `;
+
+}
+
+
+/* ===========================================================
+   FUENTES
+   =========================================================== */
+
+function renderFuentes(){
+
+  $("#t-fuentes").innerHTML = `
+
+  <div class="card">
+
+    <h3>
+    Fuentes oficiales
+    </h3>
+
+
+    <p>
+
+      <a
+        target="_blank"
+        rel="noopener"
+        href="
+        https://app.skermo.org/ranking-rfee/public/RFEE
+        ">
+
+      Skermo RFEE ·
+      Ranking Nacional
+
+      </a>
+
+    </p>
+
+
+    <p>
+
+      <a
+        target="_blank"
+        rel="noopener"
+        href="
+        https://app.skermo.org/calendar/public/RFEE?setLang=es
+        ">
+
+      Skermo RFEE ·
+      Calendario
+
+      </a>
+
+    </p>
+
+
+    <p class="small mut">
+
+    Datos consultados
+    automáticamente mediante
+    GitHub Actions.
+
+    </p>
+
+  </div>
+
+  `;
+
+}
+
+
+/* ===========================================================
+   RENDER GENERAL
+   =========================================================== */
+
+function renderAll(){
+
+  renderResumen();
+
+  renderRanking();
+
+  renderCalendar();
+
+  renderResultados();
+
+  renderInterno();
+
+  renderCalc();
+
+  renderNormativa();
+
+  renderFuentes();
+
+}
+
+
+/* ===========================================================
+   INICIO
+   =========================================================== */
+
+loadData();
+
 </script>
 
 </body>
