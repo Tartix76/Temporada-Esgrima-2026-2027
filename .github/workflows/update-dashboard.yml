@@ -22,13 +22,17 @@ jobs:
       - run: python -m playwright install --with-deps chromium
       - name: Actualizar Nacional RFEE
         run: python scripts/update_rfee.py
+      - name: Actualizar ranking interno RFEE
+        run: python scripts/update_internal_rfee.py
       - name: Actualizar Regional FME
         run: python scripts/update_fme.py
       - name: Validar JSON
         run: |
           python -m json.tool data/nacional-rfee.json > /dev/null
           python -m json.tool data/regional-fme.json > /dev/null
+          python -c "import json; d=json.load(open('data/nacional-rfee.json')); assert d.get('internal_rankings'), 'Falta ranking interno'"
           python -c "import json; d=json.load(open('data/nacional-rfee.json')); assert any(d['rankings'].values()), 'Ranking nacional vacío'"
+          python -c "import json; d=json.load(open('data/nacional-rfee.json')); assert d['internal_rankings'].get('M17') or d['internal_rankings'].get('M20'), 'Cadete y Junior vacíos'
           python -c "import json; d=json.load(open('data/regional-fme.json')); assert len(d['calendar']) > 1, 'Calendario regional incompleto'"
       - name: Guardar cambios
         run: |
