@@ -1567,293 +1567,649 @@ function renderInterno(){
    CALCULADORA
    =========================================================== */
 
-let cCat="M15";
-let cComp=0;
-let cPos=1;
-let cN=34;
-
-
-function renderCalc(){
-
-  const rule =
-    RULES[cCat];
-
-
-  if(
-    cComp >= rule.comps.length
-  ){
-    cComp=0;
-  }
-
-
-  const coef =
-    rule.comps[cComp][1];
-
-
-  const p =
-    pts(
-      cPos,
-      cN,
-      coef
-    );
-
-
-  const base =
-    pts(
-      cPos,
-      cN,
-      1
-    );
-
-
-  $("#t-calc").innerHTML = `
-
-  <div class="grid g2">
-
-
-    <div class="card">
-
-      <h3>
-      Calcula los puntos
-      de una competición
-      </h3>
-
-
-      <div class="row">
-
-
-        <label class="f">
-
-        Ranking
-
-        <select id="ccat">
-
-        ${
-          Object.entries(
-            CATNAME
-          )
-          .map(
-            ([k,l]) =>
-            `<option
-              value="${k}"
-              ${k==cCat
-                ?"selected"
-                :""}>
-              ${l}
-             </option>`
-          )
-          .join("")
-        }
-
-        </select>
-
-        </label>
-
-
-        <label class="f">
-
-        Competición
-
-        <select id="ccomp">
-
-        ${
-          rule.comps
-            .map(
-              (c,i) =>
-              `<option
-                value="${i}"
-                ${i==cComp
-                 ?"selected"
-                 :""}>
-
-               ${c[0]}
-               · ×${c[1]}
-
-               </option>`
-            )
-            .join("")
-        }
-
-        </select>
-
-        </label>
-
-
-      </div>
-
-
-      <div class="row"
-           style="margin-top:12px">
-
-
-        <label class="f">
-
-        Posición
-
-        <input
-          id="cpos"
-          type="number"
-          min="1"
-          value="${cPos}"
-        >
-
-        </label>
-
-
-        <label class="f">
-
-        Nº participantes
-
-        <input
-          id="cn"
-          type="number"
-          min="2"
-          value="${cN}"
-        >
-
-        </label>
-
-
-      </div>
-
-
-      <div style="margin-top:18px">
-
-        <div class="small mut">
-        Puntos obtenidos
-        </div>
-
-        <div class="big">
-
-        ${
-          Number.isNaN(p)
-          ? "—"
-          : fmt(p)
-        }
-
-        </div>
-
-        <div class="small mut">
-
-        ${
-          Number.isNaN(p)
-          ?
-          "Comprueba posición y participantes."
-          :
-          `Base ${fmt(base)}
-           × ${coef}`
-        }
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>
-      Fórmula RFEE
-      </h3>
-
-      <p>
-
-      Puntos =
-      [
-      Bonus(posición)
-      +
-      1000 ×
-      (
-      1,01 −
-      log10(posición)
-      /
-      log10(participantes)
-      )
-      ]
-      × coeficiente
-
-      </p>
-
-
-      <p class="small mut">
-
-      Bonus:
-      1.º 1414 ·
-      2.º 1212 ·
-      3.º-4.º 1010 ·
-      5.º-8.º 808 ·
-      9.º-16.º 606 ·
-      17.º-32.º 404 ·
-      33.º-64.º 202 ·
-      65.º-128.º 101.
-
-      </p>
-
-    </div>
-
-
-  </div>
-
-  `;
-
-
-  $("#ccat").onchange =
-    e => {
-
-      cCat=e.target.value;
-
-      cComp=0;
-
-      cN=RULES[cCat].n;
-
-      renderCalc();
-
-    };
-
-
-  $("#ccomp").onchange =
-    e => {
-
-      cComp =
-        Number(
-          e.target.value
-        );
-
-      renderCalc();
-
-    };
-
-
-  $("#cpos").oninput =
-    e => {
-
-      cPos =
-        Number(
-          e.target.value
-        );
-
-      renderCalc();
-
-    };
-
-
-  $("#cn").oninput =
-    e => {
-
-      cN =
-        Number(
-          e.target.value
-        );
-
-      renderCalc();
-
-    };
+let internalCategory = "M17";
+let internalSearch = "";
+let internalClub = "";
+
+
+function internalLabel(category){
+
+  return (
+    category === "M17"
+      ? "Cadete"
+      : category === "M20"
+        ? "Junior"
+        : category
+  );
 
 }
 
 
+function internalMinimum(category){
+
+  const ranking =
+    DATA
+      .internal_rankings
+      ?.[category];
+
+  return Number(
+    ranking?.minimum
+    ||
+    (
+      category === "M17"
+        ? 7000
+        : category === "M20"
+          ? 7200
+          : 0
+    )
+  );
+
+}
+
+
+function renderInterno(){
+
+  const rankings =
+    DATA.internal_rankings
+    ||
+    {};
+
+
+  const available =
+    [
+      "M17",
+      "M20"
+    ].filter(
+      category =>
+        rankings[category]
+        &&
+        Array.isArray(
+          rankings[category].rows
+        )
+    );
+
+
+  if(
+    available.length === 0
+  ){
+
+    $("#t-interno")
+      .innerHTML =
+        `
+
+        <div class="err">
+
+          No se ha cargado todavía
+          el ranking interno RFEE.
+
+          Ejecuta el workflow
+
+          <b>
+          Actualizar dashboard
+          Nacional y Regional
+          </b>
+
+          y comprueba que
+          data/nacional-rfee.json
+          contiene
+          internal_rankings.
+
+        </div>
+        `;
+
+    return;
+
+  }
+
+
+  if(
+    !available.includes(
+      internalCategory
+    )
+  ){
+
+    internalCategory =
+      available[0];
+
+  }
+
+
+  const current =
+    rankings[
+      internalCategory
+    ];
+
+
+  const rows =
+    current.rows
+    ||
+    [];
+
+
+  const clubs =
+    [
+      ...new Set(
+        rows
+          .map(
+            row =>
+              row.club
+          )
+          .filter(Boolean)
+      )
+    ]
+    .sort();
+
+
+  const query =
+    internalSearch
+      .toLowerCase();
+
+
+  const filtered =
+    rows.filter(
+      row =>
+        (
+          !query
+          ||
+          String(
+            row.full_name
+            ||
+            ""
+          )
+          .toLowerCase()
+          .includes(query)
+        )
+        &&
+        (
+          !internalClub
+          ||
+          row.club
+          ===
+          internalClub
+        )
+    );
+
+
+  const minimum =
+    internalMinimum(
+      internalCategory
+    );
+
+
+  const originalHeaders =
+    Array.isArray(
+      current.headers
+    )
+      ? current.headers
+      : [];
+
+
+  const detailHeaders =
+    originalHeaders.filter(
+      header => {
+
+        const normalized =
+          header
+            .toLowerCase();
+
+        return !(
+          normalized.includes(
+            "pos"
+          )
+          ||
+          normalized.includes(
+            "nombre"
+          )
+          ||
+          normalized.includes(
+            "apellido"
+          )
+          ||
+          normalized.includes(
+            "club"
+          )
+          ||
+          normalized.includes(
+            "nacimiento"
+          )
+          ||
+          normalized.includes(
+            "año"
+          )
+          ||
+          normalized === "total"
+          ||
+          normalized.includes(
+            "puntuación total"
+          )
+        );
+
+      }
+    );
+
+
+  const body =
+    filtered
+      .map(
+        row => {
+
+          const total =
+            Number(
+              row.total
+            )
+            ||
+            0;
+
+
+          const progress =
+            minimum > 0
+              ?
+              Math.min(
+                100,
+                total
+                /
+                minimum
+                *
+                100
+              )
+              :
+              0;
+
+
+          return `
+
+          <tr>
+
+            <td class="n">
+            <b>
+            ${row.position ?? "—"}
+            </b>
+            </td>
+
+
+            <td>
+            ${esc(row.full_name)}
+            </td>
+
+
+            <td>
+            ${esc(row.club)}
+            </td>
+
+
+            <td>
+            ${esc(row.birth_year)}
+            </td>
+
+
+            ${
+              detailHeaders
+                .map(
+                  header =>
+                    `
+                    <td class="n">
+                    ${
+                      esc(
+                        row.columns
+                          ?.[header]
+                        ||
+                        ""
+                      )
+                    }
+                    </td>
+                    `
+                )
+                .join("")
+            }
+
+
+            <td class="n">
+            <b>
+            ${fmt(total)}
+            </b>
+            </td>
+
+
+            <td>
+
+              <div class="bar">
+
+                <i style="
+                  width:
+                  ${progress}%
+                ">
+                </i>
+
+              </div>
+
+              <div class="small mut">
+
+              ${
+                minimum
+                ?
+                `${fmt(total)}
+                 /
+                 ${fmt(minimum)}`
+                :
+                ""
+              }
+
+              </div>
+
+            </td>
+
+          </tr>
+          `;
+
+        }
+      )
+      .join("");
+
+
+  $("#t-interno")
+    .innerHTML =
+      `
+
+      <div class="card">
+
+
+        <div class="chips">
+
+          ${
+            available
+              .map(
+                category =>
+                  `
+                  <button
+                    type="button"
+                    class="chip
+                    ${
+                      category
+                      ===
+                      internalCategory
+                        ? "on"
+                        : ""
+                    }"
+                    data-internal-category="
+                    ${category}
+                    "
+                  >
+
+                  ${
+                    internalLabel(
+                      category
+                    )
+                  }
+
+                  </button>
+                  `
+              )
+              .join("")
+          }
+
+        </div>
+
+
+        <div class="row"
+             style="
+             margin-bottom:10px
+             ">
+
+
+          <input
+            id="internalSearch"
+            placeholder="
+            Buscar tiradora…
+            "
+            value="${
+              esc(
+                internalSearch
+              )
+            }"
+          >
+
+
+          <select
+            id="internalClub"
+          >
+
+            <option value="">
+            Todos los clubes
+            </option>
+
+            ${
+              clubs
+                .map(
+                  club =>
+                    `
+                    <option
+                      value="${esc(club)}"
+                      ${
+                        club
+                        ===
+                        internalClub
+                          ? "selected"
+                          : ""
+                      }
+                    >
+
+                    ${esc(club)}
+
+                    </option>
+                    `
+                )
+                .join("")
+            }
+
+          </select>
+
+
+          <span class="small mut">
+
+          ${
+            filtered.length
+          }
+
+          tiradoras
+
+          </span>
+
+        </div>
+
+
+        <div class="ok">
+
+          <b>
+          ${
+            esc(
+              current.name
+              ||
+              (
+                "Ranking interno "
+                +
+                internalLabel(
+                  internalCategory
+                )
+              )
+            )
+          }
+          </b>
+
+          · Fecha de referencia:
+
+          <b>
+          ${
+            esc(
+              current
+                .reference_date
+              ||
+              DATA
+                .internal_rankings_updated_at
+              ||
+              "sin fecha"
+            )
+          }
+          </b>
+
+          · Mínimo de referencia:
+
+          <b>
+          ${fmt(minimum)}
+          puntos
+          </b>
+
+        </div>
+
+
+        <div class="tbl"
+             style="margin-top:12px">
+
+
+          <table>
+
+
+            <thead>
+
+              <tr>
+
+                <th class="n">
+                #
+                </th>
+
+                <th>
+                Tiradora
+                </th>
+
+                <th>
+                Club
+                </th>
+
+                <th>
+                Año
+                </th>
+
+                ${
+                  detailHeaders
+                    .map(
+                      header =>
+                        `
+                        <th class="n">
+                        ${esc(header)}
+                        </th>
+                        `
+                    )
+                    .join("")
+                }
+
+                <th class="n">
+                Total
+                </th>
+
+                <th>
+                Progreso
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+            ${body}
+            </tbody>
+
+
+          </table>
+
+
+        </div>
+
+
+        <p class="small mut">
+
+        Fuente:
+
+        <a
+          href="${
+            esc(
+              current.source_url
+              ||
+              "https://app.skermo.org/classification/public/RFEE?setLang=es"
+            )
+          }"
+          target="_blank"
+          rel="noopener"
+        >
+
+        Skermo RFEE ·
+        Clasificaciones
+
+        </a>
+
+        </p>
+
+
+      </div>
+      `;
+
+
+  $("#t-interno .chips")
+    .onclick =
+      event => {
+
+        const category =
+          event
+            .target
+            .dataset
+            .internalCategory;
+
+
+        if(!category){
+          return;
+        }
+
+
+        internalCategory =
+          category;
+
+
+        internalSearch =
+          "";
+
+
+        internalClub =
+          "";
+
+
+        renderInterno();
+
+      };
+
+
+  $("#internalSearch")
+    .oninput =
+      event => {
+
+        internalSearch =
+          event.target.value;
+
+        renderInterno();
+
+      };
+
+
+  $("#internalClub")
+    .onchange =
+      event => {
+
+        internalClub =
+          event.target.value;
+
+        renderInterno();
+
+      };
+
+}
 /* ===========================================================
    NORMATIVA
    =========================================================== */
