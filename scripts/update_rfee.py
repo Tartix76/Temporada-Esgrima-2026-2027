@@ -179,14 +179,51 @@ def normalize(value):
 
 def compact_name(value):
     """
-    Normaliza nombres para comparar:
-    - mayúsculas/minúsculas;
-    - tildes;
-    - signos;
-    - espacios.
+    Normaliza nombres procedentes de Skermo
+    para poder compararlos correctamente.
+
+    Ejemplos:
+
+    "1 ADRIANA VICENTE MORENO"
+    -> "ADRIANA VICENTE MORENO"
+
+    "2 ANNA GALLEGO AGUSTI"
+    -> "ANNA GALLEGO AGUSTI"
+
+    "2. ANNA GALLEGO AGUSTI"
+    -> "ANNA GALLEGO AGUSTI"
+
+    "2ª ANNA GALLEGO AGUSTI"
+    -> "ANNA GALLEGO AGUSTI"
     """
 
-    text = normalize(value)
+    text = normalize(
+        value
+    )
+
+    # --------------------------------------------------------
+    # Eliminar posición numérica que Skermo puede añadir
+    # delante del nombre.
+    #
+    # Elimina, por ejemplo:
+    #
+    # 1 ADRIANA...
+    # 1. ADRIANA...
+    # 1º ADRIANA...
+    # 1ª ADRIANA...
+    # 1) ADRIANA...
+    # --------------------------------------------------------
+
+    text = re.sub(
+        r"^\s*\d+[\.\-ºª\)]*\s*",
+        "",
+        text,
+    )
+
+    # --------------------------------------------------------
+    # Eliminar caracteres que no sean letras,
+    # números o espacios.
+    # --------------------------------------------------------
 
     text = re.sub(
         r"[^a-z0-9 ]",
@@ -194,9 +231,15 @@ def compact_name(value):
         text,
     )
 
-    return " ".join(
+    # --------------------------------------------------------
+    # Normalizar espacios.
+    # --------------------------------------------------------
+
+    text = " ".join(
         text.split()
-    ).upper()
+    )
+
+    return text.upper()
 
 
 def parse_number(value):
