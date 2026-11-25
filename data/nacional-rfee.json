@@ -1,43 +1,3392 @@
 {
-  "updated_at": "24/11/2026",
-  "source_updated_at": "",
+  "updated_at": "25/11/2026 09:22 UTC",
+  "source_updated_at": "2026-11-25T09:22:33+00:00",
   "season": "2026-2027",
-
   "filters": {
     "weapon": "Sable",
     "gender": "Femenino"
   },
-
   "validation": {
-    "M15_rows": 0,
-    "M15_positive_points": 0,
-    "M15_max_points": 0
+    "M15_rows": 61,
+    "M15_positive_points": 58,
+    "M15_max_points": 7472.2
   },
-
   "ranking_urls": {
-    "M13": "",
-    "M15": "",
-    "M17": "",
-    "M20": "",
-    "ABS": ""
+    "M13": "https://app.skermo.org/ranking-rfee/public/RFEE?season=16&weapon=S&category=12&gender=W&setLang=es",
+    "M15": "https://app.skermo.org/ranking-rfee/public/RFEE?season=16&weapon=S&category=4&gender=W&setLang=es",
+    "M17": "https://app.skermo.org/ranking-rfee/public/RFEE?season=16&weapon=S&category=5&gender=W&setLang=es",
+    "M20": "https://app.skermo.org/ranking-rfee/public/RFEE?season=16&weapon=S&category=6&gender=W&setLang=es",
+    "ABS": "https://app.skermo.org/ranking-rfee/public/RFEE?season=16&weapon=S&category=7&gender=W&setLang=es"
   },
-
   "rankings": {
-    "M13": [],
-    "M15": [],
-    "M17": [],
-    "M20": [],
-    "ABS": []
+    "M13": [
+      {
+        "position": 1,
+        "first_name": "1. ADRIANA",
+        "last_name": "VICENTE MORENO",
+        "full_name": "1. ADRIANA VICENTE MORENO",
+        "birth_date": "27/01/2013",
+        "birth_year": "2013",
+        "club": "SAMA-M",
+        "points": 6348.3
+      },
+      {
+        "position": 2,
+        "first_name": "2. JULIA",
+        "last_name": "BELTRAN GIL",
+        "full_name": "2. JULIA BELTRAN GIL",
+        "birth_date": "10/05/2013",
+        "birth_year": "2013",
+        "club": "SAMA-M",
+        "points": 5771.35
+      },
+      {
+        "position": 3,
+        "first_name": "3. SARA",
+        "last_name": "PUGA GARCIA",
+        "full_name": "3. SARA PUGA GARCIA",
+        "birth_date": "25/05/2013",
+        "birth_year": "2013",
+        "club": "CEEC-M",
+        "points": 5716.36
+      },
+      {
+        "position": 4,
+        "first_name": "4. MARTA",
+        "last_name": "GOMEZ GARCIA",
+        "full_name": "4. MARTA GOMEZ GARCIA",
+        "birth_date": "17/09/2014",
+        "birth_year": "2014",
+        "club": "CE-M",
+        "points": 5271.3
+      },
+      {
+        "position": 5,
+        "first_name": "5. IRATXE",
+        "last_name": "BALLESTEROS",
+        "full_name": "5. IRATXE BALLESTEROS",
+        "birth_date": "12/11/2014",
+        "birth_year": "2014",
+        "club": "CE-M",
+        "points": 4619.07
+      },
+      {
+        "position": 6,
+        "first_name": "6. ANA",
+        "last_name": "SANCHEZ CORBELLA",
+        "full_name": "6. ANA SANCHEZ CORBELLA",
+        "birth_date": "03/08/2013",
+        "birth_year": "2013",
+        "club": "SAMA-M",
+        "points": 4407.63
+      },
+      {
+        "position": 7,
+        "first_name": "7. SOFÍA",
+        "last_name": "PASTOR ROVALINO",
+        "full_name": "7. SOFÍA PASTOR ROVALINO",
+        "birth_date": "26/07/2013",
+        "birth_year": "2013",
+        "club": "CE-M",
+        "points": 3431.41
+      },
+      {
+        "position": 8,
+        "first_name": "8. ANGELICA MARIA",
+        "last_name": "SUAREZ ZAS",
+        "full_name": "8. ANGELICA MARIA SUAREZ ZAS",
+        "birth_date": "08/01/2013",
+        "birth_year": "2013",
+        "club": "CEEC-M",
+        "points": 3376.63
+      },
+      {
+        "position": 9,
+        "first_name": "9. MARINA",
+        "last_name": "CUBELA MORILLO",
+        "full_name": "9. MARINA CUBELA MORILLO",
+        "birth_date": "10/02/2013",
+        "birth_year": "2013",
+        "club": "CEHE-PO",
+        "points": 2779.8
+      },
+      {
+        "position": 10,
+        "first_name": "10. ALBA",
+        "last_name": "MARTIN HAGEL",
+        "full_name": "10. ALBA MARTIN HAGEL",
+        "birth_date": "22/12/2015",
+        "birth_year": "2015",
+        "club": "SASLE-M",
+        "points": 2615.03
+      },
+      {
+        "position": 11,
+        "first_name": "11. PAULA",
+        "last_name": "ESCOBEDO HIGUERAS",
+        "full_name": "11. PAULA ESCOBEDO HIGUERAS",
+        "birth_date": "15/12/2013",
+        "birth_year": "2013",
+        "club": "CEL-M",
+        "points": 2505.77
+      },
+      {
+        "position": 12,
+        "first_name": "12. BLANCA",
+        "last_name": "BENGOECHEA DE LUIS",
+        "full_name": "12. BLANCA BENGOECHEA DE LUIS",
+        "birth_date": "18/03/2014",
+        "birth_year": "2014",
+        "club": "CE-M",
+        "points": 2247.07
+      },
+      {
+        "position": 13,
+        "first_name": "13. MADISON",
+        "last_name": "DELGADO GARCIA",
+        "full_name": "13. MADISON DELGADO GARCIA",
+        "birth_date": "13/11/2013",
+        "birth_year": "2013",
+        "club": "CEEC-M",
+        "points": 2224.32
+      },
+      {
+        "position": 14,
+        "first_name": "14. NATALIA",
+        "last_name": "MONTORO CASTILLO",
+        "full_name": "14. NATALIA MONTORO CASTILLO",
+        "birth_date": "20/02/2014",
+        "birth_year": "2014",
+        "club": "CEA-V",
+        "points": 2017.54
+      },
+      {
+        "position": 15,
+        "first_name": "15. NOA",
+        "last_name": "SERRANO LOPEZ",
+        "full_name": "15. NOA SERRANO LOPEZ",
+        "birth_date": "19/04/2014",
+        "birth_year": "2014",
+        "club": "SASLE-M",
+        "points": 1639.22
+      },
+      {
+        "position": 16,
+        "first_name": "16. XIYAO",
+        "last_name": "JI",
+        "full_name": "16. XIYAO JI",
+        "birth_date": "24/11/2013",
+        "birth_year": "2013",
+        "club": "CEA-V",
+        "points": 1620.9
+      },
+      {
+        "position": 17,
+        "first_name": "17. GADEA",
+        "last_name": "PRADO DEL ESTAL",
+        "full_name": "17. GADEA PRADO DEL ESTAL",
+        "birth_date": "29/05/2014",
+        "birth_year": "2014",
+        "club": "ELGATO-M",
+        "points": 1518.19
+      },
+      {
+        "position": 18,
+        "first_name": "18. CRISTINA",
+        "last_name": "AGÜERO SANZ",
+        "full_name": "18. CRISTINA AGÜERO SANZ",
+        "birth_date": "15/11/2013",
+        "birth_year": "2013",
+        "club": "CEAL-M",
+        "points": 1466.56
+      },
+      {
+        "position": 19,
+        "first_name": "19. BIANCA",
+        "last_name": "BUENO FORNI",
+        "full_name": "19. BIANCA BUENO FORNI",
+        "birth_date": "16/01/2014",
+        "birth_year": "2014",
+        "club": "CE-M",
+        "points": 1244.22
+      },
+      {
+        "position": 20,
+        "first_name": "20. ANA",
+        "last_name": "ÁLVAREZ ÍÑIGO",
+        "full_name": "20. ANA ÁLVAREZ ÍÑIGO",
+        "birth_date": "23/05/2014",
+        "birth_year": "2014",
+        "club": "ELGATO-M",
+        "points": 896.04
+      },
+      {
+        "position": 21,
+        "first_name": "21. MAIA",
+        "last_name": "DE LAMO VAQUERO",
+        "full_name": "21. MAIA DE LAMO VAQUERO",
+        "birth_date": "26/04/2013",
+        "birth_year": "2013",
+        "club": "AEC-CU",
+        "points": 863.11
+      },
+      {
+        "position": 22,
+        "first_name": "22. ROCIO",
+        "last_name": "MARTÍNEZ PÉREZ",
+        "full_name": "22. ROCIO MARTÍNEZ PÉREZ",
+        "birth_date": "09/02/2014",
+        "birth_year": "2014",
+        "club": "CEA-V",
+        "points": 861.0
+      },
+      {
+        "position": 23,
+        "first_name": "23. ISABEL",
+        "last_name": "GASCON DE LA OSA",
+        "full_name": "23. ISABEL GASCON DE LA OSA",
+        "birth_date": "12/05/2013",
+        "birth_year": "2013",
+        "club": "CECR-CR",
+        "points": 815.56
+      },
+      {
+        "position": 24,
+        "first_name": "24. KEILA AIMARÁ",
+        "last_name": "GONZALEZ PEREZ",
+        "full_name": "24. KEILA AIMARÁ GONZALEZ PEREZ",
+        "birth_date": "04/03/2014",
+        "birth_year": "2014",
+        "club": "CETORRE-MA",
+        "points": 690.49
+      },
+      {
+        "position": 25,
+        "first_name": "25. PAULA",
+        "last_name": "RODRIGUEZ ALONSO",
+        "full_name": "25. PAULA RODRIGUEZ ALONSO",
+        "birth_date": "28/03/2015",
+        "birth_year": "2015",
+        "club": "ECC-BU",
+        "points": 561.46
+      },
+      {
+        "position": 26,
+        "first_name": "26. DANIELA",
+        "last_name": "GARCIA HERNANDO",
+        "full_name": "26. DANIELA GARCIA HERNANDO",
+        "birth_date": "03/11/2015",
+        "birth_year": "2015",
+        "club": "ECC-BU",
+        "points": 517.5
+      },
+      {
+        "position": 27,
+        "first_name": "27. JIMENA",
+        "last_name": "ALVARADO GUANIPA",
+        "full_name": "27. JIMENA ALVARADO GUANIPA",
+        "birth_date": "29/01/2014",
+        "birth_year": "2014",
+        "club": "CECR-CR",
+        "points": 431.12
+      },
+      {
+        "position": 28,
+        "first_name": "28. CLARA",
+        "last_name": "ESTELLÉS DIEGO",
+        "full_name": "28. CLARA ESTELLÉS DIEGO",
+        "birth_date": "09/05/2015",
+        "birth_year": "2015",
+        "club": "CED-V",
+        "points": 414.0
+      },
+      {
+        "position": 29,
+        "first_name": "29. MARTINA",
+        "last_name": "MORALES RODRIGUEZ",
+        "full_name": "29. MARTINA MORALES RODRIGUEZ",
+        "birth_date": "27/10/2013",
+        "birth_year": "2013",
+        "club": "CECR-CR",
+        "points": 414.0
+      },
+      {
+        "position": 9999,
+        "first_name": "30. CAROLINA",
+        "last_name": "GRANDAS ARELLANO",
+        "full_name": "30. CAROLINA GRANDAS ARELLANO",
+        "birth_date": "30/07/2014",
+        "birth_year": "2014",
+        "club": "CE-M",
+        "points": 0.0
+      }
+    ],
+    "M15": [
+      {
+        "position": 1,
+        "first_name": "1. VIOLETA",
+        "last_name": "MARTI PRADA",
+        "full_name": "1. VIOLETA MARTI PRADA",
+        "birth_date": "04/11/2011",
+        "birth_year": "2011",
+        "club": "SAMA-M",
+        "points": 7472.2
+      },
+      {
+        "position": 2,
+        "first_name": "2. CRISTINA",
+        "last_name": "LÓPEZ MARTÍNEZ",
+        "full_name": "2. CRISTINA LÓPEZ MARTÍNEZ",
+        "birth_date": "01/09/2011",
+        "birth_year": "2011",
+        "club": "CE-M",
+        "points": 6992.69
+      },
+      {
+        "position": 3,
+        "first_name": "3. MARÍA",
+        "last_name": "GONZÁLEZ DE HERRERO COBO",
+        "full_name": "3. MARÍA GONZÁLEZ DE HERRERO COBO",
+        "birth_date": "16/01/2011",
+        "birth_year": "2011",
+        "club": "CE-M",
+        "points": 6259.98
+      },
+      {
+        "position": 4,
+        "first_name": "4. ANNA",
+        "last_name": "GALLEGO AGUSTI",
+        "full_name": "4. ANNA GALLEGO AGUSTI",
+        "birth_date": "26/10/2012",
+        "birth_year": "2012",
+        "club": "FED-V-C",
+        "points": 5040.38
+      },
+      {
+        "position": 5,
+        "first_name": "5. BIANCA",
+        "last_name": "SELLÉS BARQUERO",
+        "full_name": "5. BIANCA SELLÉS BARQUERO",
+        "birth_date": "28/12/2011",
+        "birth_year": "2011",
+        "club": "CEA-V",
+        "points": 4959.38
+      },
+      {
+        "position": 6,
+        "first_name": "6. VICTORIA",
+        "last_name": "GARCÍA ALBERCA",
+        "full_name": "6. VICTORIA GARCÍA ALBERCA",
+        "birth_date": "20/10/2011",
+        "birth_year": "2011",
+        "club": "ELGATO-M",
+        "points": 4712.9
+      },
+      {
+        "position": 7,
+        "first_name": "7. ADRIANA",
+        "last_name": "VICENTE MORENO",
+        "full_name": "7. ADRIANA VICENTE MORENO",
+        "birth_date": "27/01/2013",
+        "birth_year": "2013",
+        "club": "SAMA-M",
+        "points": 4511.89
+      },
+      {
+        "position": 8,
+        "first_name": "8. ANA",
+        "last_name": "SANCHEZ CORBELLA",
+        "full_name": "8. ANA SANCHEZ CORBELLA",
+        "birth_date": "03/08/2013",
+        "birth_year": "2013",
+        "club": "SAMA-M",
+        "points": 3732.39
+      },
+      {
+        "position": 9,
+        "first_name": "9. CARMEN",
+        "last_name": "DEL RÍO MORENO",
+        "full_name": "9. CARMEN DEL RÍO MORENO",
+        "birth_date": "18/02/2011",
+        "birth_year": "2011",
+        "club": "CE-M",
+        "points": 3506.25
+      },
+      {
+        "position": 10,
+        "first_name": "10. ANA",
+        "last_name": "MOLINA ARCOS",
+        "full_name": "10. ANA MOLINA ARCOS",
+        "birth_date": "30/07/2011",
+        "birth_year": "2011",
+        "club": "CECR-CR",
+        "points": 3498.2
+      },
+      {
+        "position": 11,
+        "first_name": "11. LUCÍA",
+        "last_name": "RÍOS OLARIA",
+        "full_name": "11. LUCÍA RÍOS OLARIA",
+        "birth_date": "06/02/2011",
+        "birth_year": "2011",
+        "club": "CEA-V",
+        "points": 3411.82
+      },
+      {
+        "position": 12,
+        "first_name": "12. MARTA",
+        "last_name": "GOMEZ GARCIA",
+        "full_name": "12. MARTA GOMEZ GARCIA",
+        "birth_date": "17/09/2014",
+        "birth_year": "2014",
+        "club": "CE-M",
+        "points": 3136.81
+      },
+      {
+        "position": 13,
+        "first_name": "13. IRATXE",
+        "last_name": "BALLESTEROS",
+        "full_name": "13. IRATXE BALLESTEROS",
+        "birth_date": "12/11/2014",
+        "birth_year": "2014",
+        "club": "CE-M",
+        "points": 3085.63
+      },
+      {
+        "position": 14,
+        "first_name": "14. SARA",
+        "last_name": "MARTIN HAGEL",
+        "full_name": "14. SARA MARTIN HAGEL",
+        "birth_date": "26/10/2012",
+        "birth_year": "2012",
+        "club": "SASLE-M",
+        "points": 2917.53
+      },
+      {
+        "position": 15,
+        "first_name": "15. LAURA",
+        "last_name": "VENTIMIGLIA",
+        "full_name": "15. LAURA VENTIMIGLIA",
+        "birth_date": "24/04/2012",
+        "birth_year": "2012",
+        "club": "SASLE-M",
+        "points": 2745.84
+      },
+      {
+        "position": 16,
+        "first_name": "16. SARA",
+        "last_name": "PUGA GARCIA",
+        "full_name": "16. SARA PUGA GARCIA",
+        "birth_date": "25/05/2013",
+        "birth_year": "2013",
+        "club": "CEEC-M",
+        "points": 2700.21
+      },
+      {
+        "position": 17,
+        "first_name": "17. NOELIA",
+        "last_name": "DOSA PODAR",
+        "full_name": "17. NOELIA DOSA PODAR",
+        "birth_date": "18/10/2011",
+        "birth_year": "2011",
+        "club": "CEEC-M",
+        "points": 2662.66
+      },
+      {
+        "position": 18,
+        "first_name": "18. ALBA",
+        "last_name": "MARTÍNEZ GONZÁLEZ",
+        "full_name": "18. ALBA MARTÍNEZ GONZÁLEZ",
+        "birth_date": "25/09/2011",
+        "birth_year": "2011",
+        "club": "CEHE-PO",
+        "points": 2553.86
+      },
+      {
+        "position": 19,
+        "first_name": "19. JULIA",
+        "last_name": "SHIROKIKH",
+        "full_name": "19. JULIA SHIROKIKH",
+        "birth_date": "26/07/2011",
+        "birth_year": "2011",
+        "club": "EHB-B",
+        "points": 2294.2
+      },
+      {
+        "position": 20,
+        "first_name": "20. MARINA",
+        "last_name": "MUÑIZ AMO",
+        "full_name": "20. MARINA MUÑIZ AMO",
+        "birth_date": "07/02/2011",
+        "birth_year": "2011",
+        "club": "CE-SG",
+        "points": 2111.04
+      },
+      {
+        "position": 21,
+        "first_name": "21. ANGELICA MARIA",
+        "last_name": "SUAREZ ZAS",
+        "full_name": "21. ANGELICA MARIA SUAREZ ZAS",
+        "birth_date": "08/01/2013",
+        "birth_year": "2013",
+        "club": "CEEC-M",
+        "points": 2063.51
+      },
+      {
+        "position": 22,
+        "first_name": "22. LEYRE",
+        "last_name": "CADINU SÁNCHEZ",
+        "full_name": "22. LEYRE CADINU SÁNCHEZ",
+        "birth_date": "15/12/2012",
+        "birth_year": "2012",
+        "club": "CEA-V",
+        "points": 1970.55
+      },
+      {
+        "position": 23,
+        "first_name": "23. LEIRE",
+        "last_name": "LÓPEZ VILLAVERDE",
+        "full_name": "23. LEIRE LÓPEZ VILLAVERDE",
+        "birth_date": "10/05/2011",
+        "birth_year": "2011",
+        "club": "ELGATO-M",
+        "points": 1908.61
+      },
+      {
+        "position": 24,
+        "first_name": "24. JULIA",
+        "last_name": "BELTRAN GIL",
+        "full_name": "24. JULIA BELTRAN GIL",
+        "birth_date": "10/05/2013",
+        "birth_year": "2013",
+        "club": "SAMA-M",
+        "points": 1794.09
+      },
+      {
+        "position": 25,
+        "first_name": "25. MARINA",
+        "last_name": "CUBELA MORILLO",
+        "full_name": "25. MARINA CUBELA MORILLO",
+        "birth_date": "10/02/2013",
+        "birth_year": "2013",
+        "club": "CEHE-PO",
+        "points": 1727.5
+      },
+      {
+        "position": 26,
+        "first_name": "26. ADA LUNA",
+        "last_name": "KECK ROMERO",
+        "full_name": "26. ADA LUNA KECK ROMERO",
+        "birth_date": "07/02/2012",
+        "birth_year": "2012",
+        "club": "CE-M",
+        "points": 1513.17
+      },
+      {
+        "position": 27,
+        "first_name": "27. AINARA",
+        "last_name": "CHACON UNGUREANU",
+        "full_name": "27. AINARA CHACON UNGUREANU",
+        "birth_date": "18/09/2011",
+        "birth_year": "2011",
+        "club": "CEEC-M",
+        "points": 1504.14
+      },
+      {
+        "position": 28,
+        "first_name": "28. JULIA",
+        "last_name": "CRESPIN GOMEZ",
+        "full_name": "28. JULIA CRESPIN GOMEZ",
+        "birth_date": "14/01/2012",
+        "birth_year": "2012",
+        "club": "SA-LO",
+        "points": 1429.31
+      },
+      {
+        "position": 29,
+        "first_name": "29. SOFÍA",
+        "last_name": "PASTOR ROVALINO",
+        "full_name": "29. SOFÍA PASTOR ROVALINO",
+        "birth_date": "26/07/2013",
+        "birth_year": "2013",
+        "club": "CE-M",
+        "points": 1337.39
+      },
+      {
+        "position": 30,
+        "first_name": "30. DARIA",
+        "last_name": "NEBEZHEVA",
+        "full_name": "30. DARIA NEBEZHEVA",
+        "birth_date": "17/02/2012",
+        "birth_year": "2012",
+        "club": "FED-AND-C",
+        "points": 1330.1
+      },
+      {
+        "position": 31,
+        "first_name": "31. JULIA",
+        "last_name": "HONCIU BALLESTER",
+        "full_name": "31. JULIA HONCIU BALLESTER",
+        "birth_date": "23/12/2011",
+        "birth_year": "2011",
+        "club": "SAV-V",
+        "points": 1309.9
+      },
+      {
+        "position": 32,
+        "first_name": "32. JIMENA",
+        "last_name": "MESTRE INFANTES",
+        "full_name": "32. JIMENA MESTRE INFANTES",
+        "birth_date": "24/04/2012",
+        "birth_year": "2012",
+        "club": "CEL-M",
+        "points": 1308.61
+      },
+      {
+        "position": 33,
+        "first_name": "33. XIYAO",
+        "last_name": "JI",
+        "full_name": "33. XIYAO JI",
+        "birth_date": "24/11/2013",
+        "birth_year": "2013",
+        "club": "CEA-V",
+        "points": 1134.16
+      },
+      {
+        "position": 34,
+        "first_name": "34. BLANCA",
+        "last_name": "BENGOECHEA DE LUIS",
+        "full_name": "34. BLANCA BENGOECHEA DE LUIS",
+        "birth_date": "18/03/2014",
+        "birth_year": "2014",
+        "club": "CE-M",
+        "points": 980.81
+      },
+      {
+        "position": 35,
+        "first_name": "35. CLARA",
+        "last_name": "MOMPÓ LISARDE",
+        "full_name": "35. CLARA MOMPÓ LISARDE",
+        "birth_date": "30/03/2011",
+        "birth_year": "2011",
+        "club": "CED-V",
+        "points": 958.47
+      },
+      {
+        "position": 36,
+        "first_name": "36. POLINA",
+        "last_name": "GERASIMOVA",
+        "full_name": "36. POLINA GERASIMOVA",
+        "birth_date": "30/12/2011",
+        "birth_year": "2011",
+        "club": "CEA-V",
+        "points": 820.8
+      },
+      {
+        "position": 37,
+        "first_name": "37. ILITHIA SOFIA",
+        "last_name": "MORENO GARCIA",
+        "full_name": "37. ILITHIA SOFIA MORENO GARCIA",
+        "birth_date": "28/02/2013",
+        "birth_year": "2013",
+        "club": "FED-AND-C",
+        "points": 766.94
+      },
+      {
+        "position": 38,
+        "first_name": "38. MADISON",
+        "last_name": "DELGADO GARCIA",
+        "full_name": "38. MADISON DELGADO GARCIA",
+        "birth_date": "13/11/2013",
+        "birth_year": "2013",
+        "club": "CEEC-M",
+        "points": 734.48
+      },
+      {
+        "position": 39,
+        "first_name": "39. MAR",
+        "last_name": "GARCIA RUBIO",
+        "full_name": "39. MAR GARCIA RUBIO",
+        "birth_date": "17/10/2012",
+        "birth_year": "2012",
+        "club": "CED-V",
+        "points": 692.84
+      },
+      {
+        "position": 40,
+        "first_name": "40. ELISA",
+        "last_name": "MORA TOME",
+        "full_name": "40. ELISA MORA TOME",
+        "birth_date": "27/08/2011",
+        "birth_year": "2011",
+        "club": "CEEC-M",
+        "points": 606.65
+      },
+      {
+        "position": 41,
+        "first_name": "41. AROA",
+        "last_name": "SANCHEZ GONZALEZ",
+        "full_name": "41. AROA SANCHEZ GONZALEZ",
+        "birth_date": "08/04/2011",
+        "birth_year": "2011",
+        "club": "CEL-M",
+        "points": 585.23
+      },
+      {
+        "position": 42,
+        "first_name": "42. MARTINA",
+        "last_name": "DOMINGUEZ MARTINS",
+        "full_name": "42. MARTINA DOMINGUEZ MARTINS",
+        "birth_date": "02/12/2011",
+        "birth_year": "2011",
+        "club": "EHB-B",
+        "points": 564.47
+      },
+      {
+        "position": 43,
+        "first_name": "43. MARIA ELISA",
+        "last_name": "SAIEH PEREZ",
+        "full_name": "43. MARIA ELISA SAIEH PEREZ",
+        "birth_date": "12/09/2012",
+        "birth_year": "2012",
+        "club": "SAMA-M",
+        "points": 525.64
+      },
+      {
+        "position": 44,
+        "first_name": "44. EMPERATRIZ",
+        "last_name": "AROCA CARRERO",
+        "full_name": "44. EMPERATRIZ AROCA CARRERO",
+        "birth_date": "11/06/2012",
+        "birth_year": "2012",
+        "club": "CEC-C",
+        "points": 517.08
+      },
+      {
+        "position": 45,
+        "first_name": "45. LINDA SOFIA",
+        "last_name": "GAVIRIA ROJAS",
+        "full_name": "45. LINDA SOFIA GAVIRIA ROJAS",
+        "birth_date": "01/02/2013",
+        "birth_year": "2013",
+        "club": "CDF-SS",
+        "points": 517.08
+      },
+      {
+        "position": 46,
+        "first_name": "46. GADEA",
+        "last_name": "PRADO DEL ESTAL",
+        "full_name": "46. GADEA PRADO DEL ESTAL",
+        "birth_date": "29/05/2014",
+        "birth_year": "2014",
+        "club": "ELGATO-M",
+        "points": 516.6
+      },
+      {
+        "position": 47,
+        "first_name": "47. AINA",
+        "last_name": "PARDO VÁZQUEZ",
+        "full_name": "47. AINA PARDO VÁZQUEZ",
+        "birth_date": "10/05/2012",
+        "birth_year": "2012",
+        "club": "EHB-B",
+        "points": 496.49
+      },
+      {
+        "position": 48,
+        "first_name": "48. YUXIN",
+        "last_name": "CHEN",
+        "full_name": "48. YUXIN CHEN",
+        "birth_date": "07/03/2014",
+        "birth_year": "2014",
+        "club": "EHB-B",
+        "points": 490.07
+      },
+      {
+        "position": 49,
+        "first_name": "49. MONICA",
+        "last_name": "HERRERA PARICIO",
+        "full_name": "49. MONICA HERRERA PARICIO",
+        "birth_date": "19/10/2012",
+        "birth_year": "2012",
+        "club": "CEEC-M",
+        "points": 486.49
+      },
+      {
+        "position": 50,
+        "first_name": "50. ALEX",
+        "last_name": "ROSELLO CANALDA",
+        "full_name": "50. ALEX ROSELLO CANALDA",
+        "birth_date": "22/07/2011",
+        "birth_year": "2011",
+        "club": "SANTCU-B",
+        "points": 479.37
+      },
+      {
+        "position": 51,
+        "first_name": "51. JANA",
+        "last_name": "CANTÓN CALCERRADA",
+        "full_name": "51. JANA CANTÓN CALCERRADA",
+        "birth_date": "18/03/2014",
+        "birth_year": "2014",
+        "club": "EHB-B",
+        "points": 449.49
+      },
+      {
+        "position": 52,
+        "first_name": "52. PAULA",
+        "last_name": "LOPEZ GUTIERREZ",
+        "full_name": "52. PAULA LOPEZ GUTIERREZ",
+        "birth_date": "14/10/2012",
+        "birth_year": "2012",
+        "club": "SAMA-M",
+        "points": 298.75
+      },
+      {
+        "position": 53,
+        "first_name": "53. INÉS",
+        "last_name": "JIMENEZ BERMEJO",
+        "full_name": "53. INÉS JIMENEZ BERMEJO",
+        "birth_date": "01/07/2012",
+        "birth_year": "2012",
+        "club": "CE-M",
+        "points": 283.38
+      },
+      {
+        "position": 54,
+        "first_name": "54. DANIELLA",
+        "last_name": "AYALA PULLA",
+        "full_name": "54. DANIELLA AYALA PULLA",
+        "birth_date": "03/09/2012",
+        "birth_year": "2012",
+        "club": "ECC-BU",
+        "points": 265.0
+      },
+      {
+        "position": 55,
+        "first_name": "55. BIANCA",
+        "last_name": "BUENO FORNI",
+        "full_name": "55. BIANCA BUENO FORNI",
+        "birth_date": "16/01/2014",
+        "birth_year": "2014",
+        "club": "CE-M",
+        "points": 261.9
+      },
+      {
+        "position": 56,
+        "first_name": "56. IRMA ROCIO",
+        "last_name": "CARRASCO MARTÍNEZ",
+        "full_name": "56. IRMA ROCIO CARRASCO MARTÍNEZ",
+        "birth_date": "19/06/2012",
+        "birth_year": "2012",
+        "club": "CEA-V",
+        "points": 229.0
+      },
+      {
+        "position": 57,
+        "first_name": "57. NATALIA",
+        "last_name": "MONTORO CASTILLO",
+        "full_name": "57. NATALIA MONTORO CASTILLO",
+        "birth_date": "20/02/2014",
+        "birth_year": "2014",
+        "club": "CEA-V",
+        "points": 223.61
+      },
+      {
+        "position": 58,
+        "first_name": "58. ROCIO",
+        "last_name": "MARTÍNEZ PÉREZ",
+        "full_name": "58. ROCIO MARTÍNEZ PÉREZ",
+        "birth_date": "09/02/2014",
+        "birth_year": "2014",
+        "club": "CEA-V",
+        "points": 217.0
+      },
+      {
+        "position": 9999,
+        "first_name": "59. DANIELA",
+        "last_name": "MARTÍNEZ GUTIÉRREZ",
+        "full_name": "59. DANIELA MARTÍNEZ GUTIÉRREZ",
+        "birth_date": "31/01/2011",
+        "birth_year": "2011",
+        "club": "CED-V",
+        "points": 0.0
+      },
+      {
+        "position": 9999,
+        "first_name": "60. RUTH",
+        "last_name": "FUENTES AYLLON",
+        "full_name": "60. RUTH FUENTES AYLLON",
+        "birth_date": "23/09/2012",
+        "birth_year": "2012",
+        "club": "CE-M",
+        "points": 0.0
+      },
+      {
+        "position": 9999,
+        "first_name": "61. CRISTINA",
+        "last_name": "AGÜERO SANZ",
+        "full_name": "61. CRISTINA AGÜERO SANZ",
+        "birth_date": "15/11/2013",
+        "birth_year": "2013",
+        "club": "CEAL-M",
+        "points": 0.0
+      }
+    ],
+    "M17": [
+      {
+        "position": 1,
+        "first_name": "1. VIOLETA",
+        "last_name": "MARTI PRADA",
+        "full_name": "1. VIOLETA MARTI PRADA",
+        "birth_date": "04/11/2011",
+        "birth_year": "2011",
+        "club": "SAMA-M",
+        "points": 9305.86
+      },
+      {
+        "position": 2,
+        "first_name": "2. CRISTINA",
+        "last_name": "LÓPEZ MARTÍNEZ",
+        "full_name": "2. CRISTINA LÓPEZ MARTÍNEZ",
+        "birth_date": "01/09/2011",
+        "birth_year": "2011",
+        "club": "CE-M",
+        "points": 9069.41
+      },
+      {
+        "position": 3,
+        "first_name": "3. ALEJANDRA",
+        "last_name": "JATIVA PLAZA",
+        "full_name": "3. ALEJANDRA JATIVA PLAZA",
+        "birth_date": "15/06/2010",
+        "birth_year": "2010",
+        "club": "SAMA-M",
+        "points": 8135.78
+      },
+      {
+        "position": 4,
+        "first_name": "4. MARÍA",
+        "last_name": "GONZÁLEZ DE HERRERO COBO",
+        "full_name": "4. MARÍA GONZÁLEZ DE HERRERO COBO",
+        "birth_date": "16/01/2011",
+        "birth_year": "2011",
+        "club": "CE-M",
+        "points": 7863.57
+      },
+      {
+        "position": 5,
+        "first_name": "5. GADEA",
+        "last_name": "PARAMO PEÑA",
+        "full_name": "5. GADEA PARAMO PEÑA",
+        "birth_date": "04/04/2009",
+        "birth_year": "2009",
+        "club": "ECC-BU",
+        "points": 7628.72
+      },
+      {
+        "position": 6,
+        "first_name": "6. ANGELA",
+        "last_name": "MARTELLA MARTELLA",
+        "full_name": "6. ANGELA MARTELLA MARTELLA",
+        "birth_date": "06/09/2009",
+        "birth_year": "2009",
+        "club": "CE-M",
+        "points": 6565.26
+      },
+      {
+        "position": 7,
+        "first_name": "7. INES",
+        "last_name": "HIGUERA LOPEZ",
+        "full_name": "7. INES HIGUERA LOPEZ",
+        "birth_date": "17/09/2009",
+        "birth_year": "2009",
+        "club": "CEEC-M",
+        "points": 6340.12
+      },
+      {
+        "position": 8,
+        "first_name": "8. KAMILA ALEXANDRA",
+        "last_name": "GONZALEZ CASARES",
+        "full_name": "8. KAMILA ALEXANDRA GONZALEZ CASARES",
+        "birth_date": "25/03/2010",
+        "birth_year": "2010",
+        "club": "CEA-V",
+        "points": 6309.03
+      },
+      {
+        "position": 9,
+        "first_name": "9. CLARA",
+        "last_name": "GÓMEZ DAMAS",
+        "full_name": "9. CLARA GÓMEZ DAMAS",
+        "birth_date": "29/04/2010",
+        "birth_year": "2010",
+        "club": "CE-M",
+        "points": 5932.32
+      },
+      {
+        "position": 10,
+        "first_name": "10. MARIONA",
+        "last_name": "SANAHUJA DE LA TORRE",
+        "full_name": "10. MARIONA SANAHUJA DE LA TORRE",
+        "birth_date": "05/05/2009",
+        "birth_year": "2009",
+        "club": "EHB-B",
+        "points": 5906.61
+      },
+      {
+        "position": 11,
+        "first_name": "11. MARIÑA",
+        "last_name": "PRIETO VARELA",
+        "full_name": "11. MARIÑA PRIETO VARELA",
+        "birth_date": "14/02/2010",
+        "birth_year": "2010",
+        "club": "CEHE-PO",
+        "points": 5637.47
+      },
+      {
+        "position": 12,
+        "first_name": "12. OLIMPIA",
+        "last_name": "HERNÁNDEZ GONZÁLEZ",
+        "full_name": "12. OLIMPIA HERNÁNDEZ GONZÁLEZ",
+        "birth_date": "18/03/2009",
+        "birth_year": "2009",
+        "club": "ELGATO-M",
+        "points": 5314.72
+      },
+      {
+        "position": 13,
+        "first_name": "13. CARLA",
+        "last_name": "JIMENO MORA",
+        "full_name": "13. CARLA JIMENO MORA",
+        "birth_date": "27/10/2010",
+        "birth_year": "2010",
+        "club": "CE-M",
+        "points": 5009.93
+      },
+      {
+        "position": 14,
+        "first_name": "14. VICTORIA",
+        "last_name": "GARCÍA ALBERCA",
+        "full_name": "14. VICTORIA GARCÍA ALBERCA",
+        "birth_date": "20/10/2011",
+        "birth_year": "2011",
+        "club": "ELGATO-M",
+        "points": 4614.59
+      },
+      {
+        "position": 15,
+        "first_name": "15. LEIRE",
+        "last_name": "LOBATO RODRIGUEZ",
+        "full_name": "15. LEIRE LOBATO RODRIGUEZ",
+        "birth_date": "05/07/2009",
+        "birth_year": "2009",
+        "club": "CEA-V",
+        "points": 4343.42
+      },
+      {
+        "position": 16,
+        "first_name": "16. BIANCA",
+        "last_name": "SELLÉS BARQUERO",
+        "full_name": "16. BIANCA SELLÉS BARQUERO",
+        "birth_date": "28/12/2011",
+        "birth_year": "2011",
+        "club": "CEA-V",
+        "points": 4223.73
+      },
+      {
+        "position": 17,
+        "first_name": "17. ANA",
+        "last_name": "MOLINA ARCOS",
+        "full_name": "17. ANA MOLINA ARCOS",
+        "birth_date": "30/07/2011",
+        "birth_year": "2011",
+        "club": "CECR-CR",
+        "points": 3729.34
+      },
+      {
+        "position": 18,
+        "first_name": "18. ILLARI",
+        "last_name": "PIQUE OCCELLI",
+        "full_name": "18. ILLARI PIQUE OCCELLI",
+        "birth_date": "29/11/2010",
+        "birth_year": "2010",
+        "club": "CDF-SS",
+        "points": 3556.95
+      },
+      {
+        "position": 19,
+        "first_name": "19. CANDELA",
+        "last_name": "TOURIÑO FERNÁNDEZ",
+        "full_name": "19. CANDELA TOURIÑO FERNÁNDEZ",
+        "birth_date": "06/08/2009",
+        "birth_year": "2009",
+        "club": "CEHE-PO",
+        "points": 3040.03
+      },
+      {
+        "position": 20,
+        "first_name": "20. ADRIANA",
+        "last_name": "VICENTE MORENO",
+        "full_name": "20. ADRIANA VICENTE MORENO",
+        "birth_date": "27/01/2013",
+        "birth_year": "2013",
+        "club": "SAMA-M",
+        "points": 2932.62
+      },
+      {
+        "position": 21,
+        "first_name": "21. LUCÍA",
+        "last_name": "RÍOS OLARIA",
+        "full_name": "21. LUCÍA RÍOS OLARIA",
+        "birth_date": "06/02/2011",
+        "birth_year": "2011",
+        "club": "CEA-V",
+        "points": 2742.14
+      },
+      {
+        "position": 22,
+        "first_name": "22. CELIA",
+        "last_name": "SANCHEZ CORBELLA",
+        "full_name": "22. CELIA SANCHEZ CORBELLA",
+        "birth_date": "22/10/2010",
+        "birth_year": "2010",
+        "club": "SAMA-M",
+        "points": 2724.12
+      },
+      {
+        "position": 23,
+        "first_name": "23. CARMEN LAIA",
+        "last_name": "CUBELA MORILLO",
+        "full_name": "23. CARMEN LAIA CUBELA MORILLO",
+        "birth_date": "01/08/2010",
+        "birth_year": "2010",
+        "club": "CEHE-PO",
+        "points": 2655.44
+      },
+      {
+        "position": 24,
+        "first_name": "24. ANNA",
+        "last_name": "GALLEGO AGUSTI",
+        "full_name": "24. ANNA GALLEGO AGUSTI",
+        "birth_date": "26/10/2012",
+        "birth_year": "2012",
+        "club": "FED-V-C",
+        "points": 2640.97
+      },
+      {
+        "position": 25,
+        "first_name": "25. ÁNGELA",
+        "last_name": "PINAZO TORMO",
+        "full_name": "25. ÁNGELA PINAZO TORMO",
+        "birth_date": "23/04/2010",
+        "birth_year": "2010",
+        "club": "CED-V",
+        "points": 2413.37
+      },
+      {
+        "position": 26,
+        "first_name": "26. SARA",
+        "last_name": "MARTIN HAGEL",
+        "full_name": "26. SARA MARTIN HAGEL",
+        "birth_date": "26/10/2012",
+        "birth_year": "2012",
+        "club": "SASLE-M",
+        "points": 2305.25
+      },
+      {
+        "position": 27,
+        "first_name": "27. MAR",
+        "last_name": "TABERNA RAMON",
+        "full_name": "27. MAR TABERNA RAMON",
+        "birth_date": "27/08/2009",
+        "birth_year": "2009",
+        "club": "CEL-M",
+        "points": 2229.17
+      },
+      {
+        "position": 28,
+        "first_name": "28. LEIRE",
+        "last_name": "LÓPEZ VILLAVERDE",
+        "full_name": "28. LEIRE LÓPEZ VILLAVERDE",
+        "birth_date": "10/05/2011",
+        "birth_year": "2011",
+        "club": "ELGATO-M",
+        "points": 2122.7
+      },
+      {
+        "position": 29,
+        "first_name": "29. RITA",
+        "last_name": "PACHECO GAVINHOS",
+        "full_name": "29. RITA PACHECO GAVINHOS",
+        "birth_date": "09/10/2010",
+        "birth_year": "2010",
+        "club": "CEHE-PO",
+        "points": 1984.85
+      },
+      {
+        "position": 30,
+        "first_name": "30. INES",
+        "last_name": "MUNRO DIAZ",
+        "full_name": "30. INES MUNRO DIAZ",
+        "birth_date": "22/06/2010",
+        "birth_year": "2010",
+        "club": "CE-M",
+        "points": 1963.09
+      },
+      {
+        "position": 31,
+        "first_name": "31. CARMEN",
+        "last_name": "DEL RÍO MORENO",
+        "full_name": "31. CARMEN DEL RÍO MORENO",
+        "birth_date": "18/02/2011",
+        "birth_year": "2011",
+        "club": "CE-M",
+        "points": 1857.49
+      },
+      {
+        "position": 32,
+        "first_name": "32. SOFIA",
+        "last_name": "SANCHEZ CORBELLA",
+        "full_name": "32. SOFIA SANCHEZ CORBELLA",
+        "birth_date": "22/10/2010",
+        "birth_year": "2010",
+        "club": "SAMA-M",
+        "points": 1849.0
+      },
+      {
+        "position": 33,
+        "first_name": "33. JULIA",
+        "last_name": "CURTO OCHOA",
+        "full_name": "33. JULIA CURTO OCHOA",
+        "birth_date": "21/12/2010",
+        "birth_year": "2010",
+        "club": "LEZO-SS",
+        "points": 1824.53
+      },
+      {
+        "position": 34,
+        "first_name": "34. NOELIA",
+        "last_name": "DOSA PODAR",
+        "full_name": "34. NOELIA DOSA PODAR",
+        "birth_date": "18/10/2011",
+        "birth_year": "2011",
+        "club": "CEEC-M",
+        "points": 1733.62
+      },
+      {
+        "position": 35,
+        "first_name": "35. GOYA",
+        "last_name": "RUIZ GARCÍA",
+        "full_name": "35. GOYA RUIZ GARCÍA",
+        "birth_date": "15/04/2010",
+        "birth_year": "2010",
+        "club": "CED-V",
+        "points": 1587.06
+      },
+      {
+        "position": 36,
+        "first_name": "36. LAURA",
+        "last_name": "VENTIMIGLIA",
+        "full_name": "36. LAURA VENTIMIGLIA",
+        "birth_date": "24/04/2012",
+        "birth_year": "2012",
+        "club": "SASLE-M",
+        "points": 1567.26
+      },
+      {
+        "position": 37,
+        "first_name": "37. DANIELA",
+        "last_name": "MORENO CANO",
+        "full_name": "37. DANIELA MORENO CANO",
+        "birth_date": "22/07/2010",
+        "birth_year": "2010",
+        "club": "EHB-B",
+        "points": 1533.5
+      },
+      {
+        "position": 38,
+        "first_name": "38. ANA",
+        "last_name": "SANCHEZ CORBELLA",
+        "full_name": "38. ANA SANCHEZ CORBELLA",
+        "birth_date": "03/08/2013",
+        "birth_year": "2013",
+        "club": "SAMA-M",
+        "points": 1496.1
+      },
+      {
+        "position": 39,
+        "first_name": "39. MARTINA",
+        "last_name": "PRADO DEL ESTAL",
+        "full_name": "39. MARTINA PRADO DEL ESTAL",
+        "birth_date": "29/09/2010",
+        "birth_year": "2010",
+        "club": "ELGATO-M",
+        "points": 1463.74
+      },
+      {
+        "position": 40,
+        "first_name": "40. CLAUDIA",
+        "last_name": "GOMEZ PEREZ",
+        "full_name": "40. CLAUDIA GOMEZ PEREZ",
+        "birth_date": "31/12/2009",
+        "birth_year": "2009",
+        "club": "CEEC-M",
+        "points": 1454.84
+      },
+      {
+        "position": 41,
+        "first_name": "41. MAGALY",
+        "last_name": "PUETATE BARRIENTOS",
+        "full_name": "41. MAGALY PUETATE BARRIENTOS",
+        "birth_date": "10/06/2009",
+        "birth_year": "2009",
+        "club": "CEA-V",
+        "points": 1452.98
+      },
+      {
+        "position": 42,
+        "first_name": "42. LOREA",
+        "last_name": "ARRIET ARRAZOLA",
+        "full_name": "42. LOREA ARRIET ARRAZOLA",
+        "birth_date": "09/08/2010",
+        "birth_year": "2010",
+        "club": "CDF-SS",
+        "points": 1151.71
+      },
+      {
+        "position": 43,
+        "first_name": "43. RAFAELLA ALESSANDRA",
+        "last_name": "REDHEAD ACOSTA",
+        "full_name": "43. RAFAELLA ALESSANDRA REDHEAD ACOSTA",
+        "birth_date": "01/03/2010",
+        "birth_year": "2010",
+        "club": "CE-M",
+        "points": 976.98
+      },
+      {
+        "position": 44,
+        "first_name": "44. JULIA",
+        "last_name": "PRUÑONOSA ORERO",
+        "full_name": "44. JULIA PRUÑONOSA ORERO",
+        "birth_date": "09/07/2009",
+        "birth_year": "2009",
+        "club": "CED-V",
+        "points": 803.6
+      },
+      {
+        "position": 45,
+        "first_name": "45. MARINA",
+        "last_name": "MUÑIZ AMO",
+        "full_name": "45. MARINA MUÑIZ AMO",
+        "birth_date": "07/02/2011",
+        "birth_year": "2011",
+        "club": "CE-SG",
+        "points": 663.48
+      },
+      {
+        "position": 46,
+        "first_name": "46. LAURA",
+        "last_name": "DÍEZ FERNÁNDEZ",
+        "full_name": "46. LAURA DÍEZ FERNÁNDEZ",
+        "birth_date": "24/02/2010",
+        "birth_year": "2010",
+        "club": "EHB-B",
+        "points": 617.34
+      },
+      {
+        "position": 47,
+        "first_name": "47. JULIA",
+        "last_name": "SHIROKIKH",
+        "full_name": "47. JULIA SHIROKIKH",
+        "birth_date": "26/07/2011",
+        "birth_year": "2011",
+        "club": "EHB-B",
+        "points": 579.4
+      },
+      {
+        "position": 48,
+        "first_name": "48. LAURA",
+        "last_name": "CASTELLÓ DRUDIS",
+        "full_name": "48. LAURA CASTELLÓ DRUDIS",
+        "birth_date": "10/06/2010",
+        "birth_year": "2010",
+        "club": "EHB-B",
+        "points": 548.14
+      },
+      {
+        "position": 49,
+        "first_name": "49. JIMENA",
+        "last_name": "MESTRE INFANTES",
+        "full_name": "49. JIMENA MESTRE INFANTES",
+        "birth_date": "24/04/2012",
+        "birth_year": "2012",
+        "club": "CEL-M",
+        "points": 544.91
+      },
+      {
+        "position": 50,
+        "first_name": "50. CLAUDIA",
+        "last_name": "FERNANDEZ LÓPEZ",
+        "full_name": "50. CLAUDIA FERNANDEZ LÓPEZ",
+        "birth_date": "10/03/2009",
+        "birth_year": "2009",
+        "club": "AEC-CU",
+        "points": 543.43
+      },
+      {
+        "position": 51,
+        "first_name": "51. DANIELA",
+        "last_name": "MARTÍNEZ GUTIÉRREZ",
+        "full_name": "51. DANIELA MARTÍNEZ GUTIÉRREZ",
+        "birth_date": "31/01/2011",
+        "birth_year": "2011",
+        "club": "CED-V",
+        "points": 500.1
+      },
+      {
+        "position": 52,
+        "first_name": "52. AINARA",
+        "last_name": "CHACON UNGUREANU",
+        "full_name": "52. AINARA CHACON UNGUREANU",
+        "birth_date": "18/09/2011",
+        "birth_year": "2011",
+        "club": "CEEC-M",
+        "points": 358.87
+      },
+      {
+        "position": 53,
+        "first_name": "53. OLAIA",
+        "last_name": "URRUTXURTU MARTINEZ",
+        "full_name": "53. OLAIA URRUTXURTU MARTINEZ",
+        "birth_date": "05/11/2010",
+        "birth_year": "2010",
+        "club": "CEI-SS",
+        "points": 296.49
+      },
+      {
+        "position": 54,
+        "first_name": "54. LUPE",
+        "last_name": "HERNANDEZ MARTINEZ",
+        "full_name": "54. LUPE HERNANDEZ MARTINEZ",
+        "birth_date": "18/03/2009",
+        "birth_year": "2009",
+        "club": "CEI-SS",
+        "points": 280.34
+      },
+      {
+        "position": 55,
+        "first_name": "55. AROA",
+        "last_name": "SANCHEZ GONZALEZ",
+        "full_name": "55. AROA SANCHEZ GONZALEZ",
+        "birth_date": "08/04/2011",
+        "birth_year": "2011",
+        "club": "CEL-M",
+        "points": 260.1
+      },
+      {
+        "position": 56,
+        "first_name": "56. XIYAO",
+        "last_name": "JI",
+        "full_name": "56. XIYAO JI",
+        "birth_date": "24/11/2013",
+        "birth_year": "2013",
+        "club": "CEA-V",
+        "points": 244.87
+      },
+      {
+        "position": 57,
+        "first_name": "57. ÁNGELES",
+        "last_name": "AVELLANEDA SALINAS",
+        "full_name": "57. ÁNGELES AVELLANEDA SALINAS",
+        "birth_date": "25/07/2009",
+        "birth_year": "2009",
+        "club": "CEL-M",
+        "points": 232.26
+      },
+      {
+        "position": 58,
+        "first_name": "58. ELISA",
+        "last_name": "MORA TOME",
+        "full_name": "58. ELISA MORA TOME",
+        "birth_date": "27/08/2011",
+        "birth_year": "2011",
+        "club": "CEEC-M",
+        "points": 231.23
+      },
+      {
+        "position": 59,
+        "first_name": "59. JÚLIA",
+        "last_name": "FERNANDEZ RUIZ",
+        "full_name": "59. JÚLIA FERNANDEZ RUIZ",
+        "birth_date": "11/10/2012",
+        "birth_year": "2012",
+        "club": "ELGATO-M",
+        "points": 212.0
+      },
+      {
+        "position": 60,
+        "first_name": "60. CLARA",
+        "last_name": "MOMPÓ LISARDE",
+        "full_name": "60. CLARA MOMPÓ LISARDE",
+        "birth_date": "30/03/2011",
+        "birth_year": "2011",
+        "club": "CED-V",
+        "points": 212.0
+      },
+      {
+        "position": 9999,
+        "first_name": "61. LEYRE",
+        "last_name": "CADINU SÁNCHEZ",
+        "full_name": "61. LEYRE CADINU SÁNCHEZ",
+        "birth_date": "15/12/2012",
+        "birth_year": "2012",
+        "club": "CEA-V",
+        "points": 0.0
+      }
+    ],
+    "M20": [
+      {
+        "position": 1,
+        "first_name": "1. LUCIA",
+        "last_name": "JIMENO MORA",
+        "full_name": "1. LUCIA JIMENO MORA",
+        "birth_date": "31/08/2007",
+        "birth_year": "2007",
+        "club": "CE-M",
+        "points": 15178.39
+      },
+      {
+        "position": 2,
+        "first_name": "2. LAIA",
+        "last_name": "MARTÍN HERNÁNDEZ",
+        "full_name": "2. LAIA MARTÍN HERNÁNDEZ",
+        "birth_date": "28/10/2007",
+        "birth_year": "2007",
+        "club": "EHB-B",
+        "points": 14184.82
+      },
+      {
+        "position": 3,
+        "first_name": "3. ELENA",
+        "last_name": "GOMEZ VALERA",
+        "full_name": "3. ELENA GOMEZ VALERA",
+        "birth_date": "02/08/2006",
+        "birth_year": "2006",
+        "club": "CEB-M",
+        "points": 11954.14
+      },
+      {
+        "position": 4,
+        "first_name": "4. VALERIA",
+        "last_name": "VERDE ALONSO",
+        "full_name": "4. VALERIA VERDE ALONSO",
+        "birth_date": "25/09/2007",
+        "birth_year": "2007",
+        "club": "SAMA-M",
+        "points": 11059.27
+      },
+      {
+        "position": 5,
+        "first_name": "5. JUNE",
+        "last_name": "RUIZ BELATEGI",
+        "full_name": "5. JUNE RUIZ BELATEGI",
+        "birth_date": "14/12/2008",
+        "birth_year": "2008",
+        "club": "CDF-SS",
+        "points": 10219.55
+      },
+      {
+        "position": 6,
+        "first_name": "6. HELENA",
+        "last_name": "VILA BAILACH",
+        "full_name": "6. HELENA VILA BAILACH",
+        "birth_date": "16/09/2008",
+        "birth_year": "2008",
+        "club": "SAM-B",
+        "points": 8808.1
+      },
+      {
+        "position": 7,
+        "first_name": "7. PILAR",
+        "last_name": "GARNELO HERMIDA",
+        "full_name": "7. PILAR GARNELO HERMIDA",
+        "birth_date": "19/07/2006",
+        "birth_year": "2006",
+        "club": "CEHE-PO",
+        "points": 7564.74
+      },
+      {
+        "position": 8,
+        "first_name": "8. HENAR",
+        "last_name": "VALVERDE MATE",
+        "full_name": "8. HENAR VALVERDE MATE",
+        "birth_date": "10/05/2007",
+        "birth_year": "2007",
+        "club": "CEST-AV",
+        "points": 7095.38
+      },
+      {
+        "position": 9,
+        "first_name": "9. GADEA",
+        "last_name": "PARAMO PEÑA",
+        "full_name": "9. GADEA PARAMO PEÑA",
+        "birth_date": "04/04/2009",
+        "birth_year": "2009",
+        "club": "ECC-BU",
+        "points": 6608.76
+      },
+      {
+        "position": 10,
+        "first_name": "10. VIOLETA",
+        "last_name": "MARTI PRADA",
+        "full_name": "10. VIOLETA MARTI PRADA",
+        "birth_date": "04/11/2011",
+        "birth_year": "2011",
+        "club": "SAMA-M",
+        "points": 6298.52
+      },
+      {
+        "position": 11,
+        "first_name": "11. ANGELA",
+        "last_name": "MARTELLA MARTELLA",
+        "full_name": "11. ANGELA MARTELLA MARTELLA",
+        "birth_date": "06/09/2009",
+        "birth_year": "2009",
+        "club": "CE-M",
+        "points": 6015.05
+      },
+      {
+        "position": 12,
+        "first_name": "12. CRISTINA",
+        "last_name": "LÓPEZ MARTÍNEZ",
+        "full_name": "12. CRISTINA LÓPEZ MARTÍNEZ",
+        "birth_date": "01/09/2011",
+        "birth_year": "2011",
+        "club": "CE-M",
+        "points": 5703.1
+      },
+      {
+        "position": 13,
+        "first_name": "13. MARÍA",
+        "last_name": "GONZÁLEZ DE HERRERO COBO",
+        "full_name": "13. MARÍA GONZÁLEZ DE HERRERO COBO",
+        "birth_date": "16/01/2011",
+        "birth_year": "2011",
+        "club": "CE-M",
+        "points": 5677.46
+      },
+      {
+        "position": 14,
+        "first_name": "14. NEREA",
+        "last_name": "THUAL TAENGUA",
+        "full_name": "14. NEREA THUAL TAENGUA",
+        "birth_date": "06/10/2007",
+        "birth_year": "2007",
+        "club": "CED-V",
+        "points": 5620.33
+      },
+      {
+        "position": 15,
+        "first_name": "15. PETRA",
+        "last_name": "ROHR LOPEZ",
+        "full_name": "15. PETRA ROHR LOPEZ",
+        "birth_date": "22/06/2007",
+        "birth_year": "2007",
+        "club": "SASLE-M",
+        "points": 5553.49
+      },
+      {
+        "position": 16,
+        "first_name": "16. CONSTANCE",
+        "last_name": "MERCIER",
+        "full_name": "16. CONSTANCE MERCIER",
+        "birth_date": "09/06/2007",
+        "birth_year": "2007",
+        "club": "CEEC-M",
+        "points": 5460.3
+      },
+      {
+        "position": 17,
+        "first_name": "17. DANIELA",
+        "last_name": "SOLERA SANCHEZ",
+        "full_name": "17. DANIELA SOLERA SANCHEZ",
+        "birth_date": "07/06/2006",
+        "birth_year": "2006",
+        "club": "CEB-M",
+        "points": 5455.01
+      },
+      {
+        "position": 18,
+        "first_name": "18. IRENE",
+        "last_name": "FERRERO CARBALLO",
+        "full_name": "18. IRENE FERRERO CARBALLO",
+        "birth_date": "14/02/2008",
+        "birth_year": "2008",
+        "club": "SASLE-M",
+        "points": 5178.0
+      },
+      {
+        "position": 19,
+        "first_name": "19. IRIA",
+        "last_name": "ORTIZ HERAS",
+        "full_name": "19. IRIA ORTIZ HERAS",
+        "birth_date": "01/03/2007",
+        "birth_year": "2007",
+        "club": "CEA-V",
+        "points": 4853.96
+      },
+      {
+        "position": 20,
+        "first_name": "20. CLARA",
+        "last_name": "GÓMEZ DAMAS",
+        "full_name": "20. CLARA GÓMEZ DAMAS",
+        "birth_date": "29/04/2010",
+        "birth_year": "2010",
+        "club": "CE-M",
+        "points": 4842.89
+      },
+      {
+        "position": 21,
+        "first_name": "21. INES",
+        "last_name": "HIGUERA LOPEZ",
+        "full_name": "21. INES HIGUERA LOPEZ",
+        "birth_date": "17/09/2009",
+        "birth_year": "2009",
+        "club": "CEEC-M",
+        "points": 4733.55
+      },
+      {
+        "position": 22,
+        "first_name": "22. ALEJANDRA",
+        "last_name": "JATIVA PLAZA",
+        "full_name": "22. ALEJANDRA JATIVA PLAZA",
+        "birth_date": "15/06/2010",
+        "birth_year": "2010",
+        "club": "SAMA-M",
+        "points": 4253.75
+      },
+      {
+        "position": 23,
+        "first_name": "23. NOELIA",
+        "last_name": "MATARRANZ GAVILAN",
+        "full_name": "23. NOELIA MATARRANZ GAVILAN",
+        "birth_date": "19/01/2007",
+        "birth_year": "2007",
+        "club": "CEB-M",
+        "points": 4021.55
+      },
+      {
+        "position": 24,
+        "first_name": "24. MARIONA",
+        "last_name": "SANAHUJA DE LA TORRE",
+        "full_name": "24. MARIONA SANAHUJA DE LA TORRE",
+        "birth_date": "05/05/2009",
+        "birth_year": "2009",
+        "club": "EHB-B",
+        "points": 3733.34
+      },
+      {
+        "position": 25,
+        "first_name": "25. KAMILA ALEXANDRA",
+        "last_name": "GONZALEZ CASARES",
+        "full_name": "25. KAMILA ALEXANDRA GONZALEZ CASARES",
+        "birth_date": "25/03/2010",
+        "birth_year": "2010",
+        "club": "CEA-V",
+        "points": 3656.47
+      },
+      {
+        "position": 26,
+        "first_name": "26. OLIMPIA",
+        "last_name": "HERNÁNDEZ GONZÁLEZ",
+        "full_name": "26. OLIMPIA HERNÁNDEZ GONZÁLEZ",
+        "birth_date": "18/03/2009",
+        "birth_year": "2009",
+        "club": "ELGATO-M",
+        "points": 3163.42
+      },
+      {
+        "position": 27,
+        "first_name": "27. YEILIN",
+        "last_name": "ZOU",
+        "full_name": "27. YEILIN ZOU",
+        "birth_date": "26/11/2007",
+        "birth_year": "2007",
+        "club": "CE-M",
+        "points": 3092.3
+      },
+      {
+        "position": 28,
+        "first_name": "28. BELEN",
+        "last_name": "DEL RIO MORENO",
+        "full_name": "28. BELEN DEL RIO MORENO",
+        "birth_date": "10/11/2008",
+        "birth_year": "2008",
+        "club": "CE-M",
+        "points": 3007.16
+      },
+      {
+        "position": 29,
+        "first_name": "29. IRIS",
+        "last_name": "MEDINA ALVAREZ",
+        "full_name": "29. IRIS MEDINA ALVAREZ",
+        "birth_date": "19/12/2006",
+        "birth_year": "2006",
+        "club": "CEB-M",
+        "points": 2963.87
+      },
+      {
+        "position": 30,
+        "first_name": "30. JULIA",
+        "last_name": "SILVESTRINI",
+        "full_name": "30. JULIA SILVESTRINI",
+        "birth_date": "07/11/2008",
+        "birth_year": "2008",
+        "club": "SAMA-M",
+        "points": 2506.14
+      },
+      {
+        "position": 31,
+        "first_name": "31. CARLA",
+        "last_name": "JIMENO MORA",
+        "full_name": "31. CARLA JIMENO MORA",
+        "birth_date": "27/10/2010",
+        "birth_year": "2010",
+        "club": "CE-M",
+        "points": 2287.7
+      },
+      {
+        "position": 32,
+        "first_name": "32. BIANCA",
+        "last_name": "SELLÉS BARQUERO",
+        "full_name": "32. BIANCA SELLÉS BARQUERO",
+        "birth_date": "28/12/2011",
+        "birth_year": "2011",
+        "club": "CEA-V",
+        "points": 2167.12
+      },
+      {
+        "position": 33,
+        "first_name": "33. MARIÑA",
+        "last_name": "PRIETO VARELA",
+        "full_name": "33. MARIÑA PRIETO VARELA",
+        "birth_date": "14/02/2010",
+        "birth_year": "2010",
+        "club": "CEHE-PO",
+        "points": 2159.18
+      },
+      {
+        "position": 34,
+        "first_name": "34. MAIALEN",
+        "last_name": "ESPINOZA",
+        "full_name": "34. MAIALEN ESPINOZA",
+        "birth_date": "23/12/2008",
+        "birth_year": "2008",
+        "club": "CDF-SS",
+        "points": 2037.21
+      },
+      {
+        "position": 35,
+        "first_name": "35. MARIA",
+        "last_name": "LORA GOMA",
+        "full_name": "35. MARIA LORA GOMA",
+        "birth_date": "23/07/2008",
+        "birth_year": "2008",
+        "club": "CBC-CA",
+        "points": 1989.43
+      },
+      {
+        "position": 36,
+        "first_name": "36. VICTORIA",
+        "last_name": "GARCÍA ALBERCA",
+        "full_name": "36. VICTORIA GARCÍA ALBERCA",
+        "birth_date": "20/10/2011",
+        "birth_year": "2011",
+        "club": "ELGATO-M",
+        "points": 1902.61
+      },
+      {
+        "position": 37,
+        "first_name": "37. LEIRE",
+        "last_name": "LOBATO RODRIGUEZ",
+        "full_name": "37. LEIRE LOBATO RODRIGUEZ",
+        "birth_date": "05/07/2009",
+        "birth_year": "2009",
+        "club": "CEA-V",
+        "points": 1820.45
+      },
+      {
+        "position": 38,
+        "first_name": "38. CLAUDIA",
+        "last_name": "GARCIA CIMAS",
+        "full_name": "38. CLAUDIA GARCIA CIMAS",
+        "birth_date": "30/10/2006",
+        "birth_year": "2006",
+        "club": "SAM-B",
+        "points": 1670.88
+      },
+      {
+        "position": 39,
+        "first_name": "39. ILLARI",
+        "last_name": "PIQUE OCCELLI",
+        "full_name": "39. ILLARI PIQUE OCCELLI",
+        "birth_date": "29/11/2010",
+        "birth_year": "2010",
+        "club": "CDF-SS",
+        "points": 1661.23
+      },
+      {
+        "position": 40,
+        "first_name": "40. ÁNGELA",
+        "last_name": "PINAZO TORMO",
+        "full_name": "40. ÁNGELA PINAZO TORMO",
+        "birth_date": "23/04/2010",
+        "birth_year": "2010",
+        "club": "CED-V",
+        "points": 1549.47
+      },
+      {
+        "position": 41,
+        "first_name": "41. CARMEN LAIA",
+        "last_name": "CUBELA MORILLO",
+        "full_name": "41. CARMEN LAIA CUBELA MORILLO",
+        "birth_date": "01/08/2010",
+        "birth_year": "2010",
+        "club": "CEHE-PO",
+        "points": 1373.07
+      },
+      {
+        "position": 42,
+        "first_name": "42. INÉS",
+        "last_name": "SILVA FERNANDES",
+        "full_name": "42. INÉS SILVA FERNANDES",
+        "birth_date": "17/04/2006",
+        "birth_year": "2006",
+        "club": "CEHE-PO",
+        "points": 1358.94
+      },
+      {
+        "position": 43,
+        "first_name": "43. CARLOTA",
+        "last_name": "GARCIA DE CASTRO",
+        "full_name": "43. CARLOTA GARCIA DE CASTRO",
+        "birth_date": "30/10/2008",
+        "birth_year": "2008",
+        "club": "CEEC-M",
+        "points": 1133.2
+      },
+      {
+        "position": 44,
+        "first_name": "44. ANGELA",
+        "last_name": "NOGUEIRA GARCÍA",
+        "full_name": "44. ANGELA NOGUEIRA GARCÍA",
+        "birth_date": "19/05/2008",
+        "birth_year": "2008",
+        "club": "CEHE-PO",
+        "points": 980.48
+      },
+      {
+        "position": 45,
+        "first_name": "45. EVA",
+        "last_name": "ROMERO MAS",
+        "full_name": "45. EVA ROMERO MAS",
+        "birth_date": "09/03/2007",
+        "birth_year": "2007",
+        "club": "CED-V",
+        "points": 968.94
+      },
+      {
+        "position": 46,
+        "first_name": "46. CATALINA",
+        "last_name": "BORRELLI",
+        "full_name": "46. CATALINA BORRELLI",
+        "birth_date": "13/04/2009",
+        "birth_year": "2009",
+        "club": "CEL-M",
+        "points": 865.91
+      },
+      {
+        "position": 47,
+        "first_name": "47. LUCIA",
+        "last_name": "RIVERO REDONDO",
+        "full_name": "47. LUCIA RIVERO REDONDO",
+        "birth_date": "01/11/2008",
+        "birth_year": "2008",
+        "club": "CCC-M",
+        "points": 820.32
+      },
+      {
+        "position": 48,
+        "first_name": "48. CELIA",
+        "last_name": "SANCHEZ CORBELLA",
+        "full_name": "48. CELIA SANCHEZ CORBELLA",
+        "birth_date": "22/10/2010",
+        "birth_year": "2010",
+        "club": "SAMA-M",
+        "points": 792.73
+      },
+      {
+        "position": 49,
+        "first_name": "49. SOFIA",
+        "last_name": "SANCHEZ CORBELLA",
+        "full_name": "49. SOFIA SANCHEZ CORBELLA",
+        "birth_date": "22/10/2010",
+        "birth_year": "2010",
+        "club": "SAMA-M",
+        "points": 763.49
+      },
+      {
+        "position": 50,
+        "first_name": "50. CLAUDIA",
+        "last_name": "GOMEZ PEREZ",
+        "full_name": "50. CLAUDIA GOMEZ PEREZ",
+        "birth_date": "31/12/2009",
+        "birth_year": "2009",
+        "club": "CEEC-M",
+        "points": 762.2
+      },
+      {
+        "position": 51,
+        "first_name": "51. NATALIA",
+        "last_name": "BERMUDEZ",
+        "full_name": "51. NATALIA BERMUDEZ",
+        "birth_date": "24/10/2007",
+        "birth_year": "2007",
+        "club": "CEL-M",
+        "points": 739.44
+      },
+      {
+        "position": 52,
+        "first_name": "52. LEIRE",
+        "last_name": "LÓPEZ VILLAVERDE",
+        "full_name": "52. LEIRE LÓPEZ VILLAVERDE",
+        "birth_date": "10/05/2011",
+        "birth_year": "2011",
+        "club": "ELGATO-M",
+        "points": 732.76
+      },
+      {
+        "position": 53,
+        "first_name": "53. NOELIA",
+        "last_name": "OSUNA SÁNCHEZ-HERRERA",
+        "full_name": "53. NOELIA OSUNA SÁNCHEZ-HERRERA",
+        "birth_date": "01/10/2008",
+        "birth_year": "2008",
+        "club": "ELGATO-M",
+        "points": 730.41
+      },
+      {
+        "position": 54,
+        "first_name": "54. LOREA",
+        "last_name": "ARRIET ARRAZOLA",
+        "full_name": "54. LOREA ARRIET ARRAZOLA",
+        "birth_date": "09/08/2010",
+        "birth_year": "2010",
+        "club": "CDF-SS",
+        "points": 730.19
+      },
+      {
+        "position": 55,
+        "first_name": "55. CANDELA",
+        "last_name": "TOURIÑO FERNÁNDEZ",
+        "full_name": "55. CANDELA TOURIÑO FERNÁNDEZ",
+        "birth_date": "06/08/2009",
+        "birth_year": "2009",
+        "club": "CEHE-PO",
+        "points": 660.07
+      },
+      {
+        "position": 56,
+        "first_name": "56. DANIELA",
+        "last_name": "MORENO CANO",
+        "full_name": "56. DANIELA MORENO CANO",
+        "birth_date": "22/07/2010",
+        "birth_year": "2010",
+        "club": "EHB-B",
+        "points": 647.85
+      },
+      {
+        "position": 57,
+        "first_name": "57. RAFAELLA ALESSANDRA",
+        "last_name": "REDHEAD ACOSTA",
+        "full_name": "57. RAFAELLA ALESSANDRA REDHEAD ACOSTA",
+        "birth_date": "01/03/2010",
+        "birth_year": "2010",
+        "club": "CE-M",
+        "points": 600.37
+      },
+      {
+        "position": 58,
+        "first_name": "58. JULIA",
+        "last_name": "CURTO OCHOA",
+        "full_name": "58. JULIA CURTO OCHOA",
+        "birth_date": "21/12/2010",
+        "birth_year": "2010",
+        "club": "LEZO-SS",
+        "points": 596.66
+      },
+      {
+        "position": 59,
+        "first_name": "59. LUCÍA",
+        "last_name": "RÍOS OLARIA",
+        "full_name": "59. LUCÍA RÍOS OLARIA",
+        "birth_date": "06/02/2011",
+        "birth_year": "2011",
+        "club": "CEA-V",
+        "points": 595.05
+      },
+      {
+        "position": 60,
+        "first_name": "60. GALA",
+        "last_name": "AMORENA LAVADO",
+        "full_name": "60. GALA AMORENA LAVADO",
+        "birth_date": "09/07/2008",
+        "birth_year": "2008",
+        "club": "LEZO-SS",
+        "points": 431.81
+      },
+      {
+        "position": 61,
+        "first_name": "61. INES",
+        "last_name": "MUNRO DIAZ",
+        "full_name": "61. INES MUNRO DIAZ",
+        "birth_date": "22/06/2010",
+        "birth_year": "2010",
+        "club": "CE-M",
+        "points": 398.06
+      },
+      {
+        "position": 62,
+        "first_name": "62. MAGALY",
+        "last_name": "PUETATE BARRIENTOS",
+        "full_name": "62. MAGALY PUETATE BARRIENTOS",
+        "birth_date": "10/06/2009",
+        "birth_year": "2009",
+        "club": "CEA-V",
+        "points": 376.02
+      },
+      {
+        "position": 63,
+        "first_name": "63. GOYA",
+        "last_name": "RUIZ GARCÍA",
+        "full_name": "63. GOYA RUIZ GARCÍA",
+        "birth_date": "15/04/2010",
+        "birth_year": "2010",
+        "club": "CED-V",
+        "points": 361.45
+      },
+      {
+        "position": 64,
+        "first_name": "64. EROLA",
+        "last_name": "FERRE BALTRONS",
+        "full_name": "64. EROLA FERRE BALTRONS",
+        "birth_date": "19/11/2007",
+        "birth_year": "2007",
+        "club": "EHB-B",
+        "points": 357.37
+      },
+      {
+        "position": 65,
+        "first_name": "65. SOFÍA",
+        "last_name": "BERNALTE DE SANTIAGO",
+        "full_name": "65. SOFÍA BERNALTE DE SANTIAGO",
+        "birth_date": "04/06/2008",
+        "birth_year": "2008",
+        "club": "CE-M",
+        "points": 335.4
+      },
+      {
+        "position": 66,
+        "first_name": "66. RITA",
+        "last_name": "PACHECO GAVINHOS",
+        "full_name": "66. RITA PACHECO GAVINHOS",
+        "birth_date": "09/10/2010",
+        "birth_year": "2010",
+        "club": "CEHE-PO",
+        "points": 331.1
+      },
+      {
+        "position": 67,
+        "first_name": "67. ANA",
+        "last_name": "MOLINA ARCOS",
+        "full_name": "67. ANA MOLINA ARCOS",
+        "birth_date": "30/07/2011",
+        "birth_year": "2011",
+        "club": "CECR-CR",
+        "points": 327.6
+      },
+      {
+        "position": 68,
+        "first_name": "68. ANNA",
+        "last_name": "GALLEGO AGUSTI",
+        "full_name": "68. ANNA GALLEGO AGUSTI",
+        "birth_date": "26/10/2012",
+        "birth_year": "2012",
+        "club": "FED-V-C",
+        "points": 313.28
+      },
+      {
+        "position": 69,
+        "first_name": "69. ANNA",
+        "last_name": "MONTERO MENA",
+        "full_name": "69. ANNA MONTERO MENA",
+        "birth_date": "14/02/2007",
+        "birth_year": "2007",
+        "club": "EHB-B",
+        "points": 273.33
+      },
+      {
+        "position": 70,
+        "first_name": "70. SARA",
+        "last_name": "MARTIN HAGEL",
+        "full_name": "70. SARA MARTIN HAGEL",
+        "birth_date": "26/10/2012",
+        "birth_year": "2012",
+        "club": "SASLE-M",
+        "points": 265.29
+      },
+      {
+        "position": 71,
+        "first_name": "71. JULIA",
+        "last_name": "PRUÑONOSA ORERO",
+        "full_name": "71. JULIA PRUÑONOSA ORERO",
+        "birth_date": "09/07/2009",
+        "birth_year": "2009",
+        "club": "CED-V",
+        "points": 257.35
+      },
+      {
+        "position": 72,
+        "first_name": "72. CARMEN",
+        "last_name": "DEL RÍO MORENO",
+        "full_name": "72. CARMEN DEL RÍO MORENO",
+        "birth_date": "18/02/2011",
+        "birth_year": "2011",
+        "club": "CE-M",
+        "points": 255.55
+      },
+      {
+        "position": 73,
+        "first_name": "73. LAURA",
+        "last_name": "CASTELLÓ DRUDIS",
+        "full_name": "73. LAURA CASTELLÓ DRUDIS",
+        "birth_date": "10/06/2010",
+        "birth_year": "2010",
+        "club": "EHB-B",
+        "points": 248.44
+      },
+      {
+        "position": 74,
+        "first_name": "74. MARTINA",
+        "last_name": "PRADO DEL ESTAL",
+        "full_name": "74. MARTINA PRADO DEL ESTAL",
+        "birth_date": "29/09/2010",
+        "birth_year": "2010",
+        "club": "ELGATO-M",
+        "points": 246.2
+      },
+      {
+        "position": 75,
+        "first_name": "75. LAURA",
+        "last_name": "DÍEZ FERNÁNDEZ",
+        "full_name": "75. LAURA DÍEZ FERNÁNDEZ",
+        "birth_date": "24/02/2010",
+        "birth_year": "2010",
+        "club": "EHB-B",
+        "points": 244.11
+      },
+      {
+        "position": 76,
+        "first_name": "76. MYROSLAVA",
+        "last_name": "SHYROKA",
+        "full_name": "76. MYROSLAVA SHYROKA",
+        "birth_date": "30/12/2008",
+        "birth_year": "2008",
+        "club": "CELS-V",
+        "points": 244.11
+      },
+      {
+        "position": 77,
+        "first_name": "77. OLAIA",
+        "last_name": "URRUTXURTU MARTINEZ",
+        "full_name": "77. OLAIA URRUTXURTU MARTINEZ",
+        "birth_date": "05/11/2010",
+        "birth_year": "2010",
+        "club": "CEI-SS",
+        "points": 237.19
+      },
+      {
+        "position": 78,
+        "first_name": "78. JULIA",
+        "last_name": "SHIROKIKH",
+        "full_name": "78. JULIA SHIROKIKH",
+        "birth_date": "26/07/2011",
+        "birth_year": "2011",
+        "club": "EHB-B",
+        "points": 235.67
+      },
+      {
+        "position": 79,
+        "first_name": "79. LUPE",
+        "last_name": "HERNANDEZ MARTINEZ",
+        "full_name": "79. LUPE HERNANDEZ MARTINEZ",
+        "birth_date": "18/03/2009",
+        "birth_year": "2009",
+        "club": "CEI-SS",
+        "points": 224.27
+      },
+      {
+        "position": 80,
+        "first_name": "80. HERMELIA",
+        "last_name": "CASTAÑÓN VARGAS",
+        "full_name": "80. HERMELIA CASTAÑÓN VARGAS",
+        "birth_date": "01/03/2007",
+        "birth_year": "2007",
+        "club": "CEA-V",
+        "points": 212.0
+      },
+      {
+        "position": 81,
+        "first_name": "81. CAMILA",
+        "last_name": "BERTING YOUNG",
+        "full_name": "81. CAMILA BERTING YOUNG",
+        "birth_date": "23/11/2007",
+        "birth_year": "2007",
+        "club": "EHB-B",
+        "points": 212.0
+      },
+      {
+        "position": 9999,
+        "first_name": "82. NATALIA",
+        "last_name": "DIEZ MARIÑO",
+        "full_name": "82. NATALIA DIEZ MARIÑO",
+        "birth_date": "22/01/2008",
+        "birth_year": "2008",
+        "club": "COMES-C",
+        "points": 0.0
+      }
+    ],
+    "ABS": [
+      {
+        "position": 1,
+        "first_name": "1. LUCIA",
+        "last_name": "MARTIN PORTUGUES BARBERO",
+        "full_name": "1. LUCIA MARTIN PORTUGUES BARBERO",
+        "birth_date": "22/10/1990",
+        "birth_year": "1990",
+        "club": "CEOYM-M",
+        "points": 9323.7
+      },
+      {
+        "position": 2,
+        "first_name": "2. ARACELI",
+        "last_name": "NAVARRO LASO",
+        "full_name": "2. ARACELI NAVARRO LASO",
+        "birth_date": "09/08/1989",
+        "birth_year": "1989",
+        "club": "CEOYM-M",
+        "points": 8325.07
+      },
+      {
+        "position": 3,
+        "first_name": "3. MARIA",
+        "last_name": "VENTURA JORQUERA",
+        "full_name": "3. MARIA VENTURA JORQUERA",
+        "birth_date": "28/02/2000",
+        "birth_year": "2000",
+        "club": "CEOYM-M",
+        "points": 6532.03
+      },
+      {
+        "position": 4,
+        "first_name": "4. CELIA",
+        "last_name": "PEREZ CUENCA",
+        "full_name": "4. CELIA PEREZ CUENCA",
+        "birth_date": "24/01/1994",
+        "birth_year": "1994",
+        "club": "CEOYM-M",
+        "points": 6490.53
+      },
+      {
+        "position": 5,
+        "first_name": "5. ELENA",
+        "last_name": "HERNANDEZ MUÑOZ",
+        "full_name": "5. ELENA HERNANDEZ MUÑOZ",
+        "birth_date": "13/06/1999",
+        "birth_year": "1999",
+        "club": "SAMA-M",
+        "points": 6067.2
+      },
+      {
+        "position": 6,
+        "first_name": "6. ITZIAR",
+        "last_name": "GALLARDO GOMEZ",
+        "full_name": "6. ITZIAR GALLARDO GOMEZ",
+        "birth_date": "02/03/2000",
+        "birth_year": "2000",
+        "club": "SAMA-M",
+        "points": 5531.9
+      },
+      {
+        "position": 7,
+        "first_name": "7. LUCIA",
+        "last_name": "JIMENO MORA",
+        "full_name": "7. LUCIA JIMENO MORA",
+        "birth_date": "31/08/2007",
+        "birth_year": "2007",
+        "club": "CE-M",
+        "points": 5144.99
+      },
+      {
+        "position": 8,
+        "first_name": "8. LAIA",
+        "last_name": "MARTÍN HERNÁNDEZ",
+        "full_name": "8. LAIA MARTÍN HERNÁNDEZ",
+        "birth_date": "28/10/2007",
+        "birth_year": "2007",
+        "club": "EHB-B",
+        "points": 5073.86
+      },
+      {
+        "position": 9,
+        "first_name": "9. MARIA ALICIA",
+        "last_name": "PERRONI",
+        "full_name": "9. MARIA ALICIA PERRONI",
+        "birth_date": "29/05/1988",
+        "birth_year": "1988",
+        "club": "CE-M",
+        "points": 4772.87
+      },
+      {
+        "position": 10,
+        "first_name": "10. MARTA",
+        "last_name": "CERRO JIMENEZ",
+        "full_name": "10. MARTA CERRO JIMENEZ",
+        "birth_date": "06/03/1999",
+        "birth_year": "1999",
+        "club": "CEB-M",
+        "points": 4662.73
+      },
+      {
+        "position": 11,
+        "first_name": "11. MARIA",
+        "last_name": "CASTAÑO CORDERO",
+        "full_name": "11. MARIA CASTAÑO CORDERO",
+        "birth_date": "26/05/2003",
+        "birth_year": "2003",
+        "club": "SAM-B",
+        "points": 4619.62
+      },
+      {
+        "position": 12,
+        "first_name": "12. MAR",
+        "last_name": "FERNANDEZ AVILA",
+        "full_name": "12. MAR FERNANDEZ AVILA",
+        "birth_date": "28/07/2005",
+        "birth_year": "2005",
+        "club": "CEL-M",
+        "points": 4616.81
+      },
+      {
+        "position": 13,
+        "first_name": "13. VALERIA",
+        "last_name": "VERDE ALONSO",
+        "full_name": "13. VALERIA VERDE ALONSO",
+        "birth_date": "25/09/2007",
+        "birth_year": "2007",
+        "club": "SAMA-M",
+        "points": 3912.93
+      },
+      {
+        "position": 14,
+        "first_name": "14. ELENA",
+        "last_name": "GOMEZ VALERA",
+        "full_name": "14. ELENA GOMEZ VALERA",
+        "birth_date": "02/08/2006",
+        "birth_year": "2006",
+        "club": "CEB-M",
+        "points": 3910.84
+      },
+      {
+        "position": 15,
+        "first_name": "15. INES",
+        "last_name": "VALVERDE MATE",
+        "full_name": "15. INES VALVERDE MATE",
+        "birth_date": "07/04/2005",
+        "birth_year": "2005",
+        "club": "CEST-AV",
+        "points": 3041.44
+      },
+      {
+        "position": 16,
+        "first_name": "16. JUNE",
+        "last_name": "RUIZ BELATEGI",
+        "full_name": "16. JUNE RUIZ BELATEGI",
+        "birth_date": "14/12/2008",
+        "birth_year": "2008",
+        "club": "CDF-SS",
+        "points": 3022.1
+      },
+      {
+        "position": 17,
+        "first_name": "17. HENAR",
+        "last_name": "VALVERDE MATE",
+        "full_name": "17. HENAR VALVERDE MATE",
+        "birth_date": "10/05/2007",
+        "birth_year": "2007",
+        "club": "CEST-AV",
+        "points": 2734.03
+      },
+      {
+        "position": 18,
+        "first_name": "18. CANDELA",
+        "last_name": "CAMPOAMOR DAVILA",
+        "full_name": "18. CANDELA CAMPOAMOR DAVILA",
+        "birth_date": "01/08/2001",
+        "birth_year": "2001",
+        "club": "CE-SG",
+        "points": 2547.54
+      },
+      {
+        "position": 19,
+        "first_name": "19. MARTA",
+        "last_name": "VELA DE PANDO",
+        "full_name": "19. MARTA VELA DE PANDO",
+        "birth_date": "23/07/2005",
+        "birth_year": "2005",
+        "club": "CBC-CA",
+        "points": 2536.23
+      },
+      {
+        "position": 20,
+        "first_name": "20. HELENA",
+        "last_name": "VILA BAILACH",
+        "full_name": "20. HELENA VILA BAILACH",
+        "birth_date": "16/09/2008",
+        "birth_year": "2008",
+        "club": "SAM-B",
+        "points": 2515.22
+      },
+      {
+        "position": 21,
+        "first_name": "21. ANNA",
+        "last_name": "ESCODA I TORROELLA",
+        "full_name": "21. ANNA ESCODA I TORROELLA",
+        "birth_date": "19/02/1996",
+        "birth_year": "1996",
+        "club": "SAM-B",
+        "points": 2511.09
+      },
+      {
+        "position": 22,
+        "first_name": "22. PAULA",
+        "last_name": "GARCIA GONZALEZ-ESTEFANI",
+        "full_name": "22. PAULA GARCIA GONZALEZ-ESTEFANI",
+        "birth_date": "16/08/2002",
+        "birth_year": "2002",
+        "club": "CEB-M",
+        "points": 2334.58
+      },
+      {
+        "position": 23,
+        "first_name": "23. NEREA",
+        "last_name": "THUAL TAENGUA",
+        "full_name": "23. NEREA THUAL TAENGUA",
+        "birth_date": "06/10/2007",
+        "birth_year": "2007",
+        "club": "CED-V",
+        "points": 2329.28
+      },
+      {
+        "position": 24,
+        "first_name": "24. GADEA",
+        "last_name": "PARAMO PEÑA",
+        "full_name": "24. GADEA PARAMO PEÑA",
+        "birth_date": "04/04/2009",
+        "birth_year": "2009",
+        "club": "ECC-BU",
+        "points": 2161.22
+      },
+      {
+        "position": 25,
+        "first_name": "25. MARIA",
+        "last_name": "LEYVA VANEGAS",
+        "full_name": "25. MARIA LEYVA VANEGAS",
+        "birth_date": "01/05/2003",
+        "birth_year": "2003",
+        "club": "CE-M",
+        "points": 2120.67
+      },
+      {
+        "position": 26,
+        "first_name": "26. VIOLETA",
+        "last_name": "MARTI PRADA",
+        "full_name": "26. VIOLETA MARTI PRADA",
+        "birth_date": "04/11/2011",
+        "birth_year": "2011",
+        "club": "SAMA-M",
+        "points": 2088.71
+      },
+      {
+        "position": 27,
+        "first_name": "27. MARÍA",
+        "last_name": "GONZÁLEZ DE HERRERO COBO",
+        "full_name": "27. MARÍA GONZÁLEZ DE HERRERO COBO",
+        "birth_date": "16/01/2011",
+        "birth_year": "2011",
+        "club": "CE-M",
+        "points": 2050.01
+      },
+      {
+        "position": 28,
+        "first_name": "28. INES",
+        "last_name": "HIGUERA LOPEZ",
+        "full_name": "28. INES HIGUERA LOPEZ",
+        "birth_date": "17/09/2009",
+        "birth_year": "2009",
+        "club": "CEEC-M",
+        "points": 1997.17
+      },
+      {
+        "position": 29,
+        "first_name": "29. PETRA",
+        "last_name": "ROHR LOPEZ",
+        "full_name": "29. PETRA ROHR LOPEZ",
+        "birth_date": "22/06/2007",
+        "birth_year": "2007",
+        "club": "SASLE-M",
+        "points": 1974.73
+      },
+      {
+        "position": 30,
+        "first_name": "30. ANGELA",
+        "last_name": "MARTELLA MARTELLA",
+        "full_name": "30. ANGELA MARTELLA MARTELLA",
+        "birth_date": "06/09/2009",
+        "birth_year": "2009",
+        "club": "CE-M",
+        "points": 1917.64
+      },
+      {
+        "position": 31,
+        "first_name": "31. IRIA",
+        "last_name": "ORTIZ HERAS",
+        "full_name": "31. IRIA ORTIZ HERAS",
+        "birth_date": "01/03/2007",
+        "birth_year": "2007",
+        "club": "CEA-V",
+        "points": 1915.18
+      },
+      {
+        "position": 32,
+        "first_name": "32. CRISTINA",
+        "last_name": "LÓPEZ MARTÍNEZ",
+        "full_name": "32. CRISTINA LÓPEZ MARTÍNEZ",
+        "birth_date": "01/09/2011",
+        "birth_year": "2011",
+        "club": "CE-M",
+        "points": 1863.75
+      },
+      {
+        "position": 33,
+        "first_name": "33. IRENE",
+        "last_name": "FERRERO CARBALLO",
+        "full_name": "33. IRENE FERRERO CARBALLO",
+        "birth_date": "14/02/2008",
+        "birth_year": "2008",
+        "club": "SASLE-M",
+        "points": 1790.32
+      },
+      {
+        "position": 34,
+        "first_name": "34. GIULIA",
+        "last_name": "ARPINO",
+        "full_name": "34. GIULIA ARPINO",
+        "birth_date": "04/11/1999",
+        "birth_year": "1999",
+        "club": "CE-M",
+        "points": 1745.85
+      },
+      {
+        "position": 35,
+        "first_name": "35. ANA",
+        "last_name": "SIERRA ACOSTA",
+        "full_name": "35. ANA SIERRA ACOSTA",
+        "birth_date": "05/06/1997",
+        "birth_year": "1997",
+        "club": "CBC-CA",
+        "points": 1716.45
+      },
+      {
+        "position": 36,
+        "first_name": "36. JIMENA",
+        "last_name": "BUENADICHA GARCÍA",
+        "full_name": "36. JIMENA BUENADICHA GARCÍA",
+        "birth_date": "01/12/2005",
+        "birth_year": "2005",
+        "club": "CEST-AV",
+        "points": 1692.14
+      },
+      {
+        "position": 37,
+        "first_name": "37. YEILIN",
+        "last_name": "ZOU",
+        "full_name": "37. YEILIN ZOU",
+        "birth_date": "26/11/2007",
+        "birth_year": "2007",
+        "club": "CE-M",
+        "points": 1538.42
+      },
+      {
+        "position": 38,
+        "first_name": "38. PILAR",
+        "last_name": "GARNELO HERMIDA",
+        "full_name": "38. PILAR GARNELO HERMIDA",
+        "birth_date": "19/07/2006",
+        "birth_year": "2006",
+        "club": "CEHE-PO",
+        "points": 1524.11
+      },
+      {
+        "position": 39,
+        "first_name": "39. ANDREEA",
+        "last_name": "LUPU",
+        "full_name": "39. ANDREEA LUPU",
+        "birth_date": "06/04/1999",
+        "birth_year": "1999",
+        "club": "CEL-M",
+        "points": 1428.04
+      },
+      {
+        "position": 40,
+        "first_name": "40. CLARA",
+        "last_name": "GÓMEZ DAMAS",
+        "full_name": "40. CLARA GÓMEZ DAMAS",
+        "birth_date": "29/04/2010",
+        "birth_year": "2010",
+        "club": "CE-M",
+        "points": 1416.18
+      },
+      {
+        "position": 41,
+        "first_name": "41. OLIMPIA",
+        "last_name": "HERNÁNDEZ GONZÁLEZ",
+        "full_name": "41. OLIMPIA HERNÁNDEZ GONZÁLEZ",
+        "birth_date": "18/03/2009",
+        "birth_year": "2009",
+        "club": "ELGATO-M",
+        "points": 1405.83
+      },
+      {
+        "position": 42,
+        "first_name": "42. EVA",
+        "last_name": "VENTURA JORQUERA",
+        "full_name": "42. EVA VENTURA JORQUERA",
+        "birth_date": "06/06/2003",
+        "birth_year": "2003",
+        "club": "CEL-M",
+        "points": 1348.46
+      },
+      {
+        "position": 43,
+        "first_name": "43. DANIELA",
+        "last_name": "SOLERA SANCHEZ",
+        "full_name": "43. DANIELA SOLERA SANCHEZ",
+        "birth_date": "07/06/2006",
+        "birth_year": "2006",
+        "club": "CEB-M",
+        "points": 1338.27
+      },
+      {
+        "position": 44,
+        "first_name": "44. ALEJANDRA",
+        "last_name": "JATIVA PLAZA",
+        "full_name": "44. ALEJANDRA JATIVA PLAZA",
+        "birth_date": "15/06/2010",
+        "birth_year": "2010",
+        "club": "SAMA-M",
+        "points": 1290.39
+      },
+      {
+        "position": 45,
+        "first_name": "45. CONSTANCE",
+        "last_name": "MERCIER",
+        "full_name": "45. CONSTANCE MERCIER",
+        "birth_date": "09/06/2007",
+        "birth_year": "2007",
+        "club": "CEEC-M",
+        "points": 1268.12
+      },
+      {
+        "position": 46,
+        "first_name": "46. NOELIA",
+        "last_name": "MATARRANZ GAVILAN",
+        "full_name": "46. NOELIA MATARRANZ GAVILAN",
+        "birth_date": "19/01/2007",
+        "birth_year": "2007",
+        "club": "CEB-M",
+        "points": 1231.98
+      },
+      {
+        "position": 47,
+        "first_name": "47. IRIS",
+        "last_name": "MEDINA ALVAREZ",
+        "full_name": "47. IRIS MEDINA ALVAREZ",
+        "birth_date": "19/12/2006",
+        "birth_year": "2006",
+        "club": "CEB-M",
+        "points": 1112.54
+      },
+      {
+        "position": 48,
+        "first_name": "48. CLAUDIA",
+        "last_name": "GARCIA CIMAS",
+        "full_name": "48. CLAUDIA GARCIA CIMAS",
+        "birth_date": "30/10/2006",
+        "birth_year": "2006",
+        "club": "SAM-B",
+        "points": 1110.31
+      },
+      {
+        "position": 49,
+        "first_name": "49. ANGELA",
+        "last_name": "DE RIOJA MEDIAVILLA",
+        "full_name": "49. ANGELA DE RIOJA MEDIAVILLA",
+        "birth_date": "13/03/1967",
+        "birth_year": "1967",
+        "club": "CE-M",
+        "points": 1048.25
+      },
+      {
+        "position": 50,
+        "first_name": "50. JULIA",
+        "last_name": "SILVESTRINI",
+        "full_name": "50. JULIA SILVESTRINI",
+        "birth_date": "07/11/2008",
+        "birth_year": "2008",
+        "club": "SAMA-M",
+        "points": 989.88
+      },
+      {
+        "position": 51,
+        "first_name": "51. EVA",
+        "last_name": "NIETO RODRIGUEZ",
+        "full_name": "51. EVA NIETO RODRIGUEZ",
+        "birth_date": "04/08/2004",
+        "birth_year": "2004",
+        "club": "CBC-CA",
+        "points": 967.58
+      },
+      {
+        "position": 52,
+        "first_name": "52. MARIONA",
+        "last_name": "SANAHUJA DE LA TORRE",
+        "full_name": "52. MARIONA SANAHUJA DE LA TORRE",
+        "birth_date": "05/05/2009",
+        "birth_year": "2009",
+        "club": "EHB-B",
+        "points": 933.51
+      },
+      {
+        "position": 53,
+        "first_name": "53. ENCARNA",
+        "last_name": "CELIS MONLEON",
+        "full_name": "53. ENCARNA CELIS MONLEON",
+        "birth_date": "30/04/2005",
+        "birth_year": "2005",
+        "club": "CED-V",
+        "points": 919.12
+      },
+      {
+        "position": 54,
+        "first_name": "54. KAMILA ALEXANDRA",
+        "last_name": "GONZALEZ CASARES",
+        "full_name": "54. KAMILA ALEXANDRA GONZALEZ CASARES",
+        "birth_date": "25/03/2010",
+        "birth_year": "2010",
+        "club": "CEA-V",
+        "points": 859.41
+      },
+      {
+        "position": 55,
+        "first_name": "55. MARIA",
+        "last_name": "LORA GOMA",
+        "full_name": "55. MARIA LORA GOMA",
+        "birth_date": "23/07/2008",
+        "birth_year": "2008",
+        "club": "CBC-CA",
+        "points": 782.98
+      },
+      {
+        "position": 56,
+        "first_name": "56. CATALINA",
+        "last_name": "BORRELLI",
+        "full_name": "56. CATALINA BORRELLI",
+        "birth_date": "13/04/2009",
+        "birth_year": "2009",
+        "club": "CEL-M",
+        "points": 692.73
+      },
+      {
+        "position": 57,
+        "first_name": "57. NATALIA",
+        "last_name": "MENDEZ MOLINA",
+        "full_name": "57. NATALIA MENDEZ MOLINA",
+        "birth_date": "05/01/2004",
+        "birth_year": "2004",
+        "club": "SASLE-M",
+        "points": 676.56
+      },
+      {
+        "position": 58,
+        "first_name": "58. NATALIA",
+        "last_name": "BERMUDEZ",
+        "full_name": "58. NATALIA BERMUDEZ",
+        "birth_date": "24/10/2007",
+        "birth_year": "2007",
+        "club": "CEL-M",
+        "points": 591.55
+      },
+      {
+        "position": 59,
+        "first_name": "59. KREESTEL",
+        "last_name": "FRAATZ",
+        "full_name": "59. KREESTEL FRAATZ",
+        "birth_date": "24/11/2000",
+        "birth_year": "2000",
+        "club": "CED-V",
+        "points": 557.34
+      },
+      {
+        "position": 60,
+        "first_name": "60. DAYANA",
+        "last_name": "ROSETE",
+        "full_name": "60. DAYANA ROSETE",
+        "birth_date": "23/02/1996",
+        "birth_year": "1996",
+        "club": "CEA-V",
+        "points": 507.94
+      },
+      {
+        "position": 61,
+        "first_name": "61. ADRIANA",
+        "last_name": "CELIS MONLEON",
+        "full_name": "61. ADRIANA CELIS MONLEON",
+        "birth_date": "30/04/2005",
+        "birth_year": "2005",
+        "club": "CED-V",
+        "points": 431.94
+      },
+      {
+        "position": 62,
+        "first_name": "62. ESTEFANIA",
+        "last_name": "BERNINSONE",
+        "full_name": "62. ESTEFANIA BERNINSONE",
+        "birth_date": "14/09/1985",
+        "birth_year": "1985",
+        "club": "SAM-B",
+        "points": 421.62
+      },
+      {
+        "position": 63,
+        "first_name": "63. BELEN",
+        "last_name": "DEL RIO MORENO",
+        "full_name": "63. BELEN DEL RIO MORENO",
+        "birth_date": "10/11/2008",
+        "birth_year": "2008",
+        "club": "CE-M",
+        "points": 402.78
+      },
+      {
+        "position": 64,
+        "first_name": "64. MAIALEN",
+        "last_name": "ESPINOZA",
+        "full_name": "64. MAIALEN ESPINOZA",
+        "birth_date": "23/12/2008",
+        "birth_year": "2008",
+        "club": "CDF-SS",
+        "points": 383.06
+      },
+      {
+        "position": 65,
+        "first_name": "65. MARÍA JOSÉ",
+        "last_name": "PADURA MÚGICA",
+        "full_name": "65. MARÍA JOSÉ PADURA MÚGICA",
+        "birth_date": "18/03/1965",
+        "birth_year": "1965",
+        "club": "CDF-SS",
+        "points": 334.19
+      },
+      {
+        "position": 66,
+        "first_name": "66. ELA",
+        "last_name": "ALPAGUT",
+        "full_name": "66. ELA ALPAGUT",
+        "birth_date": "16/01/2005",
+        "birth_year": "2005",
+        "club": "CE-SG",
+        "points": 316.51
+      },
+      {
+        "position": 67,
+        "first_name": "67. ANDREA",
+        "last_name": "RODRIGUEZ ESCOBAR",
+        "full_name": "67. ANDREA RODRIGUEZ ESCOBAR",
+        "birth_date": "22/04/2004",
+        "birth_year": "2004",
+        "club": "SASLE-M",
+        "points": 306.37
+      },
+      {
+        "position": 68,
+        "first_name": "68. ANA",
+        "last_name": "ARCOS CASTELLANOS",
+        "full_name": "68. ANA ARCOS CASTELLANOS",
+        "birth_date": "10/04/1982",
+        "birth_year": "1982",
+        "club": "CECR-CR",
+        "points": 291.47
+      },
+      {
+        "position": 69,
+        "first_name": "69. ÁNGELA",
+        "last_name": "PINAZO TORMO",
+        "full_name": "69. ÁNGELA PINAZO TORMO",
+        "birth_date": "23/04/2010",
+        "birth_year": "2010",
+        "club": "CED-V",
+        "points": 285.31
+      },
+      {
+        "position": 70,
+        "first_name": "70. JULIA",
+        "last_name": "CURTO OCHOA",
+        "full_name": "70. JULIA CURTO OCHOA",
+        "birth_date": "21/12/2010",
+        "birth_year": "2010",
+        "club": "LEZO-SS",
+        "points": 276.66
+      },
+      {
+        "position": 71,
+        "first_name": "71. ANA",
+        "last_name": "MOLINA ARCOS",
+        "full_name": "71. ANA MOLINA ARCOS",
+        "birth_date": "30/07/2011",
+        "birth_year": "2011",
+        "club": "CECR-CR",
+        "points": 262.08
+      },
+      {
+        "position": 72,
+        "first_name": "72. RAFAELLA ALESSANDRA",
+        "last_name": "REDHEAD ACOSTA",
+        "full_name": "72. RAFAELLA ALESSANDRA REDHEAD ACOSTA",
+        "birth_date": "01/03/2010",
+        "birth_year": "2010",
+        "club": "CE-M",
+        "points": 259.32
+      },
+      {
+        "position": 73,
+        "first_name": "73. SAOIRSE",
+        "last_name": "MCGLINCHEY",
+        "full_name": "73. SAOIRSE MCGLINCHEY",
+        "birth_date": "09/05/1999",
+        "birth_year": "1999",
+        "club": "CE-M",
+        "points": 251.22
+      },
+      {
+        "position": 74,
+        "first_name": "74. ILLARI",
+        "last_name": "PIQUE OCCELLI",
+        "full_name": "74. ILLARI PIQUE OCCELLI",
+        "birth_date": "29/11/2010",
+        "birth_year": "2010",
+        "club": "CDF-SS",
+        "points": 242.26
+      },
+      {
+        "position": 75,
+        "first_name": "75. NOELIE",
+        "last_name": "BOYER",
+        "full_name": "75. NOELIE BOYER",
+        "birth_date": "12/11/1999",
+        "birth_year": "1999",
+        "club": "CEA-V",
+        "points": 228.16
+      },
+      {
+        "position": 76,
+        "first_name": "76. EVA",
+        "last_name": "ROMERO MAS",
+        "full_name": "76. EVA ROMERO MAS",
+        "birth_date": "09/03/2007",
+        "birth_year": "2007",
+        "club": "CED-V",
+        "points": 228.16
+      },
+      {
+        "position": 77,
+        "first_name": "77. CARLOTA",
+        "last_name": "GARCIA DE CASTRO",
+        "full_name": "77. CARLOTA GARCIA DE CASTRO",
+        "birth_date": "30/10/2008",
+        "birth_year": "2008",
+        "club": "CEEC-M",
+        "points": 221.24
+      },
+      {
+        "position": 78,
+        "first_name": "78. CLAUDIA",
+        "last_name": "GOMEZ PEREZ",
+        "full_name": "78. CLAUDIA GOMEZ PEREZ",
+        "birth_date": "31/12/2009",
+        "birth_year": "2009",
+        "club": "CEEC-M",
+        "points": 221.24
+      },
+      {
+        "position": 79,
+        "first_name": "79. LOREA",
+        "last_name": "ARRIET ARRAZOLA",
+        "full_name": "79. LOREA ARRIET ARRAZOLA",
+        "birth_date": "09/08/2010",
+        "birth_year": "2010",
+        "club": "CDF-SS",
+        "points": 212.0
+      },
+      {
+        "position": 9999,
+        "first_name": "80. NATALIA",
+        "last_name": "DIEZ MARIÑO",
+        "full_name": "80. NATALIA DIEZ MARIÑO",
+        "birth_date": "22/01/2008",
+        "birth_year": "2008",
+        "club": "COMES-C",
+        "points": 0.0
+      },
+      {
+        "position": 9999,
+        "first_name": "81. RICARDO",
+        "last_name": "ALBA FRANCISCONI",
+        "full_name": "81. RICARDO ALBA FRANCISCONI",
+        "birth_date": "11/07/1970",
+        "birth_year": "1970",
+        "club": "CE-SG",
+        "points": 0.0
+      },
+      {
+        "position": 9999,
+        "first_name": "82. JULIO FERNANDO",
+        "last_name": "VICENT CLEMENTE",
+        "full_name": "82. JULIO FERNANDO VICENT CLEMENTE",
+        "birth_date": "29/07/1990",
+        "birth_year": "1990",
+        "club": "CED-V",
+        "points": 0.0
+      }
+    ]
   },
-
-  "calendar": [],
-
+  "calendar": [
+    {
+      "date": "28/11/2026",
+      "name": "TLM",
+      "category": "ABS",
+      "modality": "I",
+      "location": "SF VET70",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    },
+    {
+      "date": "19/12/2026",
+      "name": "TNR M17",
+      "category": "M17",
+      "modality": "I",
+      "location": "SF M17",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    },
+    {
+      "date": "19/12/2026",
+      "name": "TNR M20",
+      "category": "M20",
+      "modality": "I",
+      "location": "SF M20",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    },
+    {
+      "date": "30/01/2027",
+      "name": "TLM",
+      "category": "ABS",
+      "modality": "I",
+      "location": "SF VET70",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    },
+    {
+      "date": "06/02/2027",
+      "name": "TNR M15",
+      "category": "M15",
+      "modality": "I",
+      "location": "SF M15",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    },
+    {
+      "date": "06/02/2027",
+      "name": "TNR M13",
+      "category": "M13",
+      "modality": "I",
+      "location": "SF M13",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    },
+    {
+      "date": "27/02/2027",
+      "name": "LIGA NACIONAL PLATA 2ª JORNADA",
+      "category": "ABS",
+      "modality": "E",
+      "location": "SF ABS",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    },
+    {
+      "date": "27/02/2027",
+      "name": "LIGA NACIONAL IBERDROLA 2ª JORNADA",
+      "category": "ABS",
+      "modality": "E",
+      "location": "SF ABS",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    },
+    {
+      "date": "27/02/2027",
+      "name": "TNR ABS",
+      "category": "ABS",
+      "modality": "I",
+      "location": "SF ABS",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    },
+    {
+      "date": "13/03/2027",
+      "name": "TLM",
+      "category": "ABS",
+      "modality": "I",
+      "location": "SF VET70",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    },
+    {
+      "date": "20/03/2027",
+      "name": "CIRCUITO EUROPEO M-14",
+      "category": "ABS",
+      "modality": "I",
+      "location": "SF M14",
+      "type": "Competición RFEE",
+      "scope": "I",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    },
+    {
+      "date": "17/04/2027",
+      "name": "TNR M15 (3/3) Sant Jordi",
+      "category": "M15",
+      "modality": "I",
+      "location": "SF M15",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Calendario RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE"
+        }
+      ]
+    }
+  ],
   "results": [],
-
   "internal_rankings_status": "fallback",
-
-  "internal_rankings_updated_at": "17/11/2026",
-
+  "internal_rankings_updated_at": "25/11/2026 09:22 UTC",
   "internal_rankings": {
     "M17": {
       "label": "Cadete",
@@ -48,7 +3397,6 @@
       "data_status": "fallback",
       "status_message": "Última clasificación interna oficial válida almacenada",
       "source_url": "https://app.skermo.org/classification/public/RFEE?setLang=es",
-
       "headers": [
         "Nacionales",
         "CM Cadete Orán 22/10",
@@ -57,7 +3405,6 @@
         "CM Junior Budapest 07/11",
         "ECC Cadete Pau 14/11"
       ],
-
       "rows": [
         {
           "position": 1,
@@ -74,13 +3421,12 @@
             "ECC Cadete Pau 14/11": "2ª · 2719,68"
           }
         },
-
         {
           "position": 2,
           "full_name": "MARÍA GONZÁLEZ DE HERRERO COBO",
           "club": "CE-M",
           "birth_year": "2011",
-          "total": 7468.90,
+          "total": 7468.9,
           "columns": {
             "Nacionales": "2248,57",
             "CM Cadete Orán 22/10": "3ª · 3153,03",
@@ -90,7 +3436,6 @@
             "ECC Cadete Pau 14/11": "—"
           }
         },
-
         {
           "position": 3,
           "full_name": "CRISTINA LÓPEZ MARTÍNEZ",
@@ -106,7 +3451,6 @@
             "ECC Cadete Pau 14/11": "6ª · 1994,33"
           }
         },
-
         {
           "position": 4,
           "full_name": "CLARA GÓMEZ DAMAS",
@@ -122,7 +3466,6 @@
             "ECC Cadete Pau 14/11": "10ª · 1641,46"
           }
         },
-
         {
           "position": 5,
           "full_name": "ALEJANDRA JATIVA PLAZA",
@@ -138,7 +3481,6 @@
             "ECC Cadete Pau 14/11": "35ª · 319,89"
           }
         },
-
         {
           "position": 6,
           "full_name": "VICTORIA GARCÍA ALBERCA",
@@ -154,7 +3496,6 @@
             "ECC Cadete Pau 14/11": "34ª · 327,27"
           }
         },
-
         {
           "position": 7,
           "full_name": "ANNA GALLEGO AGUSTI",
@@ -170,7 +3511,6 @@
             "ECC Cadete Pau 14/11": "21ª · 1229,72"
           }
         },
-
         {
           "position": 8,
           "full_name": "ADRIANA VICENTE MORENO",
@@ -186,13 +3526,12 @@
             "ECC Cadete Pau 14/11": "5ª · 2040,76"
           }
         },
-
         {
           "position": 9,
           "full_name": "BIANCA SELLÉS BARQUERO",
           "club": "CEA-V",
           "birth_year": "2011",
-          "total": 2822.50,
+          "total": 2822.5,
           "columns": {
             "Nacionales": "1284,30",
             "CM Cadete Orán 22/10": "—",
@@ -202,7 +3541,6 @@
             "ECC Cadete Pau 14/11": "15ª · 1538,20"
           }
         },
-
         {
           "position": 10,
           "full_name": "CARLA JIMENO MORA",
@@ -218,7 +3556,6 @@
             "ECC Cadete Pau 14/11": "28ª · 1156,46"
           }
         },
-
         {
           "position": 11,
           "full_name": "LUCÍA RÍOS OLARIA",
@@ -234,7 +3571,6 @@
             "ECC Cadete Pau 14/11": "27ª · 1165,72"
           }
         },
-
         {
           "position": 12,
           "full_name": "CELIA SANCHEZ CORBELLA",
@@ -250,7 +3586,6 @@
             "ECC Cadete Pau 14/11": "73ª · 0"
           }
         },
-
         {
           "position": 13,
           "full_name": "JULIA CURTO OCHOA",
@@ -266,7 +3601,6 @@
             "ECC Cadete Pau 14/11": "53ª · 214,21"
           }
         },
-
         {
           "position": 14,
           "full_name": "KAMILA ALEXANDRA GONZALEZ CASARES",
@@ -282,7 +3616,6 @@
             "ECC Cadete Pau 14/11": "36ª · 312,71"
           }
         },
-
         {
           "position": 15,
           "full_name": "ANA SANCHEZ CORBELLA",
@@ -298,7 +3631,6 @@
             "ECC Cadete Pau 14/11": "38ª · 298,94"
           }
         },
-
         {
           "position": 16,
           "full_name": "NOELIA DOSA PODAR",
@@ -314,7 +3646,6 @@
             "ECC Cadete Pau 14/11": "39ª · 292,33"
           }
         },
-
         {
           "position": 17,
           "full_name": "SARA PUGA GARCIA",
@@ -330,7 +3661,6 @@
             "ECC Cadete Pau 14/11": "41ª · 279,59"
           }
         },
-
         {
           "position": 18,
           "full_name": "MARIÑA PRIETO VARELA",
@@ -346,7 +3676,6 @@
             "ECC Cadete Pau 14/11": "—"
           }
         },
-
         {
           "position": 19,
           "full_name": "INES MUNRO DIAZ",
@@ -362,13 +3691,12 @@
             "ECC Cadete Pau 14/11": "50ª · 229,05"
           }
         },
-
         {
           "position": 20,
           "full_name": "MARINA MUÑIZ AMO",
           "club": "CE-SG",
           "birth_year": "2011",
-          "total": 895.00,
+          "total": 895.0,
           "columns": {
             "Nacionales": "895,00",
             "CM Cadete Orán 22/10": "—",
@@ -380,7 +3708,6 @@
         }
       ]
     },
-
     "M20": {
       "label": "Junior",
       "category": "M20",
@@ -390,13 +3717,11 @@
       "data_status": "fallback",
       "status_message": "Última clasificación interna oficial válida almacenada",
       "source_url": "https://app.skermo.org/classification/public/RFEE?setLang=es",
-
       "headers": [
         "Nacionales",
         "CM Junior Orán 22/10",
         "CM Junior Budapest 07/11"
       ],
-
       "rows": [
         {
           "position": 1,
@@ -410,20 +3735,18 @@
             "CM Junior Budapest 07/11": "15ª · 3650,10"
           }
         },
-
         {
           "position": 2,
           "full_name": "LUCIA JIMENO MORA",
           "club": "CE-M",
           "birth_year": "2007",
-          "total": 3289.60,
+          "total": 3289.6,
           "columns": {
             "Nacionales": "2716,98",
             "CM Junior Orán 22/10": "81ª · 0",
             "CM Junior Budapest 07/11": "79ª · 572,62"
           }
         },
-
         {
           "position": 3,
           "full_name": "LAIA MARTÍN HERNÁNDEZ",
@@ -436,7 +3759,6 @@
             "CM Junior Budapest 07/11": "133ª · 214,51"
           }
         },
-
         {
           "position": 4,
           "full_name": "JUNE RUIZ BELATEGI",
@@ -449,7 +3771,6 @@
             "CM Junior Budapest 07/11": "106ª · 438,73"
           }
         },
-
         {
           "position": 5,
           "full_name": "HELENA VILA BAILACH",
@@ -462,7 +3783,6 @@
             "CM Junior Budapest 07/11": "—"
           }
         },
-
         {
           "position": 6,
           "full_name": "CRISTINA LÓPEZ MARTÍNEZ",
@@ -475,7 +3795,6 @@
             "CM Junior Budapest 07/11": "110ª · 421,86"
           }
         },
-
         {
           "position": 7,
           "full_name": "NEREA THUAL TAENGUA",
@@ -488,7 +3807,6 @@
             "CM Junior Budapest 07/11": "—"
           }
         },
-
         {
           "position": 8,
           "full_name": "HENAR VALVERDE MATE",
@@ -501,20 +3819,18 @@
             "CM Junior Budapest 07/11": "193ª · 0"
           }
         },
-
         {
           "position": 9,
           "full_name": "MARÍA GONZÁLEZ DE HERRERO COBO",
           "club": "CE-M",
           "birth_year": "2011",
-          "total": 1861.10,
+          "total": 1861.1,
           "columns": {
             "Nacionales": "1356,56",
             "CM Junior Orán 22/10": "65ª · 296,82",
             "CM Junior Budapest 07/11": "135ª · 207,71"
           }
         },
-
         {
           "position": 10,
           "full_name": "ALEJANDRA JATIVA PLAZA",
@@ -527,7 +3843,6 @@
             "CM Junior Budapest 07/11": "173ª · 0"
           }
         },
-
         {
           "position": 11,
           "full_name": "GADEA PARAMO PEÑA",
@@ -540,7 +3855,6 @@
             "CM Junior Budapest 07/11": "—"
           }
         },
-
         {
           "position": 12,
           "full_name": "VALERIA VERDE ALONSO",
@@ -553,7 +3867,6 @@
             "CM Junior Budapest 07/11": "—"
           }
         },
-
         {
           "position": 13,
           "full_name": "IRIA ORTIZ HERAS",
@@ -566,7 +3879,6 @@
             "CM Junior Budapest 07/11": "—"
           }
         },
-
         {
           "position": 14,
           "full_name": "CLARA GÓMEZ DAMAS",
@@ -579,7 +3891,6 @@
             "CM Junior Budapest 07/11": "152ª · 153,69"
           }
         },
-
         {
           "position": 15,
           "full_name": "MARIONA SANAHUJA DE LA TORRE",
@@ -592,20 +3903,18 @@
             "CM Junior Budapest 07/11": "—"
           }
         },
-
         {
           "position": 16,
           "full_name": "OLIMPIA HERNÁNDEZ GONZÁLEZ",
           "club": "ELGATO-M",
           "birth_year": "2009",
-          "total": 1085.10,
+          "total": 1085.1,
           "columns": {
             "Nacionales": "1085,10",
             "CM Junior Orán 22/10": "—",
             "CM Junior Budapest 07/11": "—"
           }
         },
-
         {
           "position": 17,
           "full_name": "ANGELA MARTELLA MARTELLA",
@@ -618,7 +3927,6 @@
             "CM Junior Budapest 07/11": "148ª · 165,84"
           }
         },
-
         {
           "position": 18,
           "full_name": "INES HIGUERA LOPEZ",
@@ -631,20 +3939,18 @@
             "CM Junior Budapest 07/11": "180ª · 0"
           }
         },
-
         {
           "position": 19,
           "full_name": "PETRA ROHR LOPEZ",
           "club": "SASLE-M",
           "birth_year": "2007",
-          "total": 751.30,
+          "total": 751.3,
           "columns": {
             "Nacionales": "751,30",
             "CM Junior Orán 22/10": "—",
             "CM Junior Budapest 07/11": "—"
           }
         },
-
         {
           "position": 20,
           "full_name": "IRENE FERRERO CARBALLO",
@@ -660,24 +3966,29 @@
       ]
     }
   },
-
   "sources": [
     {
       "name": "Skermo RFEE · Ranking Nacional",
       "url": "https://app.skermo.org/ranking-rfee/public/RFEE?setLang=es",
       "use": "Rankings nacionales de Sable Femenino"
     },
-
     {
       "name": "Skermo RFEE · Calendario",
       "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es",
       "use": "Calendario RFEE de Sable Femenino"
     },
-
     {
       "name": "Skermo RFEE · Clasificaciones internas",
       "url": "https://app.skermo.org/classification/public/RFEE?setLang=es",
       "use": "Ranking interno Cadete y Junior de Sable Femenino"
     }
-  ]
+  ],
+  "ranking_status": {
+    "M13": "live",
+    "M15": "live",
+    "M17": "live",
+    "M20": "live",
+    "ABS": "live"
+  },
+  "calendar_url": "https://app.skermo.org/calendar/public/RFEE?setLang=es"
 }
