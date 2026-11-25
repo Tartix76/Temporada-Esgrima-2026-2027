@@ -1,147 +1,81 @@
 #!/usr/bin/env python3
 
-import io
 import json
-import re
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import urljoin
 
-import pdfplumber
-import requests
-from bs4 import BeautifulSoup
-from playwright.sync_api import sync_playwright
 
+# ============================================================
+# RUTAS
+# ============================================================
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 
-JSON_FILE = (
+NATIONAL_JSON = (
     BASE_DIR
     / "data"
     / "nacional-rfee.json"
 )
 
-CLASSIFICATION_URL = (
-    "https://app.skermo.org/"
-    "classification/public/RFEE"
-    "?setLang=es"
-)
-
-TARGETS = {
-    "M17": {
-        "label": "Cadete",
-        "search": (
-            "RANKING INTERNO CADETE "
-            "SABLE FEMENINO"
-        ),
-        "minimum": 7000,
-    },
-    "M20": {
-        "label": "Junior",
-        "search": (
-            "RANKING INTERNO JUNIOR "
-            "SABLE FEMENINO"
-        ),
-        "minimum": 7200,
-    },
-}
-
-SESSION = requests.Session()
-
-SESSION.headers.update(
-    {
-        "User-Agent": (
-            "Mozilla/5.0 "
-            "(X11; Linux x86_64) "
-            "AppleWebKit/537.36 "
-            "Chrome/120.0 Safari/537.36 "
-            "dashboard-sable-femenino/4.0"
-        ),
-        "Accept-Language": (
-            "es-ES,es;q=0.9,en;q=0.8"
-        ),
-    }
+FALLBACK_JSON = (
+    BASE_DIR
+    / "data"
+    / "internal-rfee-fallback.json"
 )
 
 
-def clean(value):
-    return " ".join(
-        str(value or "").split()
-    ).strip()
+# ============================================================
+# UTILIDADES
+# ============================================================
 
+def read_json(path):
+    """
+    Lee un fichero JSON y devuelve
+    su contenido como diccionario.
+    """
 
-def normalize(value):
-    return (
-        clean(value)
-        .casefold()
-        .replace("á", "a")
-        .replace("é", "e")
-        .replace("í", "i")
-        .replace("ó", "o")
-        .replace("ú", "u")
-        .replace("ü", "u")
-        .replace("ñ", "n")
-    )
-
-
-def parse_number(value):
-    text = clean(value)
-
-    text = re.sub(
-        r"[^0-9,.\-]",
-        "",
-        text,
-    )
-
-    if not text:
-        return 0.0
-
-    if (
-        "," in text
-        and "." in text
-    ):
-        text = (
-            text
-            .replace(".", "")
-            .replace(",", ".")
-        )
-
-    elif "," in text:
-        text = text.replace(
-            ",",
-            ".",
-        )
+    if not path.exists():
+        return {}
 
     try:
-        return float(text)
 
-    except ValueError:
-        return 0.0
-
-
-def read_json():
-    if not JSON_FILE.exists():
-        raise FileNotFoundError(
-            "No existe "
-            "data/nacional-rfee.json"
+        return json.loads(
+            path.read_text(
+                encoding="utf-8"
+            )
         )
 
-    return json.loads(
-        JSON_FILE.read_text(
-            encoding="utf-8"
+    except Exception as error:
+
+        print(
+            f"ERROR leyendo {path}: "
+            f"{error}"
         )
-    )
+
+        return {}
 
 
-def write_json(data):
-    JSON_FILE.parent.mkdir(
+def write_json(
+    path,
+    data,
+):
+    """
+    Escribe el JSON primero en un
+    fichero temporal.
+
+    Solo reemplaza el fichero real
+    cuando el nuevo JSON es válido.
+    """
+
+    path.parent.mkdir(
         parents=True,
         exist_ok=True,
     )
 
     temporary = (
-        JSON_FILE
-        .with_suffix(".json.tmp")
+        path.with_suffix(
+            ".json.tmp"
+        )
     )
 
     temporary.write_text(
@@ -153,8 +87,7 @@ def write_json(data):
         encoding="utf-8",
     )
 
-    # Validación antes de reemplazar
-    # el JSON publicado.
+    # Comprobación de seguridad.
     json.loads(
         temporary.read_text(
             encoding="utf-8"
@@ -162,898 +95,386 @@ def write_json(data):
     )
 
     temporary.replace(
-        JSON_FILE
+        path
     )
 
 
-def wait_page(page):
-    try:
-        page.wait_for_load_state(
-            "networkidle",
-            timeout=30000,
-        )
-
-    except Exception:
-        pass
-
-    page.wait_for_timeout(
-        2000
-    )
-
-
-def select_visible(
-    page,
-    requested_label,
+def count_valid_rows(
+    ranking,
 ):
     """
-    Selecciona una opción por su
-    texto visible.
-
-    Evita depender de IDs internos
-    de Skermo.
+    Cuenta filas del ranking interno
+    que tienen nombre y total.
     """
 
-    wanted = normalize(
-        requested_label
+    rows = ranking.get(
+        "rows",
+        [],
     )
 
-    for select in (
-        page
-        .locator("select")
-        .all()
-    ):
-
-        options = (
-            select
-            .locator("option")
-        )
-
-        for index in range(
-            options.count()
-        ):
-
-            option = options.nth(
-                index
-            )
-
-            label = normalize(
-                option.inner_text()
-            )
-
-            if label == wanted:
-
-                select.select_option(
-                    value=(
-                        option
-                        .get_attribute(
-                            "value"
-                        )
-                    )
-                )
-
-                page.wait_for_timeout(
-                    800
-                )
-
-                return True
-
-    return False
-
-
-def find_target_link(
-    page,
-    target_text,
-):
-    """
-    Busca la fila de clasificación
-    interna y devuelve:
-
-    - nombre
-    - fecha de referencia
-    - enlace de descarga/apertura
-    """
-
-    target = normalize(
-        target_text
-    )
-
-    for row in (
-        page
-        .locator("table tr")
-        .all()
-    ):
-
-        row_text = clean(
-            row.inner_text()
-        )
-
+    return sum(
+        1
+        for row in rows
         if (
-            target
-            not in normalize(row_text)
-        ):
-            continue
-
-        date_match = re.search(
-            r"\d{2}/\d{2}/\d{4}",
-            row_text,
-        )
-
-        date = (
-            date_match.group()
-            if date_match
-            else ""
-        )
-
-        links = (
-            row
-            .locator("a")
-        )
-
-        href = ""
-
-        if links.count() > 0:
-            for index in range(
-                links.count()
-            ):
-
-                candidate = (
-                    links
-                    .nth(index)
-                    .get_attribute("href")
+            row.get("full_name")
+            and
+            float(
+                row.get(
+                    "total",
+                    0
                 )
-
-                if candidate:
-                    href = urljoin(
-                        page.url,
-                        candidate,
-                    )
-
-                    # Priorizamos PDF o
-                    # enlace de clasificación.
-                    if (
-                        ".pdf" in href.lower()
-                        or
-                        "classification"
-                        in href.lower()
-                    ):
-                        break
-
-        return {
-            "name": row_text,
-            "reference_date": date,
-            "url": href,
-        }
-
-    return None
-
-
-def html_table_rows(html):
-    """
-    Intenta interpretar una
-    clasificación presentada
-    directamente como tabla HTML.
-    """
-
-    soup = BeautifulSoup(
-        html,
-        "html.parser",
-    )
-
-    best_table = []
-
-    for table in soup.select(
-        "table"
-    ):
-
-        current = []
-
-        for tr in table.select(
-            "tr"
-        ):
-
-            cells = [
-                clean(
-                    cell.get_text(
-                        " ",
-                        strip=True,
-                    )
-                )
-                for cell
-                in tr.find_all(
-                    ["td", "th"]
-                )
-            ]
-
-            if cells:
-                current.append(cells)
-
-        if (
-            len(current)
+                or
+                0
+            )
             >
-            len(best_table)
-        ):
-            best_table = current
-
-    return best_table
+            0
+        )
+    )
 
 
-def pdf_table_rows(
-    content,
+def validate_internal(
+    internal,
 ):
     """
-    Extrae tablas de un PDF.
-
-    Devuelve la tabla con mayor
-    número de filas, que debería
-    corresponder a la clasificación.
+    Comprueba qué categorías contienen
+    datos internos utilizables.
     """
 
-    best_table = []
+    valid = {}
 
-    with pdfplumber.open(
-        io.BytesIO(content)
-    ) as pdf:
-
-        for page in pdf.pages:
-
-            tables = (
-                page.extract_tables()
-                or
-                []
-            )
-
-            for table in tables:
-
-                cleaned = []
-
-                for row in table:
-
-                    if not row:
-                        continue
-
-                    cells = [
-                        clean(cell)
-                        for cell in row
-                    ]
-
-                    if any(cells):
-                        cleaned.append(
-                            cells
-                        )
-
-                if (
-                    len(cleaned)
-                    >
-                    len(best_table)
-                ):
-                    best_table = cleaned
-
-    return best_table
-
-
-def find_header_row(
-    table,
-):
-    """
-    Encuentra la fila de encabezados
-    usando términos habituales del
-    ranking interno RFEE.
-    """
-
-    keywords = [
-        "pos",
-        "nombre",
-        "apellidos",
-        "club",
-        "nacional",
-        "total",
-        "puntos",
-    ]
-
-    for index, row in enumerate(
-        table[:15]
-    ):
-
-        combined = normalize(
-            " ".join(row)
-        )
-
-        hits = sum(
-            1
-            for keyword
-            in keywords
-            if keyword
-            in combined
-        )
-
-        if hits >= 2:
-            return index
-
-    return 0
-
-
-def unique_headers(
-    headers,
-):
-    """
-    Evita claves duplicadas cuando
-    una clasificación contiene varias
-    columnas llamadas Puntos.
-    """
-
-    result = []
-    used = {}
-
-    for index, header in enumerate(
-        headers
-    ):
-
-        header = (
-            clean(header)
-            or
-            f"Columna {index + 1}"
-        )
-
-        used[header] = (
-            used.get(header, 0)
-            + 1
-        )
-
-        if used[header] > 1:
-            header = (
-                f"{header} "
-                f"{used[header]}"
-            )
-
-        result.append(
-            header
-        )
-
-    return result
-
-
-def row_to_record(
-    headers,
-    row,
-):
-    """
-    Convierte una fila en un registro
-    uniforme.
-
-    Conserva también todas las
-    columnas originales para que el
-    HTML pueda mostrar competiciones
-    y puntos parciales.
-    """
-
-    padded = list(row)
-
-    while len(padded) < len(
-        headers
-    ):
-        padded.append("")
-
-    columns = {}
-
-    for index, header in enumerate(
-        headers
-    ):
-
-        columns[header] = clean(
-            padded[index]
-            if index < len(padded)
-            else ""
-        )
-
-    normalized_headers = {
-        header: normalize(header)
-        for header in headers
-    }
-
-    def value_for(
-        candidates,
-    ):
-        for header, normalized in (
-            normalized_headers.items()
-        ):
-
-            if any(
-                candidate in normalized
-                for candidate
-                in candidates
-            ):
-                return columns.get(
-                    header,
-                    "",
-                )
-
-        return ""
-
-    position_text = value_for(
-        [
-            "posicion",
-            "pos.",
-            "puesto",
-            "ranking",
-        ]
-    )
-
-    position_match = re.search(
-        r"\d+",
-        position_text,
-    )
-
-    position = (
-        int(position_match.group())
-        if position_match
-        else None
-    )
-
-    name = value_for(
-        [
-            "nombre",
-        ]
-    )
-
-    surname = value_for(
-        [
-            "apellido",
-        ]
-    )
-
-    full_name = clean(
-        f"{name} {surname}"
-    )
-
-    if not full_name:
-        full_name = value_for(
-            [
-                "tirador",
-                "deportista",
-                "nombre completo",
-            ]
-        )
-
-    club = value_for(
-        [
-            "club",
-        ]
-    )
-
-    birth = value_for(
-        [
-            "fecha nacimiento",
-            "nacimiento",
-            "ano",
-        ]
-    )
-
-    birth_year_match = re.search(
-        r"(?:19|20)\d{2}",
-        birth,
-    )
-
-    birth_year = (
-        birth_year_match.group()
-        if birth_year_match
-        else ""
-    )
-
-    total_text = value_for(
-        [
-            "total",
-            "puntuacion total",
-            "puntos total",
-        ]
-    )
-
-    # Si no existe una columna TOTAL,
-    # utiliza la última columna que
-    # contenga puntos/puntuación.
-    if not total_text:
-
-        point_headers = [
-            header
-            for header, normalized
-            in normalized_headers.items()
-            if (
-                "punto" in normalized
-                or
-                "puntuacion" in normalized
-            )
-        ]
-
-        if point_headers:
-            total_text = columns[
-                point_headers[-1]
-            ]
-
-    total = parse_number(
-        total_text
-    )
-
-    return {
-        "position": position,
-        "name": name,
-        "surname": surname,
-        "full_name": full_name,
-        "club": club,
-        "birth_year": birth_year,
-        "total": total,
-        "columns": columns,
-    }
-
-
-def parse_classification_table(
-    table,
-):
-    if not table:
-        raise RuntimeError(
-            "No se encontró ninguna tabla"
-        )
-
-    header_index = find_header_row(
-        table
-    )
-
-    headers = unique_headers(
-        table[header_index]
-    )
-
-    records = []
-
-    for row in table[
-        header_index + 1:
+    for category in [
+        "M17",
+        "M20",
     ]:
 
-        record = row_to_record(
-            headers,
-            row,
+        ranking = internal.get(
+            category
         )
 
-        if not record["full_name"]:
+        if not ranking:
             continue
 
-        if record["position"] is None:
+        rows = ranking.get(
+            "rows",
+            [],
+        )
+
+        if not rows:
             continue
 
-        records.append(
-            record
+        valid_rows = count_valid_rows(
+            ranking
         )
 
-    if not records:
+        if valid_rows == 0:
+            continue
+
+        valid[category] = ranking
+
+    return valid
+
+
+# ============================================================
+# DATOS FALLBACK
+# ============================================================
+
+def load_fallback():
+    """
+    Carga la última clasificación
+    interna oficial almacenada.
+    """
+
+    print()
+    print(
+        "Buscando fallback de "
+        "ranking interno..."
+    )
+
+    fallback = read_json(
+        FALLBACK_JSON
+    )
+
+    if not fallback:
+
         raise RuntimeError(
-            "La tabla no contiene "
-            "tiradoras válidas"
+            "No existe o está vacío "
+            "data/internal-rfee-fallback.json"
         )
 
-    return (
-        headers,
-        records,
+    valid = validate_internal(
+        fallback
     )
 
+    if not valid:
 
-def download_content(
-    url,
-):
-    response = SESSION.get(
-        url,
-        timeout=90,
-    )
-
-    response.raise_for_status()
-
-    return (
-        response.content,
-        response.headers.get(
-            "Content-Type",
-            "",
-        ),
-    )
-
-
-def classification_from_url(
-    browser,
-    item,
-):
-    url = item["url"]
-
-    if not url:
         raise RuntimeError(
-            "La fila de Skermo "
-            "no contiene enlace"
+            "internal-rfee-fallback.json "
+            "no contiene rankings "
+            "M17/M20 válidos"
         )
 
-    content, content_type = (
-        download_content(url)
-    )
+    for category, ranking in (
+        valid.items()
+    ):
 
-    is_pdf = (
-        "pdf" in content_type.lower()
-        or
-        content.startswith(b"%PDF")
-        or
-        ".pdf" in url.lower()
-    )
+        ranking[
+            "data_status"
+        ] = "fallback"
 
-    if is_pdf:
-        table = pdf_table_rows(
-            content
+        ranking[
+            "status_message"
+        ] = (
+            "Última clasificación "
+            "interna oficial válida "
+            "almacenada"
         )
 
-    else:
-        page = browser.new_page(
-            locale="es-ES",
-            viewport={
-                "width": 1500,
-                "height": 1900,
-            },
-        )
-
-        try:
-            page.goto(
-                url,
-                wait_until=(
-                    "domcontentloaded"
-                ),
-                timeout=120000,
+        ranking[
+            "loaded_at"
+        ] = (
+            datetime.now()
+            .astimezone()
+            .isoformat(
+                timespec="seconds"
             )
-
-            wait_page(page)
-
-            table = html_table_rows(
-                page.content()
-            )
-
-        finally:
-            page.close()
-
-    headers, rows = (
-        parse_classification_table(
-            table
         )
-    )
 
-    return {
-        "name": item["name"],
-        "reference_date": (
-            item["reference_date"]
-        ),
-        "source_url": url,
-        "headers": headers,
-        "rows": rows,
-    }
+        print(
+            category,
+            ":",
+            len(
+                ranking.get(
+                    "rows",
+                    []
+                )
+            ),
+            "tiradoras,",
+            count_valid_rows(
+                ranking
+            ),
+            "con puntos positivos",
+        )
+
+    return valid
 
 
-def collect_internal_rankings(
-    browser,
-    previous,
+# ============================================================
+# RANKING EXISTENTE
+# ============================================================
+
+def get_existing_internal(
+    national,
 ):
-    page = browser.new_page(
-        locale="es-ES",
-        viewport={
-            "width": 1500,
-            "height": 1900,
-        },
-    )
+    """
+    Si nacional-rfee.json ya contiene
+    un ranking interno válido, lo
+    conserva.
 
-    result = {}
+    Esto evita perder datos válidos
+    por una actualización posterior.
+    """
 
-    try:
-        page.goto(
-            CLASSIFICATION_URL,
-            wait_until="domcontentloaded",
-            timeout=120000,
-        )
-
-        wait_page(page)
-
-        # Si los filtros existen,
-        # reducimos la tabla a Sable,
-        # Femenino e Individual.
-        select_visible(
-            page,
-            "Sable",
-        )
-
-        select_visible(
-            page,
-            "Femenino",
-        )
-
-        select_visible(
-            page,
-            "Individual",
-        )
-
-        wait_page(page)
-
-        for category, config in (
-            TARGETS.items()
-        ):
-
-            try:
-                item = find_target_link(
-                    page,
-                    config["search"],
-                )
-
-                if not item:
-                    raise RuntimeError(
-                        "No se encontró "
-                        + config["search"]
-                    )
-
-                classification = (
-                    classification_from_url(
-                        browser,
-                        item,
-                    )
-                )
-
-                classification[
-                    "label"
-                ] = config["label"]
-
-                classification[
-                    "category"
-                ] = category
-
-                classification[
-                    "minimum"
-                ] = config["minimum"]
-
-                classification[
-                    "positive_totals"
-                ] = sum(
-                    row["total"] > 0
-                    for row
-                    in classification[
-                        "rows"
-                    ]
-                )
-
-                if (
-                    classification[
-                        "positive_totals"
-                    ]
-                    == 0
-                ):
-                    raise RuntimeError(
-                        "La clasificación "
-                        "no contiene totales "
-                        "positivos"
-                    )
-
-                result[category] = (
-                    classification
-                )
-
-                print(
-                    category,
-                    len(
-                        classification[
-                            "rows"
-                        ]
-                    ),
-                    "tiradoras;",
-                    classification[
-                        "positive_totals"
-                    ],
-                    "totales positivos",
-                )
-
-            except Exception as exc:
-                print(
-                    "AVISO ranking interno",
-                    category,
-                    exc,
-                )
-
-                if category in previous:
-                    result[category] = (
-                        previous[category]
-                    )
-
-                    print(
-                        category,
-                        "conserva la última "
-                        "clasificación válida",
-                    )
-
-    finally:
-        page.close()
-
-    return result
-
-
-def main():
-    data = read_json()
-
-    previous = data.get(
+    internal = national.get(
         "internal_rankings",
         {},
     )
 
-    with sync_playwright() as p:
+    valid = validate_internal(
+        internal
+    )
 
-        browser = (
-            p.chromium.launch(
-                headless=True
-            )
+    if valid:
+
+        print()
+        print(
+            "Ya existe ranking interno "
+            "válido en nacional-rfee.json."
         )
 
-        internal = (
-            collect_internal_rankings(
-                browser,
-                previous,
+        for category, ranking in (
+            valid.items()
+        ):
+
+            print(
+                category,
+                ":",
+                len(
+                    ranking.get(
+                        "rows",
+                        []
+                    )
+                ),
+                "tiradoras",
             )
+
+    return valid
+
+
+# ============================================================
+# FUENTES
+# ============================================================
+
+def add_source(
+    national,
+):
+    """
+    Añade la fuente del ranking interno
+    sin duplicarla.
+    """
+
+    sources = national.setdefault(
+        "sources",
+        [],
+    )
+
+    source_url = (
+        "https://app.skermo.org/"
+        "classification/public/RFEE"
+        "?setLang=es"
+    )
+
+    exists = any(
+        source.get("url")
+        ==
+        source_url
+        for source in sources
+    )
+
+    if not exists:
+
+        sources.append(
+            {
+                "name": (
+                    "Skermo RFEE · "
+                    "Clasificaciones internas"
+                ),
+                "url": source_url,
+                "use": (
+                    "Ranking interno Cadete "
+                    "y Junior de "
+                    "Sable Femenino"
+                ),
+            }
         )
 
-        browser.close()
+
+# ============================================================
+# MAIN
+# ============================================================
+
+def main():
+
+    print(
+        "================================"
+    )
+
+    print(
+        "ACTUALIZACIÓN RANKING INTERNOO"
+    )
+
+    print(
+        "================================"
+    )
+
+    print()
+
+
+    # --------------------------------------------------------
+    # Leer nacional-rfee.json
+    # --------------------------------------------------------
+
+    if not NATIONAL_JSON.exists():
+
+        raise RuntimeError(
+            "No existe "
+            "data/nacional-rfee.json"
+        )
+
+
+    national = read_json(
+        NATIONAL_JSON
+    )
+
+
+    if not national:
+
+        raise RuntimeError(
+            "nacional-rfee.json "
+            "está vacío o no es válido"
+        )
+
+
+    # --------------------------------------------------------
+    # 1. Intentar conservar datos
+    # internos existentes.
+    # --------------------------------------------------------
+
+    internal = (
+        get_existing_internal(
+           national
+        )
+    )
+
+
+    # --------------------------------------------------------
+    # 2. Si no existen, cargar fallback.
+    # --------------------------------------------------------
 
     if not internal:
 
-    print(
-        "No se pudo interpretar "
-        "la clasificación interna "
-        "publicada por Skermo."
-    )
-
-    fallback_file = (
-        BASE_DIR
-        / "data"
-        / "internal-rfee-fallback.json"
-    )
-
-    if fallback_file.exists():
+        print()
+        print(
+            "No existe ranking interno "
+            "válido en el JSON nacional."
+        )
 
         print(
-            "Cargando último ranking "
-            "interno oficial válido "
-            "desde fallback."
+            "Se utilizará la última "
+            "clasificación oficial "
+            "almacenada."
         )
 
-        internal = json.loads(
-            fallback_file.read_text(
-                encoding="utf-8"
-            )
+        internal = (
+            load_fallback()
         )
 
-        for category, ranking in internal.items():
 
-            ranking[
-                "data_status"
-            ] = "fallback"
+    # --------------------------------------------------------
+    # Comprobación final.
+    # --------------------------------------------------------
 
-            ranking[
-                "status_message"
-            ] = (
-                "Última clasificación "
-                "oficial válida almacenada"
-            )
-
-        print(
-            "Fallback cargado:",
-            ", ".join(
-                internal.keys()
-            )
-        )
-
-    else:
+    if not internal:
 
         raise RuntimeError(
             "No se obtuvo ningún "
-            "ranking interno y tampoco "
-            "existe "
-            "data/internal-rfee-fallback.json"
+            "ranking interno válido"
         )
 
-    data[
+
+    valid_categories = list(
+        internal.keys()
+    )
+
+
+    if not valid_categories:
+
+        raise RuntimeError(
+            "No existen categorías "
+            "internas válidas"
+        )
+
+
+    # --------------------------------------------------------
+    # Guardar ranking interno
+    # dentro del JSON nacional.
+    # --------------------------------------------------------
+
+    national[
         "internal_rankings"
     ] = internal
 
-    data[
+
+    national[
         "internal_rankings_updated_at"
     ] = (
         datetime.now()
@@ -1063,45 +484,102 @@ def main():
         )
     )
 
-    data.setdefault(
-        "sources",
-        [],
-    )
 
-    source_exists = any(
-        source.get("url")
-        == CLASSIFICATION_URL
-        for source
-        in data["sources"]
-    )
-
-    if not source_exists:
-        data["sources"].append(
-            {
-                "name": (
-                    "Skermo RFEE · "
-                    "Clasificaciones"
-                ),
-                "url": (
-                    CLASSIFICATION_URL
-                ),
-                "use": (
-                    "Ranking interno "
-                    "Cadete y Junior "
-                    "de Sable Femenino"
-                ),
-            }
+    national[
+        "internal_rankings_status"
+    ] = (
+        "fallback"
+        if any(
+            ranking.get(
+                "data_status"
+            )
+            ==
+            "fallback"
+            for ranking
+            in internal.values()
         )
+        else
+        "existing"
+    )
+
+
+    add_source(
+        national
+    )
+
+
+    # --------------------------------------------------------
+    # Escribir JSON.
+    # --------------------------------------------------------
 
     write_json(
-        data
+        NATIONAL_JSON,
+        national,
+    )
+
+
+    # --------------------------------------------------------
+    # Resumen.
+    # --------------------------------------------------------
+
+    print()
+    print(
+        "Ranking interno guardado."
     )
 
     print(
-        "Ranking interno guardado en",
-        JSON_FILE,
+        "Categorías disponibles:",
+        ", ".join(
+            valid_categories
+        ),
+    )
+
+
+    for category in (
+        valid_categories
+    ):
+
+        ranking = internal[
+            category
+        ]
+
+        rows = ranking.get(
+            "rows",
+            [],
+        )
+
+        valid_rows = (
+            count_valid_rows(
+                ranking
+            )
+        )
+
+        print(
+            category,
+            ":",
+            len(rows),
+            "filas,",
+            valid_rows,
+            "con puntos positivos",
+        )
+
+
+    print()
+    print(
+        "Archivo actualizado:"
+    )
+
+    print(
+        NATIONAL_JSON
+    )
+
+    print()
+    print(
+        "Actualización de ranking "
+        "interno completada."
     )
 
 
 if __name__ == "__main__":
+
     main()
