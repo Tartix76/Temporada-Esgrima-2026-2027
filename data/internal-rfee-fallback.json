@@ -88,6 +88,231 @@
           "CM Junior Budapest 07/11": "173ª · 0",
           "ECC Cadete Pau 14/11": "35ª · 319,89"
         }
+      },
+      {
+        "position": 6,
+        "full_name": "VICTORIA GARCÍA ALBERCA",
+        "club": "ELGATO-M",
+        "birth_year": "2011",
+        "total": 3163.13,
+        "columns": {
+          "Nacionales": "1363,34",
+          "CM Cadete Orán 22/10": "18ª · 1472,53",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "130ª · 0",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "34ª · 327,27"
+        }
+      },
+      {
+        "position": 7,
+        "full_name": "ANNA GALLEGO AGUSTI",
+        "club": "SAM-B",
+        "birth_year": "2012",
+        "total": 3070.34,
+        "columns": {
+          "Nacionales": "1840,62",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "21ª · 1229,72"
+        }
+      },
+      {
+        "position": 8,
+        "full_name": "ADRIANA VICENTE MORENO",
+        "club": "SAMA-M",
+        "birth_year": "2013",
+        "total": 3044.73,
+        "columns": {
+          "Nacionales": "1003,97",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "5ª · 2040,76"
+        }
+      },
+      {
+        "position": 9,
+        "full_name": "BIANCA SELLÉS BARQUERO",
+        "club": "CEA-V",
+        "birth_year": "2011",
+        "total": 2822.50,
+        "columns": {
+          "Nacionales": "1284,30",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "15ª · 1538,20"
+        }
+      },
+      {
+        "position": 10,
+        "full_name": "CARLA JIMENO MORA",
+        "club": "CE-M",
+        "birth_year": "2010",
+        "total": 2445.92,
+        "columns": {
+          "Nacionales": "1289,46",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "28ª · 1156,46"
+        }
+      },
+      {
+        "position": 11,
+        "full_name": "LUCÍA RÍOS OLARIA",
+        "club": "CEA-V",
+        "birth_year": "2011",
+        "total": 2151.92,
+        "columns": {
+          "Nacionales": "986,20",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "27ª · 1165,72"
+        }
+      },
+      {
+        "position": 12,
+        "full_name": "CELIA SANCHEZ CORBELLA",
+        "club": "SAMA-M",
+        "birth_year": "2010",
+        "total": 2137.47,
+        "columns": {
+          "Nacionales": "731,51",
+          "CM Cadete Orán 22/10": "21ª · 1405,97",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "73ª · 0"
+        }
+      },
+      {
+        "position": 13,
+        "full_name": "JULIA CURTO OCHOA",
+        "club": "CDF-SS",
+        "birth_year": "2010",
+        "total": 1736.23,
+        "columns": {
+          "Nacionales": "1522,01",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "53ª · 214,21"
+        }
+      },
+      {
+        "position": 14,
+        "full_name": "KAMILA ALEXANDRA GONZALEZ CASARES",
+        "club": "CEA-V",
+        "birth_year": "2010",
+        "total": 1646.03,
+        "columns": {
+          "Nacionales": "1333,32",
+          "CM Cadete Orán 22/10": "27ª · 0",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "36ª · 312,71"
+        }
+      },
+      {
+        "position": 15,
+        "full_name": "ANA SANCHEZ CORBELLA",
+        "club": "SAMA-M",
+        "birth_year": "2013",
+        "total": 1247.21,
+        "columns": {
+          "Nacionales": "948,27",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "38ª · 298,94"
+        }
+      },
+      {
+        "position": 16,
+        "full_name": "NOELIA DOSA PODAR",
+        "club": "CEEC-M",
+        "birth_year": "2011",
+        "total": 1231.49,
+        "columns": {
+          "Nacionales": "939,16",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "39ª · 292,33"
+        }
+      },
+      {
+        "position": 17,
+        "full_name": "SARA PUGA GARCIA",
+        "club": "CEEC-M",
+        "birth_year": "2013",
+        "total": 1225.83,
+        "columns": {
+          "Nacionales": "946,24",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "41ª · 279,59"
+        }
+      },
+      {
+        "position": 18,
+        "full_name": "MARIÑA PRIETO VARELA",
+        "club": "CEHE-PO",
+        "birth_year": "2010",
+        "total": 1220.31,
+        "columns": {
+          "Nacionales": "1220,31",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "—"
+        }
+      },
+      {
+        "position": 19,
+        "full_name": "INES MUNRO DIAZ",
+        "club": "CE-M",
+        "birth_year": "2010",
+        "total": 1025.53,
+        "columns": {
+          "Nacionales": "796,48",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "50ª · 229,05"
+        }
+      },
+      {
+        "position": 20,
+        "full_name": "MARINA MUÑIZ AMO",
+        "club": "CE-SG",
+        "birth_year": "2011",
+        "total": 895.00,
+        "columns": {
+          "Nacionales": "895,00",
+          "CM Cadete Orán 22/10": "—",
+          "CM Junior Orán 23/10": "—",
+          "CM Cadete Budapest 06/11": "—",
+          "CM Junior Budapest 07/11": "—",
+          "ECC Cadete Pau 14/11": "—"
+        }
       }
     ]
   },
@@ -130,18 +355,6 @@
       },
       {
         "position": 3,
-        "full_name": "JUNE RUIZ BELATEGI",
-        "club": "CDF-SS",
-        "birth_year": "2008",
-        "total": 2809.26,
-        "columns": {
-          "Nacionales": "2092,37",
-          "CM Junior Orán 22/10": "68ª · 278,16",
-          "CM Junior Budapest 07/11": "106ª · 438,73"
-        }
-      },
-      {
-        "position": 4,
         "full_name": "LAIA MARTÍN HERNÁNDEZ",
         "club": "EHB-B",
         "birth_year": "2007",
@@ -153,7 +366,31 @@
         }
       },
       {
+        "position": 4,
+        "full_name": "JUNE RUIZ BELATEGI",
+        "club": "CDF-SS",
+        "birth_year": "2008",
+        "total": 2809.26,
+        "columns": {
+          "Nacionales": "2092,37",
+          "CM Junior Orán 22/10": "68ª · 278,16",
+          "CM Junior Budapest 07/11": "106ª · 438,73"
+        }
+      },
+      {
         "position": 5,
+        "full_name": "HELENA VILA BAILACH",
+        "club": "SAM-B",
+        "birth_year": "2008",
+        "total": 2068.76,
+        "columns": {
+          "Nacionales": "1784,47",
+          "CM Junior Orán 22/10": "67ª · 284,29",
+          "CM Junior Budapest 07/11": "—"
+        }
+      },
+      {
+        "position": 6,
         "full_name": "CRISTINA LÓPEZ MARTÍNEZ",
         "club": "CE-M",
         "birth_year": "2011",
@@ -162,6 +399,174 @@
           "Nacionales": "1872,04",
           "CM Junior Orán 22/10": "90ª · 0",
           "CM Junior Budapest 07/11": "110ª · 421,86"
+        }
+      },
+      {
+        "position": 7,
+        "full_name": "NEREA THUAL TAENGUA",
+        "club": "CED-V",
+        "birth_year": "2007",
+        "total": 1710.27,
+        "columns": {
+          "Nacionales": "1449,97",
+          "CM Junior Orán 22/10": "71ª · 260,30",
+          "CM Junior Budapest 07/11": "—"
+        }
+      },
+      {
+        "position": 8,
+        "full_name": "HENAR VALVERDE MATE",
+        "club": "CEST-AV",
+        "birth_year": "2007",
+        "total": 1691.27,
+        "columns": {
+          "Nacionales": "1691,27",
+          "CM Junior Orán 22/10": "—",
+          "CM Junior Budapest 07/11": "193ª · 0"
+        }
+      },
+      {
+        "position": 9,
+        "full_name": "MARÍA GONZÁLEZ DE HERRERO COBO",
+        "club": "CE-M",
+        "birth_year": "2011",
+        "total": 1861.10,
+        "columns": {
+          "Nacionales": "1356,56",
+          "CM Junior Orán 22/10": "65ª · 296,82",
+          "CM Junior Budapest 07/11": "135ª · 207,71"
+        }
+      },
+      {
+        "position": 10,
+        "full_name": "ALEJANDRA JATIVA PLAZA",
+        "club": "SAMA-M",
+        "birth_year": "2010",
+        "total": 1402.26,
+        "columns": {
+          "Nacionales": "1180,85",
+          "CM Junior Orán 22/10": "78ª · 221,41",
+          "CM Junior Budapest 07/11": "173ª · 0"
+        }
+      },
+      {
+        "position": 11,
+        "full_name": "GADEA PARAMO PEÑA",
+        "club": "ECC-BU",
+        "birth_year": "2009",
+        "total": 1366.46,
+        "columns": {
+          "Nacionales": "1366,46",
+          "CM Junior Orán 22/10": "82ª · 0",
+          "CM Junior Budapest 07/11": "—"
+        }
+      },
+      {
+        "position": 12,
+        "full_name": "VALERIA VERDE ALONSO",
+        "club": "SAMA-M",
+        "birth_year": "2007",
+        "total": 1344.02,
+        "columns": {
+          "Nacionales": "1344,02",
+          "CM Junior Orán 22/10": "94ª · 0",
+          "CM Junior Budapest 07/11": "—"
+        }
+      },
+      {
+        "position": 13,
+        "full_name": "IRIA ORTIZ HERAS",
+        "club": "EHB-B",
+        "birth_year": "2007",
+        "total": 1333.28,
+        "columns": {
+          "Nacionales": "1333,28",
+          "CM Junior Orán 22/10": "—",
+          "CM Junior Budapest 07/11": "—"
+        }
+      },
+      {
+        "position": 14,
+        "full_name": "CLARA GÓMEZ DAMAS",
+        "club": "CE-M",
+        "birth_year": "2010",
+        "total": 1380.06,
+        "columns": {
+          "Nacionales": "1226,37",
+          "CM Junior Orán 22/10": "92ª · 0",
+          "CM Junior Budapest 07/11": "152ª · 153,69"
+        }
+      },
+      {
+        "position": 15,
+        "full_name": "MARIONA SANAHUJA DE LA TORRE",
+        "club": "SAM-B",
+        "birth_year": "2009",
+        "total": 1204.61,
+        "columns": {
+          "Nacionales": "1204,61",
+          "CM Junior Orán 22/10": "—",
+          "CM Junior Budapest 07/11": "—"
+        }
+      },
+      {
+        "position": 16,
+        "full_name": "OLIMPIA HERNÁNDEZ GONZÁLEZ",
+        "club": "ELGATO-M",
+        "birth_year": "2009",
+        "total": 1085.10,
+        "columns": {
+          "Nacionales": "1085,10",
+          "CM Junior Orán 22/10": "—",
+          "CM Junior Budapest 07/11": "—"
+        }
+      },
+      {
+        "position": 17,
+        "full_name": "ANGELA MARTELLA MARTELLA",
+        "club": "CE-M",
+        "birth_year": "2009",
+        "total": 1244.11,
+        "columns": {
+          "Nacionales": "1078,27",
+          "CM Junior Orán 22/10": "—",
+          "CM Junior Budapest 07/11": "148ª · 165,84"
+        }
+      },
+      {
+        "position": 18,
+        "full_name": "INES HIGUERA LOPEZ",
+        "club": "SAMA-M",
+        "birth_year": "2009",
+        "total": 786.62,
+        "columns": {
+          "Nacionales": "786,62",
+          "CM Junior Orán 22/10": "—",
+          "CM Junior Budapest 07/11": "180ª · 0"
+        }
+      },
+      {
+        "position": 19,
+        "full_name": "PETRA ROHR LOPEZ",
+        "club": "SASLE-M",
+        "birth_year": "2007",
+        "total": 751.30,
+        "columns": {
+          "Nacionales": "751,30",
+          "CM Junior Orán 22/10": "—",
+          "CM Junior Budapest 07/11": "—"
+        }
+      },
+      {
+        "position": 20,
+        "full_name": "IRENE FERRERO CARBALLO",
+        "club": "SASLE-M",
+        "birth_year": "2008",
+        "total": 671.92,
+        "columns": {
+          "Nacionales": "671,92",
+          "CM Junior Orán 22/10": "—",
+          "CM Junior Budapest 07/11": "—"
         }
       }
     ]
