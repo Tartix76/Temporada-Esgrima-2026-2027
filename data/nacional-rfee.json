@@ -1,6 +1,6 @@
 {
-  "updated_at": "25/11/2026 07:38 UTC",
-  "source_updated_at": "2026-11-25T07:38:52+00:00",
+  "updated_at": "25/11/2026 08:35 UTC",
+  "source_updated_at": "2026-11-25T08:35:52+00:00",
   "season": "2026-2027",
   "filters": {
     "weapon": "Sable",
@@ -2430,22 +2430,6 @@
     },
     {
       "date": "27/02/2027",
-      "name": "LIGA NACIONAL IBERDROLA 2ª JORNADA",
-      "category": "ABS",
-      "modality": "E",
-      "location": "SF ABS",
-      "type": "Competición RFEE",
-      "scope": "N",
-      "registration_deadline": "",
-      "links": [
-        {
-          "label": "Skermo RFEE",
-          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10560"
-        }
-      ]
-    },
-    {
-      "date": "27/02/2027",
       "name": "LIGA NACIONAL PLATA 2ª JORNADA",
       "category": "ABS",
       "modality": "E",
@@ -2457,6 +2441,22 @@
         {
           "label": "Skermo RFEE",
           "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10561"
+        }
+      ]
+    },
+    {
+      "date": "27/02/2027",
+      "name": "LIGA NACIONAL IBERDROLA 2ª JORNADA",
+      "category": "ABS",
+      "modality": "E",
+      "location": "SF ABS",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10560"
         }
       ]
     },
@@ -2534,6 +2534,187 @@
     {
       "name": "Skermo RFEE · Calendario",
       "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es"
+    },
+    {
+      "name": "Skermo RFEE · Clasificaciones internas",
+      "url": "https://app.skermo.org/classification/public/RFEE?setLang=es",
+      "use": "Ranking interno Cadete y Junior de Sable Femenino"
     }
-  ]
+  ],
+  "internal_rankings": {
+    "M17": {
+      "label": "Cadete",
+      "category": "M17",
+      "reference_date": "17/11/2026",
+      "minimum": 7000,
+      "source_url": "https://app.skermo.org/classification/public/RFEE?setLang=es",
+      "headers": [
+        "Nacionales",
+        "CM Cadete Orán 22/10",
+        "CM Junior Orán 23/10",
+        "CM Cadete Budapest 06/11",
+        "CM Junior Budapest 07/11",
+        "ECC Cadete Pau 14/11"
+      ],
+      "rows": [
+        {
+          "position": 1,
+          "full_name": "VIOLETA MARTI PRADA",
+          "club": "SAMA-M",
+          "birth_year": "2011",
+          "total": 11357.15,
+          "columns": {
+            "Nacionales": "3164,15",
+            "CM Cadete Orán 22/10": "2ª · 3630,38",
+            "CM Junior Orán 23/10": "52ª · 608,09",
+            "CM Cadete Budapest 06/11": "52ª · 554,53",
+            "CM Junior Budapest 07/11": "15ª · 4562,62",
+            "ECC Cadete Pau 14/11": "2ª · 2719,68"
+          }
+        },
+        {
+          "position": 2,
+          "full_name": "MARÍA GONZÁLEZ DE HERRERO COBO",
+          "club": "CE-M",
+          "birth_year": "2011",
+          "total": 7468.9,
+          "columns": {
+            "Nacionales": "2248,57",
+            "CM Cadete Orán 22/10": "3ª · 3153,03",
+            "CM Junior Orán 23/10": "65ª · 371,03",
+            "CM Cadete Budapest 06/11": "30ª · 2067,31",
+            "CM Junior Budapest 07/11": "135ª · 259,64",
+            "ECC Cadete Pau 14/11": "—"
+          }
+        },
+        {
+          "position": 3,
+          "full_name": "CRISTINA LÓPEZ MARTÍNEZ",
+          "club": "CE-M",
+          "birth_year": "2011",
+          "total": 6797.38,
+          "columns": {
+            "Nacionales": "3454,73",
+            "CM Cadete Orán 22/10": "24ª · 1348,31",
+            "CM Junior Orán 23/10": "90ª · 0",
+            "CM Cadete Budapest 06/11": "57ª · 519,79",
+            "CM Junior Budapest 07/11": "110ª · 527,32",
+            "ECC Cadete Pau 14/11": "6ª · 1994,33"
+          }
+        },
+        {
+          "position": 4,
+          "full_name": "CLARA GÓMEZ DAMAS",
+          "club": "CE-M",
+          "birth_year": "2010",
+          "total": 4461.25,
+          "columns": {
+            "Nacionales": "1433,91",
+            "CM Cadete Orán 22/10": "22ª · 1385,88",
+            "CM Junior Orán 23/10": "92ª · 0",
+            "CM Cadete Budapest 06/11": "59ª · 506,73",
+            "CM Junior Budapest 07/11": "152ª · 192,12",
+            "ECC Cadete Pau 14/11": "10ª · 1641,46"
+          }
+        },
+        {
+          "position": 5,
+          "full_name": "ALEJANDRA JATIVA PLAZA",
+          "club": "SAMA-M",
+          "birth_year": "2010",
+          "total": 4336.27,
+          "columns": {
+            "Nacionales": "1677,34",
+            "CM Cadete Orán 22/10": "9ª · 2074,10",
+            "CM Junior Orán 23/10": "78ª · 276,77",
+            "CM Cadete Budapest 06/11": "48ª · 584,83",
+            "CM Junior Budapest 07/11": "173ª · 0",
+            "ECC Cadete Pau 14/11": "35ª · 319,89"
+          }
+        }
+      ],
+      "data_status": "fallback",
+      "status_message": "Última clasificación interna oficial válida almacenada",
+      "loaded_at": "2026-11-25T08:35:53+00:00"
+    },
+    "M20": {
+      "label": "Junior",
+      "category": "M20",
+      "reference_date": "17/11/2026",
+      "minimum": 7200,
+      "source_url": "https://app.skermo.org/classification/public/RFEE?setLang=es",
+      "headers": [
+        "Nacionales",
+        "CM Junior Orán 22/10",
+        "CM Junior Budapest 07/11"
+      ],
+      "rows": [
+        {
+          "position": 1,
+          "full_name": "VIOLETA MARTI PRADA",
+          "club": "SAMA-M",
+          "birth_year": "2011",
+          "total": 6688.31,
+          "columns": {
+            "Nacionales": "2551,75",
+            "CM Junior Orán 22/10": "52ª · 486,47",
+            "CM Junior Budapest 07/11": "15ª · 3650,10"
+          }
+        },
+        {
+          "position": 2,
+          "full_name": "LUCIA JIMENO MORA",
+          "club": "CE-M",
+          "birth_year": "2007",
+          "total": 3289.6,
+          "columns": {
+            "Nacionales": "2716,98",
+            "CM Junior Orán 22/10": "81ª · 0",
+            "CM Junior Budapest 07/11": "79ª · 572,62"
+          }
+        },
+        {
+          "position": 3,
+          "full_name": "JUNE RUIZ BELATEGI",
+          "club": "CDF-SS",
+          "birth_year": "2008",
+          "total": 2809.26,
+          "columns": {
+            "Nacionales": "2092,37",
+            "CM Junior Orán 22/10": "68ª · 278,16",
+            "CM Junior Budapest 07/11": "106ª · 438,73"
+          }
+        },
+        {
+          "position": 4,
+          "full_name": "LAIA MARTÍN HERNÁNDEZ",
+          "club": "EHB-B",
+          "birth_year": "2007",
+          "total": 2589.45,
+          "columns": {
+            "Nacionales": "2374,94",
+            "CM Junior Orán 22/10": "87ª · 0",
+            "CM Junior Budapest 07/11": "133ª · 214,51"
+          }
+        },
+        {
+          "position": 5,
+          "full_name": "CRISTINA LÓPEZ MARTÍNEZ",
+          "club": "CE-M",
+          "birth_year": "2011",
+          "total": 2293.89,
+          "columns": {
+            "Nacionales": "1872,04",
+            "CM Junior Orán 22/10": "90ª · 0",
+            "CM Junior Budapest 07/11": "110ª · 421,86"
+          }
+        }
+      ],
+      "data_status": "fallback",
+      "status_message": "Última clasificación interna oficial válida almacenada",
+      "loaded_at": "2026-11-25T08:35:53+00:00"
+    }
+  },
+  "internal_rankings_updated_at": "25/11/2026 08:35 UTC",
+  "internal_rankings_status": "fallback"
 }
