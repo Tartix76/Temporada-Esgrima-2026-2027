@@ -14,16 +14,38 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+
   update-dashboard:
+
     name: Actualizar datos RFEE y FME
+
     runs-on: ubuntu-latest
+
     timeout-minutes: 25
 
     steps:
+
+      # ======================================================
+      # REPOSITORIO
+      # ======================================================
+
       - name: Descargar repositorio
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
+
+
+      - name: Sincronizar con main
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+          git clean -fd
+
+
+      # ======================================================
+      # PYTHON
+      # ======================================================
 
       - name: Configurar Python
         uses: actions/setup-python@v5
@@ -31,24 +53,39 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+
       - name: Instalar dependencias Python
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+
       - name: Instalar Chromium para Playwright
         run: |
           python -m playwright install --with-deps chromium
+
+
+      # ======================================================
+      # COMPROBAR ARCHIVOS
+      # ======================================================
 
       - name: Validar archivos requeridos
         run: |
           test -f scripts/update_rfee.py
           test -f scripts/update_internal_rfee.py
           test -f scripts/update_fme.py
+
           test -f data/nacional-rfee.json
           test -f data/regional-fme.json
+          test -f data/internal-rfee-fallback.json
+
           test -f docs/fme/Calendario.pdf
           test -f docs/fme/Competicion.pdf
+
+
+      # ======================================================
+      # COMPROBAR SINTAXIS
+      # ======================================================
 
       - name: Validar sintaxis Python
         run: |
@@ -56,87 +93,139 @@ jobs:
           python -m py_compile scripts/update_internal_rfee.py
           python -m py_compile scripts/update_fme.py
 
+
+      # ======================================================
+      # RANKING NACIONAL RFEE
+      # ======================================================
+
       - name: Actualizar ranking nacional RFEE
         run: |
           python scripts/update_rfee.py
 
+
       - name: Validar ranking nacional RFEE
         run: |
           python - <<'PY'
+
           import json
           from pathlib import Path
 
-          path = Path("data/nacional-rfee.json")
-
-          if not path.exists():
-              raise SystemExit(
-                  "No existe data/nacional-rfee.json"
-              )
-
-          data = json.loads(
-              path.read_text(encoding="utf-8")
+          path = Path(
+              "data/nacional-rfee.json"
           )
 
-          rankings = data.get("rankings", {})
+          data = json.loads(
+              path.read_text(
+                  encoding="utf-8"
+              )
+          )
+
+          rankings = data.get(
+              "rankings",
+              {}
+          )
 
           if not rankings:
               raise SystemExit(
-                  "El JSON nacional no contiene rankings"
+                  "El JSON nacional "
+                  "no contiene rankings"
               )
 
-          m15 = rankings.get("M15", [])
+          m15 = rankings.get(
+              "M15",
+              []
+          )
 
           if not m15:
               raise SystemExit(
-                  "El ranking nacional M15 está vacío"
+                  "El ranking M15 "
+                  "está vacío"
               )
 
           positives = sum(
-              float(row.get("points", 0) or 0) > 0
-              for row in m15
+              float(
+                  row.get(
+                      "points",
+                      0
+                  )
+                  or
+                  0
+              )
+              > 0
+              for row
+              in m15
           )
 
           if positives == 0:
               raise SystemExit(
-                  "M15 contiene tiradoras, pero todos "
+                  "M15 contiene "
+                  "tiradoras pero todos "
                   "los puntos son cero"
               )
 
           print(
-              "Ranking M15 validado:",
-              len(m15),
-              "tiradoras;",
-              positives,
-              "con puntos positivos"
+              "Ranking M15 validado"
           )
+
+          print(
+              "Tiradoras:",
+              len(m15)
+          )
+
+          print(
+              "Con puntos positivos:",
+              positives
+          )
+
           PY
 
+
+      # ======================================================
+      # RANKING INTERNO RFEE
+      # ======================================================
+
       - name: Actualizar ranking interno RFEE
-        id: internal_ranking
+        id: ranking_interno
         continue-on-error: true
         run: |
           python scripts/update_internal_rfee.py
 
-      - name: Informar del resultado del ranking interno
+
+      - name: Comprobar resultado ranking interno
         if: always()
         run: |
-          if [ "${{ steps.internal_ranking.outcome }}" = "success" ]; then
-            echo "El ranking interno RFEE se actualizó correctamente."
+          if [ "${{ steps.ranking_interno.outcome }}" = "success" ]; then
+
+            echo "Ranking interno RFEE actualizado correctamente."
+
           else
-            echo "::warning::No se pudo actualizar el ranking interno RFEE."
-            echo "::warning::Se conservarán los últimos datos internos válidos si existen."
+
+            echo "::warning::No se pudo actualizar directamente el ranking interno RFEE."
+
+            echo "::warning::El dashboard continuará usando los últimos datos internos válidos."
+
           fi
 
-      - name: Validar ranking interno si existe
+
+      # ======================================================
+      # VALIDAR RANKING INTERNO
+      # ======================================================
+
+      - name: Validar ranking interno RFEE
         run: |
           python - <<'PY'
+
           import json
           from pathlib import Path
 
-          path = Path("data/nacional-rfee.json")
+          path = Path(
+              "data/nacional-rfee.json"
+          )
 
           data = json.loads(
-              path.read_text(encoding="utf-8")
+              path.read_text(
+                  encoding="utf-8"
+              )
           )
 
           internal = data.get(
@@ -145,70 +234,114 @@ jobs:
           )
 
           if not internal:
+
               print(
-                  "AVISO: todavía no existe internal_rankings."
+                  "AVISO: no hay "
+                  "internal_rankings."
               )
+
               print(
-                  "La actualización general continuará."
+                  "El workflow continuará."
               )
+
               raise SystemExit(0)
 
-          categories = [
-              category
-              for category in ["M17", "M20"]
-              if (
-                  category in internal
-                  and internal[category].get("rows")
-              )
-          ]
 
-          if not categories:
-              print(
-                  "AVISO: internal_rankings existe, "
-                  "pero no contiene filas M17 o M20."
-              )
-              raise SystemExit(0)
+          for category in [
+              "M17",
+              "M20"
+          ]:
 
-          for category in categories:
-              ranking = internal[category]
-              rows = ranking.get("rows", [])
+              ranking = internal.get(
+                  category
+              )
+
+              if not ranking:
+
+                  print(
+                      category,
+                      "no disponible"
+                  )
+
+                  continue
+
+
+              rows = ranking.get(
+                  "rows",
+                  []
+              )
+
 
               positives = sum(
-                  float(row.get("total", 0) or 0) > 0
-                  for row in rows
+                  float(
+                      row.get(
+                          "total",
+                          0
+                      )
+                      or
+                      0
+                  )
+                  > 0
+                  for row
+                  in rows
               )
+
 
               print(
                   category,
+                  ":",
                   len(rows),
-                  "tiradoras;",
-                  positives,
-                  "totales positivos"
+                  "tiradoras"
               )
 
+
+              print(
+                  category,
+                  ":",
+                  positives,
+                  "con puntos positivos"
+              )
+
+
           print(
-              "Ranking interno disponible:",
-              ", ".join(categories)
+              "Validación ranking "
+              "interno terminada."
           )
+
           PY
+
+
+      # ======================================================
+      # REGIONAL FME
+      # ======================================================
 
       - name: Actualizar datos regionales FME
         run: |
           python scripts/update_fme.py
 
-      - name: Validar JSON nacional y regional
-        run: |
-          python -m json.tool \
-            data/nacional-rfee.json \
-            > /dev/null
 
-          python -m json.tool \
-            data/regional-fme.json \
-            > /dev/null
+      # ======================================================
+      # VALIDAR JSON
+      # ======================================================
+
+      - name: Validar JSON nacional
+        run: |
+          python -m json.tool data/nacional-rfee.json > /dev/null
+
+
+      - name: Validar JSON regional
+        run: |
+          python -m json.tool data/regional-fme.json > /dev/null
+
+
+      # ======================================================
+      # VALIDAR REGIONAL
+      # ======================================================
 
       - name: Validar calendario regional
         run: |
           python - <<'PY'
+
           import json
           from pathlib import Path
 
@@ -217,7 +350,9 @@ jobs:
           )
 
           data = json.loads(
-              path.read_text(encoding="utf-8")
+              path.read_text(
+                  encoding="utf-8"
+              )
           )
 
           calendar = data.get(
@@ -226,68 +361,127 @@ jobs:
           )
 
           if len(calendar) <= 1:
+
               raise SystemExit(
-                  "El calendario regional contiene "
-                  "una o ninguna competición"
+                  "El calendario regional "
+                  "contiene una o ninguna "
+                  "competición"
               )
 
+
           print(
-              "Calendario regional validado:",
+              "Calendario regional:",
               len(calendar),
               "competiciones"
           )
+
           PY
 
-      - name: Mostrar resumen de actualización
+
+      # ======================================================
+      # RESUMEN
+      # ======================================================
+
+      - name: Mostrar resumen
         run: |
           python - <<'PY'
+
           import json
 
-          national = json.load(
-              open(
-                  "data/nacional-rfee.json",
-                  encoding="utf-8"
-              )
-          )
+          with open(
+              "data/nacional-rfee.json",
+              encoding="utf-8"
+          ) as file:
 
-          regional = json.load(
-              open(
-                  "data/regional-fme.json",
-                  encoding="utf-8"
+              national = json.load(
+                  file
               )
+
+
+          with open(
+              "data/regional-fme.json",
+              encoding="utf-8"
+          ) as file:
+
+              regional = json.load(
+                  file
+              )
+
+
+          print(
+              "=============================="
           )
 
           print(
-              "Actualización nacional:",
-              national.get("updated_at")
+              "RESUMEN DE ACTUALIZACIÓN"
           )
 
           print(
-              "M15 nacional:",
-              len(
-                  national
-                  .get("rankings", {})
-                  .get("M15", [])
-              ),
+              "=============================="
+          )
+
+
+          print(
+              "Nacional:",
+              national.get(
+                  "updated_at"
+              )
+          )
+
+
+          m15 = (
+              national
+              .get(
+                  "rankings",
+                  {}
+              )
+              .get(
+                  "M15",
+                  []
+              )
+          )
+
+
+          print(
+              "M15:",
+              len(m15),
               "tiradoras"
           )
+
 
           internal = national.get(
               "internal_rankings",
               {}
           )
 
-          print(
-              "Ranking interno:",
-              ", ".join(internal.keys())
-              if internal
-              else "no disponible"
-          )
 
           print(
-              "Actualización regional:",
-              regional.get("updated_at")
+              "Ranking interno:",
+              ", ".join(
+                  internal.keys()
+              )
+              if internal
+              else
+              "no disponible"
           )
+
+
+          print(
+              "Estado interno:",
+              national.get(
+                  "internal_rankings_status",
+                  "sin estado"
+              )
+          )
+
+
+          print(
+              "Regional:",
+              regional.get(
+                  "updated_at"
+              )
+          )
+
 
           print(
               "Calendario regional:",
@@ -296,29 +490,60 @@ jobs:
                       "calendar",
                       []
                   )
-              ),
-              "pruebas"
+              )
           )
+
+
+          print(
+              "=============================="
+          )
+
           PY
+
+
+      # ======================================================
+      # PREPARAR CAMBIOS
+      # ======================================================
+
+      - name: Comprobar cambios generados
+        run: |
+          echo "Estado del repositorio:"
+          git status --short
+
+
+      - name: Preparar cambios de datos
+        run: |
+          git add data/nacional-rfee.json
+          git add data/regional-fme.json
+
+          echo "Cambios preparados:"
+
+          git diff --cached --stat
+
+
+      # ======================================================
+      # PUBLICACIÓN
+      # ======================================================
 
       - name: Guardar cambios en GitHub
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add data/nacional-rfee.json
-          git add data/regional-fme.json
-
           if git diff --cached --quiet; then
+
             echo "No hay datos nuevos que guardar."
-          else
-            git commit -m "Actualizar datos RFEE y FME"
 
-            echo "Sincronizando con main antes de publicar..."
+            exit 0
 
-            git pull --rebase origin main
-
-            echo "Publicando los datos actualizados..."
-
-            git push origin HEAD:main
           fi
+
+          echo "Creando commit..."
+
+          git commit -m "Actualizar datos RFEE y FME"
+
+          echo "Publicando commit..."
+
+          git push origin HEAD:main
+
+          echo "Datos publicados correctamente."
