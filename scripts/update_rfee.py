@@ -5,7 +5,10 @@ import json
 import re
 import unicodedata
 from pathlib import Path
+from urllib.parse import parse_qsl
 from urllib.parse import urlencode
+from urllib.parse import urlsplit
+from urllib.parse import urlunsplit
 
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
@@ -35,66 +38,6 @@ CALENDAR_URL = (
 
 SEASON_LABEL = "2026-2027"
 
-# Skermo puede cambiar los identificadores internos.
-# El script prueba ambos.
-SEASON_IDS = [
-    "16",
-    "17",
-]
-
-CATEGORY_IDS = {
-    "M13": ["12"],
-    "M15": ["4"],
-    "M17": ["5"],
-    "M20": ["6"],
-    "ABS": ["7"],
-}
-
-CATEGORY_LABELS = {
-    "M13": [
-        "M13",
-        "Sub 13",
-        "Menores de 13",
-    ],
-    "M15": [
-        "M15",
-        "Sub 15",
-        "Infantil",
-        "Menores de 15",
-    ],
-    "M17": [
-        "M17",
-        "Sub 17",
-        "Cadete",
-        "Menores de 17",
-    ],
-    "M20": [
-        "M20",
-        "Sub 20",
-        "Junior",
-        "Júnior",
-        "Menores de 20",
-    ],
-    "ABS": [
-        "ABS",
-        "Absoluto",
-        "Absoluta",
-    ],
-}
-
-WEAPON_LABELS = [
-    "Sable",
-    "SABLE",
-]
-
-GENDER_LABELS = [
-    "Femenino",
-    "Femenina",
-    "Women",
-    "Female",
-    "Mujer",
-]
-
 CATEGORIES = [
     "M13",
     "M15",
@@ -103,9 +46,110 @@ CATEGORIES = [
     "ABS",
 ]
 
+CATEGORY_LABELS = {
+    "M13": [
+        "M13",
+        "Sub 13",
+        "Sub-13",
+        "Menores de 13",
+    ],
+    "M15": [
+        "M15",
+        "Sub 15",
+        "Sub-15",
+        "Infantil",
+        "Menores de 15",
+    ],
+    "M17": [
+        "M17",
+        "Sub 17",
+        "Sub-17",
+        "Cadete",
+        "Menores de 17",
+    ],
+    "M20": [
+        "M20",
+        "Sub 20",
+        "Sub-20",
+        "Junior",
+        "Júnior",
+        "Menores de 20",
+    ],
+    "ABS": [
+        "ABS",
+        "Absoluto",
+        "Absoluta",
+        "Senior",
+        "Sénior",
+    ],
+}
+
+WEAPON_LABELS = [
+    "Sable",
+]
+
+GENDER_LABELS = [
+    "Femenino",
+    "Femenina",
+    "Women",
+    "Female",
+]
+
+SEASON_PARAMETER_NAMES = [
+    "season",
+    "season_id",
+    "idSeason",
+]
+
+WEAPON_PARAMETER_NAMES = [
+    "weapon",
+    "weapon_id",
+    "idWeapon",
+]
+
+CATEGORY_PARAMETER_NAMES = [
+    "category",
+    "category_id",
+    "idCategory",
+]
+
+GENDER_PARAMETER_NAMES = [
+    "gender",
+    "gender_id",
+    "idGender",
+]
+
+TABLE_REQUIRED_HEADERS = [
+    [
+        "posición",
+        "posicion",
+        "puesto",
+        "ranking",
+        "pos.",
+        "#",
+    ],
+    [
+        "nombre",
+        "tiradora",
+        "deportista",
+    ],
+    [
+        "puntuación",
+        "puntuacion",
+        "puntos",
+        "total",
+    ],
+]
+
+# Comprobación solicitada a partir del ranking oficial actual.
+EXPECTED_M15_LEADERS = [
+    "ADRIANA VICENTE MORENO",
+    "ANNA GALLEGO AGUSTI",
+]
+
 
 # ============================================================
-# TEXTO Y NÚMEROS
+# UTILIDADES DE TEXTO
 # ============================================================
 
 def clean(value):
@@ -115,13 +159,6 @@ def clean(value):
 
 
 def normalize(value):
-    """
-    Normaliza texto para comparar:
-    - minúsculas
-    - sin tildes
-    - espacios compactados
-    """
-
     text = clean(value).casefold()
 
     text = "".join(
@@ -132,37 +169,48 @@ def normalize(value):
         )
         if unicodedata.category(
             character
-        ) != "Mn"
+        )
+        !=
+        "Mn"
     )
 
     return text
 
 
+def compact_name(value):
+    """
+    Normaliza nombres para comparar:
+    - mayúsculas/minúsculas;
+    - tildes;
+    - signos;
+    - espacios.
+    """
+
+    text = normalize(value)
+
+    text = re.sub(
+        r"[^a-z0-9 ]",
+        " ",
+        text,
+    )
+
+    return " ".join(
+        text.split()
+    ).upper()
+
+
 def parse_number(value):
-    """
-    Convierte:
-    1.234,56 -> 1234.56
-    1234,56  -> 1234.56
-    1234.56  -> 1234.56
-    """
-
-    text = clean(value)
-
     text = re.sub(
         r"[^0-9,.\-]",
         "",
-        text,
+        clean(value),
     )
 
     if not text:
         return 0.0
 
-    if (
-        "," in text
-        and
-        "." in text
-    ):
-        # Formato español 1.234,56
+    if "," in text and "." in text:
+
         if text.rfind(",") > text.rfind("."):
             text = (
                 text
@@ -170,9 +218,11 @@ def parse_number(value):
                 .replace(",", ".")
             )
 
-        # Formato inglés 1,234.56
         else:
-            text = text.replace(",", "")
+            text = text.replace(
+                ",",
+                "",
+            )
 
     elif "," in text:
         text = text.replace(
@@ -205,15 +255,6 @@ def extract_year(value):
 # ============================================================
 
 def read_previous_data():
-    """
-    Carga el JSON actual para preservar:
-    - ranking anterior válido;
-    - ranking interno;
-    - resultados;
-    - calendario;
-    - fuentes.
-    """
-
     if not OUTPUT_FILE.exists():
         return {}
 
@@ -227,7 +268,7 @@ def read_previous_data():
     except Exception as error:
         print(
             "AVISO: no se pudo leer "
-            "nacional-rfee.json:",
+            "el JSON nacional anterior:",
             error,
         )
 
@@ -235,12 +276,6 @@ def read_previous_data():
 
 
 def write_json_safely(data):
-    """
-    Genera primero un fichero temporal.
-    Solo reemplaza el JSON publicado
-    después de validar su sintaxis.
-    """
-
     OUTPUT_FILE.parent.mkdir(
         parents=True,
         exist_ok=True,
@@ -290,46 +325,40 @@ def wait_for_page(page):
     )
 
 
-def option_matches(
-    option_text,
-    requested_labels,
+def save_diagnostic(
+    category,
+    name,
+    content,
 ):
-    option_normalized = normalize(
-        option_text
+    path = Path(
+        f"/tmp/rfee-{category}-{name}.html"
     )
 
-    for requested in requested_labels:
-        requested_normalized = normalize(
-            requested
-        )
+    path.write_text(
+        content,
+        encoding="utf-8",
+    )
 
-        if (
-            option_normalized
-            ==
-            requested_normalized
-        ):
-            return True
-
-        if (
-            requested_normalized
-            in
-            option_normalized
-        ):
-            return True
-
-    return False
+    print(
+        "Diagnóstico guardado:",
+        path,
+    )
 
 
-def select_option_by_labels(
-    page,
-    labels,
-):
+# ============================================================
+# DESCUBRIR LOS DESPLEGABLES REALES
+# ============================================================
+
+def get_select_definitions(page):
     """
-    Busca las opciones indicadas en todos
-    los selectores de la página.
-
-    Devuelve True cuando selecciona una.
+    Lee todos los desplegables y devuelve:
+    - name;
+    - id;
+    - opciones;
+    - valor seleccionado.
     """
+
+    definitions = []
 
     selects = page.locator(
         "select"
@@ -342,119 +371,500 @@ def select_option_by_labels(
             select_index
         )
 
-        options = select.locator(
-            "option"
+        name = clean(
+            select.get_attribute(
+                "name"
+            )
+        )
+
+        element_id = clean(
+            select.get_attribute(
+                "id"
+            )
+        )
+
+        value = clean(
+            select.input_value()
+        )
+
+        options = []
+
+        option_locator = (
+            select.locator(
+                "option"
+            )
         )
 
         for option_index in range(
-            options.count()
+            option_locator.count()
         ):
-            option = options.nth(
-                option_index
+            option = (
+                option_locator.nth(
+                    option_index
+                )
             )
 
-            option_text = clean(
-                option.inner_text()
+            options.append(
+                {
+                    "text": clean(
+                        option.inner_text()
+                    ),
+                    "value": clean(
+                        option.get_attribute(
+                            "value"
+                        )
+                    ),
+                    "selected": (
+                        option.is_checked()
+                        if (
+                            option.get_attribute(
+                                "selected"
+                            )
+                            is not None
+                        )
+                        else False
+                    ),
+                }
             )
 
-            if not option_matches(
-                option_text,
-                labels,
-            ):
-                continue
+        definitions.append(
+            {
+                "index": select_index,
+                "name": name,
+                "id": element_id,
+                "value": value,
+                "options": options,
+            }
+        )
 
-            value = option.get_attribute(
-                "value"
-            )
+    return definitions
 
-            try:
-                select.select_option(
-                    value=value
-                )
 
-                wait_for_page(
-                    page
-                )
+def labels_match(
+    visible_text,
+    requested_labels,
+):
+    visible = normalize(
+        visible_text
+    )
 
-                print(
-                    "Filtro seleccionado:",
-                    option_text,
-                )
+    for label in requested_labels:
+        requested = normalize(
+            label
+        )
 
-                return True
+        if visible == requested:
+            return True
 
-            except Exception as error:
-                print(
-                    "AVISO seleccionando",
-                    option_text,
-                    error,
-                )
+        if (
+            requested
+            and
+            requested in visible
+        ):
+            return True
 
     return False
 
 
-# ============================================================
-# IDENTIFICACIÓN DE COLUMNAS
-# ============================================================
-
-def find_column(
-    headers,
-    candidates,
+def find_option_in_definitions(
+    definitions,
+    labels,
 ):
     """
-    Devuelve el índice de una columna
-    comparando los encabezados.
+    Busca una opción por texto visible y
+    devuelve el selector y el valor real.
     """
 
-    normalized_headers = [
-        normalize(header)
-        for header in headers
-    ]
+    exact_matches = []
+    partial_matches = []
 
-    # Primero coincidencia exacta.
-    for candidate in candidates:
-        target = normalize(
-            candidate
-        )
+    for definition in definitions:
+        for option in definition[
+            "options"
+        ]:
+            visible = normalize(
+                option["text"]
+            )
 
-        for index, header in enumerate(
-            normalized_headers
-        ):
-            if header == target:
-                return index
+            for label in labels:
+                requested = normalize(
+                    label
+                )
 
-    # Después coincidencia parcial.
-    for candidate in candidates:
-        target = normalize(
-            candidate
-        )
+                if not requested:
+                    continue
 
-        for index, header in enumerate(
-            normalized_headers
-        ):
-            if target in header:
-                return index
+                match = {
+                    "select_index": (
+                        definition[
+                            "index"
+                        ]
+                    ),
+                    "select_name": (
+                        definition[
+                            "name"
+                        ]
+                    ),
+                    "select_id": (
+                        definition[
+                            "id"
+                        ]
+                    ),
+                    "option_text": (
+                        option[
+                            "text"
+                        ]
+                    ),
+                    "option_value": (
+                        option[
+                            "value"
+                        ]
+                    ),
+                }
 
-    return None
+                if visible == requested:
+                    exact_matches.append(
+                        match
+                    )
+
+                elif requested in visible:
+                    partial_matches.append(
+                        match
+                    )
+
+    matches = (
+        exact_matches
+        or
+        partial_matches
+    )
+
+    return (
+        matches[0]
+        if matches
+        else None
+    )
 
 
-def cell_value(
-    cells,
-    index,
+def parameter_name_for_match(
+    match,
+    default_names,
 ):
-    if index is None:
-        return ""
+    if match["select_name"]:
+        return match["select_name"]
 
-    if index >= len(cells):
-        return ""
+    if match["select_id"]:
+        return match["select_id"]
 
-    return clean(
-        cells[index]
+    return default_names[0]
+
+
+def discover_filter_values(
+    page,
+    category,
+):
+    definitions = (
+        get_select_definitions(
+            page
+        )
+    )
+
+    print(
+        "Desplegables detectados:"
+    )
+
+    for definition in definitions:
+        print(
+            {
+                "name": definition[
+                    "name"
+                ],
+                "id": definition[
+                    "id"
+                ],
+                "value": definition[
+                    "value"
+                ],
+                "options": [
+                    option["text"]
+                    for option
+                    in definition[
+                        "options"
+                    ]
+                ],
+            }
+        )
+
+    season = find_option_in_definitions(
+        definitions,
+        [SEASON_LABEL],
+    )
+
+    weapon = find_option_in_definitions(
+        definitions,
+        WEAPON_LABELS,
+    )
+
+    category_match = (
+        find_option_in_definitions(
+            definitions,
+            CATEGORY_LABELS[
+                category
+            ],
+        )
+    )
+
+    gender = find_option_in_definitions(
+        definitions,
+        GENDER_LABELS,
+    )
+
+    missing = []
+
+    if not season:
+        missing.append(
+            "temporada "
+            + SEASON_LABEL
+        )
+
+    if not weapon:
+        missing.append(
+            "arma Sable"
+        )
+
+    if not category_match:
+        missing.append(
+            "categoría "
+            + category
+        )
+
+    if not gender:
+        missing.append(
+            "género Femenino"
+        )
+
+    if missing:
+        raise RuntimeError(
+            "No se han encontrado "
+            "estos filtros: "
+            + ", ".join(missing)
+        )
+
+    return {
+        parameter_name_for_match(
+            season,
+            SEASON_PARAMETER_NAMES,
+        ): season[
+            "option_value"
+        ],
+        parameter_name_for_match(
+            weapon,
+            WEAPON_PARAMETER_NAMES,
+        ): weapon[
+            "option_value"
+        ],
+        parameter_name_for_match(
+            category_match,
+            CATEGORY_PARAMETER_NAMES,
+        ): category_match[
+            "option_value"
+        ],
+        parameter_name_for_match(
+            gender,
+            GENDER_PARAMETER_NAMES,
+        ): gender[
+            "option_value"
+        ],
+        "setLang": "es",
+    }, {
+        "season": {
+            "text": season[
+                "option_text"
+            ],
+            "value": season[
+                "option_value"
+            ],
+        },
+        "weapon": {
+            "text": weapon[
+                "option_text"
+            ],
+            "value": weapon[
+                "option_value"
+            ],
+        },
+        "category": {
+            "text": category_match[
+                "option_text"
+            ],
+            "value": category_match[
+                "option_value"
+            ],
+        },
+        "gender": {
+            "text": gender[
+                "option_text"
+            ],
+            "value": gender[
+                "option_value"
+            ],
+        },
+    }
+
+
+# ============================================================
+# URL DE CONSULTA
+# ============================================================
+
+def create_url(
+    base_url,
+    parameters,
+):
+    split = urlsplit(
+        base_url
+    )
+
+    current_parameters = dict(
+        parse_qsl(
+            split.query,
+            keep_blank_values=True,
+        )
+    )
+
+    current_parameters.update(
+        parameters
+    )
+
+    return urlunsplit(
+        (
+            split.scheme,
+            split.netloc,
+            split.path,
+            urlencode(
+                current_parameters
+            ),
+            split.fragment,
+        )
     )
 
 
 # ============================================================
-# INTERPRETACIÓN DEL RANKING
+# VALIDACIÓN DE FILTROS VISIBLES
+# ============================================================
+
+def selected_option_texts(page):
+    selected = []
+
+    selects = page.locator(
+        "select"
+    )
+
+    for index in range(
+        selects.count()
+    ):
+        select = selects.nth(
+            index
+        )
+
+        try:
+            value = select.input_value()
+
+            selected_option = (
+                select.locator(
+                    f'option[value="{value}"]'
+                )
+            )
+
+            if (
+                selected_option.count()
+                >
+                0
+            ):
+                selected.append(
+                    clean(
+                        selected_option
+                        .first
+                        .inner_text()
+                    )
+                )
+
+        except Exception:
+            continue
+
+    return selected
+
+
+def verify_selected_filters(
+    page,
+    category,
+):
+    selected = (
+        selected_option_texts(
+            page
+        )
+    )
+
+    print(
+        category,
+        "opciones seleccionadas:",
+        selected,
+    )
+
+    checks = {
+        "season": any(
+            labels_match(
+                value,
+                [SEASON_LABEL],
+            )
+            for value in selected
+        ),
+        "weapon": any(
+            labels_match(
+                value,
+                WEAPON_LABELS,
+            )
+            for value in selected
+        ),
+        "category": any(
+            labels_match(
+                value,
+                CATEGORY_LABELS[
+                    category
+                ],
+            )
+            for value in selected
+        ),
+        "gender": any(
+            labels_match(
+                value,
+                GENDER_LABELS,
+            )
+            for value in selected
+        ),
+    }
+
+    print(
+        category,
+        "validación de filtros:",
+        checks,
+    )
+
+    if not all(
+        checks.values()
+    ):
+        raise RuntimeError(
+            "La página no confirma todos "
+            "los filtros esperados: "
+            + json.dumps(
+                checks,
+                ensure_ascii=False,
+            )
+        )
+
+    return selected
+
+
+# ============================================================
+# TABLAS HTML
 # ============================================================
 
 def extract_tables(html):
@@ -480,8 +890,7 @@ def extract_tables(html):
                         strip=True,
                     )
                 )
-                for cell
-                in tr.find_all(
+                for cell in tr.find_all(
                     ["th", "td"]
                 )
             ]
@@ -499,102 +908,215 @@ def extract_tables(html):
     return tables
 
 
-def locate_ranking_table(html):
+def find_column(
+    headers,
+    candidates,
+):
+    normalized_headers = [
+        normalize(header)
+        for header in headers
+    ]
+
+    for candidate in candidates:
+        requested = normalize(
+            candidate
+        )
+
+        for index, header in enumerate(
+            normalized_headers
+        ):
+            if header == requested:
+                return index
+
+    for candidate in candidates:
+        requested = normalize(
+            candidate
+        )
+
+        for index, header in enumerate(
+            normalized_headers
+        ):
+            if requested in header:
+                return index
+
+    return None
+
+
+def cell(
+    row,
+    index,
+):
+    if index is None:
+        return ""
+
+    if index >= len(row):
+        return ""
+
+    return clean(
+        row[index]
+    )
+
+
+def headers_are_ranking(
+    headers,
+):
     """
-    Localiza la tabla de ranking por
-    los encabezados, no por su posición.
+    Exige tres grupos:
+    - posición;
+    - nombre o deportista;
+    - puntuación o puntos.
     """
 
+    normalized_headers = [
+        normalize(header)
+        for header in headers
+    ]
+
+    for required_group in (
+        TABLE_REQUIRED_HEADERS
+    ):
+        found = False
+
+        for candidate in required_group:
+            requested = normalize(
+                candidate
+            )
+
+            if any(
+                requested == header
+                or
+                requested in header
+                for header
+                in normalized_headers
+            ):
+                found = True
+                break
+
+        if not found:
+            return False
+
+    return True
+
+
+def find_ranking_table(html):
     tables = extract_tables(
         html
     )
 
-    best = None
-    best_score = -1
+    candidates = []
 
-    expected_headers = [
-        "posición",
-        "posicion",
-        "puesto",
-        "ranking",
-        "nombre",
-        "apellidos",
-        "club",
-        "puntuación",
-        "puntuacion",
-        "puntos",
-    ]
-
-    for table in tables:
-        for header_index, row in enumerate(
+    for table_index, table in enumerate(
+        tables
+    ):
+        for header_index, headers in enumerate(
             table[:10]
         ):
-            combined = normalize(
-                " ".join(row)
+            if not headers_are_ranking(
+                headers
+            ):
+                continue
+
+            data_rows = (
+                table[
+                    header_index + 1:
+                ]
             )
 
-            score = sum(
+            numeric_rows = sum(
                 1
-                for expected
-                in expected_headers
-                if normalize(expected)
-                in combined
+                for row in data_rows
+                if (
+                    row
+                    and
+                    re.search(
+                        r"\d+",
+                        row[0],
+                    )
+                )
             )
 
-            # Bonificación si tiene bastantes filas.
-            if len(table) >= 10:
-                score += 2
+            candidates.append(
+                {
+                    "table_index": (
+                        table_index
+                    ),
+                    "header_index": (
+                        header_index
+                    ),
+                    "headers": headers,
+                    "table": table,
+                    "numeric_rows": (
+                        numeric_rows
+                    ),
+                }
+            )
 
-            if score > best_score:
-                best_score = score
-                best = (
-                    table,
-                    header_index,
-                )
+    if not candidates:
+        return None
 
-    if not best:
-        return None, None
-
-    table, header_index = best
-
-    # Exigimos al menos dos señales
-    # semánticas de ranking.
-    header_text = normalize(
-        " ".join(
-            table[header_index]
-        )
+    candidates.sort(
+        key=lambda item: (
+            item["numeric_rows"],
+            len(item["table"]),
+        ),
+        reverse=True,
     )
 
-    semantic_hits = sum(
-        1
-        for expected in [
-            "pos",
-            "nombre",
-            "club",
-            "puntu",
-            "puntos",
-        ]
-        if expected in header_text
+    selected = candidates[0]
+
+    print(
+        "Tabla de ranking seleccionada:",
+        {
+            "table_index": (
+                selected[
+                    "table_index"
+                ]
+            ),
+            "header_index": (
+                selected[
+                    "header_index"
+                ]
+            ),
+            "headers": (
+                selected[
+                    "headers"
+                ]
+            ),
+            "numeric_rows": (
+                selected[
+                    "numeric_rows"
+                ]
+            ),
+        },
     )
 
-    if semantic_hits < 2:
-        return None, None
-
-    return table, header_index
+    return selected
 
 
-def parse_ranking_html(html):
-    table, header_index = (
-        locate_ranking_table(
-            html
-        )
+# ============================================================
+# PARSEAR RANKING
+# ============================================================
+
+def parse_ranking(
+    html,
+):
+    selected = find_ranking_table(
+        html
     )
 
-    if not table:
-        return []
+    if not selected:
+        return [], []
 
-    headers = table[
-        header_index
+    table = selected[
+        "table"
+    ]
+
+    header_index = selected[
+        "header_index"
+    ]
+
+    headers = selected[
+        "headers"
     ]
 
     position_index = find_column(
@@ -609,14 +1131,14 @@ def parse_ranking_html(html):
         ],
     )
 
-    first_name_index = find_column(
+    name_index = find_column(
         headers,
         [
             "Nombre",
         ],
     )
 
-    last_name_index = find_column(
+    surname_index = find_column(
         headers,
         [
             "Apellidos",
@@ -633,6 +1155,13 @@ def parse_ranking_html(html):
         ],
     )
 
+    club_index = find_column(
+        headers,
+        [
+            "Club",
+        ],
+    )
+
     birth_index = find_column(
         headers,
         [
@@ -640,13 +1169,6 @@ def parse_ranking_html(html):
             "Nacimiento",
             "Año",
             "Ano",
-        ],
-    )
-
-    club_index = find_column(
-        headers,
-        [
-            "Club",
         ],
     )
 
@@ -660,148 +1182,240 @@ def parse_ranking_html(html):
         ],
     )
 
-    # Si no identifica posición o puntos
-    # no es una tabla de ranking válida.
     if (
         position_index is None
         or
         points_index is None
     ):
-        print(
-            "AVISO: tabla localizada, "
-            "pero no se detectan columnas "
-            "Posición/Puntuación."
-        )
+        return [], headers
 
-        print(
-            "Encabezados detectados:",
-            headers,
-        )
-
-        return []
-
-    parsed = []
+    rows = []
 
     for source_row in table[
         header_index + 1:
     ]:
-        position_text = cell_value(
+        position_text = cell(
             source_row,
             position_index,
         )
 
-        position_match = re.search(
+        match = re.search(
             r"\d+",
             position_text,
         )
 
-        if not position_match:
+        if not match:
             continue
 
         position = int(
-            position_match.group()
+            match.group()
         )
 
-        first_name = cell_value(
+        first_name = cell(
             source_row,
-            first_name_index,
+            name_index,
         )
 
-        last_name = cell_value(
+        last_name = cell(
             source_row,
-            last_name_index,
+            surname_index,
         )
 
-        full_name = cell_value(
+        combined_name = cell(
             source_row,
             full_name_index,
         )
 
-        # Si no hay columna separada
-        # para el nombre completo.
-        if not full_name:
-            full_name = clean(
-                f"{first_name} {last_name}"
+        if not combined_name:
+            combined_name = clean(
+                f"{first_name} "
+                f"{last_name}"
             )
 
-        # Algunos formatos tienen todo
-        # el nombre en "Nombre".
         if (
-            not last_name
-            and first_name
+            combined_name
+            and
+            not first_name
         ):
-            full_name = first_name
+            first_name = (
+                combined_name
+            )
 
-        if not full_name:
+        if not combined_name:
             continue
 
-        club = cell_value(
+        club = cell(
             source_row,
             club_index,
         )
 
-        birth_date = cell_value(
+        birth_date = cell(
             source_row,
             birth_index,
         )
 
-        points_text = cell_value(
-            source_row,
-            points_index,
-        )
-
         points = parse_number(
-            points_text
+            cell(
+                source_row,
+                points_index,
+            )
         )
 
-        parsed.append(
+        rows.append(
             {
                 "position": position,
-                "first_name": (
-                    first_name
-                    or
-                    full_name
-                ),
+                "first_name": first_name,
                 "last_name": last_name,
-                "full_name": full_name,
+                "full_name": (
+                    combined_name
+                ),
                 "birth_date": birth_date,
-                "birth_year": extract_year(
-                    birth_date
+                "birth_year": (
+                    extract_year(
+                        birth_date
+                    )
                 ),
                 "club": club,
                 "points": points,
             }
         )
 
-    # Eliminar duplicados.
     unique = {}
 
-    for row in parsed:
+    for row in rows:
         key = (
             row["position"],
-            normalize(
+            compact_name(
                 row["full_name"]
             ),
         )
 
         unique[key] = row
 
-    rows = sorted(
+    result = sorted(
         unique.values(),
         key=lambda row: (
             row["position"],
-            row["full_name"],
+            compact_name(
+                row["full_name"]
+            ),
         ),
     )
 
-    return rows
+    return result, headers
 
 
 # ============================================================
-# MÉTODO 1: FILTROS VISIBLES
+# VALIDACIONES POR CATEGORÍA
 # ============================================================
 
-def ranking_using_visible_filters(
+def validate_positions(rows):
+    if not rows:
+        raise RuntimeError(
+            "La tabla no contiene filas"
+        )
+
+    positions = [
+        row["position"]
+        for row in rows
+    ]
+
+    if min(positions) != 1:
+        raise RuntimeError(
+            "El ranking no comienza "
+            "en la posición 1"
+        )
+
+    if len(set(positions)) < 2:
+        raise RuntimeError(
+            "El ranking no contiene "
+            "suficientes posiciones"
+        )
+
+
+def validate_points(rows):
+    positive = sum(
+        row["points"] > 0
+        for row in rows
+    )
+
+    if positive == 0:
+        raise RuntimeError(
+            "Todas las puntuaciones "
+            "son cero"
+        )
+
+    return positive
+
+
+def validate_m15_leaders(rows):
+    if len(rows) < 2:
+        raise RuntimeError(
+            "M15 contiene menos "
+            "de dos tiradoras"
+        )
+
+    actual = [
+        compact_name(
+            rows[0]["full_name"]
+        ),
+        compact_name(
+            rows[1]["full_name"]
+        ),
+    ]
+
+    expected = [
+        compact_name(name)
+        for name in (
+            EXPECTED_M15_LEADERS
+        )
+    ]
+
+    if actual != expected:
+        raise RuntimeError(
+            "M15 no coincide con el "
+            "ranking oficial esperado. "
+            f"Primeras extraídas: {actual}. "
+            f"Esperadas: {expected}."
+        )
+
+
+def validate_category(
+    category,
+    rows,
+):
+    validate_positions(
+        rows
+    )
+
+    positive = validate_points(
+        rows
+    )
+
+    if category == "M15":
+        validate_m15_leaders(
+            rows
+        )
+
+    return {
+        "rows": len(rows),
+        "positive_points": positive,
+        "maximum_points": max(
+            row["points"]
+            for row in rows
+        ),
+        "first_two": [
+            row["full_name"]
+            for row in rows[:2]
+        ],
+    }
+
+
+# ============================================================
+# OBTENER RANKING CORRECTO
+# ============================================================
+
+def discover_parameters(
     browser,
     category,
 ):
@@ -825,337 +1439,125 @@ def ranking_using_visible_filters(
             page
         )
 
-        season_ok = select_option_by_labels(
-            page,
-            [
-                SEASON_LABEL,
-            ],
-        )
-
-        weapon_ok = select_option_by_labels(
-            page,
-            WEAPON_LABELS,
-        )
-
-        category_ok = select_option_by_labels(
-            page,
-            CATEGORY_LABELS[
-                category
-            ],
-        )
-
-        gender_ok = select_option_by_labels(
-            page,
-            GENDER_LABELS,
-        )
-
-        print(
-            category,
-            "filtros:",
-            {
-                "season": season_ok,
-                "weapon": weapon_ok,
-                "category": category_ok,
-                "gender": gender_ok,
-            },
-        )
-
-        wait_for_page(
-            page
-        )
-
-        rows = parse_ranking_html(
-            page.content()
+        parameters, selection = (
+            discover_filter_values(
+                page,
+                category,
+            )
         )
 
         return (
-            rows,
-            page.url,
-            page.content(),
+            parameters,
+            selection,
         )
 
     finally:
         page.close()
 
 
-# ============================================================
-# MÉTODO 2: URLS DIRECTAS
-# ============================================================
-
-def direct_ranking_urls(
-    category,
-):
-    urls = []
-
-    for season_id in SEASON_IDS:
-        for category_id in CATEGORY_IDS[
-            category
-        ]:
-            parameter_sets = [
-                {
-                    "season": season_id,
-                    "weapon": "S",
-                    "category": category_id,
-                    "gender": "W",
-                    "setLang": "es",
-                },
-                {
-                    "season": season_id,
-                    "weapon": "S",
-                    "category": category_id,
-                    "gender": "F",
-                    "setLang": "es",
-                },
-            ]
-
-            for parameters in parameter_sets:
-                urls.append(
-                    RANKING_URL
-                    + "?"
-                    + urlencode(
-                        parameters
-                    )
-                )
-
-    return urls
-
-
-def ranking_using_direct_urls(
+def retrieve_live_ranking(
     browser,
     category,
 ):
-    last_html = ""
-
-    for url in direct_ranking_urls(
-        category
-    ):
-        print(
-            "Probando URL:",
-            url,
-        )
-
-        page = browser.new_page(
-            locale="es-ES",
-            viewport={
-                "width": 1600,
-                "height": 2000,
-            },
-        )
-
-        try:
-            page.goto(
-                url,
-                wait_until="domcontentloaded",
-                timeout=120000,
-            )
-
-            wait_for_page(
-                page
-            )
-
-            html = page.content()
-            last_html = html
-
-            rows = parse_ranking_html(
-                html
-            )
-
-            if rows:
-                return (
-                    rows,
-                    page.url,
-                    html,
-                )
-
-        except Exception as error:
-            print(
-                "AVISO URL directa:",
-                error,
-            )
-
-        finally:
-            page.close()
-
-    return (
-        [],
-        RANKING_URL,
-        last_html,
-    )
-
-
-# ============================================================
-# RECUPERAR UNA CATEGORÍA
-# ============================================================
-
-def retrieve_category(
-    browser,
-    category,
-    previous_rows,
-):
-    print()
-    print(
-        "=============================="
-    )
-
-    print(
-        "Actualizando",
-        category,
-    )
-
-    print(
-        "=============================="
-    )
-
-    rows = []
-    source_url = RANKING_URL
-    diagnostic_html = ""
-
-    # Método 1.
-    try:
-        (
-            rows,
-            source_url,
-            diagnostic_html,
-        ) = ranking_using_visible_filters(
+    parameters, expected_selection = (
+        discover_parameters(
             browser,
             category,
         )
-
-    except Exception as error:
-        print(
-            "AVISO filtros visibles",
-            category,
-            error,
-        )
-
-    # Método 2.
-    if not rows:
-        try:
-            (
-                rows,
-                source_url,
-                direct_html,
-            ) = ranking_using_direct_urls(
-                browser,
-                category,
-            )
-
-            if direct_html:
-                diagnostic_html = (
-                    direct_html
-                )
-
-        except Exception as error:
-            print(
-                "AVISO URLs directas",
-                category,
-                error,
-            )
-
-    # Guardar diagnóstico si no se extrajo.
-    if not rows and diagnostic_html:
-        diagnostic_path = Path(
-            f"/tmp/skermo-{category}.html"
-        )
-
-        diagnostic_path.write_text(
-            diagnostic_html,
-            encoding="utf-8",
-        )
-
-        print(
-            "HTML diagnóstico:",
-            diagnostic_path,
-        )
-
-    if rows:
-        positive = sum(
-            row["points"] > 0
-            for row in rows
-        )
-
-        maximum = max(
-            (
-                row["points"]
-                for row in rows
-            ),
-            default=0,
-        )
-
-        print(
-            category,
-            ":",
-            len(rows),
-            "filas",
-        )
-
-        print(
-            category,
-            ":",
-            positive,
-            "puntuaciones positivas",
-        )
-
-        print(
-            category,
-            ": máximo",
-            maximum,
-        )
-
-        # Protección específica.
-        if (
-            category == "M15"
-            and positive == 0
-        ):
-            print(
-                "AVISO: M15 extraído, "
-                "pero todos los puntos "
-                "son cero."
-            )
-
-            rows = []
-
-    # Usar anterior solo si realmente
-    # contiene filas.
-    if not rows and previous_rows:
-        print(
-            category,
-            ": se conservan",
-            len(previous_rows),
-            "filas anteriores.",
-        )
-
-        return (
-            previous_rows,
-            source_url,
-            "previous",
-        )
-
-    if not rows:
-        print(
-            category,
-            ": no se pudo recuperar "
-            "ningún ranking válido.",
-        )
-
-        return (
-            [],
-            source_url,
-            "empty",
-        )
-
-    return (
-        rows,
-        source_url,
-        "live",
     )
+
+    query_url = create_url(
+        RANKING_URL,
+        parameters,
+    )
+
+    print(
+        category,
+        "URL construida:",
+        query_url,
+    )
+
+    print(
+        category,
+        "selección esperada:",
+        expected_selection,
+    )
+
+    page = browser.new_page(
+        locale="es-ES",
+        viewport={
+            "width": 1600,
+            "height": 2200,
+        },
+    )
+
+    try:
+        page.goto(
+            query_url,
+            wait_until="domcontentloaded",
+            timeout=120000,
+        )
+
+        wait_for_page(
+            page
+        )
+
+        selected_options = (
+            verify_selected_filters(
+                page,
+                category,
+            )
+        )
+
+        html = page.content()
+
+        rows, table_headers = (
+            parse_ranking(
+                html
+            )
+        )
+
+        try:
+            validation = (
+                validate_category(
+                    category,
+                    rows,
+                )
+            )
+
+        except Exception:
+            save_diagnostic(
+                category,
+                "invalid",
+                html,
+            )
+
+            raise
+
+        return {
+            "rows": rows,
+            "url": page.url,
+            "selection": (
+                expected_selection
+            ),
+            "selected_options": (
+                selected_options
+            ),
+            "table_headers": (
+                table_headers
+            ),
+            "validation": validation,
+        }
+
+    finally:
+        page.close()
 
 
 # ============================================================
 # CALENDARIO
 # ============================================================
 
-def parse_calendar_html(html):
+def parse_calendar(html):
     tables = extract_tables(
         html
     )
@@ -1171,40 +1573,30 @@ def parse_calendar_html(html):
             if "sable" not in combined:
                 continue
 
-            if not any(
-                value in combined
-                for value in [
-                    "femenino",
-                    "femenina",
-                    "women",
-                ]
+            if not (
+                "femenino" in combined
+                or
+                "femenina" in combined
             ):
                 continue
 
-            date = next(
-                (
-                    clean(cell)
-                    for cell in row
-                    if re.search(
-                        r"\d{2}/\d{2}/\d{4}",
-                        clean(cell),
-                    )
-                ),
-                "",
-            )
+            date = ""
 
-            date_match = re.search(
-                r"\d{2}/\d{2}/\d{4}",
-                date,
-            )
+            for value in row:
+                match = re.search(
+                    r"\d{2}/\d{2}/\d{4}",
+                    clean(value),
+                )
 
-            if not date_match:
+                if match:
+                    date = match.group()
+                    break
+
+            if not date:
                 continue
 
-            event_date = date_match.group()
-
             name = (
-                row[1]
+                clean(row[1])
                 if len(row) > 1
                 else "Competición RFEE"
             )
@@ -1222,24 +1614,20 @@ def parse_calendar_html(html):
                 "ABS",
             )
 
-            location = (
-                row[6]
-                if len(row) > 6
-                else ""
-            )
-
             events.append(
                 {
-                    "date": event_date,
-                    "name": clean(name),
+                    "date": date,
+                    "name": name,
                     "category": category,
                     "modality": (
                         "E"
                         if "equip" in combined
                         else "I"
                     ),
-                    "location": clean(
-                        location
+                    "location": (
+                        clean(row[6])
+                        if len(row) > 6
+                        else ""
                     ),
                     "type": (
                         "Competición RFEE"
@@ -1259,14 +1647,6 @@ def parse_calendar_html(html):
                         else "N"
                     ),
                     "registration_deadline": "",
-                    "links": [
-                        {
-                            "label": (
-                                "Calendario RFEE"
-                            ),
-                            "url": CALENDAR_URL,
-                        }
-                    ],
                 }
             )
 
@@ -1310,45 +1690,16 @@ def retrieve_calendar(
             page
         )
 
-        select_option_by_labels(
-            page,
-            [SEASON_LABEL],
-        )
-
-        select_option_by_labels(
-            page,
-            WEAPON_LABELS,
-        )
-
-        select_option_by_labels(
-            page,
-            GENDER_LABELS,
-        )
-
-        wait_for_page(
-            page
-        )
-
-        events = parse_calendar_html(
+        events = parse_calendar(
             page.content()
         )
 
         if events:
-            print(
-                "Calendario:",
-                len(events),
-                "eventos",
-            )
-
-            return (
-                events,
-                page.url,
-            )
+            return events, page.url
 
         print(
-            "AVISO: calendario RFEE "
-            "vacío. Se conserva el "
-            "anterior."
+            "AVISO: calendario nacional "
+            "vacío; se conserva el anterior."
         )
 
         return (
@@ -1358,7 +1709,7 @@ def retrieve_calendar(
 
     except Exception as error:
         print(
-            "AVISO calendario RFEE:",
+            "AVISO calendario:",
             error,
         )
 
@@ -1372,73 +1723,12 @@ def retrieve_calendar(
 
 
 # ============================================================
-# VALIDACIÓN
-# ============================================================
-
-def validate_m15(rankings):
-    m15 = rankings.get(
-        "M15",
-        [],
-    )
-
-    rows = len(
-        m15
-    )
-
-    positive = sum(
-        parse_number(
-            row.get(
-                "points",
-                0,
-            )
-        )
-        > 0
-        for row in m15
-    )
-
-    maximum = max(
-        (
-            parse_number(
-                row.get(
-                    "points",
-                    0,
-                )
-            )
-            for row in m15
-        ),
-        default=0,
-    )
-
-    validation = {
-        "M15_rows": rows,
-        "M15_positive_points": positive,
-        "M15_max_points": maximum,
-    }
-
-    if rows == 0:
-        raise RuntimeError(
-            "M15 está vacío. "
-            "Skermo no devolvió una "
-            "tabla válida y no existe "
-            "un ranking M15 anterior "
-            "que conservar."
-        )
-
-    if positive == 0:
-        raise RuntimeError(
-            "M15 contiene tiradoras, "
-            "pero todos los puntos "
-            "son cero."
-        )
-
-    return validation
-
-
-# ============================================================
 # FUENTES
 # ============================================================
 
-def merge_sources(previous_sources):
+def merge_sources(
+    current_sources,
+):
     required = [
         {
             "name": (
@@ -1470,11 +1760,11 @@ def merge_sources(previous_sources):
         },
     ]
 
-    result = []
+    merged = []
     seen = set()
 
     for source in (
-        list(previous_sources or [])
+        list(current_sources or [])
         +
         required
     ):
@@ -1493,11 +1783,11 @@ def merge_sources(previous_sources):
             url
         )
 
-        result.append(
+        merged.append(
             source
         )
 
-    return result
+    return merged
 
 
 # ============================================================
@@ -1514,16 +1804,12 @@ def main():
         )
     )
 
-    previous_calendar = (
-        previous.get(
-            "calendar",
-            [],
-        )
-    )
-
     rankings = {}
     ranking_urls = {}
     ranking_status = {}
+    ranking_selections = {}
+    ranking_headers = {}
+    category_validations = {}
 
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(
@@ -1531,39 +1817,171 @@ def main():
         )
 
         for category in CATEGORIES:
-            (
-                rows,
-                source_url,
-                status,
-            ) = retrieve_category(
-                browser,
+            print()
+            print(
+                "================================"
+            )
+            print(
+                "ACTUALIZANDO",
                 category,
-                previous_rankings.get(
-                    category,
-                    [],
-                ),
+            )
+            print(
+                "================================"
             )
 
-            rankings[category] = rows
-            ranking_urls[category] = (
-                source_url
-            )
-            ranking_status[category] = (
-                status
-            )
+            try:
+                result = (
+                    retrieve_live_ranking(
+                        browser,
+                        category,
+                    )
+                )
+
+                rankings[category] = (
+                    result["rows"]
+                )
+
+                ranking_urls[category] = (
+                    result["url"]
+                )
+
+                ranking_status[category] = (
+                    "live"
+                )
+
+                ranking_selections[category] = {
+                    "season": (
+                        result[
+                            "selection"
+                        ][
+                            "season"
+                        ]
+                    ),
+                    "weapon": (
+                        result[
+                            "selection"
+                        ][
+                            "weapon"
+                        ]
+                    ),
+                    "category": (
+                        result[
+                            "selection"
+                        ][
+                            "category"
+                        ]
+                    ),
+                    "gender": (
+                        result[
+                            "selection"
+                        ][
+                            "gender"
+                        ]
+                    ),
+                    "selected_options": (
+                        result[
+                            "selected_options"
+                        ]
+                    ),
+                }
+
+                ranking_headers[category] = (
+                    result[
+                        "table_headers"
+                    ]
+                )
+
+                category_validations[category] = (
+                    result[
+                        "validation"
+                    ]
+                )
+
+                print(
+                    category,
+                    "VALIDADO:",
+                    result["validation"],
+                )
+
+            except Exception as error:
+                print(
+                    "ERROR",
+                    category,
+                    ":",
+                    error,
+                )
+
+                old_rows = (
+                    previous_rankings.get(
+                        category,
+                        [],
+                    )
+                )
+
+                # No conservamos M13/M15 si no
+                # podemos confirmar que son correctos.
+                if (
+                    category in [
+                        "M13",
+                        "M15",
+                    ]
+                ):
+                    rankings[category] = []
+                    ranking_status[category] = (
+                        "rejected"
+                    )
+
+                elif old_rows:
+                    rankings[category] = (
+                        old_rows
+                    )
+                    ranking_status[category] = (
+                        "previous"
+                    )
+
+                else:
+                    rankings[category] = []
+                    ranking_status[category] = (
+                        "empty"
+                    )
+
+                ranking_urls[category] = (
+                    RANKING_URL
+                    + "?setLang=es"
+                )
 
         (
             calendar,
             calendar_url,
         ) = retrieve_calendar(
             browser,
-            previous_calendar,
+            previous.get(
+                "calendar",
+                [],
+            ),
         )
 
         browser.close()
 
-    validation = validate_m15(
-        rankings
+    # M15 debe ser válido para publicar
+    # una nueva versión del ranking nacional.
+    if (
+        ranking_status.get(
+            "M15"
+        )
+        !=
+        "live"
+    ):
+        raise RuntimeError(
+            "No se publica la actualización: "
+            "M15 no ha superado la validación "
+            "de categoría y líderes."
+        )
+
+    m15_validation = (
+        category_validations[
+            "M15"
+        ]
     )
 
     now = (
@@ -1572,12 +1990,8 @@ def main():
         .astimezone()
     )
 
-    # Empezar desde el JSON anterior
-    # permite preservar:
-    # - internal_rankings
-    # - internal_rankings_status
-    # - resultados
-    # - cualquier metadato añadido.
+    # Se parte del JSON anterior para
+    # conservar los rankings internos.
     output = dict(
         previous
     )
@@ -1594,17 +2008,49 @@ def main():
                     timespec="seconds"
                 )
             ),
-            "season": SEASON_LABEL,
+            "season": (
+                SEASON_LABEL
+            ),
             "filters": {
                 "weapon": "Sable",
                 "gender": "Femenino",
             },
-            "validation": validation,
+            "validation": {
+                "M15_rows": (
+                    m15_validation[
+                        "rows"
+                    ]
+                ),
+                "M15_positive_points": (
+                    m15_validation[
+                        "positive_points"
+                    ]
+                ),
+                "M15_max_points": (
+                    m15_validation[
+                        "maximum_points"
+                    ]
+                ),
+                "M15_first_two": (
+                    m15_validation[
+                        "first_two"
+                    ]
+                ),
+            },
             "ranking_status": (
                 ranking_status
             ),
             "ranking_urls": (
                 ranking_urls
+            ),
+            "ranking_selections": (
+                ranking_selections
+            ),
+            "ranking_table_headers": (
+                ranking_headers
+            ),
+            "category_validations": (
+                category_validations
             ),
             "rankings": rankings,
             "calendar_url": (
@@ -1620,7 +2066,6 @@ def main():
         }
     )
 
-    # Conservar resultados anteriores.
     output.setdefault(
         "results",
         previous.get(
@@ -1637,11 +2082,9 @@ def main():
     print(
         "================================"
     )
-
     print(
-        "ACTUALIZACIÓN RFEE COMPLETADA"
+        "ACTUALIZACIÓN PUBLICABLE"
     )
-
     print(
         "================================"
     )
@@ -1652,39 +2095,37 @@ def main():
             [],
         )
 
-        positives = sum(
-            parse_number(
-                row.get(
-                    "points",
-                    0,
-                )
-            )
-            > 0
-            for row in rows
-        )
-
         print(
             category,
             ":",
             len(rows),
-            "filas,",
-            positives,
-            "con puntos,",
-            "estado:",
+            "filas · estado",
             ranking_status.get(
                 category
             ),
         )
 
+        if rows:
+            print(
+                "Primeras:",
+                [
+                    row[
+                        "full_name"
+                    ]
+                    for row
+                    in rows[:3]
+                ],
+            )
+
     print()
     print(
         "Validación M15:",
-        validation,
+        m15_validation,
     )
 
     print()
     print(
-        "Ranking interno preservado:",
+        "Rankings internos preservados:",
         bool(
             output.get(
                 "internal_rankings"
@@ -1694,7 +2135,7 @@ def main():
 
     print()
     print(
-        "Archivo guardado:",
+        "JSON guardado:",
         OUTPUT_FILE,
     )
 
