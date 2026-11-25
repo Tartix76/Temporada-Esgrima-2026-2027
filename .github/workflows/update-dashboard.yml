@@ -313,5 +313,12 @@ jobs:
             echo "No hay datos nuevos que guardar."
           else
             git commit -m "Actualizar datos RFEE y FME"
-            git push
+
+            echo "Sincronizando con main antes de publicar..."
+
+            git pull --rebase origin main
+
+            echo "Publicando los datos actualizados..."
+
+            git push origin HEAD:main
           fi
