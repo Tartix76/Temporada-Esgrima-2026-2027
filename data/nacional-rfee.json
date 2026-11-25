@@ -1,6 +1,6 @@
 {
-  "updated_at": "24/11/2026 19:14 UTC",
-  "source_updated_at": "2026-11-24T19:14:20+00:00",
+  "updated_at": "25/11/2026 01:31 UTC",
+  "source_updated_at": "2026-11-25T01:31:59+00:00",
   "season": "2026-2027",
   "filters": {
     "weapon": "Sable",
@@ -2430,22 +2430,6 @@
     },
     {
       "date": "27/02/2027",
-      "name": "LIGA NACIONAL IBERDROLA 2ª JORNADA",
-      "category": "ABS",
-      "modality": "E",
-      "location": "SF ABS",
-      "type": "Competición RFEE",
-      "scope": "N",
-      "registration_deadline": "",
-      "links": [
-        {
-          "label": "Skermo RFEE",
-          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10560"
-        }
-      ]
-    },
-    {
-      "date": "27/02/2027",
       "name": "LIGA NACIONAL PLATA 2ª JORNADA",
       "category": "ABS",
       "modality": "E",
@@ -2457,6 +2441,22 @@
         {
           "label": "Skermo RFEE",
           "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10561"
+        }
+      ]
+    },
+    {
+      "date": "27/02/2027",
+      "name": "LIGA NACIONAL IBERDROLA 2ª JORNADA",
+      "category": "ABS",
+      "modality": "E",
+      "location": "SF ABS",
+      "type": "Competición RFEE",
+      "scope": "N",
+      "registration_deadline": "",
+      "links": [
+        {
+          "label": "Skermo RFEE",
+          "url": "https://app.skermo.org/calendar/public/RFEE?setLang=es#detail10560"
         }
       ]
     },
