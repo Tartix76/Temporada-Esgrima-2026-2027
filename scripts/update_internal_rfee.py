@@ -993,9 +993,60 @@ def main():
         browser.close()
 
     if not internal:
+
+    print(
+        "No se pudo interpretar "
+        "la clasificación interna "
+        "publicada por Skermo."
+    )
+
+    fallback_file = (
+        BASE_DIR
+        / "data"
+        / "internal-rfee-fallback.json"
+    )
+
+    if fallback_file.exists():
+
+        print(
+            "Cargando último ranking "
+            "interno oficial válido "
+            "desde fallback."
+        )
+
+        internal = json.loads(
+            fallback_file.read_text(
+                encoding="utf-8"
+            )
+        )
+
+        for category, ranking in internal.items():
+
+            ranking[
+                "data_status"
+            ] = "fallback"
+
+            ranking[
+                "status_message"
+            ] = (
+                "Última clasificación "
+                "oficial válida almacenada"
+            )
+
+        print(
+            "Fallback cargado:",
+            ", ".join(
+                internal.keys()
+            )
+        )
+
+    else:
+
         raise RuntimeError(
             "No se obtuvo ningún "
-            "ranking interno"
+            "ranking interno y tampoco "
+            "existe "
+            "data/internal-rfee-fallback.json"
         )
 
     data[
