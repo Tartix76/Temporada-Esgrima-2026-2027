@@ -1,6 +1,6 @@
 {
-  "updated_at": "25/11/2026 19:07 UTC",
-  "source_updated_at": "2026-11-25T19:07:40+00:00",
+  "updated_at": "26/11/2026 01:31 UTC",
+  "source_updated_at": "2026-11-26T01:31:03+00:00",
   "season": "2026-2027",
   "filters": {
     "weapon": "Sable",
@@ -226,22 +226,22 @@
       },
       {
         "position": 21,
-        "first_name": "21. ELIZABETH",
-        "last_name": "TISHINA",
-        "full_name": "21. ELIZABETH TISHINA",
-        "birth_date": "03/08/2015",
-        "birth_year": "2015",
-        "club": "CED-V",
+        "first_name": "21. GADEA",
+        "last_name": "PRADO DEL ESTAL",
+        "full_name": "21. GADEA PRADO DEL ESTAL",
+        "birth_date": "29/05/2014",
+        "birth_year": "2014",
+        "club": "ELGATO-M",
         "points": 453.71
       },
       {
         "position": 22,
-        "first_name": "22. GADEA",
-        "last_name": "PRADO DEL ESTAL",
-        "full_name": "22. GADEA PRADO DEL ESTAL",
-        "birth_date": "29/05/2014",
-        "birth_year": "2014",
-        "club": "ELGATO-M",
+        "first_name": "22. ELIZABETH",
+        "last_name": "TISHINA",
+        "full_name": "22. ELIZABETH TISHINA",
+        "birth_date": "03/08/2015",
+        "birth_year": "2015",
+        "club": "CED-V",
         "points": 453.71
       },
       {
@@ -1020,22 +1020,22 @@
       },
       {
         "position": 41,
-        "first_name": "41. LEIRE",
-        "last_name": "MORO",
-        "full_name": "41. LEIRE MORO",
-        "birth_date": "04/12/2011",
-        "birth_year": "2011",
-        "club": "CEEC-M",
+        "first_name": "41. DANIELLA",
+        "last_name": "AYALA PULLA",
+        "full_name": "41. DANIELLA AYALA PULLA",
+        "birth_date": "03/09/2012",
+        "birth_year": "2012",
+        "club": "ECC-BU",
         "points": 218.45
       },
       {
         "position": 42,
-        "first_name": "42. DANIELLA",
-        "last_name": "AYALA PULLA",
-        "full_name": "42. DANIELLA AYALA PULLA",
-        "birth_date": "03/09/2012",
-        "birth_year": "2012",
-        "club": "ECC-BU",
+        "first_name": "42. LEIRE",
+        "last_name": "MORO",
+        "full_name": "42. LEIRE MORO",
+        "birth_date": "04/12/2011",
+        "birth_year": "2011",
+        "club": "CEEC-M",
         "points": 218.45
       },
       {
@@ -2407,7 +2407,7 @@
     },
     {
       "date": "27/02/2027",
-      "name": "LIGA NACIONAL IBERDROLA 2ª JORNADA",
+      "name": "LIGA NACIONAL PLATA 2ª JORNADA",
       "category": "ABS",
       "modality": "E",
       "location": "SF ABS",
@@ -2417,7 +2417,7 @@
     },
     {
       "date": "27/02/2027",
-      "name": "LIGA NACIONAL PLATA 2ª JORNADA",
+      "name": "LIGA NACIONAL IBERDROLA 2ª JORNADA",
       "category": "ABS",
       "modality": "E",
       "location": "SF ABS",
@@ -2468,7 +2468,7 @@
   ],
   "results": [],
   "internal_rankings_status": "fallback",
-  "internal_rankings_updated_at": "25/11/2026 19:07 UTC",
+  "internal_rankings_updated_at": "26/11/2026 01:31 UTC",
   "internal_rankings": {
     "M17": {
       "label": "Cadete",
