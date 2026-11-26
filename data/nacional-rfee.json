@@ -1,6 +1,6 @@
 {
-  "updated_at": "26/11/2026 07:37 UTC",
-  "source_updated_at": "2026-11-26T07:37:18+00:00",
+  "updated_at": "26/11/2026 13:35 UTC",
+  "source_updated_at": "2026-11-26T13:35:36+00:00",
   "season": "2026-2027",
   "filters": {
     "weapon": "Sable",
@@ -1020,23 +1020,33 @@
       },
       {
         "position": 41,
-        "first_name": "41. DANIELLA",
+        "first_name": "41. LEIRE",
+        "last_name": "MORO",
+        "full_name": "41. LEIRE MORO",
+        "birth_date": "04/12/2011",
+        "birth_year": "2011",
+        "club": "CEEC-M",
+        "points": 218.45
+      },
+      {
+        "position": 42,
+        "first_name": "42. DANIELLA",
         "last_name": "AYALA PULLA",
-        "full_name": "41. DANIELLA AYALA PULLA",
+        "full_name": "42. DANIELLA AYALA PULLA",
         "birth_date": "03/09/2012",
         "birth_year": "2012",
         "club": "ECC-BU",
         "points": 218.45
       },
       {
-        "position": 42,
-        "first_name": "42. LEIRE",
-        "last_name": "MORO",
-        "full_name": "42. LEIRE MORO",
-        "birth_date": "04/12/2011",
-        "birth_year": "2011",
+        "position": 9999,
+        "first_name": "44. INES",
+        "last_name": "SANCHEZ JULIAN",
+        "full_name": "44. INES SANCHEZ JULIAN",
+        "birth_date": "25/05/2010",
+        "birth_year": "2010",
         "club": "CEEC-M",
-        "points": 218.45
+        "points": 0.0
       },
       {
         "position": 9999,
@@ -2468,7 +2478,7 @@
   ],
   "results": [],
   "internal_rankings_status": "fallback",
-  "internal_rankings_updated_at": "26/11/2026 07:37 UTC",
+  "internal_rankings_updated_at": "26/11/2026 13:35 UTC",
   "internal_rankings": {
     "M17": {
       "label": "Cadete",
@@ -3257,7 +3267,7 @@
       ]
     },
     "M17": {
-      "rows": 43,
+      "rows": 44,
       "positive_points": 42,
       "maximum_points": 5513.25,
       "first_two": [
