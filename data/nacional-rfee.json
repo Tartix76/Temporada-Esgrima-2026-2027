@@ -1,6 +1,6 @@
 {
-  "updated_at": "27/11/2026 13:30 UTC",
-  "source_updated_at": "2026-11-27T13:30:07+00:00",
+  "updated_at": "27/11/2026 19:12 UTC",
+  "source_updated_at": "2026-11-27T19:12:38+00:00",
   "season": "2026-2027",
   "filters": {
     "weapon": "Sable",
@@ -2478,7 +2478,7 @@
   ],
   "results": [],
   "internal_rankings_status": "fallback",
-  "internal_rankings_updated_at": "27/11/2026 13:30 UTC",
+  "internal_rankings_updated_at": "27/11/2026 19:12 UTC",
   "internal_rankings": {
     "M17": {
       "label": "Cadete",
