@@ -1,6 +1,6 @@
 {
-  "updated_at": "28/11/2026 01:29 UTC",
-  "source_updated_at": "2026-11-28T01:29:35+00:00",
+  "updated_at": "28/11/2026 07:29 UTC",
+  "source_updated_at": "2026-11-28T07:29:38+00:00",
   "season": "2026-2027",
   "filters": {
     "weapon": "Sable",
@@ -1020,22 +1020,22 @@
       },
       {
         "position": 41,
-        "first_name": "41. LEIRE",
-        "last_name": "MORO",
-        "full_name": "41. LEIRE MORO",
-        "birth_date": "04/12/2011",
-        "birth_year": "2011",
-        "club": "CEEC-M",
+        "first_name": "41. DANIELLA",
+        "last_name": "AYALA PULLA",
+        "full_name": "41. DANIELLA AYALA PULLA",
+        "birth_date": "03/09/2012",
+        "birth_year": "2012",
+        "club": "ECC-BU",
         "points": 218.45
       },
       {
         "position": 42,
-        "first_name": "42. DANIELLA",
-        "last_name": "AYALA PULLA",
-        "full_name": "42. DANIELLA AYALA PULLA",
-        "birth_date": "03/09/2012",
-        "birth_year": "2012",
-        "club": "ECC-BU",
+        "first_name": "42. LEIRE",
+        "last_name": "MORO",
+        "full_name": "42. LEIRE MORO",
+        "birth_date": "04/12/2011",
+        "birth_year": "2011",
+        "club": "CEEC-M",
         "points": 218.45
       },
       {
@@ -2478,7 +2478,7 @@
   ],
   "results": [],
   "internal_rankings_status": "fallback",
-  "internal_rankings_updated_at": "28/11/2026 01:29 UTC",
+  "internal_rankings_updated_at": "28/11/2026 07:29 UTC",
   "internal_rankings": {
     "M17": {
       "label": "Cadete",
